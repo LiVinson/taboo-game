@@ -13,15 +13,6 @@ export default function Home() {
   const toggleInstructions = () => {
     setDisplayState((display) => !display)
   }
-
-  const requestGame = () => {
-    console.log("send a request to join game")
-  }
-
-  React.useEffect(() => {
-    requestGame()
-  }, [])
-
   const style = {
     width: "400px",
     height: "200px",

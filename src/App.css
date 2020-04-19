@@ -8,6 +8,7 @@ body {
   text-decoration: uppercase;
   letter-spacing: 0.25em;
   border-radius: 3px;
+  border: solid;
   font-size: 16px;
   display: flex;
   justify-content: center;
@@ -15,5 +16,5 @@ body {
   cursor: pointer;
   text-decoration: none;
   max-width: 200px;
-  color: white;
+  color: red;
 }
