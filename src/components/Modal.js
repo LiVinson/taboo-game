@@ -20,7 +20,7 @@ export default function Modal({
   return (
     <div style={style}>
       <h3>{header}</h3>
-      <p>{children}</p>
+      <div>{children}</div>
       <button onClick={() => toggleInstructions()}>Close</button>
     </div>
   )
