@@ -1,10 +1,9 @@
 import React from "react"
-import PropTypes from "prop-types"
 import Modal from "../components/Modal"
 import { Redirect } from "react-router-dom"
 import JoinForm from "../components/JoinForm"
 import { database } from "../utils/firebase_conn"
-import { v4 as uuidv4 } from "uuid"
+import { createNewCode } from "../utils/helpers"
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -36,7 +35,7 @@ export default class Home extends React.Component {
 
   createNewGame(e) {
     e.target.disabled = true
-    const id = uuidv4()
+    const id = createNewCode()
     const gamecode = id.split("-")[0]
     console.log("gamecode: ", gamecode)
 
