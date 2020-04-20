@@ -1,32 +1,41 @@
 import React from "react"
+import PropTypes from "prop-types"
 import Modal from "../components/Modal"
 import { Redirect } from "react-router-dom"
 import JoinForm from "../components/JoinForm"
 import { database } from "../utils/firebase_conn"
 import { v4 as uuidv4 } from "uuid"
 
-export default function Home() {
-  const [displayState, setDisplayState] = React.useState(false) //controls instructions modal
-  const [generateNewGame, setGenerateNewGame] = React.useState(false)
-  const [redirectToNew, setRedirectToNew] = React.useState(null)
-  const [gamecode, setGameCode] = React.useState(null)
+export default class Home extends React.Component {
+  constructor(props) {
+    super(props)
 
-  const toggleInstructions = () => {
-    setDisplayState((display) => !display)
-  }
-  const style = {
-    width: "400px",
-    height: "200px",
-    fontSize: "50px",
-  }
-
-  React.useEffect(() => {
-    if (generateNewGame) {
-      createNewGame()
+    this.state = {
+      showInstructions: false,
+      gamecode: null,
+      redirect: false,
     }
-  }, [generateNewGame])
 
-  const createNewGame = () => {
+    this.style = {
+      width: "400px",
+      height: "200px",
+      fontSize: "50px",
+    }
+    this.toggleInstructions = this.toggleInstructions.bind(this)
+    this.createNewGame = this.createNewGame.bind(this)
+  }
+
+  toggleInstructions() {
+    this.setState((state) => {
+      return {
+        ...state,
+        showInstructions: !state.showInstructions,
+      }
+    })
+  }
+
+  createNewGame(e) {
+    e.target.disabled = true
     const id = uuidv4()
     const gamecode = id.split("-")[0]
     console.log("gamecode: ", gamecode)
@@ -50,8 +59,13 @@ export default function Home() {
       .set(game)
       .then(() => {
         console.log(gamecode, "created")
-        setRedirectToNew(true)
-        setGameCode(gamecode)
+        this.setState((state) => {
+          return {
+            ...state,
+            redirect: true,
+            gamecode,
+          }
+        })
         //Redirect to waiting room.
       })
       .catch((err) =>
@@ -62,42 +76,48 @@ export default function Home() {
       )
   }
 
-  if (redirectToNew && gamecode) {
-    return <Redirect to={`/new?gamecode=${gamecode}`} />
-  }
+  render() {
+    const { redirect, gamecode } = this.state
+    if (gamecode && redirect) {
+      return (
+        <Redirect
+          push //Keeps home location on the history stack
+          to={{ pathname: "new", search: `?gamecode=${gamecode}` }}
+        />
+      )
+    }
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-around",
-        paddingTop: "20px",
-      }}
-    >
-      <button
-        disabled={generateNewGame}
-        onClick={() => setGenerateNewGame(true)}
-        style={style}
-      >
-        Create New Game
-      </button>
-
-      <button
-        onClick={() => {
-          toggleInstructions()
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          paddingTop: "20px",
         }}
-        style={style}
       >
-        Join Game
-      </button>
-      <Modal
-        display={displayState}
-        toggleInstructions={toggleInstructions}
-        header="Join a Game of Taboo"
-        buttonText=""
-      >
-        {<JoinForm confirmGame={(code) => {}} />}
-      </Modal>
-    </div>
-  )
+        <button onClick={(e) => this.createNewGame(e)} style={this.style}>
+          Create New Game
+        </button>
+
+        <button
+          onClick={() => {
+            this.toggleInstructions()
+          }}
+          style={this.style}
+        >
+          Join Game
+        </button>
+        {this.state.showInstructions ? (
+          <Modal
+            display={this.state.showInstructions}
+            toggleDisplay={this.toggleInstructions}
+            header="Join a Game of Taboo"
+            buttonText=""
+          >
+            {<JoinForm confirmGame={(code) => {}} />}
+          </Modal>
+        ) : null}
+      </div>
+    )
+  }
 }

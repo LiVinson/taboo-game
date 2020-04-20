@@ -1,11 +1,8 @@
 import React from "react"
 
-export default function Modal({
-  display,
-  toggleInstructions,
-  header,
-  children,
-}) {
+// export default function Modal({ display, toggleDisplay, header, children }) {
+export default function Modal(props) {
+  console.log(props)
   const style = {
     zIndex: "10",
     position: "fixed",
@@ -13,15 +10,21 @@ export default function Modal({
     left: "50%",
     top: "30%",
     marginLeft: "-100px",
-    display: !display && "none",
+    display: !props.display && "none",
     padding: "30px",
     background: "blue",
   }
   return (
     <div style={style}>
-      <h3>{header}</h3>
-      <div>{children}</div>
-      <button onClick={() => toggleInstructions()}>Close</button>
+      <h3>{props.header}</h3>
+      <div>{props.children}</div>
+      <button
+        onClick={() => {
+          props.toggleDisplay()
+        }}
+      >
+        Close
+      </button>
     </div>
   )
 }

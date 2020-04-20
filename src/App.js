@@ -8,20 +8,22 @@ import New from "./pages/New"
 import Join from "./pages/Join"
 import Game from "./pages/Game"
 
-function App() {
-  return (
-    <Router>
-      <Container>
-        <Navbar />
-        <Switch>
-          <Route path={"/"} exact component={Home} />
-          <Route path="/new" component={New} />
-          <Route path="/join" component={Join} />
-          <Route path="/play" component={Game} />
-        </Switch>
-      </Container>
-    </Router>
-  )
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Container>
+          <Navbar />
+          <Switch>
+            <Route path={"/"} exact component={Home} />
+            <Route path="/new" component={New} />
+            <Route path="/join" component={Join} />
+            <Route path="/play" component={Game} />
+          </Switch>
+        </Container>
+      </Router>
+    )
+  }
 }
 
 /*
