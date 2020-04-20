@@ -2,8 +2,8 @@ import React from "react"
 import Modal from "../components/Modal"
 import { Redirect } from "react-router-dom"
 import JoinForm from "../components/JoinForm"
-import { database } from "../utils/firebase_conn"
 import { createNewCode } from "../utils/helpers"
+import { createNewGame } from "../utils/API"
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ export default class Home extends React.Component {
       fontSize: "50px",
     }
     this.toggleInstructions = this.toggleInstructions.bind(this)
-    this.createNewGame = this.createNewGame.bind(this)
+    this.createGameCode = this.createGameCode.bind(this)
   }
 
   toggleInstructions() {
@@ -33,46 +33,24 @@ export default class Home extends React.Component {
     })
   }
 
-  createNewGame(e) {
+  createGameCode(e) {
     e.target.disabled = true
-    const id = createNewCode()
-    const gamecode = id.split("-")[0]
-    console.log("gamecode: ", gamecode)
-
-    const game = {
-      status: "pending",
-      unassigned: [],
-      team1: {
-        teamName: "Team 1",
-        players: [],
-        score: 0,
-      },
-      team2: {
-        teamName: "Team 2",
-        players: [],
-        score: 0,
-      },
-    }
-    database
-      .ref(`games/${gamecode}`)
-      .set(game)
-      .then(() => {
-        console.log(gamecode, "created")
-        this.setState((state) => {
-          return {
-            ...state,
-            redirect: true,
-            gamecode,
-          }
-        })
+    const gamecode = createNewCode()
+    createNewGame()
+      .then((res) => {
         //Redirect to waiting room.
+        this.setState((state) => ({
+          ...state,
+          redirect: true,
+          gamecode,
+        }))
       })
-      .catch((err) =>
+      .catch((err) => {
         console.log(
           "There was an error creating a new game with gamecode: ",
           gamecode
         )
-      )
+      })
   }
 
   render() {
@@ -94,7 +72,7 @@ export default class Home extends React.Component {
           paddingTop: "20px",
         }}
       >
-        <button onClick={(e) => this.createNewGame(e)} style={this.style}>
+        <button onClick={(e) => this.createGameCode(e)} style={this.style}>
           Create New Game
         </button>
 

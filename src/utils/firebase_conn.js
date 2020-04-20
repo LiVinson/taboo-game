@@ -16,13 +16,4 @@ firebase.initializeApp(firebaseConfig)
 
 const database = firebase.database()
 
-// export function testfirebase() {
-//   const unassignedPlayerRef = database.ref(`games/77d755c5/unassigned`)
-//   unassignedPlayerRef.on("value", function (snapshot) {
-//     console.log(snapshot.val())
-//   })
-// }
-
-// export function createNewGame() {}
-
 export { database }
