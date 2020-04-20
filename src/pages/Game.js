@@ -1,6 +1,6 @@
 import React from "react"
 
-function assignTurn() {}
+// function assignTurn() {}
 
 export default function Game() {
   /*

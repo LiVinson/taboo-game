@@ -25,11 +25,13 @@ function App() {
 }
 
 /*
-  Add create game component - page or modal? with form
-  On submit - generate code - will be in firebase.
-  Update Join to check or success/error of game code:
-    /error: Invalid code. Try again.
-    /success: Enter name. Save user. Display all players in game.
-    start game: Load Game page.
+
+Next Steps:
+- Before generating game code, ask for username.
+- Create player object.
+- Generate game code and attach listner (done)
+- If waiting is empty, add player as unassigned and set as host.
+- Save player's id in state.
+- On click of start game: assign players to a team and set team name.
 */
 export default App
