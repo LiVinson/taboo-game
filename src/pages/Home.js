@@ -36,7 +36,7 @@ export default class Home extends React.Component {
   createGameCode(e) {
     e.target.disabled = true
     const gamecode = createNewCode()
-    createNewGame()
+    createNewGame(gamecode)
       .then((res) => {
         //Redirect to waiting room.
         this.setState((state) => ({
