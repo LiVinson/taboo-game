@@ -82,3 +82,9 @@ export function addPlayerToPath(player, path) {
       return false
     })
 }
+
+export function confirmGameCode(gamecode) {
+  return new Promise(function (resolve, reject) {
+    resolve(true)
+  })
+}

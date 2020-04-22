@@ -10,10 +10,11 @@ export default class Home extends React.Component {
     super(props)
 
     this.state = {
-      showInstructions: false,
+      showGameCodeForm: false,
       gamecode: null,
       playerId: null,
       redirect: false,
+      validGame: false,
     }
 
     this.style = {
@@ -21,17 +22,18 @@ export default class Home extends React.Component {
       height: "200px",
       fontSize: "50px",
     }
-    this.toggleInstructions = this.toggleInstructions.bind(this)
+    this.toggleGameCodeForm = this.toggleGameCodeForm.bind(this)
     this.createGame = this.createGame.bind(this)
     this.createPlayerCode = this.createPlayerCode.bind(this)
+    this.validGameCode = this.validGameCode.bind(this)
   }
 
-  //Controls whether game instructions display in middle of Homepage
-  toggleInstructions() {
+  //Controls whether game code input displays in middle of Homepage
+  toggleGameCodeForm() {
     this.setState((state) => {
       return {
         ...state,
-        showInstructions: !state.showInstructions,
+        showGameCodeForm: !state.showGameCodeForm,
       }
     })
   }
@@ -60,13 +62,18 @@ export default class Home extends React.Component {
   */
   createPlayerCode(gamecode) {
     createNewCode().then((playerId) => {
-      this.setState((state) => ({
-        ...state,
-        redirect: true,
+      console.log(playerId)
+      this.setState({
         gamecode,
+        redirect: true,
         playerId,
-      }))
+        showGameCodeForm: false,
+      })
     })
+  }
+
+  validGameCode(gamecode) {
+    this.createPlayerCode(gamecode)
   }
 
   render() {
@@ -97,20 +104,20 @@ export default class Home extends React.Component {
 
         <button
           onClick={() => {
-            this.toggleInstructions()
+            this.toggleGameCodeForm()
           }}
           style={this.style}
         >
           Join Game
         </button>
-        {this.state.showInstructions ? (
+        {this.state.showGameCodeForm ? (
           <Modal
-            display={this.state.showInstructions}
-            toggleDisplay={this.toggleInstructions}
+            display={this.state.showGameCodeForm}
+            toggleDisplay={this.toggleGameCodeForm}
             header="Join a Game of Taboo"
             buttonText=""
           >
-            {<JoinForm confirmGame={(code) => {}} />}
+            {<JoinForm validGameCode={this.createPlayerCode} />}
           </Modal>
         ) : null}
       </div>

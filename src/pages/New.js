@@ -14,7 +14,6 @@ export default class New extends React.Component {
     this.state = {
       loading: true,
       gamecode: queryString.parse(this.props.location.search).gamecode,
-      playerId: queryString.parse(this.props.location.search).playerId,
       currentPlayer: {
         playerId: queryString.parse(this.props.location.search).playerId,
       },
@@ -65,13 +64,15 @@ export default class New extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const { playerId, gamecode, currentPlayerName, currentPlayer } = this.state
+    const { gamecode, currentPlayerName, currentPlayer } = this.state
     // const playerId = createNewCode()
     //If listener could not be set on mount, this is first player so they are assigned host
+    console.log(currentPlayer)
     const player = {
       ...currentPlayer,
       name: currentPlayerName,
     }
+    console.log(player)
     const unassignedPath = `games/${gamecode}/unassigned/${player.playerId}`
 
     try {
@@ -93,14 +94,12 @@ export default class New extends React.Component {
       unassignedPlayers: unassignedArray,
       unassignedListener:
         state.unassignedListener === false ? true : state.unassignedListener,
-      currentPlayer: "player with player Id = " + this.state.playerId,
     }))
   }
 
   render() {
     const {
       unassignedPlayers,
-      playerId,
       currentPlayer,
       currentPlayerName,
       loading,
@@ -112,7 +111,7 @@ export default class New extends React.Component {
       unassignedPlayers.length === 0 ||
       !includedInArray(unassignedPlayers, "playerId", currentPlayer.playerId)
     ) {
-      console.log("Player not created yet")
+      // console.log("Player not created yet")
       return (
         <PlayerInfoForm
           name={currentPlayerName}
@@ -128,7 +127,11 @@ export default class New extends React.Component {
             return (
               <li key={player.playerId}>
                 {player.name}
-                <span>{player.playerId === playerId ? "Me!" : "Not Me"}</span>
+                <span>
+                  {player.playerId === currentPlayer.playerId
+                    ? "Me!"
+                    : "Not Me"}
+                </span>
               </li>
             )
           })}
