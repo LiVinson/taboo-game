@@ -13,6 +13,7 @@ export default class Home extends React.Component {
       showInstructions: false,
       gamecode: null,
       redirect: false,
+      playerId: null,
     }
 
     this.style = {
@@ -35,31 +36,41 @@ export default class Home extends React.Component {
 
   createGameCode(e) {
     e.target.disabled = true
-    const gamecode = createNewCode()
-    createNewGame(gamecode)
-      .then((res) => {
-        //Redirect to waiting room.
-        this.setState((state) => ({
-          ...state,
-          redirect: true,
-          gamecode,
-        }))
-      })
-      .catch((err) => {
-        console.log(
-          "There was an error creating a new game with gamecode: ",
-          gamecode
-        )
-      })
+    createNewCode().then((gamecode) => {
+      createNewGame(gamecode)
+        .then((res) => {
+          console.log("game created?: ", res)
+          //Redirect to waiting room.
+          createNewCode().then((playerId) => {
+            console.log("playerId:", playerId)
+            this.setState((state) => ({
+              ...state,
+              redirect: true,
+              gamecode,
+              playerId,
+            }))
+          })
+        })
+        .catch((err) => {
+          console.log(
+            "There was an error creating a new game with gamecode: ",
+            gamecode
+          )
+        })
+    })
   }
 
+
   render() {
-    const { redirect, gamecode } = this.state
+    const { redirect, gamecode, playerId } = this.state
     if (gamecode && redirect) {
       return (
         <Redirect
           push //Keeps home location on the history stack
-          to={{ pathname: "new", search: `?gamecode=${gamecode}` }}
+          to={{
+            pathname: "new",
+            search: `?gamecode=${gamecode}&playerId=${playerId}`,
+          }}
         />
       )
     }

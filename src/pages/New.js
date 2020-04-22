@@ -1,7 +1,11 @@
 import React from "react"
 import queryString from "query-string"
-import { database } from "../utils/firebase_conn"
-import { createNewCode } from "../utils/helpers"
+import PlayerInfoForm from "../components/PlayerInfoForm"
+import {
+  createNewCode,
+  convertFBObjectToArray,
+  includedInArray,
+} from "../utils/helpers"
 import {
   confirmPathExists,
   attachListenerToPath,
@@ -12,8 +16,11 @@ export default class New extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
       gamecode: queryString.parse(this.props.location.search).gamecode,
+      playerId: queryString.parse(this.props.location.search).playerId,
       currentPlayer: null,
+      host: false,
       currentPlayerName: "",
       unassignedPlayers: [],
       waitingListener: false,
@@ -21,6 +28,7 @@ export default class New extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleUnassignedChange = this.handleUnassignedChange.bind(this)
   }
 
   async componentDidMount() {
@@ -30,24 +38,31 @@ export default class New extends React.Component {
     const path = `games/${gamecode}/unassigned`
 
     confirmPathExists(path).then((exists) => {
-      console.log("path exists: ", exists)
+      console.log("path exists?: ", exists)
       if (exists && !waitingListener) {
-        console.log("add listener")
-        attachListenerToPath(gamecode, "unassigned")
-          .then((res) => {
-            console.log("waiting attached. Response:")
-            console.log(res)
-            //convert res to array for easier looping
-            this.setState({
-              waitingListener: true,
-              unassignedPlayers: res,
-            })
+        // console.log("add listener")
+        attachListenerToPath(
+          gamecode,
+          "unassigned",
+          waitingListener,
+          this.handleUnassignedChange
+        ).then((res) => {
+          //only gets here for attaching listener
+          //   //convert res to array for easier looping
+
+          this.setState({
+            waitingListener: true,
+            host: true,
+            loading: false,
           })
-          .catch((err) => {
-            console.warn("There as an error attaching the listerner")
-          })
-      } else {
-        console.log("add listener later")
+          // })
+          // .catch((err) => {
+          //   console.warn("There as an error attaching the listerner")
+          // })
+        })
+        // else {
+        //   console.log("lister not attached.")
+        // }
       }
     })
   }
@@ -61,35 +76,78 @@ export default class New extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const { gamecode, currentPlayerName, waitingListener } = this.state
-    const playerId = createNewCode()
+    const {
+      host,
+      playerId,
+      gamecode,
+      currentPlayerName,
+      waitingListener,
+    } = this.state
+    // const playerId = createNewCode()
     //If listener could not be set on mount, this is first player so they are assigned host
     const player = {
+      playerId,
       name: currentPlayerName,
-      host: !waitingListener,
     }
     const unassignedPath = `games/${gamecode}/unassigned/${playerId}`
 
-    addPlayerToPath(player, unassignedPath)
-      .then((res) => {
-        if (res) {
-          console.log("returned from addPlayer")
-          this.setState({
-            currentPlayer: {
-              ...player,
-              playerId,
-            },
-          })
-        }
-      })
-      .catch((err) => {
-        console.warn("Something went wrong creating the player")
-      })
+    try {
+      addPlayerToPath(player, unassignedPath)
+    } catch (err) {
+      console.log("there was a problem adding player")
+    }
+    // .then((res) => {
+    //   console.log(res)
+    // if (res && !this.state.waitingListener) {
+    //   console.log("returned from addPlayer, need to add listener")
+    //   attachListenerToPath(
+    //     gamecode,
+    //     "unassigned",
+    //     this.handleUnassignedChange
+    //   )
+    // }
+    // this.setState((state) => ({
+    //   ...this.state,
+    //   currentPlayer: player,
+    // }))
+    // })
+    // .catch((err) => {
+    //   console.warn("Something went wrong creating the player")
+    // })
+  }
+
+  //Called when nonhost joins, or player added to unassigned
+  handleUnassignedChange(unassignedSnapshotObj) {
+    console.log("handle unassigned")
+
+    // const { waitingListener } = this.state
+    console.log("value: ")
+    console.log(unassignedSnapshotObj)
+    const unassignedArray = convertFBObjectToArray(unassignedSnapshotObj)
+
+    this.setState((state) => ({
+      loading: false,
+      unassignedPlayers: unassignedArray,
+      waitingListener:
+        state.waitingListener === false ? true : state.waitingListener,
+      currentPlayer: "player with player Id = " + this.state.playerId,
+    }))
   }
 
   render() {
-    const { currentPlayer, currentPlayerName } = this.state
-    if (!currentPlayer) {
+    const {
+      unassignedPlayers,
+      playerId,
+      currentPlayer,
+      currentPlayerName,
+      loading,
+    } = this.state
+    if (loading) {
+      return <p>Loading Game</p>
+    } else if (
+      unassignedPlayers.length === 0 ||
+      !includedInArray(unassignedPlayers, "playerId", playerId)
+    ) {
       console.log("Player not created yet")
       return (
         <PlayerInfoForm
@@ -99,31 +157,18 @@ export default class New extends React.Component {
         />
       )
     } else {
-      return <p>{currentPlayer.name}</p>
+      return (
+        <ul>
+          {unassignedPlayers.map((player) => {
+            return (
+              <li key={player.playerId}>
+                {player.name}
+                <span>{player.playerId === playerId ? "Me!" : "Not Me"}</span>
+              </li>
+            )
+          })}
+        </ul>
+      )
     }
   }
-}
-
-function PlayerInfoForm({ name, onChange, onSubmit }) {
-  return (
-    <form>
-      <label>Enter your display name</label>
-      <input
-        type="text"
-        placeholder="Name"
-        name="currentPlayerName"
-        value={name}
-        onChange={(e) => onChange(e)}
-      />
-      <button
-        type="submit"
-        onClick={(e) => {
-          onSubmit(e)
-        }}
-        disabled={!name.length}
-      >
-        Save Name
-      </button>
-    </form>
-  )
 }

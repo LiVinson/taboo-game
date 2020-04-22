@@ -10,7 +10,7 @@ export async function createNewGame(gamecode) {
   console.log("creating new game")
   const game = {
     status: "pending",
-    unassigned: [],
+    unassigned: "none",
     team1: {
       teamName: "Team 1",
       players: [],
@@ -22,7 +22,7 @@ export async function createNewGame(gamecode) {
       score: 0,
     },
   }
-  await database
+  return await database
     .ref(`games/${gamecode}`)
     .set(game)
     .then(() => {
@@ -43,46 +43,43 @@ export function confirmPathExists(pathToCheck) {
   })
 }
 
-export function attachListenerToPath(gamecode, pathToAttach) {
+export function attachListenerToPath(
+  gamecode,
+  pathToAttach,
+  listener,
+  onChange
+) {
   return new Promise(function (resolve, reject) {
     try {
       database
         .ref(`games/${gamecode}/${pathToAttach}`)
         .on("value", function (snapshot) {
-          console.log("listener attached to", pathToAttach)
           const value = snapshot.val()
-          resolve(value)
+          if (value === "none") {
+            //listener attached
+            console.log("listener attached for host player")
+            return resolve(value)
+          } else {
+            console.log("listener attached for non-host player or player added")
+            onChange(value)
+          }
         })
+      // {
+      //   console.log("listener attached to", pathToAttach)
+      //   const value = snapshot.val()
+      //   resolve(value)
+      // })
     } catch (err) {
       reject(err)
     }
   })
-
-  // const ref = database.ref(`games/${gamecode}/${pathToAttach}`)
-
-  //   await ref.on("value", function (snapshot) {
-  //     console.log("listener attached to", pathToAttach)
-  //     const value = snapshot.val()
-  //     console.log(value)
-  //     return value
-  //   })
-
-  // await attachListenerAsync(gamecode, pathToAttach)
-  // console.log("listener complete, returning")
-  // return true
 }
 
-function attachListenerAsync(gamecode, pathToAttach, resolve, reject) {}
-
-export async function addPlayerToPath(player, path) {
+export function addPlayerToPath(player, path) {
   console.log(path)
-  database
+  return database
     .ref(path)
     .set(player)
-    .then(() => {
-      console.log("player created")
-      return true
-    })
     .catch((err) => {
       console.warn(err)
       return false
