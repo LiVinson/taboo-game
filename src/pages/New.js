@@ -1,11 +1,7 @@
 import React from "react"
 import queryString from "query-string"
 import PlayerInfoForm from "../components/PlayerInfoForm"
-import {
-  createNewCode,
-  convertFBObjectToArray,
-  includedInArray,
-} from "../utils/helpers"
+import { convertFBObjectToArray, includedInArray } from "../utils/helpers"
 import {
   confirmPathExists,
   attachListenerToPath,
@@ -19,11 +15,13 @@ export default class New extends React.Component {
       loading: true,
       gamecode: queryString.parse(this.props.location.search).gamecode,
       playerId: queryString.parse(this.props.location.search).playerId,
-      currentPlayer: null,
+      currentPlayer: {
+        playerId: queryString.parse(this.props.location.search).playerId,
+      },
       host: false,
       currentPlayerName: "",
+      unassignedListener: false, //determines if FB listener has been set on unassigned players
       unassignedPlayers: [],
-      waitingListener: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -31,38 +29,29 @@ export default class New extends React.Component {
     this.handleUnassignedChange = this.handleUnassignedChange.bind(this)
   }
 
-  async componentDidMount() {
-    //check if there are players waiting in the room.
-    //If yes: attach a listener.
-    const { waitingListener, gamecode } = this.state
+  componentDidMount() {
+    const { unassignedListener, gamecode } = this.state
     const path = `games/${gamecode}/unassigned`
 
+    //Confirm there is a "unassigned" path in firebase. Required to attach a listner
     confirmPathExists(path).then((exists) => {
-      console.log("path exists?: ", exists)
-      if (exists && !waitingListener) {
-        // console.log("add listener")
+      //If the unassigned path exists and listener has not already been attached:
+      if (exists && !unassignedListener) {
         attachListenerToPath(
           gamecode,
           "unassigned",
-          waitingListener,
           this.handleUnassignedChange
-        ).then((res) => {
-          //only gets here for attaching listener
-          //   //convert res to array for easier looping
-
-          this.setState({
-            waitingListener: true,
-            host: true,
-            loading: false,
+        )
+          .then((res) => {
+            this.setState({
+              waitingListener: true,
+              host: true,
+              loading: false,
+            })
           })
-          // })
-          // .catch((err) => {
-          //   console.warn("There as an error attaching the listerner")
-          // })
-        })
-        // else {
-        //   console.log("lister not attached.")
-        // }
+          .catch((err) =>
+            console.warn("There was a problem attaching the listener")
+          )
       }
     })
   }
@@ -76,60 +65,34 @@ export default class New extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const {
-      host,
-      playerId,
-      gamecode,
-      currentPlayerName,
-      waitingListener,
-    } = this.state
+    const { playerId, gamecode, currentPlayerName, currentPlayer } = this.state
     // const playerId = createNewCode()
     //If listener could not be set on mount, this is first player so they are assigned host
     const player = {
-      playerId,
+      ...currentPlayer,
       name: currentPlayerName,
     }
-    const unassignedPath = `games/${gamecode}/unassigned/${playerId}`
+    const unassignedPath = `games/${gamecode}/unassigned/${player.playerId}`
 
     try {
+      //Adds player object as a property on the unassigned FB path
+      //Will cause listener to fire, which calls handleUnassignedChange
       addPlayerToPath(player, unassignedPath)
     } catch (err) {
       console.log("there was a problem adding player")
     }
-    // .then((res) => {
-    //   console.log(res)
-    // if (res && !this.state.waitingListener) {
-    //   console.log("returned from addPlayer, need to add listener")
-    //   attachListenerToPath(
-    //     gamecode,
-    //     "unassigned",
-    //     this.handleUnassignedChange
-    //   )
-    // }
-    // this.setState((state) => ({
-    //   ...this.state,
-    //   currentPlayer: player,
-    // }))
-    // })
-    // .catch((err) => {
-    //   console.warn("Something went wrong creating the player")
-    // })
   }
 
-  //Called when nonhost joins, or player added to unassigned
+  //Called when any change is detected to the unassigned FB path, passing current value of path
   handleUnassignedChange(unassignedSnapshotObj) {
-    console.log("handle unassigned")
-
-    // const { waitingListener } = this.state
-    console.log("value: ")
-    console.log(unassignedSnapshotObj)
+    //Converts object with player objects for properties to array with player objects
     const unassignedArray = convertFBObjectToArray(unassignedSnapshotObj)
 
     this.setState((state) => ({
       loading: false,
       unassignedPlayers: unassignedArray,
-      waitingListener:
-        state.waitingListener === false ? true : state.waitingListener,
+      unassignedListener:
+        state.unassignedListener === false ? true : state.unassignedListener,
       currentPlayer: "player with player Id = " + this.state.playerId,
     }))
   }
@@ -145,8 +108,9 @@ export default class New extends React.Component {
     if (loading) {
       return <p>Loading Game</p>
     } else if (
+      //Requests name if current player is not already added to unassigned path in FB
       unassignedPlayers.length === 0 ||
-      !includedInArray(unassignedPlayers, "playerId", playerId)
+      !includedInArray(unassignedPlayers, "playerId", currentPlayer.playerId)
     ) {
       console.log("Player not created yet")
       return (
@@ -157,6 +121,7 @@ export default class New extends React.Component {
         />
       )
     } else {
+      //Lists all currently waiting players
       return (
         <ul>
           {unassignedPlayers.map((player) => {

@@ -1,16 +1,12 @@
 import { database } from "./firebase_conn"
 
-// function validateGameCode(code) {
-//   console.log("validating game code")
-// }
-
 //Creates initial game object and sets property in
 //firebase to gamecode with value of game object.
 export async function createNewGame(gamecode) {
   console.log("creating new game")
   const game = {
     status: "pending",
-    unassigned: "none",
+    unassigned: "none", //Set to none to allow a listener to be attached immediately
     team1: {
       teamName: "Team 1",
       players: [],
@@ -34,7 +30,7 @@ export async function createNewGame(gamecode) {
     })
 }
 
-//
+//Confirms that a firebase path exists in the database.
 export function confirmPathExists(pathToCheck) {
   console.log("checking: ", pathToCheck)
   const ref = database.ref(pathToCheck)
@@ -43,38 +39,39 @@ export function confirmPathExists(pathToCheck) {
   })
 }
 
-export function attachListenerToPath(
-  gamecode,
-  pathToAttach,
-  listener,
-  onChange
-) {
+/*
+Input:
+   A gamecode
+   The firebase path that requires a listener
+   onChange: Function invoked when listener is set and each time a change at the path takes place.
+
+Output:
+  Initial attach: Returns a promise with current value at the path of the listner
+  Each path update: Calls the onChange function passed. 
+*/
+export function attachListenerToPath(gamecode, pathToAttach, onChange) {
   return new Promise(function (resolve, reject) {
     try {
       database
         .ref(`games/${gamecode}/${pathToAttach}`)
         .on("value", function (snapshot) {
           const value = snapshot.val()
+          //Value at path is none when no relevant children were previously added
           if (value === "none") {
-            //listener attached
-            console.log("listener attached for host player")
             return resolve(value)
+            //Path contains relevant values
           } else {
-            console.log("listener attached for non-host player or player added")
             onChange(value)
           }
         })
-      // {
-      //   console.log("listener attached to", pathToAttach)
-      //   const value = snapshot.val()
-      //   resolve(value)
-      // })
     } catch (err) {
       reject(err)
     }
   })
 }
 
+//Adds the player object to the provided FB path. No "then"
+// because a listener callback function is triggered
 export function addPlayerToPath(player, path) {
   console.log(path)
   return database
@@ -85,11 +82,3 @@ export function addPlayerToPath(player, path) {
       return false
     })
 }
-
-// function requestGameData(code) {
-//   console.log("requesting game data...")
-// }
-
-// function endGame() {
-//   console.log("game over")
-// }

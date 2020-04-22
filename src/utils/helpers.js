@@ -9,6 +9,8 @@ export function createNewCode() {
   })
 }
 
+//Converts FB object with a property for each element Object
+// into array of element objects
 export function convertFBObjectToArray(fbObject) {
   const fbArray = []
 
@@ -23,12 +25,11 @@ export function convertFBObjectToArray(fbObject) {
         name: "Test",
         id: 98765
       }
-    Output: [{name: "Bob", id: 12345}, {name:"Test", id:98765}]
+    Sample Output: [{name: "Bob", id: 12345}, {name:"Test", id:98765}]
 }]
   }*/
 
   for (let keyObj in fbObject) {
-    //console.log(fbObject[keyObj])
     const newObj = {}
     for (let key in fbObject[keyObj]) {
       newObj[key] = fbObject[keyObj][key]
@@ -39,6 +40,7 @@ export function convertFBObjectToArray(fbObject) {
   return fbArray
 }
 
+//Checks if array contains an object with the property name === value
 export function includedInArray(arr, property, value) {
   const filteredArray = arr.filter((item) => item[property] === value)
   console.log(filteredArray)

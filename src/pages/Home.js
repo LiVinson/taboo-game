@@ -12,8 +12,8 @@ export default class Home extends React.Component {
     this.state = {
       showInstructions: false,
       gamecode: null,
-      redirect: false,
       playerId: null,
+      redirect: false,
     }
 
     this.style = {
@@ -22,9 +22,11 @@ export default class Home extends React.Component {
       fontSize: "50px",
     }
     this.toggleInstructions = this.toggleInstructions.bind(this)
-    this.createGameCode = this.createGameCode.bind(this)
+    this.createGame = this.createGame.bind(this)
+    this.createPlayerCode = this.createPlayerCode.bind(this)
   }
 
+  //Controls whether game instructions display in middle of Homepage
   toggleInstructions() {
     this.setState((state) => {
       return {
@@ -34,23 +36,16 @@ export default class Home extends React.Component {
     })
   }
 
-  createGameCode(e) {
+  /*Called when "Create Game" selected
+    Generates a game code.
+    Users code to create a game object in firebase
+    Passes gamecode to function to create player id
+  */
+  createGame(e) {
     e.target.disabled = true
     createNewCode().then((gamecode) => {
       createNewGame(gamecode)
-        .then((res) => {
-          console.log("game created?: ", res)
-          //Redirect to waiting room.
-          createNewCode().then((playerId) => {
-            console.log("playerId:", playerId)
-            this.setState((state) => ({
-              ...state,
-              redirect: true,
-              gamecode,
-              playerId,
-            }))
-          })
-        })
+        .then((res) => this.createPlayerCode(gamecode))
         .catch((err) => {
           console.log(
             "There was an error creating a new game with gamecode: ",
@@ -60,6 +55,19 @@ export default class Home extends React.Component {
     })
   }
 
+  /*Generates a player id
+  sets state and redirects to Game "Waiting room"
+  */
+  createPlayerCode(gamecode) {
+    createNewCode().then((playerId) => {
+      this.setState((state) => ({
+        ...state,
+        redirect: true,
+        gamecode,
+        playerId,
+      }))
+    })
+  }
 
   render() {
     const { redirect, gamecode, playerId } = this.state
@@ -83,7 +91,7 @@ export default class Home extends React.Component {
           paddingTop: "20px",
         }}
       >
-        <button onClick={(e) => this.createGameCode(e)} style={this.style}>
+        <button onClick={(e) => this.createGame(e)} style={this.style}>
           Create New Game
         </button>
 
