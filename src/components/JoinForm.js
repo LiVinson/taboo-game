@@ -7,6 +7,7 @@ export default class JoinForm extends React.Component {
 
     this.state = {
       gamecode: "",
+      invalidMsg: "",
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -26,6 +27,10 @@ export default class JoinForm extends React.Component {
       if (valid) {
         console.log("valid")
         this.props.validGameCode(this.state.gamecode)
+      } else {
+        this.setState({
+          invalidMsg: `${this.state.gamecode} is not a valid gamecode.`,
+        })
       }
     })
   }
@@ -43,7 +48,7 @@ export default class JoinForm extends React.Component {
           type="text"
           placeholder="Gamecode"
         />
-        <span className="join-message"></span>
+        <span className="join-message">{this.state.invalidMsg}</span>
         <button onClick={(e) => this.handleSubmit(e)} className="btn">
           Join Game!
         </button>
