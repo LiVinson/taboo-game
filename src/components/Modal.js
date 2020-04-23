@@ -16,7 +16,13 @@ export default function Modal({ display, toggleDisplay, header, children }) {
     <div style={style}>
       <h3>{header}</h3>
       <div>{children}</div>
-      <button onClick={() => toggleDisplay()}>Close</button>
+      <button
+        onClick={() => {
+          toggleDisplay()
+        }}
+      >
+        Close
+      </button>
     </div>
   )
 }

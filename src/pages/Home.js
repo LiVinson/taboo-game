@@ -83,8 +83,7 @@ export default class Home extends React.Component {
         <Redirect
           push //Keeps home location on the history stack
           to={{
-            pathname: "new",
-            search: `?gamecode=${gamecode}&playerId=${playerId}`,
+            pathname: `new/${gamecode}/${playerId}`,
           }}
         />
       )

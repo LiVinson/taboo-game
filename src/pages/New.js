@@ -13,9 +13,9 @@ export default class New extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      gamecode: queryString.parse(this.props.location.search).gamecode,
+      gamecode: props.match.params.gamecode,
       currentPlayer: {
-        playerId: queryString.parse(this.props.location.search).playerId,
+        playerId: props.match.params.playerId,
       },
       host: false,
       currentPlayerName: "",

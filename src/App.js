@@ -16,7 +16,7 @@ class App extends React.Component {
           <Navbar />
           <Switch>
             <Route path={"/"} exact component={Home} />
-            <Route path="/new" component={New} />
+            <Route path="/new/:gamecode/:playerId" component={New} />
             <Route path="/join" component={Join} />
             <Route path="/play" component={Game} />
           </Switch>

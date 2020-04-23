@@ -7,34 +7,50 @@ const style = {
   display: "flex",
   justifyContent: "flex-end",
 }
-export default function Navbar() {
-  const [displayState, setDisplayState] = React.useState(false)
-  const toggleInstructions = () => {
-    console.log("instructions")
-    setDisplayState((display) => !display)
+
+export default class Navbar extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      displayInstructions: false,
+    }
+
+    this.toggleInstructions = this.toggleInstructions.bind(this)
   }
-  return (
-    <React.Fragment>
-      <div style={style}>
-        <ul
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            listStyleType: "none",
-          }}
+
+  toggleInstructions() {
+    this.setState(({ displayInstructions }) => ({
+      displayInstructions: !displayInstructions,
+    }))
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <div style={style}>
+          <ul
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              listStyleType: "none",
+            }}
+          >
+            <li>
+              <button onClick={() => this.toggleInstructions()}>
+                How to Play
+              </button>
+            </li>
+          </ul>
+        </div>
+        <Modal
+          display={this.state.displayInstructions}
+          toggleDisplay={this.toggleInstructions}
+          header="Instructions"
         >
-          <li>
-            <button onClick={() => toggleInstructions()}>How to Play</button>
-          </li>
-        </ul>
-      </div>
-      <Modal
-        display={displayState}
-        toggleInstructions={toggleInstructions}
-        header="Instructions"
-      >
-        Here are the instructions
-      </Modal>
-    </React.Fragment>
-  )
+          Here are the instructions
+        </Modal>
+      </React.Fragment>
+    )
+  }
 }
