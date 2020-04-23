@@ -1,12 +1,19 @@
 import { database } from "./firebase_conn"
 
+//Confirms whether gamecode entered is valid
+export function confirmGameCode(gamecode) {
+  return new Promise(function (resolve, reject) {
+    resolve(true)
+  })
+}
+
 //Creates initial game object and sets property in
 //firebase to gamecode with value of game object.
 export async function createNewGame(gamecode) {
   console.log("creating new game")
   const game = {
     status: "pending",
-    unassigned: "none", //Set to none to allow a listener to be attached immediately
+    players: "none", //Set to none to allow a listener to be attached immediately
     team1: {
       teamName: "Team 1",
       players: [],
@@ -83,8 +90,10 @@ export function addPlayerToPath(player, path) {
     })
 }
 
-export function confirmGameCode(gamecode) {
-  return new Promise(function (resolve, reject) {
-    resolve(true)
-  })
+export function updatePlayerInfo(gamecode, playerId, key, value) {
+  const playerRef = `games/${gamecode}/players/${playerId}/`
+  console.log(playerRef)
+  database
+    .ref(`games/${gamecode}/players/${playerId}/`)
+    .update({ [key]: value })
 }
