@@ -3,14 +3,9 @@ import { database } from "./firebase_conn"
 //Confirms whether gamecode entered is valid
 export function confirmGameCode(gamecode) {
   return new Promise(function (resolve, reject) {
-    // const response = database()
-    //   .ref(`games/${gamecode}/status`)
-    //   .equalTo("pending")
-    // console.log(response)
-
-    const ref = database.ref(`games/${gamecode}/status`)
-    ref.once("value").then(
-      function (snapshot) {
+    try {
+      const ref = database.ref(`games/${gamecode}/status`)
+      ref.once("value").then(function (snapshot) {
         const value = snapshot.val() || "does not exist"
         console.log(value)
         if (value === "pending") {
@@ -18,13 +13,10 @@ export function confirmGameCode(gamecode) {
         } else {
           resolve(false)
         }
-        // if (exists) {
-        //   if (snapshot.child("status").val() === "pending"){
-        //     resolve(true)
-        //   }
-      }
-      // console.log(exists)
-    )
+      })
+    } catch (err) {
+      reject(err)
+    }
   })
 }
 

@@ -7,10 +7,10 @@ export default function TeamButton({ playerId, team, toggleTeam }) {
         Join Team 2
       </button>
     )
-  } else if (team === "Team2") {
+  } else if (team === "Team 2") {
     return (
       <button onClick={() => toggleTeam("Team 1,", playerId)}>
-        Join Team 2
+        Join Team 1
       </button>
     )
   } else {

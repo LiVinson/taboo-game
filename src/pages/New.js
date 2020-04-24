@@ -1,7 +1,9 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import PlayerInfoForm from "../components/PlayerInfoForm"
 import Teams from "../components/Teams"
 import { convertFBObjectToArray, includedInArray } from "../utils/helpers"
+import LinkButton from "../components/LinkButton"
 import {
   confirmPathExists,
   attachListenerToPath,
@@ -22,6 +24,7 @@ export default class New extends React.Component {
       currentPlayerName: "",
       playersListener: false, //determines if FB listener has been set on players path
       players: [],
+      redirect: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -103,6 +106,7 @@ export default class New extends React.Component {
   }
   render() {
     const { players, currentPlayer, currentPlayerName, loading } = this.state
+
     if (loading) {
       return <p>Loading Game</p>
     } else if (
@@ -122,31 +126,24 @@ export default class New extends React.Component {
       //Lists all currently waiting players
       return (
         <div>
-          <h2>Unassigned Players</h2>
           <Teams
             players={players}
             teamName="unassigned"
             toggleTeam={this.toggleTeam}
           />
+          <LinkButton
+            to={`/play/${this.state.gamecode}/${currentPlayer.playerId}`}
+            disabled={allPlayersAssigned(this.state.players)}
+          >
+            Start Game
+          </LinkButton>
         </div>
       )
     }
   }
 }
 
-/*return (
-        <ul>
-          {unassignedPlayers.map((player) => {
-            return (
-              <li key={player.playerId}>
-                {player.name}
-                <span>
-                  {player.playerId === currentPlayer.playerId
-                    ? "Me!"
-                    : "Not Me"}
-                </span>
-              </li>
-            )
-          })}
-        </ul>
-        )*/
+function allPlayersAssigned(players) {
+  const unassigned = players.filter((player) => player.team === "unassigned")
+  return unassigned.length > 0
+}

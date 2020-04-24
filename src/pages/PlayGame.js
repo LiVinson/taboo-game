@@ -2,7 +2,7 @@ import React from "react"
 
 // function assignTurn() {}
 
-export default function Game() {
+export default function PlayGame() {
   /*
     Information needed:
 
@@ -14,5 +14,5 @@ export default function Game() {
      "this" user and their team and current role.
     */
 
-  return <div>Play Taboo</div>
+  return <div>Play Taboo!</div>
 }

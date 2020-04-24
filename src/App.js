@@ -5,8 +5,7 @@ import Container from "./components/Container"
 import Navbar from "./components/Navbar"
 import Home from "./pages/Home"
 import New from "./pages/New"
-import Join from "./pages/Join"
-import Game from "./pages/Game"
+import Game from "./pages/PlayGame"
 
 class App extends React.Component {
   render() {
@@ -17,8 +16,7 @@ class App extends React.Component {
           <Switch>
             <Route path={"/"} exact component={Home} />
             <Route path="/new/:gamecode/:playerId" component={New} />
-            <Route path="/join" component={Join} />
-            <Route path="/play" component={Game} />
+            <Route path="/play/:gamecode/:playerId" component={Game} />
           </Switch>
         </Container>
       </Router>
