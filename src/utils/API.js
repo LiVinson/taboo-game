@@ -110,3 +110,12 @@ export function updatePlayerInfo(gamecode, playerId, key, value) {
     .ref(`games/${gamecode}/players/${playerId}/`)
     .update({ [key]: value })
 }
+
+export function getDeck(deck) {
+  return new Promise(function (resolve, reject) {
+    import("./cards").then((obj) => {
+      //shuffle Deck
+      resolve(obj.default.deck1)
+    })
+  })
+}
