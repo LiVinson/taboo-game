@@ -1,5 +1,5 @@
 import React from "react"
-import { getDeck } from "../utils/API"
+import { getDeck, updateGameStatus } from "../utils/API"
 
 // function assignTurn() {}
 
@@ -47,7 +47,8 @@ export default class PlayGame extends React.Component {
 
   componentDidMount() {
     //change game state to "in progress"
-    this.getNextDeck()
+    updateGameStatus(this.props.match.params.gamecode, "in progress")
+    // this.getNextDeck()
   }
 
   getNextDeck() {

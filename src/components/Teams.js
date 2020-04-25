@@ -24,5 +24,10 @@ export default function Teams({ team, players, toggleTeam }) {
 }
 
 function filterByTeam(players, team) {
-  return players.filter((player) => player.team === team)
+  const filteredPlayers = players.filter((player) => {
+    // console.log(player.team, team)
+    return player.team === team
+  })
+  console.log(filteredPlayers)
+  return filteredPlayers
 }

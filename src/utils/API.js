@@ -69,25 +69,36 @@ Output:
   Initial attach: Returns a promise with current value at the path of the listner
   Each path update: Calls the onChange function passed. 
 */
-export function attachListenerToPath(gamecode, pathToAttach, onChange) {
+
+function attachListener(path, callback, initialValue) {
   return new Promise(function (resolve, reject) {
-    try {
-      database
-        .ref(`games/${gamecode}/${pathToAttach}`)
-        .on("value", function (snapshot) {
-          const value = snapshot.val()
-          //Value at path is none when no relevant children were previously added
-          if (value === "none") {
-            return resolve(value)
-            //Path contains relevant values
-          } else {
-            onChange(value)
-          }
-        })
-    } catch (err) {
-      reject(err)
-    }
+    database.ref(path).on("value", function (snapshot) {
+      const value = snapshot.val()
+
+      if (value === initialValue) {
+        resolve(value)
+      } else {
+        callback(value)
+      }
+    })
   })
+}
+// export function attachListenerToPath(gamecode, [pathToAttach, onChange, compareValue]) {
+export async function attachListenerToPath(gamecode, [...attachDetails]) {
+  // console.log(attachDetails)
+  const returnArr = []
+
+  for (let i = 0; i < attachDetails.length; i++) {
+    const { pathToAttach, onChange, initialValue } = attachDetails[i]
+
+    const response = await attachListener(
+      `games/${gamecode}/${pathToAttach}`,
+      onChange,
+      initialValue
+    )
+    returnArr.push(response)
+  }
+  return returnArr
 }
 
 //Adds the player object to the provided FB path. No "then"
@@ -111,6 +122,11 @@ export function updatePlayerInfo(gamecode, playerId, key, value) {
     .update({ [key]: value })
 }
 
+export function updateGameStatus(gamecode, status) {
+  const gameStatusRef = `games/${gamecode}/`
+  console.log(gameStatusRef)
+  database.ref(gameStatusRef).update({ status: status })
+}
 export function getDeck(deck) {
   return new Promise(function (resolve, reject) {
     import("./cards").then((obj) => {
