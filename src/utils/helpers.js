@@ -41,7 +41,7 @@ export function convertFBObjectToArray(fbObject) {
 }
 
 //Checks if array contains an object with the property name === value
-export function includedInArray(arr, property, value) {
+export function includedInArrayOfObjects(arr, property, value) {
   const filteredArray = arr.filter((item) => item[property] === value)
   console.log(filteredArray)
   return filteredArray.length > 0

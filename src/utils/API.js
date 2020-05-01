@@ -8,7 +8,7 @@ export function confirmGameCode(gamecode) {
       ref.once("value").then(function (snapshot) {
         const value = snapshot.val() || "does not exist"
         console.log(value)
-        if (value === "pending") {
+        if (value === "pending" || "adding") {
           resolve(true)
         } else {
           resolve(false)
@@ -70,35 +70,14 @@ Output:
   Each path update: Calls the onChange function passed. 
 */
 
-function attachListener(path, callback, initialValue) {
+export function attachListener(path, callback, type) {
   return new Promise(function (resolve, reject) {
     database.ref(path).on("value", function (snapshot) {
       const value = snapshot.val()
-
-      if (value === initialValue) {
-        resolve(value)
-      } else {
-        callback(value)
-      }
+      console.log(value)
+      callback(value, type, resolve)
     })
   })
-}
-// export function attachListenerToPath(gamecode, [pathToAttach, onChange, compareValue]) {
-export async function attachListenerToPath(gamecode, [...attachDetails]) {
-  // console.log(attachDetails)
-  const returnArr = []
-
-  for (let i = 0; i < attachDetails.length; i++) {
-    const { pathToAttach, onChange, initialValue } = attachDetails[i]
-
-    const response = await attachListener(
-      `games/${gamecode}/${pathToAttach}`,
-      onChange,
-      initialValue
-    )
-    returnArr.push(response)
-  }
-  return returnArr
 }
 
 //Adds the player object to the provided FB path. No "then"
@@ -125,7 +104,20 @@ export function updatePlayerInfo(gamecode, playerId, key, value) {
 export function updateGameStatus(gamecode, status) {
   const gameStatusRef = `games/${gamecode}/`
   console.log(gameStatusRef)
-  database.ref(gameStatusRef).update({ status: status })
+  return new Promise(function (resolve, reject) {
+    database
+      .ref(gameStatusRef)
+      .update({ status: status })
+      .then((res) => {
+        console.log("then of updateGameStatus")
+        resolve(true)
+      })
+      .catch((err) => {
+        console.log("there was an error updating game status")
+        console.log(err)
+        reject(false)
+      })
+  })
 }
 export function getDeck(deck) {
   return new Promise(function (resolve, reject) {
