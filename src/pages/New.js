@@ -1,7 +1,7 @@
 import React from "react"
 import { Redirect } from "react-router-dom"
 import PlayerInfoForm from "../components/PlayerInfoForm"
-import Teams from "../components/Teams"
+import Team from "../components/Team"
 import {
   convertFBObjectToArray,
   includedInArrayOfObjects,
@@ -82,12 +82,7 @@ export default class New extends React.Component {
 
   handleInputSubmit(e) {
     e.preventDefault()
-    const {
-      gamecode,
-      currentPlayerName,
-      currentPlayer,
-      gameStatus,
-    } = this.state
+    const { gamecode, currentPlayerName, currentPlayer } = this.state
     // const playerId = createNewCode()
     //If listener could not be set on mount, this is first player so they are assigned host
     console.log(currentPlayer)
@@ -217,9 +212,19 @@ export default class New extends React.Component {
       //Lists all players divided by team
       return (
         <div>
-          <Teams
-            players={players}
+          <Team
+            players={players.filter((player) => player.team === "unassigned")}
             teamName="unassigned"
+            toggleTeam={this.toggleTeam}
+          />
+          <Team
+            players={players.filter((player) => player.team === "Team 1")}
+            teamName="Team 1"
+            toggleTeam={this.toggleTeam}
+          />
+          <Team
+            players={players.filter((player) => player.team === "Team 2")}
+            teamName="Team 2"
             toggleTeam={this.toggleTeam}
           />
           <button

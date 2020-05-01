@@ -119,6 +119,23 @@ export function updateGameStatus(gamecode, status) {
       })
   })
 }
+
+export function retrieveGameInformation(gamecode) {
+  //get the players
+  return new Promise(function (resolve, reject) {
+    database
+      .ref(`games/${gamecode}/players`)
+      .once("value")
+      .then(function (snapshot) {
+        console.log(snapshot.val())
+        resolve(snapshot.val())
+      })
+      .catch(function (err) {
+        console.log("there was an issue retreiving the players:", err)
+        reject(err)
+      })
+  })
+}
 export function getDeck(deck) {
   return new Promise(function (resolve, reject) {
     import("./cards").then((obj) => {

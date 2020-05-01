@@ -9,11 +9,14 @@ export default function Team({ players, teamName, toggleTeam }) {
         {players.map((player) => (
           <li key={player.playerId}>
             <p>{player.name}</p>
-            <TeamButton
-              team={player.team}
-              playerId={player.playerId}
-              toggleTeam={toggleTeam}
-            />
+
+            {toggleTeam ? (
+              <TeamButton
+                team={player.team}
+                playerId={player.playerId}
+                toggleTeam={toggleTeam}
+              />
+            ) : null}
           </li>
         ))}
       </ul>

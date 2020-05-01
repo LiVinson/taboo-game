@@ -1,6 +1,7 @@
 import React from "react"
-import { getDeck, updateGameStatus } from "../utils/API"
-
+import Team from "../components/Team"
+import { getDeck, retrieveGameInformation } from "../utils/API"
+import { convertFBObjectToArray } from "../utils/helpers"
 // function assignTurn() {}
 
 export default class PlayGame extends React.Component {
@@ -18,78 +19,107 @@ export default class PlayGame extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      round: 1,
-      turn: "Team 1",
-      currentCardIndex: 0,
+      loading: true,
+      gamecode: props.match.params.gamecode,
+      currentPlayerId: props.match.params.playerId,
+      round: {
+        number: 1,
+        turn: 1,
+        speaker: null,
+        watcher: null,
+        cardsPlayed: [],
+      },
       deck: {
         deckNumber: 1,
         cards: [],
+        currentCardIndex: 0,
       },
-      playedCards: [],
-      scores: {
-        Team1: 0,
-        Team2: 0,
-      },
+
       Team1: {
         players: [],
-        status: "speak", //speak/watch
-        player: 0,
+        playerTurnIndex: 0,
+        score: 0,
       },
       Team2: {
         players: [],
-        status: "watch", //speak/watch
-        player: 0,
+        playerTurnIndex: 0,
+        score: 0,
       },
     }
 
-    this.getNextDeck = this.getNextDeck.bind(this)
+    // this.getNextDeck = this.getNextDeck.bind(this)
   }
 
   componentDidMount() {
-    //change game state to "in progress"
-    updateGameStatus(this.props.match.params.gamecode, "in progress")
-    // this.getNextDeck()
-  }
+    //get game information
+    //setRoundInfo
 
-  getNextDeck() {
-    const currentDeck = this.state.deck.deckNumber
-    getDeck(currentDeck + 1).then((newDeck) => {
-      console.log(newDeck)
+    retrieveGameInformation(this.state.gamecode).then((response) => {
+      const players = convertFBObjectToArray(response)
+      const Team1Players = players.filter((player) => player.team === "Team 1")
+      const Team2Players = players.filter((player) => player.team === "Team 2")
+
       this.setState((state) => ({
-        deck: {
-          deckNumber: state.deck.deckNumber + 1,
-          cards: newDeck,
+        Team1: {
+          ...state.Team1,
+          players: Team1Players,
+        },
+        Team2: {
+          ...state.Team2,
+          players: Team2Players,
         },
       }))
     })
   }
 
-  setNextCard() {}
+  // getNextDeck() {
+  //   const currentDeck = this.state.deck.deckNumber
+  //   getDeck(currentDeck + 1).then((newDeck) => {
+  //     console.log(newDeck)
+  //     this.setState((state) => ({
+  //       deck: {
+  //         deckNumber: state.deck.deckNumber + 1,
+  //         cards: newDeck,
+  //       },
+  //     }))
+  //   })
+  // }
+
+  // setNextCard() {}
 
   render() {
-    const cards = this.state.deck.cards
-    const currentCardIndex = this.state.currentCardIndex
-    const currentCard = cards[currentCardIndex]
-    const invalidWords = currentCard ? currentCard.invalidWords : []
-    console.log(cards)
-    console.log(currentCard)
-    console.log(invalidWords)
-    return (
-      <div>
-        <h1>Play Taboo!</h1>
-        {currentCard ? (
+    const { loading, Team1, Team2 } = this.state
+    if (loading) {
+      return <p>Loading Works</p>
+    } else {
+      return (
+        <div>
           <div>
-            {currentCard.word}
-            <ul>
-              {invalidWords.map((wrongWord, index) => (
-                <li key={index}>{wrongWord}</li>
-              ))}
-            </ul>
+            {/*Add score*/}
+
+            <Team players={Team1.players} teamName="Team 1" />
+            <Team players={Team2.players} teamName="Team 2" />
           </div>
-        ) : (
-          <p>"Loading Words"</p>
-        )}
-      </div>
-    )
+          <div>
+            {/*Round Information w/ speaker watcher*/}
+            {/*game div - pre round:
+              //button to start round
+              //you are speaker message
+              //you are watcher message            
+            */}
+            {/*game div - in round round:
+                  //timer 
+                  //speaker:
+                    //current card
+                    //next button
+                  watcher: 
+                    //current card
+                  
+                    
+            */}
+          </div>
+        </div>
+      )
+    }
   }
 }
