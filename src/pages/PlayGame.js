@@ -2,7 +2,7 @@ import React from "react"
 import Team from "../components/Team"
 import { getDeck, retrieveGameInformation } from "../utils/API"
 import { convertFBObjectToArray } from "../utils/helpers"
-// function assignTurn() {}
+import RoundInfo from "../components/RoundInfo"
 
 export default class PlayGame extends React.Component {
   /*
@@ -12,7 +12,7 @@ export default class PlayGame extends React.Component {
     teams, 
     players on each team
      Current round. 
-     Selected Speaker and Watcher 
+     Selected Giver  and Watcher 
      "this" user and their team and current role.
     */
 
@@ -25,7 +25,7 @@ export default class PlayGame extends React.Component {
       round: {
         number: 1,
         turn: 1,
-        speaker: null,
+        giver: null,
         watcher: null,
         cardsPlayed: [],
       },
@@ -88,28 +88,30 @@ export default class PlayGame extends React.Component {
   // setNextCard() {}
 
   render() {
-    const { loading, Team1, Team2 } = this.state
+    const { loading, Team1, Team2, round } = this.state
+    const { number, giver, watcher } = round
+
     if (loading) {
       return <p>Loading Works</p>
     } else {
       return (
         <div>
+          {/*Add score*/}
           <div>
-            {/*Add score*/}
-
             <Team players={Team1.players} teamName="Team 1" />
             <Team players={Team2.players} teamName="Team 2" />
           </div>
-          <div>
-            {/*Round Information w/ speaker watcher*/}
-            {/*game div - pre round:
+          <RoundInfo round={number} giver={giver} watcher={watcher} />
+
+          {/*Round Information w/ speaker watcher*/}
+          {/*game div - pre round:
               //button to start round
-              //you are speaker message
+              //you are giver message
               //you are watcher message            
             */}
-            {/*game div - in round round:
+          {/*game div - in round round:
                   //timer 
-                  //speaker:
+                  //giver:
                     //current card
                     //next button
                   watcher: 
@@ -117,7 +119,6 @@ export default class PlayGame extends React.Component {
                   
                     
             */}
-          </div>
         </div>
       )
     }
