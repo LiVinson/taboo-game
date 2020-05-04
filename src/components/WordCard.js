@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function GameCard({ word, tabooList }) {
+export default function WordCard({ word, tabooList }) {
   return (
     <div>
       <Word />

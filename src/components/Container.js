@@ -2,6 +2,7 @@ import React from "react"
 
 const style = {
   maxWidth: "1024px",
+  height: "95vh",
   padding: "0px 20px",
   margin: "0 auto",
   position: "relative",

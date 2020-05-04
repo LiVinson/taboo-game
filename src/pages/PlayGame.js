@@ -2,7 +2,9 @@ import React from "react"
 import Team from "../components/Team"
 import { getDeck, retrieveGameInformation } from "../utils/API"
 import { convertFBObjectToArray } from "../utils/helpers"
+import ScoreCard from "../components/ScoreCard"
 import RoundInfo from "../components/RoundInfo"
+import GameContainer from "../components/GameContainer"
 
 export default class PlayGame extends React.Component {
   /*
@@ -25,9 +27,10 @@ export default class PlayGame extends React.Component {
       round: {
         number: 1,
         turn: 1,
-        giver: null,
-        watcher: null,
+        giver: "Tom",
+        watcher: "Sue",
         cardsPlayed: [],
+        status: "pre", //keeps track of if it is before round, or round in progress
       },
       deck: {
         deckNumber: 1,
@@ -68,6 +71,7 @@ export default class PlayGame extends React.Component {
           ...state.Team2,
           players: Team2Players,
         },
+        loading: false,
       }))
     })
   }
@@ -89,21 +93,34 @@ export default class PlayGame extends React.Component {
 
   render() {
     const { loading, Team1, Team2, round } = this.state
-    const { number, giver, watcher } = round
+    const { number, giver, watcher, turn, status } = round
 
     if (loading) {
       return <p>Loading Works</p>
     } else {
       return (
-        <div>
+        <div style={{ height: "100%" }}>
           {/*Add score*/}
-          <div>
+          <div style={{ width: "33%", float: "left", height: "100%" }}>
+            <ScoreCard score1={Team1.score} score2={Team2.score} />
             <Team players={Team1.players} teamName="Team 1" />
             <Team players={Team2.players} teamName="Team 2" />
           </div>
-          <RoundInfo round={number} giver={giver} watcher={watcher} />
+          <RoundInfo
+            round={number}
+            giver={giver}
+            watcher={watcher}
+            turn={turn}
+          />
+          <GameContainer
+            guessingTeam={true}
+            giver={true}
+            watcher={false}
+            giverName={giver}
+            watcherName={watcher}
+            round={status}
+          />
 
-          {/*Round Information w/ speaker watcher*/}
           {/*game div - pre round:
               //button to start round
               //you are giver message
