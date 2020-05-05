@@ -70,12 +70,14 @@ Output:
   Each path update: Calls the onChange function passed. 
 */
 
-export function attachListener(path, callback, type) {
+export function attachListener(path, callback, type, action, changeType="value") {
+  console.log("about to attach a listener", changeType)
   return new Promise(function (resolve, reject) {
     database.ref(path).on("value", function (snapshot) {
       const value = snapshot.val()
       console.log(value)
-      callback(value, type, resolve)
+      console.log(action)
+      callback(value, type, resolve, action)
     })
   })
 }

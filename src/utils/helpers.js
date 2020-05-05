@@ -46,3 +46,25 @@ export function includedInArrayOfObjects(arr, property, value) {
   console.log(filteredArray)
   return filteredArray.length > 0
 }
+
+
+/*
+value: the value returned from firebase
+type: The type of event listener
+check: The value to compare to determine next action
+cb_true: call back if check value is true
+cb_false: call back if check value is false
+
+ */
+export function handleListenerCallbacks(value, type, temp, action) {
+  const {check, cb_true, cb_false} = action
+  
+  console.log(action)
+  //e.g. action.round_status
+  if(action.check) {
+      cb_true(value)
+  } else {
+    cb_false(value)
+  }
+
+}

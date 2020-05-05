@@ -1,57 +1,65 @@
 import React from "react"
+import PreRound from "./PreRound.js"
 
 export default function GameContainer({
   round,
-  guessingTeam,
-  giver,
-  watcher,
-  giverName,
-  watcherName,
+  onGuessingTeam,
+  getActivePlayers,
+  currentPlayerId,
+  startRound,
 }) {
   let msg = ""
-  if (round === "pre") {
-    msg = preRoundMsg(guessingTeam, giver, watcher, giverName, watcherName)
+  const { giver, watcher } = getActivePlayers()
+
+
+  switch (round) {
+    case "pre":
+      msg = preRoundMsg(
+        onGuessingTeam,       
+        startRound,
+        giver,
+        watcher,
+        currentPlayerId
+      )
+      return <PreRound
+               message={msg} 
+               isGiver={giver.playerId === currentPlayerId}
+               startRound = {startRound}
+               />
+    case "in progress":
+      return <h1>In Progress!</h1>
+      break
+    default:
   }
-  return (
-    <div
-      style={{
-        float: "left",
-        border: "2px solid black",
-        height: "100%",
-        width: "65%",
-      }}
-    >
-      {round === "pre" ? (
-        <div dangerouslySetInnerHTML={{ __html: msg }} />
-      ) : //   guessingTeam={guessingTeam}
-      //   giver={giver}
-      //   watcher={watcher}
-      //   giverName={giverName}
-      //   watcherName={watcherName}
-      // />
-      null}
-    </div>
-  )
+
+
 }
 
-//Preround:
+//Preround message based on current player's team and giver/watcher status:
 function preRoundMsg(
   guessingTeam,
-  giver = false,
-  watcher = false,
-  giverName,
-  watcherName
+  startRound,
+  giver,
+  watcher,
+  currentPlayerId
 ) {
   let preRoundMsg = ""
 
-  if (guessingTeam) {
-    preRoundMsg += giver
-      ? `<p>It's your turn to give clues to your team. ${watcherName} will be making sure you don't say any taboo words! Select the start button to begin!</p><button>Start Round!</button>`
-      : `<p>It's your team's turn to guess the words, and ${giverName} will be giving the clues. Get Ready!</p>`
+
+  console.log(giver, watcher)
+  const isGiver = giver.playerId === currentPlayerId
+  const isWatcher = watcher.playerId === currentPlayerId
+
+  console.log(currentPlayerId + " is giver: " + isGiver)  
+  console.log(currentPlayerId + " is watcher: " + isWatcher)
+  if (guessingTeam()) {
+    preRoundMsg += isGiver
+      ? `It's your turn to give clues to your team. ${watcher.name} will be making sure you don't say any taboo words! Select the start button to begin!`
+      : `It's your team's turn to guess the words, and ${giver.name} will be giving the clues. Get Ready!`
   } else {
-    preRoundMsg += watcher
-      ? `<p>It's the other team's turn to give the clues! You are the watcher for this round! Make sure ${giverName} does not say any taboo words!</p>`
-      : `<p>Sit back and relax! It's the other team's turn to guess the words.</p>`
+    preRoundMsg += isWatcher
+      ? `It's the other team's turn to give the clues! You are the watcher for this round! Make sure ${giver.name} does not say any taboo words!`
+      : `Sit back and relax! It's the other team's turn to guess the words.`
   }
   console.log(preRoundMsg)
   return preRoundMsg
