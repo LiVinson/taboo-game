@@ -85,13 +85,13 @@ export default class New extends React.Component {
     const { gamecode, currentPlayerName, currentPlayer } = this.state
     // const playerId = createNewCode()
     //If listener could not be set on mount, this is first player so they are assigned host
-    console.log(currentPlayer)
+    // console.log(currentPlayer)
     const player = {
       ...currentPlayer,
       name: currentPlayerName,
       team: "unassigned",
     }
-    console.log(player)
+    // console.log(player)
     const playersPath = `games/${gamecode}/players/${player.playerId}`
 
     try {

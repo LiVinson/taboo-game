@@ -25,7 +25,11 @@ export function confirmGameCode(gamecode) {
 export async function createNewGame(gamecode) {
   console.log("creating new game")
   const game = {
-    status: "pending",
+    deck: {
+      cards: "none",
+      currentCardIndex: 0,
+      deckNumber: 1
+    },    
     players: "none", //Set to none to allow a listener to be attached immediately
     team1: {
       teamName: "Team 1",
@@ -37,6 +41,10 @@ export async function createNewGame(gamecode) {
       players: [],
       score: 0,
     },
+    round: {
+      number: 1,
+      status: "pre"
+    }
   }
   return await database
     .ref(`games/${gamecode}`)
@@ -70,14 +78,14 @@ Output:
   Each path update: Calls the onChange function passed. 
 */
 
-export function attachListener(path, callback, type, action, changeType="value") {
-  console.log("about to attach a listener", changeType)
+export function attachListener(path, callback, listenerType) {
+  console.log("about to attach a listener: ", listenerType)
   return new Promise(function (resolve, reject) {
-    database.ref(path).on("value", function (snapshot) {
+    database.ref(path).on("value", async function (snapshot) {
       const value = snapshot.val()
       console.log(value)
-      console.log(action)
-      callback(value, type, resolve, action)
+      await callback(value, listenerType, resolve)
+      return "yo"
     })
   })
 }
@@ -123,6 +131,7 @@ export function updateGameStatus(gamecode, status) {
 }
 
 export function retrieveGameInformation(gamecode) {
+  console.log("gamecode", gamecode)
   //get the players
   return new Promise(function (resolve, reject) {
     database

@@ -34,7 +34,7 @@ export function convertFBObjectToArray(fbObject) {
     for (let key in fbObject[keyObj]) {
       newObj[key] = fbObject[keyObj][key]
     }
-    console.log(newObj)
+    // console.log(newObj)
     fbArray.push(newObj)
   }
   return fbArray
@@ -43,7 +43,7 @@ export function convertFBObjectToArray(fbObject) {
 //Checks if array contains an object with the property name === value
 export function includedInArrayOfObjects(arr, property, value) {
   const filteredArray = arr.filter((item) => item[property] === value)
-  console.log(filteredArray)
+  // console.log(filteredArray)
   return filteredArray.length > 0
 }
 
