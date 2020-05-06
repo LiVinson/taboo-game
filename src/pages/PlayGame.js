@@ -7,6 +7,27 @@ import RoundInfo from "../components/RoundInfo"
 import GameContainer from "../components/GameContainer"
 
 
+/*pickle - Master to do list
+ - Add function to handle each of the listener changes.
+ - Move handleDBListeners to helper file.
+ - Refactors News handlers to use it.
+ - Get Card component to display to the screen.
+ - Add skip/complete triggers to the card to display next word
+ - Add timer and display to all users
+ - Add round over handler.
+ - Display each card with button for status.
+ - Add card correct handler. Add card incorrect handler.
+ - Handle scoring.
+ - Handle starting new round.
+ - Handle end of game
+ - Styling
+ - Add settings to intro: 
+    - Lose points for skip?
+    - Number of rounds to play.
+  - Create cards
+  - Add a script to import them to firebase
+
+*/
 export default class PlayGame extends React.Component {
   /*
     Information needed:
