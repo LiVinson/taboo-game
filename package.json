@@ -34,5 +34,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "csv-parser": "^2.3.2",
+    "custom-env": "^2.0.1"
   }
 }
