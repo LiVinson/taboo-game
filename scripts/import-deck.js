@@ -1,4 +1,3 @@
-
 require("custom-env").env(`${process.env.NODE_ENV}.local`, "../")
 const csvParser = require("csv-parser");
 const fs = require("fs")
