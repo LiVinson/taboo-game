@@ -1,15 +1,12 @@
-// const importFile = "deck-100.csv"
+
 require("custom-env").env(`${process.env.NODE_ENV}.local`, "../")
 const csvParser = require("csv-parser");
 const fs = require("fs")
 const path = require("path")
 const firebase = require("firebase/app");
-// Add the Firebase products that you want to use
+
+//Configure firebase database
 require("firebase/database");
-
-
-console.log("current environment: ", process.env.NODE_ENV)
-
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -26,6 +23,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 const database = firebase.database()
 
+//Confirms if arguments for action and fileName provided
 const runScript = ()=> {
     console.log(process.argv.length)
     const action = process.argv[2]
@@ -40,6 +38,7 @@ const runScript = ()=> {
     }
 }
 
+//Reads arguments provided and determines action needed.
 const readFlags = (action, fileName) => {    
     switch (action) {
         case "-a":
@@ -52,54 +51,45 @@ const readFlags = (action, fileName) => {
     }
 }
 
-const addNewDeck = (fileName, deckId) =>  {
+//Receives name of deck, creates path, and opens file stream to read .csv file.
+const addNewDeck = (fileName) =>  {
     //verify that deck exists in side of "../decks"
     const fileWithExtension = fileName.includes(".csv", fileName.length-4) ? fileName : fileName + ".csv"
     const fullPath = path.join(__dirname, "../decks", fileWithExtension) 
     
       
-        //Create a file stream to read file line by line
+//Create a file stream to read file line by line
 
-        const cards = []
-        const invalidCards = []
-        const stream = fs.createReadStream(fullPath)
+const cards = []
+const invalidCards = []
+const stream = fs.createReadStream(fullPath)
 
-        stream
-            .on("error", (err) => {
-                console.log(err.message)
-                process.exit(1)
-            })
+stream
+    .on("error", (err) => {
+        console.log(err.message)
+        process.exit(1)
+    })
 
-            .pipe(csvParser())
-                .on("data", (row) => {
-                    if((Object.keys(row)).length === 3) {
-
-                        cards.push(row)
-                    } else {
-                        invalidCards.push(row)
-                    }
-                    
-                })
-                .on("end", () => {
-                    console.log("finished reading files. Valid: ")
-                    console.log(cards)
-                    
-                    console.log("finished reading files. invalid: ")
-                    console.log(invalidCards)
-                })
-
-
-
-    
-
-    // } 
-    
-
+    .pipe(csvParser())
+        .on("data", (row) => {
+            //Checks that there are correct number of properties. If not, pushes to invalid array
+            if((Object.keys(row)).length === 3) {
+                cards.push(row)
+            } else {
+                invalidCards.push(row)
+            }            
+        })
+        .on("end", () => {
+            console.log("finished reading files. Valid: ")
+            console.log(cards)
+            
+            console.log("finished reading files. invalid: ")
+            console.log(invalidCards)
+        })   
 }
 
+//Verifies if a filename is valid. Currently not used.
 const validateFile = (filePath) => {
-
-
     try {
         if(fs.existsSync(filePath)) {
             return true
@@ -114,38 +104,3 @@ const validateFile = (filePath) => {
 }
 
 runScript();
-
-
-// if(!flags[0] || flags[0] !== "-d" || flags[0] !== "-deck") {
-//     console.log("Must pass -d flag to import a new deck. Example: node script.js -d 'deckFile'")
-//     process.exist(1);
-// }
-
-//Structure: NODE_ENV=[env] node script.js -d "deckfile"
-
-//Confirm length of arguments is greater than 2
-
-
-
-//Grab deck id from file name.
-//Check if this deck already exists in the database
-    //If so, log a message, exit script
-
-//Read file and save each line as an element in an array
-//Loop over array and create object: 
-    /*{
-        apple: {
-            category: thing,
-            taboo1: fruit,
-            taboo2: red,
-            taboo3: test,
-            taboo4: test,
-            taboo5: test
-        },
-        birthday: {...}
-    }
-    */
-
-   //Insert contents of array into firebase
-   //Add id/indication matching deck into firebase for future checks (avoid same cards added twice)
-   //Write to log the deck 'id' and number of cards that were added 
