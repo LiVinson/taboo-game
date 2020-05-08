@@ -43,7 +43,7 @@ const readFlags = (action, fileName) => {
         case "-a":
         case "-add":
             console.log("add new deck")
-            addNewDeck(fileName)
+            readDeckFile(fileName)
             break;
         default:
             console.log("something's wrong")
@@ -51,7 +51,7 @@ const readFlags = (action, fileName) => {
 }
 
 //Receives name of deck, creates path, and opens file stream to read .csv file.
-const addNewDeck = (fileName) =>  {
+const readDeckFile = (fileName) =>  {
     //verify that deck exists in side of "../decks"
     const fileWithExtension = fileName.includes(".csv", fileName.length-4) ? fileName : fileName + ".csv"
     const fullPath = path.join(__dirname, "../decks", fileWithExtension) 
@@ -72,7 +72,7 @@ stream
     .pipe(csvParser())
         .on("data", (row) => {
             //Checks that there are correct number of properties. If not, pushes to invalid array
-            if((Object.keys(row)).length === 3) {
+            if((Object.keys(row)).length === 6) {
                 cards.push(row)
             } else {
                 invalidCards.push(row)
@@ -80,11 +80,39 @@ stream
         })
         .on("end", () => {
             console.log("finished reading files. Valid: ")
-            console.log(cards)
+            // console.log(cards)
             
-            console.log("finished reading files. invalid: ")
-            console.log(invalidCards)
+            // console.log("finished reading files. invalid: ")
+            // console.log(invalidCards)
+
+            addDeckToDatabase(cards)
+
+
         })   
+}
+
+const addDeckToDatabase = (deck) => {
+//     //connect to to firebase here instead of globally?
+    
+    const deckId = 1000
+    const path = "deck/" + deckId
+    const dbRef = database.ref(path)
+    dbRef.set(deck)
+    // console.log(deck)
+    // readDeck()
+}
+
+const readDeck = () => {
+    const path = "deck"
+    const dbRef = database.ref(path)
+    dbRef.on("value", function(snapshot) {
+        console.log("reading")
+        console.log(snapshot.val())
+    })
+}
+
+const LogErrorsToFile = () => {
+
 }
 
 //Verifies if a filename is valid. Currently not used.
@@ -102,4 +130,5 @@ const validateFile = (filePath) => {
     }
 }
 
+// database.ref("deck").set({test: true})
 runScript();
