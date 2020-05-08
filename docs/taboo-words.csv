@@ -1,76 +1,76 @@
-category,word,taboo1,taboo2,taboo3,taboo4,taboo5 
-people,Beyonce,Destiny's Child,Jay-Z,Blue Ivy,Homecoming  
-people,Kendrick Lamar,rapper,West Coast,Compton,Humble
-people,Will Smith,Fresh Prince,Independence Day,Jada Pinkett
-people,Simba,Lion King,Disney,Mufasa,Pride Rock,movie
-people,Matthew McCaugnahey
-people,Elliot Stabler
-people,Aziz Ansari
-people,Kanye West
-people,Chance the Rapper
-people,Harry Potter
-people,Voldemort
-people,Serena Williams
-people,Michael Phelps
-people,Donald Trump
-people,Barack Obama
-people,Justin Trudeau
-people,Bill Gates
-people,Jackie Chan
-people,Michelle Obama,
-people,Abraham Limcol
-people,Oprah Winfrey
-people,Justin Beiber
-people,The Rock
-people,Iron Main
-people,Spiderman
-people,Wonder Woman
-people,Christiano Renaldo
-people,Idris Elba
-people,Whoopie Goldberg
-people,Rihanna 
-people,Michael Jackson
-people,Albert Einstein
-people,Lebron James
-people,Michael Jordan
-people,Kobe Bryant
-people,Samuel L. Jackson
-people,Steve Harvey
-people,Jim  Carrey
-people,The Little Mermaid
-people,Aladdin
-people,Goku
-people,Where’s Waldo
-people,Spongebob Squarepants
-people,Mickey Mouse
-people,Scooby Doo
-people,Optimus Prime
-people,Luke Skywalker
-people,Austin Powers
-people,Barbie
-people,Barney
-people,Bugs Bunny
-people,Captain America
-people,Cinderella
-people,Cookie Monster
-people,Edward Scissorhands
-people,Elsa
-people,Hansel and Gretal
-people,Nemo
-people,Pink Panther
-people,Yoda
-people,The Very Hungry Caterpillar
-people,Pablo Escobar
-people,Little Red Riding Hood
-people,Last of a Dying Breed
-people,Ring bearer
-people,Teacher’s pet
-people,Game of Thrones
-people,Parallel universe
-people,IRS
-people,Tiger king
-people,Anti-vaxxer
-people,Punk’d
+word,taboo1,taboo2,taboo3,taboo4,taboo5,category
+Beyonce,Destiny's Child,Jay-Z,Blue Ivy,Homecoming,person  
+Kendrick Lamar,rapper,West Coast,Compton,Humble,person
+Will Smith,Fresh Prince,Independence Day,Jada Pinkett,person
+Simba,Lion King,Disney,Mufasa,Pride Rock,movie,person
+Matthew McCaugnahey,person
+Elliot Stabler,person
+Aziz Ansari,person
+Kanye West,person
+Chance the Rapper,person
+Harry Potter,person
+Voldemort,person
+Serena Williams,person
+Michael Phelps,person
+Donald Trump,person
+Barack Obama,person
+Justin Trudeau,person
+Bill Gates,person
+Jackie Chan,person
+Michelle Obama,,person
+Abraham Limcol,person
+Oprah Winfrey,person
+Justin Beiber,person
+The Rock,person
+Iron Main,person
+Spiderman,person
+Wonder Woman,person
+Christiano Renaldo,person
+Idris Elba,person
+Whoopie Goldberg,person
+Rihanna,person 
+Michael Jackson,person
+Albert Einstein,person
+Lebron James,person
+Michael Jordan,person
+Kobe Bryant,person
+Samuel L. Jackson,person
+Steve Harvey,person
+Jim  Carrey,person
+The Little Mermaid,person
+Aladdin,person
+Goku,person
+Where’s Waldo,person
+Spongebob Squarepants,person
+Mickey Mouse,person
+Scooby Doo,person
+Optimus Prime,person
+Luke Skywalker,person
+Austin Powers,person
+Barbie,person
+Barney,person
+Bugs Bunny,person
+Captain America,person
+Cinderella,person
+Cookie Monster,person
+Edward Scissorhands,person
+Elsa,person
+Hansel and Gretal,person
+Nemo,person
+Pink Panther,person
+Yoda,person
+The Very Hungry Caterpillar,person
+Pablo Escobar,person
+Little Red Riding Hood,person
+Last of a Dying Breed,person
+Ring bearer,person
+Teacher’s pet,person
+Game of Thrones
+Parallel universe
+IRS
+Tiger king,person
+Anti-vaxxer,person
+Punk’d
 places,Florida
 places,Disney World
 places,The Moon
