@@ -47,6 +47,46 @@ export function includedInArrayOfObjects(arr, property, value) {
   return filteredArray.length > 0
 }
 
+export function setupListenerRequest
+  (listeners, index, gamecode, createListener, listenerHandler) {
+    //pickle - clean up switch to only call attachListener at the end with a variable for the path
+    let listenerPath
+    switch (listeners[index]) {
+      case "gameStatus":
+        console.log("set gameStatus listener")
+        listenerPath = `games/${gamecode}/status`
+        break
+      case "players":
+        console.log("set players listener")
+        listenerPath = `games/${gamecode}/players`
+        break
+      case "roundStatus":
+        console.log("set roundStatus")
+        listenerPath = `games/${gamecode}/round/status`
+        break
+      case "roundNumber":
+        console.log("set roundNumberStatus")
+        listenerPath = `games/${gamecode}/round/number`
+        break
+      case "cardIndex":
+        console.log("set cardIndex")
+        listenerPath = `games/${gamecode}/deck/currentCardIndex`
+        break
+      case "currentCards":
+        console.log("set currentCards")
+        listenerPath = `games/${gamecode}/deck/cards`       
+        break
+      default:
+        //pickle - update once error logging set
+        console.log("something broke :/")
+        throw new Error("something broke in listener")
+        
+    }
+
+    console.log(listenerPath)
+    console.log(listenerHandler)
+    createListener(listenerPath, listenerHandler, listeners[index])
+  }
 
 /*
 value: the value returned from firebase

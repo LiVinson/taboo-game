@@ -5,6 +5,7 @@ import Team from "../components/Team"
 import {
   convertFBObjectToArray,
   includedInArrayOfObjects,
+  setupListenerRequest
 } from "../utils/helpers"
 
 import {
@@ -24,18 +25,20 @@ export default class New extends React.Component {
       },
       host: false,
       currentPlayerName: "",
-      playersListener: false, //determines if FB listener has been set on players path
-      gameStatusListener: false,
+      listenersSet: false,
       players: [],
       redirect: false,
       // gameStatus: "pending",
     }
+
+    this.listenerTypes = ["gameStatus", "players"]
 
     this.handleDBChange = this.handleDBChange.bind(this)
     this.updateListenerStatus = this.updateListenerStatus.bind(this)
 
     this.handlePlayersChange = this.handlePlayersChange.bind(this)
     this.handleGameStatusChange = this.handleGameStatusChange.bind(this)
+    this.determineDBChangeType = this.determineDBChangeType.bind(this)
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleInputSubmit = this.handleInputSubmit.bind(this)
@@ -46,32 +49,16 @@ export default class New extends React.Component {
 
   componentDidMount() {
     const { gamecode } = this.state
-    //attaches a listener to the status of the game to check for when to start
-    attachListener(`games/${gamecode}/status`, this.handleDBChange, "game")
-      //attaches a listener to the list of players, to check when new players join game
-      .then((val) => {
-        console.log("gamestatus listener attached:", val)
-        attachListener(
-          `games/${gamecode}/players`,
-          this.handleDBChange,
-          "players"
-        )
-          //Set that both listeners are true, to allow player form to display
-          .then((val) => {
-            console.log("players listener attached: ", val)
-
-            this.setState({
-              gameStatusListener: true,
-              playersListener: true,
-            })
-          })
-      })
+    setupListenerRequest 
+    (this.listenerTypes, 0, gamecode, attachListener, this.handleDBChange)
   }
 
   componentWillUnmount() {
     //remove listeners
     console.log("remove player listeners")
   }
+
+  
 
   handleInputChange(e) {
     const { name, value } = e.target
@@ -119,25 +106,34 @@ export default class New extends React.Component {
   //cb for any changes to the game status or players. Determines if another
   //listener needs to be applied, if state of listeners should be updated
   //or functions to handle game/player changes should be fired.
-  handleDBChange(value, type, cb) {
+  handleDBChange(changeType, value) {
+    const index = this.listenerTypes.findIndex(
+      (listener) => listener === changeType
+    )
+    if (this.state.listenersSet) {
+      console.log("listeners previously set!")
+      //if listeners are already true, take 'usual' action based on which listener was fired
+      this.determineDBChangeType(changeType, value)
+    } else if (index !== -1 && index < this.listenerTypes.length - 1) {
+      //in process of setting listeners
+      console.log("more listeners to set")
+      setupListenerRequest
+      (this.listenerTypes, index + 1, this.state.gamecode, attachListener, this.handleDBChange)
+    } else {
+      console.log("all listeners set for the first time")
+      this.updateListenerStatus()
+    }
+  }
+
+  determineDBChangeType(type, value) {
     switch (type) {
-      case "game":
-        if (!this.state.playersListener) {
-          console.log("players listener false resolve promise")
-          cb(value)
-        } else {
-          this.handleGameStatusChange(value)
-        }
+      case "gameStatus":
+        this.handleGameStatusChange(value)
         break
       case "players":
-        if (!this.state.playersListener) {
-          this.updateListenerStatus()
-        } else {
-          this.handlePlayersChange(value)
-        }
+        this.handlePlayersChange(value)
         break
       default:
-        console.log("something went terrible wrong...")
         break
     }
   }
@@ -145,8 +141,7 @@ export default class New extends React.Component {
   //Called after component mounts, once both game and player listeners are set
   updateListenerStatus() {
     this.setState({
-      playersListener: true,
-      gameStatusListener: true,
+      listenersSet: true,
     })
   }
 
@@ -182,8 +177,8 @@ export default class New extends React.Component {
       players,
       currentPlayer,
       currentPlayerName,
-      gameStatusListener,
-      playersListener,
+      listenersSet,
+
       redirect,
     } = this.state
 
@@ -193,7 +188,7 @@ export default class New extends React.Component {
           to={`/play/${this.state.gamecode}/${currentPlayer.playerId}`}
         />
       )
-    } else if (!gameStatusListener || !playersListener) {
+    } else if (!listenersSet) {
       return <p>Loading Game</p>
     } else if (
       //Requests name if current player is not already added to players path in FB
