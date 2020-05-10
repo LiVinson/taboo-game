@@ -88,6 +88,8 @@ export function setupListenerRequest
     createListener(listenerPath, listenerHandler, listeners[index])
   }
 
+
+
 /*
 value: the value returned from firebase
 type: The type of event listener

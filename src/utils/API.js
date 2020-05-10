@@ -81,7 +81,6 @@ Output:
 
 export function attachListener(path, callback, listenerType) {
   console.log("about to attach a listener: ", listenerType)
-
     database.ref(path).on("value", function (snapshot) {
       const value = snapshot.val()
       console.log(value)
@@ -113,20 +112,16 @@ export function updatePlayerInfo(gamecode, playerId, key, value) {
 export function updateGameStatus(gamecode, status) {
   const gameStatusRef = `games/${gamecode}/`
   console.log(gameStatusRef)
-  // return new Promise(function (resolve, reject) {
-    database
-      .ref(gameStatusRef)
-      .update({ status: status })
-      .then((res) => {
-        console.log("then of updateGameStatus")
-        // resolve(true)
-      })
-      .catch((err) => {
-        console.log("there was an error updating game status")
-        console.log(err)
-        // reject(false)
-      })
-  // })
+  database
+    .ref(gameStatusRef)
+    .update({ status: status })
+    .then((res) => {
+      console.log("then of updateGameStatus")
+    })
+    .catch((err) => {
+      console.log("there was an error updating game status")
+      console.log(err)
+    })
 }
 
 export function retrieveGameInformation(gamecode) {
