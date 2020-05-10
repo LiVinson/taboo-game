@@ -1,45 +1,12 @@
 import React from "react"
 import Team from "../components/Team"
-import { getDeck, retrieveGameInformation, attachListener} from "../utils/API"
-import { convertFBObjectToArray, handleListenerCallbacks } from "../utils/helpers"
+import { getDeck, retrieveGameInformation, attachListener } from "../utils/API"
+import { convertFBObjectToArray, setupListenerRequest } from "../utils/helpers"
 import ScoreCard from "../components/ScoreCard"
 import RoundInfo from "../components/RoundInfo"
 import GameContainer from "../components/GameContainer"
 
-
-/*pickle - Master to do list
- - Add function to handle each of the listener changes.
- - Move handleDBListeners to helper file.
- - Refactors News handlers to use it.
- - Get Card component to display to the screen.
- - Add skip/complete triggers to the card to display next word
- - Add timer and display to all users
- - Add round over handler.
- - Display each card with button for status.
- - Add card correct handler. Add card incorrect handler.
- - Handle scoring.
- - Handle starting new round.
- - Handle end of game
- - Styling
- - Add settings to intro: 
-    - Lose points for skip?
-    - Number of rounds to play.
-  - Create cards
-  - Add a script to import them to firebase
-
-*/
 export default class PlayGame extends React.Component {
-  /*
-    Information needed:
-
-    Number of rounds, 
-    teams, 
-    players on each team
-     Current round. 
-     Selected Giver  and Watcher 
-     "this" user and their team and current role.
-    */
-
   constructor(props) {
     super(props)
     this.state = {
@@ -77,58 +44,64 @@ export default class PlayGame extends React.Component {
 
     this.determineActivePlayers = this.determineActivePlayers.bind(this)
     this.startRound = this.startRound.bind(this)
-    this.requestListeners = this.requestListeners.bind(this)
     // this.getNextDeck = this.getNextDeck.bind(this)
-    // this.setRoundStatusListener = this.setRoundStatusListener.bind(this)
     this.handleDBChange = this.handleDBChange.bind(this)
     this.requestGameInformation = this.requestGameInformation.bind(this)
   }
 
-   componentDidMount() {    
-     this.requestListeners(this.listenerTypes, 0, this.state.gamecode) 
-   }
-
+  componentDidMount() {
+    const { gamecode } = this.state
+    setupListenerRequest(
+      this.listenerTypes,
+      0,
+      gamecode,
+      attachListener,
+      this.handleDBChange
+    )
+  }
   
-   requestListeners(listeners, index, gamecode){ 
-     //pickle - clean up switch to only call attachListener at the end with a variable for the path
-    switch (listeners[index]) {
-      case "roundStatus":
-        console.log("set roundStatus")
-        attachListener(`games/${gamecode}/round/status`, this.handleDBChange, listeners[index])
-        break;  
-      case "roundNumber":
-        console.log("set roundStroundNumberatus")
-        attachListener(`games/${gamecode}/round/number`, this.handleDBChange, listeners[index])
-        break;
-      case "cardIndex":
-        console.log("set cardIndex")
-        attachListener(`games/${gamecode}/deck/currentCardIndex`, this.handleDBChange, listeners[index])
-        break;
-      case "currentCards":
-        console.log("set currentCards")
-        attachListener(`games/${gamecode}/deck/cards`, this.handleDBChange, listeners[index])       
-        break
-      default:
-        console.log("something broke :/")
-        break;
-    }     
-  } 
-
-   handleDBChange(dbValue, changeType) {    
-    const index = this.listenerTypes.findIndex((listener) => listener === changeType)
+  handleDBChange(changeType, value) {
+    const index = this.listenerTypes.findIndex(
+      (listener) => listener === changeType
+    )
     if (this.state.listenersSet) {
       console.log("listeners previously set!")
       //if listeners are already true, take 'usual' action based on which listener was fired
-    } else if (index !== -1 && index < this.listenerTypes.length -1) {
+      this.determineDBChangeType(changeType, value)
+    } else if (index !== -1 && index < this.listenerTypes.length - 1) {
       //in process of setting listeners
       console.log("more listeners to set")
-      this.requestListeners(this.listenerTypes, index + 1, this.state.gamecode)
+      setupListenerRequest(
+        this.listenerTypes,
+        index + 1,
+        this.state.gamecode,
+        attachListener,
+        this.handleDBChange
+      )
     } else {
       console.log("all listeners set for the first time")
       this.requestGameInformation()
     }
   }
 
+  determineDBChangeType(type, value) {
+    switch (type) {
+      case "roundStatus":
+        console.log("round status fired")
+        break
+      case "roundNumber":
+        console.log("round number fired")
+        break
+      case "cardIndex":
+        console.log("round number fired")
+        break
+      case "currentCards":
+        console.log("round number fired")
+        break
+      default:
+        break
+    }
+  }
   
   requestGameInformation() {
      retrieveGameInformation(this.state.gamecode)
