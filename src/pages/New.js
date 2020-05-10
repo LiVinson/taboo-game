@@ -40,6 +40,8 @@ export default class New extends React.Component {
     this.handleGameStatusChange = this.handleGameStatusChange.bind(this)
     this.determineDBChangeType = this.determineDBChangeType.bind(this)
 
+    this.determineDBChangeType = this.determineDBChangeType.bind(this)
+
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleInputSubmit = this.handleInputSubmit.bind(this)
 
@@ -49,8 +51,7 @@ export default class New extends React.Component {
 
   componentDidMount() {
     const { gamecode } = this.state
-    setupListenerRequest 
-    (this.listenerTypes, 0, gamecode, attachListener, this.handleDBChange)
+    setupListenerRequest(this.listenerTypes, 0, gamecode, attachListener, this.handleDBChange)
   }
 
   componentWillUnmount() {
@@ -137,7 +138,6 @@ export default class New extends React.Component {
         break
     }
   }
-
   //Called after component mounts, once both game and player listeners are set
   updateListenerStatus() {
     this.setState({
@@ -178,7 +178,6 @@ export default class New extends React.Component {
       currentPlayer,
       currentPlayerName,
       listenersSet,
-
       redirect,
     } = this.state
 
