@@ -191,8 +191,9 @@ export default class PlayGame extends React.Component {
   // setNextCard() {}
 
   render() {
-    const { loading, team1, team2, round, currentPlayer } = this.state
+    const { loading, team1, team2, round, currentPlayer, deck } = this.state
     const { roundNumber, giver, watcher, turn, roundStatus } = round
+    const currentWord = deck.cards[deck.currentCardIndex]
 
 
     console.log(currentWord)
