@@ -1,5 +1,6 @@
 import React from "react"
 import PreRound from "./PreRound.js"
+import InRound from "./InRound"
 
 export default function GameContainer({
   round,
@@ -7,10 +8,11 @@ export default function GameContainer({
   getActivePlayers,
   currentPlayerId,
   startRound,
+  word
 }) {
   let msg = ""
   const { giver, watcher } = getActivePlayers()
-
+  
 
   switch (round) {
     case "pre":
@@ -27,8 +29,12 @@ export default function GameContainer({
                startRound = {startRound}
                />
     case "in progress":
-      return <h1>In Progress!</h1>
-      break
+      
+      return <InRound
+         wordInfo={word}
+         isGiver={giver.playerId === currentPlayerId}
+         isWatcher={watcher.playerId === currentPlayerId}
+         />      
     default:
   }
 

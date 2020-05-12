@@ -1,11 +1,11 @@
 import React from "react"
 
-export default function WordCard({ word, tabooList }) {
+export default function WordCard({ word, tabooWords }) {
   return (
     <div>
       <Word />
-      {tabooList.map((word) => (
-        <TabooWord word={word} />
+      {tabooWords.map((word) => (
+        <TabooWord key={word} word={word} />
       ))}
     </div>
   )
@@ -16,5 +16,5 @@ function Word({ word }) {
 }
 
 function TabooWord({ word }) {
-  return <div>{word}</div>
+  return <div >{word}</div>
 }

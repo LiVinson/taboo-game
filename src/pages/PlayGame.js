@@ -24,7 +24,10 @@ export default class PlayGame extends React.Component {
       },
       deck: {
         deckNumber: 1,
-        cards: [],
+        cards: [{
+          word: "pencil",
+          tabooWords: ["eraser", "write", "number 2"]
+        }],
         currentCardIndex: 0,
       },
 
@@ -188,9 +191,12 @@ export default class PlayGame extends React.Component {
   // setNextCard() {}
 
   render() {
-    const { loading, team1, team2, round, currentPlayer } = this.state
+    const { loading, team1, team2, round, currentPlayer, deck } = this.state
     const { roundNumber, giver, watcher, turn, roundStatus } = round
+    const currentWord = deck.cards[deck.currentCardIndex]
 
+
+    console.log(currentWord)
     if (loading) {
       return <p>Loading Works</p>
     } else {
@@ -225,6 +231,7 @@ export default class PlayGame extends React.Component {
               getActivePlayers={() =>
                 this.determineActivePlayers(turn, team1, team2)
               }
+              word={currentWord}
             />
           </div>
           {/*game div - pre round:
