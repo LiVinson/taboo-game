@@ -141,6 +141,19 @@ export function retrieveGameInformation(gamecode) {
       })
   })
 }
+
+export function updateRoundStatus(gamecode, status){ 
+    database.ref(`games/${gamecode}/round`)
+    .update({ status: status })
+    .then((response) => {
+      console.log("then of updateRound")
+    })
+    .catch((err) => {
+      console.log("there was an error updating round status")
+      console.log(err)
+    })
+
+}
 export function getDeck(deck) {
   return new Promise(function (resolve, reject) {
     import("./cards").then((obj) => {
