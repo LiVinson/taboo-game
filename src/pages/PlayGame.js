@@ -1,6 +1,6 @@
 import React from "react"
 import Team from "../components/Team"
-import { getDeck, retrieveGameInformation, attachListener } from "../utils/API"
+import { getDeck, retrieveGameInformation, attachListener, updateRoundStatus } from "../utils/API"
 import { convertFBObjectToArray, setupListenerRequest } from "../utils/helpers"
 import ScoreCard from "../components/ScoreCard"
 import RoundInfo from "../components/RoundInfo"
@@ -15,12 +15,12 @@ export default class PlayGame extends React.Component {
       gamecode: props.match.params.gamecode,
       currentPlayer: null,
       round: {
-        number: 1,
+        roundNumber: 1,
         turn: 1,
         giverId: null,
         watcherId: null,
         cardsPlayed: [],
-        status: "pre", //keeps track of if it is before round, or round in progress
+        roundStatus: "pre", //keeps track of if it is before round, or round in progress
       },
       deck: {
         deckNumber: 1,
@@ -92,16 +92,16 @@ export default class PlayGame extends React.Component {
   determineDBChangeType(type, value) {
     switch (type) {
       case "roundStatus":
-        console.log("round status fired")
+        this.setRoundState(type, value)
         break
       case "roundNumber":
         console.log("round number fired")
         break
       case "cardIndex":
-        console.log("round number fired")
+        console.log("card index fired")
         break
       case "currentCards":
-        console.log("round number fired")
+        console.log("currentCard fired")
         break
       default:
         break
@@ -137,6 +137,15 @@ export default class PlayGame extends React.Component {
     })
   }
 
+  setRoundState(type, value) {
+    this.setState((state) => ({
+      round : {
+        ...state.round,
+        [type]: value
+      }
+    }))
+  }
+
   determineActivePlayers(turn, team1, team2) {
     const activePlayers = {
       giver: null,
@@ -158,15 +167,9 @@ export default class PlayGame extends React.Component {
 
   startRound() {
     console.log("start round")
-
+    const { gamecode } = this.state
     //change in firebase
-
-    this.setState((state) => ({
-      round: {
-        ...state.round,
-        status: "in progress",
-      },
-    }))
+    updateRoundStatus(gamecode, "in progress")
   }
 
   // getNextDeck() {
@@ -186,7 +189,7 @@ export default class PlayGame extends React.Component {
 
   render() {
     const { loading, team1, team2, round, currentPlayer } = this.state
-    const { number, giver, watcher, turn, status } = round
+    const { roundNumber, giver, watcher, turn, roundStatus } = round
 
     if (loading) {
       return <p>Loading Works</p>
@@ -200,7 +203,7 @@ export default class PlayGame extends React.Component {
             <Team players={team2.players} teamName="Team 2" />
           </div>
           <RoundInfo
-            round={number}
+            round={roundNumber}
             giver={giver}
             watcher={watcher}
             turn={turn}
@@ -216,7 +219,7 @@ export default class PlayGame extends React.Component {
             <p>{currentPlayer.playerId}</p>
             <GameContainer
               onGuessingTeam={() => onCurrentTeam(currentPlayer, turn)}
-              round={status}
+              round={roundStatus}
               startRound={this.startRound}
               currentPlayerId={currentPlayer.playerId}
               getActivePlayers={() =>
