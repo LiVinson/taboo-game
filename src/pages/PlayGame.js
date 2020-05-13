@@ -162,6 +162,7 @@ export default class PlayGame extends React.Component {
       }
     }))
   }
+  
 
   determineActivePlayers(turn, team1, team2) {
     const activePlayers = {
