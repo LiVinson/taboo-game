@@ -1,9 +1,10 @@
 import React from "react"
 
 export default function WordCard({ word, tabooWords }) {
+ console.log(tabooWords)
   return (
     <div>
-      <Word />
+      <Word word={word}/>
       {tabooWords.map((word) => (
         <TabooWord key={word} word={word} />
       ))}

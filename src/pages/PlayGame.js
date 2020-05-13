@@ -23,11 +23,8 @@ export default class PlayGame extends React.Component {
         roundStatus: "pre", //keeps track of if it is before round, or round in progress
       },
       deck: {
-        deckNumber: 1,
-        cards: [{
-          word: "pencil",
-          tabooWords: ["eraser", "write", "number 2"]
-        }],
+        deckId: 1000,
+        cards: [],
         currentCardIndex: 0,
       },
 
@@ -48,6 +45,7 @@ export default class PlayGame extends React.Component {
       "roundNumber",
       "cardIndex",
       "currentCards",
+      
     ]
 
     this.determineActivePlayers = this.determineActivePlayers.bind(this)
@@ -55,6 +53,8 @@ export default class PlayGame extends React.Component {
     // this.getNextDeck = this.getNextDeck.bind(this)
     this.handleDBChange = this.handleDBChange.bind(this)
     this.requestGameInformation = this.requestGameInformation.bind(this)
+ 
+    this.setRoundState = this.setRoundState.bind(this)
   }
 
   componentDidMount() {
@@ -69,6 +69,7 @@ export default class PlayGame extends React.Component {
   }
   
   handleDBChange(changeType, value) {
+    console.log("handleDBChange")
     const index = this.listenerTypes.findIndex(
       (listener) => listener === changeType
     )
@@ -111,14 +112,21 @@ export default class PlayGame extends React.Component {
     }
   }
   
+  //retreives game data and deck
   requestGameInformation() {
-    retrieveGameInformation(this.state.gamecode).then((response) => {
-      const players = convertFBObjectToArray(response)
+    const {gamecode} = this.state
+    const { deckId } = this.state.deck
+    console.log(deckId)
+    retrieveGameInformation(gamecode, deckId)
+    .then((response) => {
+      console.log(response)
+      const players = convertFBObjectToArray(response[0])
       const team1Players = players.filter((player) => player.team === "Team 1")
       const team2Players = players.filter((player) => player.team === "Team 2")
       const currentPlayer = players.filter(
         (player) => player.playerId === this.props.match.params.playerId
       )
+      const cards=response[1]
       // console.log(this.props.match.params.playerId)
       console.log(currentPlayer)
       this.setState((state) => ({
@@ -136,11 +144,17 @@ export default class PlayGame extends React.Component {
         },
         loading: false,
         currentPlayer: currentPlayer[0],
+        deck: {
+          ...state.deck,
+          cards: cards
+        }
       }))
     })
   }
 
   setRoundState(type, value) {
+    console.log("round change type fired")
+    console.log(type, value)
     this.setState((state) => ({
       round : {
         ...state.round,
@@ -148,6 +162,7 @@ export default class PlayGame extends React.Component {
       }
     }))
   }
+  
 
   determineActivePlayers(turn, team1, team2) {
     const activePlayers = {
