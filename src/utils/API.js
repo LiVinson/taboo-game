@@ -29,8 +29,8 @@ export async function createNewGame(gamecode) {
     deck: {
       cards: "none",
       currentCardIndex: 0,
-      deckNumber: 1
-    },    
+      deckNumber: 1,
+    },
     players: "none", //Set to none to allow a listener to be attached immediately
     team1: {
       teamName: "Team 1",
@@ -44,8 +44,8 @@ export async function createNewGame(gamecode) {
     },
     round: {
       number: 1,
-      status: "pre"
-    }
+      status: "pre",
+    },
   }
   return await database
     .ref(`games/${gamecode}`)
@@ -81,11 +81,11 @@ Output:
 
 export function attachListener(path, callback, listenerType) {
   console.log("about to attach a listener: ", listenerType)
-    database.ref(path).on("value", function (snapshot) {
-      const value = snapshot.val()
-      console.log(value)
-      callback(listenerType, value)     
-    })
+  database.ref(path).on("value", function (snapshot) {
+    const value = snapshot.val()
+    console.log(value)
+    callback(listenerType, value)
+  })
 }
 
 //Adds the player object to the provided FB path. No "then"
@@ -124,9 +124,7 @@ export function updateGameStatus(gamecode, status) {
     })
 }
 
-export function retrieveGameInformation(gamecode) {
-  console.log("gamecode", gamecode)
-  //get the players
+function getGameData(gamecode) {
   return new Promise(function (resolve, reject) {
     database
       .ref(`games/${gamecode}/players`)
@@ -142,23 +140,54 @@ export function retrieveGameInformation(gamecode) {
   })
 }
 
-export function updateRoundStatus(gamecode, status){ 
-    database.ref(`games/${gamecode}/round`)
+function getDeck(deckId) {
+  console.log(deckId)
+  return new Promise((resolve, reject) => {
+    database
+      .ref(`deck/${deckId}`)
+      .once("value")
+      .then(function (snapshot) {
+        console.log(snapshot.val())
+        resolve(snapshot.val())
+      })
+      .catch(function (err) {
+        console.log("there was an issue retreiving the deck:", err)
+        reject(err)
+      })
+  })
+}
+
+export function retrieveGameInformation(gamecode, deckId) {
+  console.log("gamecode", gamecode)
+  //get the players
+
+  return Promise.all([getGameData(gamecode), getDeck(deckId)])
+
+  // return new Promise(function (resolve, reject) {
+  //   database
+  //     .ref(`games/${gamecode}/players`)
+  //     .once("value")
+  //     .then(function (snapshot) {
+  //       console.log(snapshot.val())
+  //       resolve(snapshot.val())
+  //     })
+  //     .catch(function (err) {
+  //       console.log("there was an issue retreiving the players:", err)
+  //       reject(err)
+  //     })
+  // })
+}
+
+export function updateRoundStatus(gamecode, status) {
+  database
+    .ref(`games/${gamecode}/round`)
     .update({ status: status })
-    .then((response) => {
-      console.log("then of updateRound")
-    })
+    // .then((response) => {
+    //   console.log("then of updateRound")
+    // })
     .catch((err) => {
       console.log("there was an error updating round status")
       console.log(err)
     })
+}
 
-}
-export function getDeck(deck) {
-  return new Promise(function (resolve, reject) {
-    import("./cards").then((obj) => {
-      //shuffle Deck
-      resolve(obj.default.deck1)
-    })
-  })
-}
