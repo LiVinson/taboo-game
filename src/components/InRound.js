@@ -1,7 +1,7 @@
 import React from "react"
 import WordCard from "./WordCard"
 
-export default function InRound({wordInfo, isGiver, isWatcher}){
+export default function InRound({wordInfo, isGiver, isWatcher, nextCard}){
     if (isGiver || isWatcher) {
         console.log(wordInfo)
         const {taboo1, taboo2,taboo3,taboo4, word} = wordInfo
@@ -13,8 +13,8 @@ export default function InRound({wordInfo, isGiver, isWatcher}){
                 tabooWords={tabooArray}
             />
             <div>
-                <button onClick={()=> console.log("skip it!")}>Skip Word!</button>
-                <button onClick={()=> console.log("correct!")}>Correct!</button>
+                <button onClick={()=> nextCard("skipped")}>Skip Word!</button>
+                <button onClick={()=> nextCard("correct")}>Correct!</button>
             </div>
         
         </div>

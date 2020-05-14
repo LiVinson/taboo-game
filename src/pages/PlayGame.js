@@ -1,6 +1,6 @@
 import React from "react"
 import Team from "../components/Team"
-import { getDeck, retrieveGameInformation, attachListener, updateRoundStatus } from "../utils/API"
+import { retrieveGameInformation, attachListener, updateRoundStatus, updateCardInfo } from "../utils/API"
 import { convertFBObjectToArray, setupListenerRequest } from "../utils/helpers"
 import ScoreCard from "../components/ScoreCard"
 import RoundInfo from "../components/RoundInfo"
@@ -25,7 +25,7 @@ export default class PlayGame extends React.Component {
       deck: {
         deckId: 1000,
         cards: [],
-        currentCardIndex: 0,
+        currentCardIndex: 0
       },
 
       team1: {
@@ -43,18 +43,18 @@ export default class PlayGame extends React.Component {
     this.listenerTypes = [
       "roundStatus",
       "roundNumber",
-      "cardIndex",
-      "currentCards",
-      
+      "currentCardIndex",
+      "currentCards",      
     ]
 
     this.determineActivePlayers = this.determineActivePlayers.bind(this)
     this.startRound = this.startRound.bind(this)
-    // this.getNextDeck = this.getNextDeck.bind(this)
     this.handleDBChange = this.handleDBChange.bind(this)
-    this.requestGameInformation = this.requestGameInformation.bind(this)
- 
+    this.determineDBChangeType = this.determineDBChangeType.bind(this)
+    this.requestGameInformation = this.requestGameInformation.bind(this)   
+    this.nextCard = this.nextCard.bind(this)
     this.setRoundState = this.setRoundState.bind(this)
+    this.cardIndexUpdated = this.cardIndexUpdated.bind(this)
   }
 
   componentDidMount() {
@@ -68,7 +68,7 @@ export default class PlayGame extends React.Component {
     )
   }
   
-  handleDBChange(changeType, value) {
+  handleDBChange(changeType, value, details) {
     console.log("handleDBChange")
     const index = this.listenerTypes.findIndex(
       (listener) => listener === changeType
@@ -76,7 +76,7 @@ export default class PlayGame extends React.Component {
     if (this.state.listenersSet) {
       console.log("listeners previously set!")
       //if listeners are already true, take 'usual' action based on which listener was fired
-      this.determineDBChangeType(changeType, value)
+      this.determineDBChangeType(changeType, value, details)
     } else if (index !== -1 && index < this.listenerTypes.length - 1) {
       //in process of setting listeners
       console.log("more listeners to set")
@@ -101,14 +101,16 @@ export default class PlayGame extends React.Component {
       case "roundNumber":
         console.log("round number fired")
         break
-      case "cardIndex":
+      case "currentCardIndex":
         console.log("card index fired")
+        this.cardIndexUpdated(value)
         break
       case "currentCards":
         console.log("currentCard fired")
         break
       default:
-        break
+        console.log("something went wrong. listener type: ", type)
+      break
     }
   }
   
@@ -152,6 +154,7 @@ export default class PlayGame extends React.Component {
     })
   }
 
+  //Called when a change in database to the round status or round number.
   setRoundState(type, value) {
     console.log("round change type fired")
     console.log(type, value)
@@ -183,6 +186,9 @@ export default class PlayGame extends React.Component {
     return activePlayers
   }
 
+  //Called when player that is giving clues selects 'Start'. 
+  //Makes request to change status of thr round from "pre" to "in progress" in the firebase.
+  //Round status change will trigger display of taboo card to the screen.
   startRound() {
     console.log("start round")
     const { gamecode } = this.state
@@ -190,20 +196,51 @@ export default class PlayGame extends React.Component {
     updateRoundStatus(gamecode, "in progress")
   }
 
-  // getNextDeck() {
-  //   const currentDeck = this.state.deck.deckNumber
-  //   getDeck(currentDeck + 1).then((newDeck) => {
-  //     console.log(newDeck)
-  //     this.setState((state) => ({
-  //       deck: {
-  //         deckNumber: state.deck.deckNumber + 1,
-  //         cards: newDeck,
-  //       },
-  //     }))
-  //   })
-  // }
+  //Called when active player selects 'next' or 'skip' on current card.
+  //Makes request to firebase to update the currentCardIndex, and to save whether card was skipped or correct.
+  //Saving card status in firebase allows it to be accesible in the CardIndex event listener fires when the card
+  //status is changed.
+  nextCard(status) {
+   const {gamecode} = this.state
+   const {currentCardIndex} = this.state.deck
 
-  // setNextCard() {}
+   console.log(status, currentCardIndex)
+   //Updates firebase with the next card index to display, and the skip/next status of currently displayed card
+    updateCardInfo(gamecode, currentCardIndex, status)
+  }
+
+  //Called when there is a change to the 'cardInfo' path. Retreives new value for card index and the status of the card
+  //that active player just clicked Next/Skip on. Creates an object of the card that is being removed w/ status to use
+  //at end of active player's turn.
+  cardIndexUpdated(cardInfo) {
+    console.log("card Info updated")
+    console.log(cardInfo)
+    const {lastCardStatus, currentCardIndex} = cardInfo
+    const currentCard = this.state.deck.cards[this.state.deck.currentCardIndex]
+   
+    //Contains card details, and if 'correct' or 'skip' selected
+      cardInfo = {
+        ...currentCard,
+        status: lastCardStatus  
+    } 
+    //push in current Card to 'played' array
+    //update current index
+    //account for round status (later)
+    
+    this.setState((state) => ({
+      round: {
+        ...state.round,
+        cardsPlayed: [...this.state.round.cardsPlayed, cardInfo]
+      
+      },
+      deck: {
+        ...this.state.deck,        
+         currentCardIndex
+        
+      }
+    }))
+  }
+ 
 
   render() {
     const { loading, team1, team2, round, currentPlayer, deck } = this.state
@@ -247,6 +284,7 @@ export default class PlayGame extends React.Component {
                 this.determineActivePlayers(turn, team1, team2)
               }
               word={currentWord}
+              nextCard = {this.nextCard}
             />
           </div>
           {/*game div - pre round:

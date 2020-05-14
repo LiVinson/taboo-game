@@ -47,10 +47,13 @@ export function includedInArrayOfObjects(arr, property, value) {
   return filteredArray.length > 0
 }
 
+
+//Called when NewGame and PlayGame components mount by looping over each type of listener required.
+//Creates the path of the specified listener, and calls function to attach listener, passing in callback to be called
+//when each listener fires (database changes at specified path)
 export function setupListenerRequest
   (listeners, index, gamecode, createListener, listenerHandler) {
-    //pickle - clean up switch to only call attachListener at the end with a variable for the path
-    let listenerPath
+    let listenerPath = ""
     switch (listeners[index]) {
       case "gameStatus":
         console.log("set gameStatus listener")
@@ -68,45 +71,18 @@ export function setupListenerRequest
         console.log("set roundNumberStatus")
         listenerPath = `games/${gamecode}/round/number`
         break
-      case "cardIndex":
+      case "currentCardIndex":
         console.log("set cardIndex")
-        listenerPath = `games/${gamecode}/deck/currentCardIndex`
+        listenerPath = `games/${gamecode}/deck/cardInfo`
         break
       case "currentCards":
         console.log("set currentCards")
-        listenerPath = `games/${gamecode}/deck/cards`       
+        listenerPath = `games/${gamecode}/deck/cards`    
         break
       default:
         //pickle - update once error logging set
         console.log("something broke :/")
-        throw new Error("something broke in listener")
-        
+        throw new Error("something broke in listener")        
     }
-
-    console.log(listenerPath)
-    console.log(listenerHandler)
     createListener(listenerPath, listenerHandler, listeners[index])
   }
-
-
-
-/*
-value: the value returned from firebase
-type: The type of event listener
-check: The value to compare to determine next action
-cb_true: call back if check value is true
-cb_false: call back if check value is false
-
- */
-export function handleListenerCallbacks(value, type, temp, action) {
-  const {check, cb_true, cb_false} = action
-  
-  console.log(action)
-  //e.g. action.round_status
-  if(action.check) {
-      cb_true(value)
-  } else {
-    cb_false(value)
-  }
-
-}
