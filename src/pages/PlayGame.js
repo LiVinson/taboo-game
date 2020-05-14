@@ -44,20 +44,15 @@ export default class PlayGame extends React.Component {
       "roundStatus",
       "roundNumber",
       "currentCardIndex",
-      "currentCards",
-      
+      "currentCards",      
     ]
 
     this.determineActivePlayers = this.determineActivePlayers.bind(this)
     this.startRound = this.startRound.bind(this)
-    // this.getNextDeck = this.getNextDeck.bind(this)
     this.handleDBChange = this.handleDBChange.bind(this)
     this.determineDBChangeType = this.determineDBChangeType.bind(this)
-   
-    this.requestGameInformation = this.requestGameInformation.bind(this)
-   
+    this.requestGameInformation = this.requestGameInformation.bind(this)   
     this.nextCard = this.nextCard.bind(this)
-
     this.setRoundState = this.setRoundState.bind(this)
     this.cardIndexUpdated = this.cardIndexUpdated.bind(this)
   }
@@ -159,6 +154,7 @@ export default class PlayGame extends React.Component {
     })
   }
 
+  //Called when a change in database to the round status or round number.
   setRoundState(type, value) {
     console.log("round change type fired")
     console.log(type, value)
@@ -190,6 +186,9 @@ export default class PlayGame extends React.Component {
     return activePlayers
   }
 
+  //Called when player that is giving clues selects 'Start'. 
+  //Makes request to change status of thr round from "pre" to "in progress" in the firebase.
+  //Round status change will trigger display of taboo card to the screen.
   startRound() {
     console.log("start round")
     const { gamecode } = this.state
@@ -197,7 +196,10 @@ export default class PlayGame extends React.Component {
     updateRoundStatus(gamecode, "in progress")
   }
 
-  //Called when user selects 'next' or 'skip' on current card.
+  //Called when active player selects 'next' or 'skip' on current card.
+  //Makes request to firebase to update the currentCardIndex, and to save whether card was skipped or correct.
+  //Saving card status in firebase allows it to be accesible in the CardIndex event listener fires when the card
+  //status is changed.
   nextCard(status) {
    const {gamecode} = this.state
    const {currentCardIndex} = this.state.deck
@@ -207,13 +209,16 @@ export default class PlayGame extends React.Component {
     updateCardInfo(gamecode, currentCardIndex, status)
   }
 
+  //Called when there is a change to the 'cardInfo' path. Retreives new value for card index and the status of the card
+  //that active player just clicked Next/Skip on. Creates an object of the card that is being removed w/ status to use
+  //at end of active player's turn.
   cardIndexUpdated(cardInfo) {
     console.log("card Info updated")
     console.log(cardInfo)
     const {lastCardStatus, currentCardIndex} = cardInfo
     const currentCard = this.state.deck.cards[this.state.deck.currentCardIndex]
    
-    //Contains card details, and if 'next' or 'skip' select
+    //Contains card details, and if 'correct' or 'skip' selected
       cardInfo = {
         ...currentCard,
         status: lastCardStatus  

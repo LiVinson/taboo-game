@@ -47,50 +47,42 @@ export function includedInArrayOfObjects(arr, property, value) {
   return filteredArray.length > 0
 }
 
+
+//Called when NewGame and PlayGame components mount by looping over each type of listener required.
+//Creates the path of the specified listener, and calls function to attach listener, passing in callback to be called
+//when each listener fires (database changes at specified path)
 export function setupListenerRequest
   (listeners, index, gamecode, createListener, listenerHandler) {
-    //pickle - clean up switch to only call attachListener at the end with a variable for the path
     let listenerPath = ""
-    let changeType = ""
     switch (listeners[index]) {
       case "gameStatus":
         console.log("set gameStatus listener")
         listenerPath = `games/${gamecode}/status`
-        changeType = "value"
         break
       case "players":
         console.log("set players listener")
         listenerPath = `games/${gamecode}/players`
-        changeType = "value"
         break
       case "roundStatus":
         console.log("set roundStatus")
         listenerPath = `games/${gamecode}/round/status`
-        changeType = "value"
         break
       case "roundNumber":
         console.log("set roundNumberStatus")
         listenerPath = `games/${gamecode}/round/number`
-        changeType = "value"
         break
       case "currentCardIndex":
         console.log("set cardIndex")
         listenerPath = `games/${gamecode}/deck/cardInfo`
-        changeType = "value"
         break
       case "currentCards":
         console.log("set currentCards")
-        listenerPath = `games/${gamecode}/deck/cards` 
-        changeType = "value"      
+        listenerPath = `games/${gamecode}/deck/cards`    
         break
       default:
         //pickle - update once error logging set
         console.log("something broke :/")
-        throw new Error("something broke in listener")
-        
+        throw new Error("something broke in listener")        
     }
-
-    console.log(listenerPath)
-    console.log(listenerHandler)
-    createListener(listenerPath, listenerHandler, listeners[index], changeType)
+    createListener(listenerPath, listenerHandler, listeners[index])
   }
