@@ -1,5 +1,6 @@
 import React from "react"
 import WordCard from "./WordCard"
+import Timer from "./Timer"
 
 export default function InRound({wordInfo, isGiver, isWatcher, nextCard}){
     if (isGiver || isWatcher) {
@@ -7,9 +8,8 @@ export default function InRound({wordInfo, isGiver, isWatcher, nextCard}){
         const {taboo1, taboo2,taboo3,taboo4, word} = wordInfo
         const tabooArray = [taboo1, taboo2, taboo3, taboo4]
         return(
-        <div>
-            <WordCard
-                word={word}
+        <div>        
+            <WordCard               
                 tabooWords={tabooArray}
             />
             <div>
