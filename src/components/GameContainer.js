@@ -1,6 +1,8 @@
 import React from "react"
 import PreRound from "./PreRound.js"
 import InRound from "./InRound"
+import Timer from "./Timer"
+
 
 export default function GameContainer({
   round,
@@ -9,6 +11,7 @@ export default function GameContainer({
   currentPlayerId,
   startRound,
   word,
+  seconds,
   nextCard
 }) {
   let msg = ""
@@ -24,19 +27,32 @@ export default function GameContainer({
         watcher,
         currentPlayerId
       )
-      return <PreRound
+      return (
+          <React.Fragment>
+              <Timer
+               runTimer={false}
+               />
+              <PreRound
                message={msg} 
                isGiver={giver.playerId === currentPlayerId}
                startRound = {startRound}
                />
-    case "in progress":
-      
-      return <InRound
-         wordInfo={word}
-         isGiver={giver.playerId === currentPlayerId}
-         isWatcher={watcher.playerId === currentPlayerId}
-         nextCard={nextCard}
-         />      
+          </React.Fragment>)
+    case "in progress":      
+      return (
+        <React.Fragment>
+            <Timer 
+              runTimer={true}
+              endofTimer={()=> {console.log("timer has ended. Need to update round status")}}/>
+            <InRound
+            wordInfo={word}
+            isGiver={giver.playerId === currentPlayerId}
+            isWatcher={watcher.playerId === currentPlayerId}
+            nextCard={nextCard}
+            runTimer={true}
+            />      
+        </React.Fragment>)
+
     default:
   }
 

@@ -21,6 +21,7 @@ export default class PlayGame extends React.Component {
         watcherId: null,
         cardsPlayed: [],
         roundStatus: "pre", //keeps track of if it is before round, or round in progress
+        timer: 120
       },
       deck: {
         deckId: 1000,
@@ -55,6 +56,7 @@ export default class PlayGame extends React.Component {
     this.nextCard = this.nextCard.bind(this)
     this.setRoundState = this.setRoundState.bind(this)
     this.cardIndexUpdated = this.cardIndexUpdated.bind(this)
+    this.decrementTime = this.decrementTime.bind(this)
   }
 
   componentDidMount() {
@@ -158,12 +160,34 @@ export default class PlayGame extends React.Component {
   setRoundState(type, value) {
     console.log("round change type fired")
     console.log(type, value)
+    let updateTimer = false
+
+    //If it's the beginning of a new round, restart Timer to 2 minutes
+    if (type === "status" && value ==="pre") {
+      updateTimer = true; 
+    } 
     this.setState((state) => ({
       round : {
         ...state.round,
-        [type]: value
+        [type]: value,
+        timer: updateTimer ? 120 : state.round.timer
       }
     }))
+  }
+
+  startTimer(){    
+    const id = setInterval(this.decrementTime, 1000)
+    
+  }
+
+  decrementTime(){    
+    this.setState((state)=> ({
+      round: {
+        ...state.round,
+        timer: state.round.timer -1
+      }
+      })
+    )
   }
   
 
