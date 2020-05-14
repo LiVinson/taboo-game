@@ -8,7 +8,8 @@ export default function GameContainer({
   getActivePlayers,
   currentPlayerId,
   startRound,
-  word
+  word,
+  nextCard
 }) {
   let msg = ""
   const { giver, watcher } = getActivePlayers()
@@ -34,6 +35,7 @@ export default function GameContainer({
          wordInfo={word}
          isGiver={giver.playerId === currentPlayerId}
          isWatcher={watcher.playerId === currentPlayerId}
+         nextCard={nextCard}
          />      
     default:
   }

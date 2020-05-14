@@ -50,31 +50,38 @@ export function includedInArrayOfObjects(arr, property, value) {
 export function setupListenerRequest
   (listeners, index, gamecode, createListener, listenerHandler) {
     //pickle - clean up switch to only call attachListener at the end with a variable for the path
-    let listenerPath
+    let listenerPath = ""
+    let changeType = ""
     switch (listeners[index]) {
       case "gameStatus":
         console.log("set gameStatus listener")
         listenerPath = `games/${gamecode}/status`
+        changeType = "value"
         break
       case "players":
         console.log("set players listener")
         listenerPath = `games/${gamecode}/players`
+        changeType = "value"
         break
       case "roundStatus":
         console.log("set roundStatus")
         listenerPath = `games/${gamecode}/round/status`
+        changeType = "value"
         break
       case "roundNumber":
         console.log("set roundNumberStatus")
         listenerPath = `games/${gamecode}/round/number`
+        changeType = "value"
         break
-      case "cardIndex":
+      case "currentCardIndex":
         console.log("set cardIndex")
-        listenerPath = `games/${gamecode}/deck/currentCardIndex`
+        listenerPath = `games/${gamecode}/deck/cardInfo`
+        changeType = "value"
         break
       case "currentCards":
         console.log("set currentCards")
-        listenerPath = `games/${gamecode}/deck/cards`       
+        listenerPath = `games/${gamecode}/deck/cards` 
+        changeType = "value"      
         break
       default:
         //pickle - update once error logging set
@@ -85,28 +92,5 @@ export function setupListenerRequest
 
     console.log(listenerPath)
     console.log(listenerHandler)
-    createListener(listenerPath, listenerHandler, listeners[index])
+    createListener(listenerPath, listenerHandler, listeners[index], changeType)
   }
-
-
-
-/*
-value: the value returned from firebase
-type: The type of event listener
-check: The value to compare to determine next action
-cb_true: call back if check value is true
-cb_false: call back if check value is false
-
- */
-export function handleListenerCallbacks(value, type, temp, action) {
-  const {check, cb_true, cb_false} = action
-  
-  console.log(action)
-  //e.g. action.round_status
-  if(action.check) {
-      cb_true(value)
-  } else {
-    cb_false(value)
-  }
-
-}

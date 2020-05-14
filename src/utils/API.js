@@ -28,7 +28,10 @@ export async function createNewGame(gamecode) {
     status: "new",
     deck: {
       cards: "none",
-      currentCardIndex: 0,
+      cardInfo: {
+        currentCardIndex: 0,
+        lastCardStatus:"none"
+      },
       deckNumber: 1,
     },
     players: "none", //Set to none to allow a listener to be attached immediately
@@ -79,9 +82,10 @@ Output:
   Each path update: Calls the onChange function passed. 
 */
 
-export function attachListener(path, callback, listenerType) {
+export function attachListener(path, callback, listenerType, changeType="value") {
   console.log("about to attach a listener: ", listenerType)
-  database.ref(path).on("value", function (snapshot) {
+  database.ref(path).on(changeType, function (snapshot) {
+    console.log("data changed")
     const value = snapshot.val()
     console.log(value)
     callback(listenerType, value)
@@ -182,12 +186,18 @@ export function updateRoundStatus(gamecode, status) {
   database
     .ref(`games/${gamecode}/round`)
     .update({ status: status })
-    // .then((response) => {
-    //   console.log("then of updateRound")
-    // })
+
     .catch((err) => {
       console.log("there was an error updating round status")
       console.log(err)
     })
+}
+
+//Receives the card index and status (next or skip) of card that 'giver' just completed.
+export function updateCardInfo(gamecode, lastIndex, lastStatus) {
+  console.log("updating card info")
+  database
+    .ref(`games/${gamecode}/deck/cardInfo`)
+    .update({ currentCardIndex: lastIndex + 1, lastCardStatus: lastStatus  })
 }
 
