@@ -1,6 +1,6 @@
 import React from "react"
 import WordCard from "./WordCard"
-import Timer from "./Timer"
+
 
 export default function InRound({wordInfo, isGiver, isWatcher, nextCard}){
     if (isGiver || isWatcher) {

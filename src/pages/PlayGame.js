@@ -1,6 +1,6 @@
 import React from "react"
 import Team from "../components/Team"
-import { retrieveGameInformation, attachListener, updateRoundStatus, updateCardInfo } from "../utils/API"
+import { retrieveGameInformation, attachListener, updateRoundStatus, updateCardInfo, updateTeamScores} from "../utils/API"
 import { convertFBObjectToArray, setupListenerRequest } from "../utils/helpers"
 import ScoreCard from "../components/ScoreCard"
 import RoundInfo from "../components/RoundInfo"
@@ -17,11 +17,12 @@ export default class PlayGame extends React.Component {
       round: {
         roundNumber: 1,
         turn: 1,
+        activeTeam: 1,
         giverId: null,
         watcherId: null,
         cardsPlayed: [],
         roundStatus: "pre", //keeps track of if it is before round, or round in progress
-        timer: 120
+        
       },
       deck: {
         deckId: 1000,
@@ -32,11 +33,13 @@ export default class PlayGame extends React.Component {
       team1: {
         players: [],
         playerTurnIndex: 0,
+        scorePerRound:[],
         score: 0,
       },
       team2: {
         players: [],
         playerTurnIndex: 0,
+        scorePerRound:[],
         score: 0,
       },
     }
@@ -45,7 +48,8 @@ export default class PlayGame extends React.Component {
       "roundStatus",
       "roundNumber",
       "currentCardIndex",
-      "currentCards",      
+      "currentCards",   
+      "handleScoreChange"   
     ]
 
     this.determineActivePlayers = this.determineActivePlayers.bind(this)
@@ -56,7 +60,8 @@ export default class PlayGame extends React.Component {
     this.nextCard = this.nextCard.bind(this)
     this.setRoundState = this.setRoundState.bind(this)
     this.cardIndexUpdated = this.cardIndexUpdated.bind(this)
-    this.decrementTime = this.decrementTime.bind(this)
+    this.confirmRoundEnd = this.confirmRoundEnd(this)
+
   }
 
   componentDidMount() {
@@ -110,6 +115,10 @@ export default class PlayGame extends React.Component {
       case "currentCards":
         console.log("currentCard fired")
         break
+      case "score":
+        console.log("score changed")
+        this.handleScoreChange(value)
+        break
       default:
         console.log("something went wrong. listener type: ", type)
       break
@@ -160,36 +169,18 @@ export default class PlayGame extends React.Component {
   setRoundState(type, value) {
     console.log("round change type fired")
     console.log(type, value)
-    let updateTimer = false
+    
 
     //If it's the beginning of a new round, restart Timer to 2 minutes
-    if (type === "status" && value ==="pre") {
-      updateTimer = true; 
-    } 
+
     this.setState((state) => ({
       round : {
         ...state.round,
         [type]: value,
-        timer: updateTimer ? 120 : state.round.timer
+        
       }
     }))
   }
-
-  startTimer(){    
-    const id = setInterval(this.decrementTime, 1000)
-    
-  }
-
-  decrementTime(){    
-    this.setState((state)=> ({
-      round: {
-        ...state.round,
-        timer: state.round.timer -1
-      }
-      })
-    )
-  }
-  
 
   determineActivePlayers(turn, team1, team2) {
     const activePlayers = {
@@ -265,11 +256,51 @@ export default class PlayGame extends React.Component {
     }))
   }
  
+  endRound(){
+    const { gamecode } = this.state
+    updateRoundStatus(gamecode, "post")
+  }
+
+  confirmRoundEnd(playedCards){
+    const giverTeamRoundScore = playedCards.filter(card => card.status === "correct")
+    const watcherTeamRoundScore =  playedCards.filter(card => card.status === "skipped")
+    let team1UpdatedScore
+    let team2UpdatedScore
+    if (this.state.activeTeam === 1) {
+      team1UpdatedScore = giverTeamRoundScore + this.state.team1.score
+      team2UpdatedScore = watcherTeamRoundScore + this.state.team2.score
+    } else {
+      team1UpdatedScore = watcherTeamRoundScore + this.state.team1.score
+      team2UpdatedScore = giverTeamRoundScore + this.state.team2.score
+    }
+    updateTeamScores(this.state.gamecode, team1UpdatedScore, team2UpdatedScore)
+  }
+
+  handleScoreChange({team1, team2}){
+    console.log("scores from FB: ", team1, team2)
+
+    const team1PrevRoundScore = team1 - this.state.score.team1
+    
+    const team2PrevRoundScore = team1 - this.state.score.team2
+
+    this.setState((state) => ({
+      team1 : {
+        ...state.team1,
+        scorePerRound: state.team1.scorePerRound.concat([team1PrevRoundScore])
+      },
+      team2 : {
+        ...state.team2,
+        scorePerRound: state.team2.scorePerRound.concat([team2PrevRoundScore])
+      }
+    })
+    )
+  }
 
   render() {
     const { loading, team1, team2, round, currentPlayer, deck } = this.state
-    const { roundNumber, giver, watcher, turn, roundStatus } = round
+    const { roundNumber, giver, watcher, turn, roundStatus, cardsPlayed } = round
     const currentWord = deck.cards[deck.currentCardIndex]
+
 
 
     console.log(currentWord)
@@ -309,6 +340,8 @@ export default class PlayGame extends React.Component {
               }
               word={currentWord}
               nextCard = {this.nextCard}
+              cardsPlayed = {cardsPlayed}
+              confirmRoundEnd = {this.confirmRoundEnd}
             />
           </div>
           {/*game div - pre round:

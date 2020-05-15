@@ -1,9 +1,10 @@
 import React from "react"
 import PreRound from "./PreRound.js"
 import InRound from "./InRound"
+import PostRound from "./PostRound"
 import Timer from "./Timer"
 
-
+//pickle - separate into 3 nested routes with 3 different components displayed in the PlayGame component
 export default function GameContainer({
   round,
   onGuessingTeam,
@@ -12,7 +13,9 @@ export default function GameContainer({
   startRound,
   word,
   seconds,
-  nextCard
+  nextCard,
+  cardsPlayed,
+  confirmRoundEnd
 }) {
   let msg = ""
   const { giver, watcher } = getActivePlayers()
@@ -52,6 +55,13 @@ export default function GameContainer({
             runTimer={true}
             />      
         </React.Fragment>)
+        case "post":      
+          return (
+            <PostRound
+            cardsPlayed={cardsPlayed}
+              confirmRoundEnd={confirmRoundEnd}
+            />
+          )
 
     default:
   }

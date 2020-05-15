@@ -37,14 +37,19 @@ export async function createNewGame(gamecode) {
     players: "none", //Set to none to allow a listener to be attached immediately
     team1: {
       teamName: "Team 1",
-      players: [],
-      score: 0,
+      players: []
+      
     },
+    
     team2: {
       teamName: "Team 2",
-      players: [],
-      score: 0,
+      players: []
+      
     },
+    score: {
+      team1: 0,
+      team2: 0
+    },   
     round: {
       number: 1,
       status: "pre",
@@ -200,4 +205,11 @@ export function updateCardInfo(gamecode, lastIndex, lastStatus) {
     .ref(`games/${gamecode}/deck/cardInfo`)
     .update({ currentCardIndex: lastIndex + 1, lastCardStatus: lastStatus  })
 }
+
+export function updateTeamScores(gamecode, team1Score, team2Score) {
+  console.log("updating card info")
+  database
+    .ref(`games/${gamecode}/score`)
+    .update({ team1: team1Score, team2: team2Score })
+  }
 
