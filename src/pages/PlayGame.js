@@ -184,13 +184,16 @@ export default class PlayGame extends React.Component {
     }})
   }
 
-  determineActivePlayers(turn, team1, team2) {
+  determineActivePlayers() {
+    const {team1, team2 } = this.state
+    const {turn } = this.state.round
+
     const activePlayers = {
       giver: null,
       watcher: null,
     }
 
-    console.log(team1)
+    console.log(team1, turn)
     if (turn === 1) {
       activePlayers.giver = team1.players[team1.playerTurnIndex]
       activePlayers.watcher = team2.players[team2.playerTurnIndex]
@@ -287,17 +290,29 @@ console.log("in progress?", this.state.round.roundStatus)
 
   confirmRoundEnd(playedCards){
     console.log(playedCards)
-    const giverTeamRoundScore = playedCards.filter(card => card.status === "correct")
-    const watcherTeamRoundScore =  playedCards.filter(card => card.status === "skipped")
+    const giverTeamRoundScore = playedCards.filter(card => card.status === "correct").length
+    const watcherTeamRoundScore =  playedCards.filter(card => card.status === "skipped").length
+    console.log("giverTeamRoundScore: ", giverTeamRoundScore)
+    console.log("watcherTeamRoundScore: ", watcherTeamRoundScore)
     let team1UpdatedScore
     let team2UpdatedScore
-    if (this.state.activeTeam === 1) {
+    console.log(this.state.team1.score)
+    console.log(this.state.team2.score)
+    if (this.state.round.activeTeam === 1) {
       team1UpdatedScore = giverTeamRoundScore + this.state.team1.score
       team2UpdatedScore = watcherTeamRoundScore + this.state.team2.score
+      console.log("updated scores: ")
+      console.log(team1UpdatedScore)
+      console.log(team2UpdatedScore)
+
     } else {
       team1UpdatedScore = watcherTeamRoundScore + this.state.team1.score
       team2UpdatedScore = giverTeamRoundScore + this.state.team2.score
+      console.log("updated scores: ")
+      console.log(team1UpdatedScore)
+      console.log(team2UpdatedScore)
     }
+
     updateTeamScores(this.state.gamecode, team1UpdatedScore, team2UpdatedScore)
   }
 
@@ -361,7 +376,7 @@ console.log("in progress?", this.state.round.roundStatus)
               startRound={this.startRound}
               currentPlayerId={currentPlayer.playerId}
               getActivePlayers={() =>
-                this.determineActivePlayers(turn, team1, team2)
+                this.determineActivePlayers()
               }
               word={currentWord}
               nextCard = {this.nextCard}

@@ -208,9 +208,9 @@ export function updateCardInfo(gamecode, lastIndex, lastStatus) {
 }
 
 export function updateTeamScores(gamecode, team1Score, team2Score) {
-  console.log("updating card info")
+  console.log("updating scores. scores: ", team1Score, team2Score  )
   database
     .ref(`games/${gamecode}/score`)
-    .update({ team1: team1Score, team2: team2Score })
+    .update({ team1: team1Score, team2: team2Score})
   }
 

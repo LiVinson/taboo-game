@@ -19,16 +19,16 @@ export default function GameContainer({
 }) {
   let msg = ""
   const { giver, watcher } = getActivePlayers()
+  console.log(giver, watcher)
   
 
   switch (round) {
     case "pre":
       msg = preRoundMsg(
         onGuessingTeam,       
-        startRound,
         giver,
         watcher,
-        currentPlayerId.Timer
+        currentPlayerId
       )
       return (
           <React.Fragment>
@@ -38,6 +38,7 @@ export default function GameContainer({
               <PreRound
                message={msg} 
                isGiver={giver.playerId === currentPlayerId}
+               isWatcher={watcher.playerId === currentPlayerId}
                startRound = {startRound}
                />
           </React.Fragment>)
@@ -60,6 +61,7 @@ export default function GameContainer({
             <PostRound
               cardsPlayed={cardsPlayed}
               confirmRoundEnd={confirmRoundEnd}
+              isWatcher={watcher.playerId === currentPlayerId}
             />
           )
 
@@ -71,8 +73,7 @@ export default function GameContainer({
 
 //Preround message based on current player's team and giver/watcher status:
 function preRoundMsg(
-  guessingTeam,
-  startRound,
+  guessingTeam, 
   giver,
   watcher,
   currentPlayerId
