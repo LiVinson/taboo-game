@@ -13,13 +13,16 @@ export default class PostRound extends React.Component {
 
 
 
-  changeCardStatus(newStatus, cardIndex) {
+  changeCardStatus(newStatus, word) {
     //finds the word to update, then updates the status
 
     this.setState((state) => {
         const updatedCards = [...state.cards]
         console.log("played cards: ", updatedCards)
         console.log("newstatus:", newStatus )
+        console.log(word)
+     
+        const cardIndex = updatedCards.findIndex(card => card.word === word)
         updatedCards[cardIndex].status = newStatus
         return {
             cards: updatedCards
@@ -43,19 +46,19 @@ export default class PostRound extends React.Component {
         <h1>Post Round</h1>
         <h3>Correct Cards</h3>
         <ul>
-          {correctCards.map((card, index) => (
+          {correctCards.map((card) => (
             <li key={card.word}>
               <p>{card.word}</p>
               <button
                 onClick={() =>
-                  this.changeCardStatus("skipped", index)
+                  this.changeCardStatus("skipped", card.word)
                 }
               >
                 Move to Skipped
               </button>
               <button
                 onClick={() =>
-                  this.changeCardStatus("none", index)
+                  this.changeCardStatus("none", card.word)
                 }
               >
                 Move to No Status
@@ -65,19 +68,19 @@ export default class PostRound extends React.Component {
         </ul>
         <h3>Skipped Cards</h3>
         <ul>
-          {skippedCards.map((card, index) => (
+          {skippedCards.map((card) => (
             <li key={card.word}>
               <p>{card.word}</p>
               <button
                 onClick={() =>
-                  this.changeCardStatus("correct", index)
+                  this.changeCardStatus("correct", card.word)
                 }
               >
                 Move to Correct
               </button>
               <button
                 onClick={() =>
-                  this.changeCardStatus("none", index)
+                  this.changeCardStatus("none", card.word)
                 }
               >
                 Move to No Status
@@ -88,19 +91,19 @@ export default class PostRound extends React.Component {
         <h3>No Status Cards</h3>
         
         <ul>
-          {noneCards.map((card, index) => (
+          {noneCards.map((card) => (
             <li key={card.word}>
               <p>{card.word}</p>
               <button
                 onClick={() =>
-                  this.changeCardStatus("correct", index)
+                  this.changeCardStatus("correct", card.word)
                 }
               >
                 Move to Correct
               </button>
               <button
                 onClick={() =>
-                  this.changeCardStatus("skipped", index)
+                  this.changeCardStatus("skipped", card.word)
                 }
               >
                 Move to Skipped
