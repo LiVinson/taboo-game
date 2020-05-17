@@ -49,7 +49,7 @@ export default class PlayGame extends React.Component {
       "roundNumber",
       "currentCardIndex",
       "currentCards",   
-      "handleScoreChange"   
+      "scores"   
     ]
 
     this.determineActivePlayers = this.determineActivePlayers.bind(this)
@@ -60,8 +60,8 @@ export default class PlayGame extends React.Component {
     this.nextCard = this.nextCard.bind(this)
     this.setRoundState = this.setRoundState.bind(this)
     this.cardIndexUpdated = this.cardIndexUpdated.bind(this)
-    this.confirmRoundEnd = this.confirmRoundEnd(this)
-
+    this.confirmRoundEnd = this.confirmRoundEnd.bind(this)
+    this.endRound = this.endRound.bind(this)
   }
 
   componentDidMount() {
@@ -169,17 +169,19 @@ export default class PlayGame extends React.Component {
   setRoundState(type, value) {
     console.log("round change type fired")
     console.log(type, value)
-    
 
     //If it's the beginning of a new round, restart Timer to 2 minutes
 
-    this.setState((state) => ({
+    this.setState((state) => {
+    console.log("loading status: ", state.loading)
+    return {
+      loading: state.loading === true ? false : state.loading,
       round : {
         ...state.round,
         [type]: value,
         
       }
-    }))
+    }})
   }
 
   determineActivePlayers(turn, team1, team2) {
@@ -216,6 +218,7 @@ export default class PlayGame extends React.Component {
   //Saving card status in firebase allows it to be accesible in the CardIndex event listener fires when the card
   //status is changed.
   nextCard(status) {
+    console.log("next card clicked")
    const {gamecode} = this.state
    const {currentCardIndex} = this.state.deck
 
@@ -232,6 +235,7 @@ export default class PlayGame extends React.Component {
     console.log(cardInfo)
     const {lastCardStatus, currentCardIndex} = cardInfo
     const currentCard = this.state.deck.cards[this.state.deck.currentCardIndex]
+
    
     //Contains card details, and if 'correct' or 'skip' selected
       cardInfo = {
@@ -242,26 +246,47 @@ export default class PlayGame extends React.Component {
     //update current index
     //account for round status (later)
     
-    this.setState((state) => ({
-      round: {
-        ...state.round,
-        cardsPlayed: [...this.state.round.cardsPlayed, cardInfo]
-      
-      },
-      deck: {
-        ...this.state.deck,        
-         currentCardIndex
+
+console.log("none?", cardInfo.status)
+console.log("in progress?", this.state.round.roundStatus)
+
+   
+      this.setState((state) => ({
+        loading: cardInfo.status === "none" && this.state.round.roundStatus === "in progress",
+        round: {
+          ...state.round,
+          cardsPlayed: [...this.state.round.cardsPlayed, cardInfo]
         
-      }
-    }))
+        },
+        deck: {
+          ...this.state.deck,        
+           currentCardIndex          
+        }
+      }))
+
+      if (cardInfo.status === "none" && this.state.round.roundStatus === "in progress") {
+        console.log("round ended - update to post")
+        const { gamecode } = this.state 
+        updateRoundStatus(gamecode, "post")
+  
+      } 
+
+
   }
  
-  endRound(){
-    const { gamecode } = this.state
-    updateRoundStatus(gamecode, "post")
+  //Called when time is up.
+   endRound(){
+      console.log("end round function")    // const { gamecode } = this.state
+    //Sets the cards that was last displayed on screen to status of none
+     this.nextCard("none")
+
+    
+    //set the status of the current card
+    // updateRoundStatus(gamecode, "post")
   }
 
   confirmRoundEnd(playedCards){
+    console.log(playedCards)
     const giverTeamRoundScore = playedCards.filter(card => card.status === "correct")
     const watcherTeamRoundScore =  playedCards.filter(card => card.status === "skipped")
     let team1UpdatedScore
@@ -340,6 +365,7 @@ export default class PlayGame extends React.Component {
               }
               word={currentWord}
               nextCard = {this.nextCard}
+              endRound={this.endRound}
               cardsPlayed = {cardsPlayed}
               confirmRoundEnd = {this.confirmRoundEnd}
             />

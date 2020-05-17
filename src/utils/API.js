@@ -35,6 +35,7 @@ export async function createNewGame(gamecode) {
       deckNumber: 1,
     },
     players: "none", //Set to none to allow a listener to be attached immediately
+    //pickle - consider combining teams into one object
     team1: {
       teamName: "Team 1",
       players: []

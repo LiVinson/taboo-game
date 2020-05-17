@@ -12,8 +12,8 @@ export default function GameContainer({
   currentPlayerId,
   startRound,
   word,
-  seconds,
   nextCard,
+  endRound,
   cardsPlayed,
   confirmRoundEnd
 }) {
@@ -28,7 +28,7 @@ export default function GameContainer({
         startRound,
         giver,
         watcher,
-        currentPlayerId
+        currentPlayerId.Timer
       )
       return (
           <React.Fragment>
@@ -46,7 +46,7 @@ export default function GameContainer({
         <React.Fragment>
             <Timer 
               runTimer={true}
-              endofTimer={()=> {console.log("timer has ended. Need to update round status")}}/>
+              endofTimer={endRound}/>
             <InRound
             wordInfo={word}
             isGiver={giver.playerId === currentPlayerId}
@@ -58,7 +58,7 @@ export default function GameContainer({
         case "post":      
           return (
             <PostRound
-            cardsPlayed={cardsPlayed}
+              cardsPlayed={cardsPlayed}
               confirmRoundEnd={confirmRoundEnd}
             />
           )

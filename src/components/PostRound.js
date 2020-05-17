@@ -1,5 +1,5 @@
 import React from "react"
-
+//test
 export default class PostRound extends React.Component {
   constructor(props) {
     super(props)
@@ -7,7 +7,8 @@ export default class PostRound extends React.Component {
       cards: props.cardsPlayed
     }
 
-    this.determineCardsStatus = this.determineCardsStatus.bind(this)
+    this.changeCardStatus = this.changeCardStatus.bind(this)
+    this.confirmCards = this.confirmCards.bind(this)
   }
 
 
@@ -16,7 +17,9 @@ export default class PostRound extends React.Component {
     //finds the word to update, then updates the status
 
     this.setState((state) => {
-        const updatedCards = [...state]
+        const updatedCards = [...state.cards]
+        console.log("played cards: ", updatedCards)
+        console.log("newstatus:", newStatus )
         updatedCards[cardIndex].status = newStatus
         return {
             cards: updatedCards
@@ -26,7 +29,8 @@ export default class PostRound extends React.Component {
 
   confirmCards() {
       console.log("cards Confirmed")
-      this.props.confirmRoundEnd(this.state)
+      console.log(this.state.cards)
+      this.props.confirmRoundEnd(this.state.cards)
   }
 
   render() {
@@ -61,19 +65,19 @@ export default class PostRound extends React.Component {
         </ul>
         <h3>Skipped Cards</h3>
         <ul>
-          {skippedCards.map((card) => (
+          {skippedCards.map((card, index) => (
             <li key={card.word}>
               <p>{card.word}</p>
               <button
                 onClick={() =>
-                  this.changeCardStatus("skipped", "correct", card.word)
+                  this.changeCardStatus("correct", index)
                 }
               >
                 Move to Correct
               </button>
               <button
                 onClick={() =>
-                  this.changeCardStatus("skipped", "none", card.word)
+                  this.changeCardStatus("none", index)
                 }
               >
                 Move to No Status
@@ -82,6 +86,7 @@ export default class PostRound extends React.Component {
           ))}
         </ul>
         <h3>No Status Cards</h3>
+        
         <ul>
           {noneCards.map((card, index) => (
             <li key={card.word}>
@@ -95,7 +100,7 @@ export default class PostRound extends React.Component {
               </button>
               <button
                 onClick={() =>
-                  this.changeCardStatus("skipped", card.word)
+                  this.changeCardStatus("skipped", index)
                 }
               >
                 Move to Skipped
