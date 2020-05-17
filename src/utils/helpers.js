@@ -79,9 +79,9 @@ export function setupListenerRequest
         console.log("set currentCards")
         listenerPath = `games/${gamecode}/deck/cards`    
         break
-      case "scores":
-        console.log("set csores")
-        listenerPath = `games/${gamecode}/scores`
+      case "score":
+        console.log("set scores")
+        listenerPath = `games/${gamecode}/score`
         break
       default:
         //pickle - update once error logging set

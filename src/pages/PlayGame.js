@@ -49,7 +49,7 @@ export default class PlayGame extends React.Component {
       "roundNumber",
       "currentCardIndex",
       "currentCards",   
-      "scores"   
+      "score"   
     ]
 
     this.determineActivePlayers = this.determineActivePlayers.bind(this)
@@ -319,18 +319,24 @@ console.log("in progress?", this.state.round.roundStatus)
   handleScoreChange({team1, team2}){
     console.log("scores from FB: ", team1, team2)
 
-    const team1PrevRoundScore = team1 - this.state.score.team1
+    const team1PrevRoundScore = team1 - this.state.team1.score
     
-    const team2PrevRoundScore = team1 - this.state.score.team2
+    const team2PrevRoundScore = team1 - this.state.team2.score
 
     this.setState((state) => ({
       team1 : {
         ...state.team1,
-        scorePerRound: state.team1.scorePerRound.concat([team1PrevRoundScore])
+        scorePerRound: state.team1.scorePerRound.concat([team1PrevRoundScore]),
+        score: team1,
+        playerTurnIndex: state.team1.playerTurnIndex + 1 < state.team1.players.length 
+        ? state.team1.playerTurnIndex + 1 : 0
       },
       team2 : {
         ...state.team2,
-        scorePerRound: state.team2.scorePerRound.concat([team2PrevRoundScore])
+        scorePerRound: state.team2.scorePerRound.concat([team2PrevRoundScore]),
+        score: team2,
+        playerTurnIndex: state.team2.playerTurnIndex + 1 < state.team2.players.length 
+        ? state.team2.playerTurnIndex + 1 : 0
       }
     })
     )
