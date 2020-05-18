@@ -1,9 +1,10 @@
 import React from "react"
 import PreRound from "./PreRound.js"
 import InRound from "./InRound"
+import PostRound from "./PostRound"
 import Timer from "./Timer"
 
-
+//pickle - separate into 3 nested routes with 3 different components displayed in the PlayGame component
 export default function GameContainer({
   round,
   onGuessingTeam,
@@ -11,18 +12,20 @@ export default function GameContainer({
   currentPlayerId,
   startRound,
   word,
-  seconds,
-  nextCard
+  nextCard,
+  endRound,
+  cardsPlayed,
+  confirmRoundEnd
 }) {
   let msg = ""
   const { giver, watcher } = getActivePlayers()
+  console.log(giver, watcher)
   
 
   switch (round) {
     case "pre":
       msg = preRoundMsg(
         onGuessingTeam,       
-        startRound,
         giver,
         watcher,
         currentPlayerId
@@ -35,6 +38,7 @@ export default function GameContainer({
               <PreRound
                message={msg} 
                isGiver={giver.playerId === currentPlayerId}
+               isWatcher={watcher.playerId === currentPlayerId}
                startRound = {startRound}
                />
           </React.Fragment>)
@@ -43,7 +47,7 @@ export default function GameContainer({
         <React.Fragment>
             <Timer 
               runTimer={true}
-              endofTimer={()=> {console.log("timer has ended. Need to update round status")}}/>
+              endofTimer={endRound}/>
             <InRound
             wordInfo={word}
             isGiver={giver.playerId === currentPlayerId}
@@ -52,6 +56,14 @@ export default function GameContainer({
             runTimer={true}
             />      
         </React.Fragment>)
+        case "post":      
+          return (
+            <PostRound
+              cardsPlayed={cardsPlayed}
+              confirmRoundEnd={confirmRoundEnd}
+              isWatcher={watcher.playerId === currentPlayerId}
+            />
+          )
 
     default:
   }
@@ -61,8 +73,7 @@ export default function GameContainer({
 
 //Preround message based on current player's team and giver/watcher status:
 function preRoundMsg(
-  guessingTeam,
-  startRound,
+  guessingTeam, 
   giver,
   watcher,
   currentPlayerId
