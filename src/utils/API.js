@@ -150,11 +150,11 @@ function getGameData(gamecode) {
   })
 }
 
-function getDeck(deckId) {
-  console.log(deckId)
+function getDeck() {
+  console.log()
   return new Promise((resolve, reject) => {
     database
-      .ref(`deck/${deckId}`)
+      .ref(`deck/`)
       .once("value")
       .then(function (snapshot) {
         console.log(snapshot.val())
@@ -167,11 +167,11 @@ function getDeck(deckId) {
   })
 }
 
-export function retrieveGameInformation(gamecode, deckId) {
+export function retrieveGameInformation(gamecode) {
   console.log("gamecode", gamecode)
   //get the players
 
-  return Promise.all([getGameData(gamecode), getDeck(deckId)])
+  return Promise.all([getGameData(gamecode), getDeck()])
 
   // return new Promise(function (resolve, reject) {
   //   database

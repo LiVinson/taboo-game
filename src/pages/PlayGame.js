@@ -12,6 +12,15 @@ export default class PlayGame extends React.Component {
     super(props)
     this.state = {
       loading: true,
+      endType: {
+        type:"numberOfTurns",
+        value: {
+          numberOfTurns: 2,
+          team1Rotations: 0,
+          team2Rotations: 0
+        },
+        
+      },
       endGame: false,
       listenersSet: false,
       gamecode: props.match.params.gamecode,
@@ -22,15 +31,12 @@ export default class PlayGame extends React.Component {
         giverId: null,
         watcherId: null,
         cardsPlayed: [],
-        roundStatus: "pre", //keeps track of if it is before round, or round in progress
-        
+        roundStatus: "pre", //keeps track of if it is before round, or round in progress      
       },
-      deck: {
-        deckId: 1000,
+      deck: {        
         cards: [],
         currentCardIndex: 0
       },
-
       team1: {
         players: [],
         playerTurnIndex: 0,
@@ -64,7 +70,6 @@ export default class PlayGame extends React.Component {
     this.confirmRoundEnd = this.confirmRoundEnd.bind(this)
     this.endRound = this.endRound.bind(this)
     this.checkEndGame = this.checkEndGame.bind(this)
-    this.endGame = this.endGame.bind(this)
   }
 
   componentDidMount() {
@@ -133,9 +138,8 @@ export default class PlayGame extends React.Component {
   // Called when all firebase listeners have been set for the first time
   requestGameInformation() {
     const {gamecode} = this.state
-    const { deckId } = this.state.deck
-    console.log(deckId)
-    retrieveGameInformation(gamecode, deckId)
+
+    retrieveGameInformation(gamecode)
     .then((response) => {
       console.log(response)
       const players = convertFBObjectToArray(response[0])
@@ -176,6 +180,9 @@ export default class PlayGame extends React.Component {
     console.log(type, value)
 
     if (value === "pre") {
+      
+      
+
         //update turn
         //update round number
         //update round status
@@ -183,28 +190,51 @@ export default class PlayGame extends React.Component {
         //determine next player's turn
         this.setState(state => {
           const { turn, roundNumber } = this.state.round
-          const { playerTurnIndex: team1playerTurn, players: team1Players } = this.state.team1
-          const { playerTurnIndex: team2playerTurn, players: team2Players } = this.state.team2
+          const index = {
+            team1: null,
+            team2: null
+          }
+
+          if (turn === 1) {
+            const { playerTurnIndex: team1playerTurn, players: team1Players } = this.state.team1
+            index.team1 = team1playerTurn + 1 < team1Players.length
+            ? team1playerTurn + 1 : 0
+          } else {
+            const { playerTurnIndex: team2playerTurn, players: team2Players } = this.state.team2
+            index.team2 = team2playerTurn + 1 < team2Players.length
+            ? team2playerTurn + 1 : 0
+          }
+         
+          console.log("new indexes: ", index)
+
 
           return {
             loading:false,
+            endType: {
+              ...state.endType,
+              value: {
+                ...state.endType.value,
+                team1Rotations: turn === 1 && index.team1 === 0 ? state.endType.value.team1Rotations + 1 : state.endType.team1Rotations, 
+                team2Rotations: turn === 2 && index.team2 === 0 ? state.endType.value.team2Rotations + 1 : state.endType.team2Rotations 
+              }
+            },
             round: {
+              ...state.round,
+              roundNumber: turn === 1 ? roundNumber : roundNumber + 1,
               turn: turn === 1 ? 2 : 1,
-              roundStatus: "pre",
-              roundNumber: turn === 1 ? roundNumber : roundNumber + 1
+              cardsPlayed: [],
+              roundStatus: "pre"
             },
             team1: {
               ...state.team1,
-               playerTurnIndex: team1playerTurn + 1 < team1Players
-                 ? team1playerTurn + 1 : 0
+               playerTurnIndex: index.team1
             },
             team2: {
               ...state.team2,
-               playerTurnIndex: team2playerTurn + 1 < team2Players
-                 ? team2playerTurn + 1 : 0
+               playerTurnIndex: index.team2
             }
         }
-      })
+      }, this.checkEndGame)
 
     } else if(value === "in progress" || value === "post") {  
       console.log("round status: ", value)
@@ -290,7 +320,7 @@ export default class PlayGame extends React.Component {
 
     console.log("none?", cardInfo.status)
     console.log("in progress?", this.state.round.roundStatus)
-
+    console.log(this.state.round.cardsPlayed)
    //If state of card is none, this means round ended. Set loading to true.
     this.setState((state) => ({
       loading: cardInfo.status === "none" && this.state.round.roundStatus === "in progress",
@@ -360,7 +390,7 @@ export default class PlayGame extends React.Component {
   handleScoreChange({team1, team2}){
     console.log("scores from FB: ", team1, team2)
     const team1PrevRoundScore = team1 - this.state.team1.score    
-    const team2PrevRoundScore = team1 - this.state.team2.score
+    const team2PrevRoundScore = team2 - this.state.team2.score
 
     this.setState((state) => (
       {
@@ -379,39 +409,54 @@ export default class PlayGame extends React.Component {
           // ? state.team2.playerTurnIndex + 1 : 0
         }
      }
-    ))
-
-    if (this.checkEndGame()) {
-      
-      console.log("game over")
-      this.setState({
-        endGame: true
-      })
-    } else {
-      const { gamecode } = this.state
-      console.log("continue to next round")
-      updateRoundStatus(gamecode, "pre")
-    }
-
+    ), updateRoundStatus(this.state.gamecode, "pre")) 
     //pickle - add functionalty to change to pre
   }
 
 
-  checkEndGame(){
-    return true
+  checkEndGame(){    
+    const { type: endType, value } = this.state.endType
+    switch(endType) {
+      case "numberOfTurns":
+        console.log("checking endgame: number of turns ")
+        //Checks if the number of times the game has reseted back to first player on each team
+        if (value.team1Rotations >= value.numberOfTurns && value.team2Rotations >= value.numberOfTurns) {
+          this.setState({
+            endGame: true
+          })
+        } else {
+          this.setState({
+            loading: false
+          })
+        }
+        break
+      case "maxScore":
+        break
+      case "cardsPlayed":
+        break
+      default:
+        console.log("error with game ending")
+    }
+    console.log("scores:", this.state.team1.score, this.state.team2.score)
+    if (this.state.team1.score > 5 || this.state.team2.score > 5) {
+         
+        console.log("game over")
+        this.setState({
+          endGame: true
+        })
+      } else {
+        const { gamecode } = this.state
+        console.log("continue to next round")
+        updateRoundStatus(gamecode, "pre")
+      }
+    }
+      
     //check that both teams still have at least 2 players
     //Check type of endGame
 
     //If based on rounds, compare number of rounds to max.
     //If meets condition, call endGame
     //otherwise, call start nextround
-  }
-
-
-
-  endGame(){
-    console.log("game over")
-  }
 
   render() {
     const { loading, team1, team2, round, currentPlayer, deck } = this.state

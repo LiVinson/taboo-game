@@ -13,7 +13,7 @@ export default function WordCard({ word, tabooWords }) {
 }
 
 function Word({ word }) {
-  return <div>{word}</div>
+  return <div style={{fontWeight:"bold"}}>{word}</div>
 }
 
 function TabooWord({ word }) {

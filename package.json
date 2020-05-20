@@ -18,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "update-deck": "env NODE_ENV=development node ./scripts/import-deck.js"
   },
   "eslintConfig": {
     "extends": "react-app"
