@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar"
 import Home from "./pages/Home"
 import New from "./pages/New"
 import Game from "./pages/PlayGame"
+import EndGame from "./pages/EndGame"
 
 class App extends React.Component {
   render() {
@@ -17,7 +18,8 @@ class App extends React.Component {
             <Route path={"/"} exact component={Home} />
             <Route path="/new/:gamecode/:playerId" component={New} />
             <Route path="/play/:gamecode/:playerId" component={Game} />
-          </Switch>
+            <Route path="/end/:gamecode/:playerId" component={EndGame}/>
+            </Switch>
         </Container>
       </Router>
     )

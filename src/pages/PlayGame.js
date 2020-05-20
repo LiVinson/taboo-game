@@ -1,4 +1,5 @@
 import React from "react"
+import { Redirect } from "react-router-dom"
 import Team from "../components/Team"
 import { retrieveGameInformation, attachListener, updateRoundStatus, updateCardInfo, updateTeamScores} from "../utils/API"
 import { convertFBObjectToArray, setupListenerRequest } from "../utils/helpers"
@@ -11,6 +12,7 @@ export default class PlayGame extends React.Component {
     super(props)
     this.state = {
       loading: true,
+      endGame: false,
       listenersSet: false,
       gamecode: props.match.params.gamecode,
       currentPlayer: null,
@@ -40,7 +42,7 @@ export default class PlayGame extends React.Component {
         playerTurnIndex: 0,
         scorePerRound:[],
         score: 0,
-      },
+      }      
     }
 
     this.listenerTypes = [
@@ -382,7 +384,9 @@ export default class PlayGame extends React.Component {
     if (this.checkEndGame()) {
       
       console.log("game over")
-      this.endGame()
+      this.setState({
+        endGame: true
+      })
     } else {
       const { gamecode } = this.state
       console.log("continue to next round")
@@ -394,7 +398,7 @@ export default class PlayGame extends React.Component {
 
 
   checkEndGame(){
-    return false
+    return true
     //check that both teams still have at least 2 players
     //Check type of endGame
 
@@ -417,7 +421,18 @@ export default class PlayGame extends React.Component {
 
 
     console.log(currentWord)
-    if (loading) {
+    if (this.state.endGame) {
+      console.log(currentPlayer.playerId)
+      return <Redirect
+        to={{
+          pathname: `/end/${this.state.gamecode}/${currentPlayer.playerId}`,
+          state: {
+            team1Score: this.state.team1.score,
+            team2Score: this.state.team2.score
+          }
+        }}
+        />
+    } else if (loading) {
       return <p>Loading Works</p>
     } else {
       return (
