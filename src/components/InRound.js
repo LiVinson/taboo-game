@@ -5,11 +5,12 @@ import WordCard from "./WordCard"
 export default function InRound({wordInfo, isGiver, isWatcher, nextCard}){
     if (isGiver || isWatcher) {
         console.log(wordInfo)
-        const {taboo1, taboo2,taboo3,taboo4, word} = wordInfo
-        const tabooArray = [taboo1, taboo2, taboo3, taboo4]
+        const {taboo1, taboo2,taboo3,taboo4, taboo5, word} = wordInfo
+        const tabooArray = [taboo1, taboo2, taboo3, taboo4, taboo5]
         return(
         <div>        
-            <WordCard               
+            <WordCard      
+                word={word}         
                 tabooWords={tabooArray}
             />
             <div>
