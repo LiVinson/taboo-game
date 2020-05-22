@@ -125,9 +125,9 @@ export function updateGameStatus(gamecode, status) {
   database
     .ref(gameStatusRef)
     .update({ status: status })
-    .then((res) => {
-      console.log("then of updateGameStatus")
-    })
+    // .then((res) => {
+    //   console.log("then of updateGameStatus")
+    // })
     .catch((err) => {
       console.log("there was an error updating game status")
       console.log(err)

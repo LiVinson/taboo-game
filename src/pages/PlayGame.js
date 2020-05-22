@@ -190,23 +190,33 @@ export default class PlayGame extends React.Component {
         //determine next player's turn
         this.setState(state => {
           const { turn, roundNumber } = this.state.round
+
           const index = {
             team1: null,
             team2: null
           }
 
-          if (turn === 1) {
+          //turn 1: team 1 was the giver team 2 was the watcher
+          //Should set to turn 2, and giver and watcher swap (same index)
+          //If turn 2: team 2 was the giver and team 1 was the watcher
+          //Should set turn to 1, and increment playerTurnIndex.
+          if (turn === 2) {
             const { playerTurnIndex: team1playerTurn, players: team1Players } = this.state.team1
+            const { playerTurnIndex: team2playerTurn, players: team2Players } = this.state.team2
+
             index.team1 = team1playerTurn + 1 < team1Players.length
             ? team1playerTurn + 1 : 0
-          } else {
-            const { playerTurnIndex: team2playerTurn, players: team2Players } = this.state.team2
             index.team2 = team2playerTurn + 1 < team2Players.length
             ? team2playerTurn + 1 : 0
+          } else {
+            index.team1 = this.state.team1.playerTurnIndex
+            index.team2 = this.state.team1.playerTurnIndex
           }
          
           console.log("new indexes: ", index)
-
+          
+          //When to rotate Team 1: If turn was 2 (Team 1 was the watcher) and the index for Team 1 'next' is 0.
+          //When to rotate Team 2: If turn was 2 (Team 2 was the giver) and the index for Team 2 'next' is 0.
 
           return {
             loading:false,
@@ -214,8 +224,8 @@ export default class PlayGame extends React.Component {
               ...state.endType,
               value: {
                 ...state.endType.value,
-                team1Rotations: turn === 1 && index.team1 === 0 ? state.endType.value.team1Rotations + 1 : state.endType.team1Rotations, 
-                team2Rotations: turn === 2 && index.team2 === 0 ? state.endType.value.team2Rotations + 1 : state.endType.team2Rotations 
+                team1Rotations: turn === 2 && index.team1 === 0 ? state.endType.value.team1Rotations + 1 : state.endType.value.team1Rotations, 
+                team2Rotations: turn === 2 && index.team2 === 0 ? state.endType.value.team2Rotations + 1 : state.endType.value.team2Rotations 
               }
             },
             round: {
@@ -420,7 +430,10 @@ export default class PlayGame extends React.Component {
       case "numberOfTurns":
         console.log("checking endgame: number of turns ")
         //Checks if the number of times the game has reseted back to first player on each team
-        if (value.team1Rotations >= value.numberOfTurns && value.team2Rotations >= value.numberOfTurns) {
+       console.log("team1 rotations:", value.team1Rotations)
+       console.log("team2 rotations:", value.team2Rotations)
+       console.log("total turns: ", value.numberOfTurns)
+        if (value.team1Rotations >= value.numberOfTurns &&  value.team2Rotations >= value.numberOfTurns) {
           this.setState({
             endGame: true
           })
@@ -437,18 +450,7 @@ export default class PlayGame extends React.Component {
       default:
         console.log("error with game ending")
     }
-    console.log("scores:", this.state.team1.score, this.state.team2.score)
-    if (this.state.team1.score > 5 || this.state.team2.score > 5) {
-         
-        console.log("game over")
-        this.setState({
-          endGame: true
-        })
-      } else {
-        const { gamecode } = this.state
-        console.log("continue to next round")
-        updateRoundStatus(gamecode, "pre")
-      }
+  
     }
       
     //check that both teams still have at least 2 players
