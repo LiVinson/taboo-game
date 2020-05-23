@@ -168,7 +168,7 @@ export default class PlayGame extends React.Component {
         currentPlayer: currentPlayer[0],
         deck: {
           ...state.deck,
-          cards: cards
+          cards: cards.slice(0,10)
         }
       }))
     })
@@ -219,7 +219,7 @@ export default class PlayGame extends React.Component {
           //When to rotate Team 2: If turn was 2 (Team 2 was the giver) and the index for Team 2 'next' is 0.
 
           return {
-            loading:false,
+            loading:true,
             endType: {
               ...state.endType,
               value: {
@@ -315,8 +315,9 @@ export default class PlayGame extends React.Component {
     console.log("card Info updated")
     console.log(cardInfo)
     const {lastCardStatus, currentCardIndex} = cardInfo
-    const currentCard = this.state.deck.cards[this.state.deck.currentCardIndex]
 
+
+    const currentCard = this.state.deck.cards[this.state.deck.currentCardIndex]
    
     //Contains card details, and if 'correct' or 'skip' selected
       cardInfo = {
@@ -325,13 +326,30 @@ export default class PlayGame extends React.Component {
     } 
     //push in current Card to 'played' array
     //update current index
-    //account for round status (later)
-    
+    //account for round status (later)   
 
     console.log("none?", cardInfo.status)
     console.log("in progress?", this.state.round.roundStatus)
     console.log(this.state.round.cardsPlayed)
-   //If state of card is none, this means round ended. Set loading to true.
+
+    if (currentCardIndex >= this.state.deck.cards.length) {
+      this.setState((state) => ({
+        loading: true,
+        round: {
+          ...state.round,
+          cardsPlayed: [...this.state.round.cardsPlayed, cardInfo]
+        },
+        deck: {
+          ...state.deck,
+          currentCardIndex
+        }
+      }), ()=>{
+        const { gamecode } = this.state 
+        updateRoundStatus(gamecode, "post")
+      })
+
+    } else {
+       //If state of card is none, this means round ended. Set loading to true.
     this.setState((state) => ({
       loading: cardInfo.status === "none" && this.state.round.roundStatus === "in progress",
       round: {
@@ -343,14 +361,24 @@ export default class PlayGame extends React.Component {
         ...this.state.deck,        
           currentCardIndex          
       }
-    }))
+    }), ()=> {  
+      
+      
+      if (cardInfo.status === "none" && this.state.round.roundStatus === "in progress") {
+        console.log("round ended - update to post")
+        const { gamecode } = this.state 
+        updateRoundStatus(gamecode, "post")
+      }  
+    })
+    }
+  
 
-    if (cardInfo.status === "none" && this.state.round.roundStatus === "in progress") {
-      console.log("round ended - update to post")
-      const { gamecode } = this.state 
-      updateRoundStatus(gamecode, "post")
+    // if (cardInfo.status === "none" && this.state.round.roundStatus === "in progress") {
+    //   console.log("round ended - update to post")
+    //   const { gamecode } = this.state 
+    //   updateRoundStatus(gamecode, "post")
 
-    }  
+    // }  
   }
  
   //Called when time is up.Calls nextCard with none to make sure card currently showing is not 
@@ -425,31 +453,41 @@ export default class PlayGame extends React.Component {
 
 
   checkEndGame(){    
-    const { type: endType, value } = this.state.endType
-    switch(endType) {
-      case "numberOfTurns":
-        console.log("checking endgame: number of turns ")
-        //Checks if the number of times the game has reseted back to first player on each team
-       console.log("team1 rotations:", value.team1Rotations)
-       console.log("team2 rotations:", value.team2Rotations)
-       console.log("total turns: ", value.numberOfTurns)
-        if (value.team1Rotations >= value.numberOfTurns &&  value.team2Rotations >= value.numberOfTurns) {
-          this.setState({
-            endGame: true
-          })
-        } else {
-          this.setState({
-            loading: false
-          })
-        }
-        break
-      case "maxScore":
-        break
-      case "cardsPlayed":
-        break
-      default:
-        console.log("error with game ending")
+
+    const { currentCardIndex, cards } = this.state.deck
+    if (currentCardIndex >= cards.length) {
+      this.setState({
+        endGame: true
+      })
+    } else {
+      const { type: endType, value } = this.state.endType
+      switch(endType) {
+        case "numberOfTurns":
+          console.log("checking endgame: number of turns ")
+          //Checks if the number of times the game has reseted back to first player on each team
+         console.log("team1 rotations:", value.team1Rotations)
+         console.log("team2 rotations:", value.team2Rotations)
+         console.log("total turns: ", value.numberOfTurns)
+          if (value.team1Rotations >= value.numberOfTurns &&  value.team2Rotations >= value.numberOfTurns) {
+            this.setState({
+              endGame: true
+            })
+          } else {
+            this.setState({
+              loading: false
+            })
+          }
+          break
+        case "maxScore":
+          break
+        case "cardsPlayed":
+          break
+        default:
+          console.log("error with game ending")
+      }
+
     }
+    
   
     }
       
