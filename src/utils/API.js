@@ -1,4 +1,5 @@
 import { database } from "./firebase_conn"
+import { shuffleArray } from "./helpers"
 
 //Confirms whether gamecode entered is valid
 export function confirmGameCode(gamecode) {
@@ -31,8 +32,8 @@ export async function createNewGame(gamecode) {
       cardInfo: {
         currentCardIndex: 0,
         lastCardStatus:"none"
-      },
-      deckNumber: 1,
+      }
+      
     },
     players: "none", //Set to none to allow a listener to be attached immediately
     //pickle - consider combining teams into one object
@@ -125,9 +126,6 @@ export function updateGameStatus(gamecode, status) {
   database
     .ref(gameStatusRef)
     .update({ status: status })
-    // .then((res) => {
-    //   console.log("then of updateGameStatus")
-    // })
     .catch((err) => {
       console.log("there was an error updating game status")
       console.log(err)
@@ -136,12 +134,11 @@ export function updateGameStatus(gamecode, status) {
 
 function getGameData(gamecode) {
   return new Promise(function (resolve, reject) {
-    database
+     database
       .ref(`games/${gamecode}/players`)
       .once("value")
-      .then(function (snapshot) {
-        console.log(snapshot.val())
-        resolve(snapshot.val())
+      .then(function (snapshot) {        
+        return resolve(snapshot.val())
       })
       .catch(function (err) {
         console.log("there was an issue retreiving the players:", err)
@@ -151,14 +148,13 @@ function getGameData(gamecode) {
 }
 
 function getDeck() {
-  console.log()
-  return new Promise((resolve, reject) => {
-    database
+  return new Promise( (resolve, reject) => {
+     database
       .ref(`deck/`)
       .once("value")
       .then(function (snapshot) {
-        console.log(snapshot.val())
-        resolve(snapshot.val())
+        const deck = snapshot.val()
+        return resolve(deck)
       })
       .catch(function (err) {
         console.log("there was an issue retreiving the deck:", err)
@@ -168,24 +164,42 @@ function getDeck() {
 }
 
 export function retrieveGameInformation(gamecode) {
-  console.log("gamecode", gamecode)
-  //get the players
+  //get game information 
+  //get the deck//
+  //shuffle the deck
+  //save in 'cards' for the gamecode
+  //return a promise array: [gameinfo, shuffled deck]
 
-  return Promise.all([getGameData(gamecode), getDeck()])
+  const data = new Promise ((res,rej) => {
+     getGameData(gamecode)
+    .then(gameData => {
+       getDeck()
+        .then(deck => {
+          const shuffledCards = shuffleArray(deck)
+           saveDeck(shuffledCards, gamecode)
+            .then(response => {
+            return res([gameData, shuffledCards])
+          })
+      })
+    })    
+     .catch(err => {
+      console.log("error in promise")
+      console.log(err)
+    })
+  })
 
-  // return new Promise(function (resolve, reject) {
-  //   database
-  //     .ref(`games/${gamecode}/players`)
-  //     .once("value")
-  //     .then(function (snapshot) {
-  //       console.log(snapshot.val())
-  //       resolve(snapshot.val())
-  //     })
-  //     .catch(function (err) {
-  //       console.log("there was an issue retreiving the players:", err)
-  //       reject(err)
-  //     })
-  // })
+  return data
+}
+
+function saveDeck(deck, gamecode){
+    return new Promise((res,rej) => 
+      database
+      .ref(`games/${gamecode}/deck/`)
+      .update({ cards: deck })
+      .then(response => {      
+        console.log("7 - saved deck")
+        return res(true)
+  }))
 }
 
 export function updateRoundStatus(gamecode, status) {

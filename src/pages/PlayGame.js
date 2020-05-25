@@ -2,10 +2,11 @@ import React from "react"
 import { Redirect } from "react-router-dom"
 import Team from "../components/Team"
 import { retrieveGameInformation, attachListener, updateRoundStatus, updateCardInfo, updateTeamScores} from "../utils/API"
-import { convertFBObjectToArray, setupListenerRequest } from "../utils/helpers"
+import { convertFBObjectToArray, setupListenerRequest, shuffleArray } from "../utils/helpers"
 import ScoreCard from "../components/ScoreCard"
 import RoundInfo from "../components/RoundInfo"
 import GameContainer from "../components/GameContainer"
+
 
 export default class PlayGame extends React.Component {
   constructor(props) {
@@ -54,8 +55,7 @@ export default class PlayGame extends React.Component {
     this.listenerTypes = [
       "roundStatus",
       "roundNumber",
-      "currentCardIndex",
-      "currentCards",   
+      "currentCardIndex",      
       "score"   
     ]
 
@@ -147,10 +147,9 @@ export default class PlayGame extends React.Component {
       const team2Players = players.filter((player) => player.team === "Team 2")
       const currentPlayer = players.filter(
         (player) => player.playerId === this.props.match.params.playerId
-      )
-      const cards=response[1]
-      // console.log(this.props.match.params.playerId)
-      console.log(currentPlayer)
+      )     
+      const cards = response[1]
+
       this.setState((state) => ({
         listenersSet: true,
         round: {
@@ -168,7 +167,7 @@ export default class PlayGame extends React.Component {
         currentPlayer: currentPlayer[0],
         deck: {
           ...state.deck,
-          cards: cards.slice(0,10)
+          cards
         }
       }))
     })
@@ -502,10 +501,7 @@ export default class PlayGame extends React.Component {
     const { loading, team1, team2, round, currentPlayer, deck } = this.state
     const { roundNumber, giver, watcher, turn, roundStatus, cardsPlayed } = round
     const currentWord = deck.cards[deck.currentCardIndex]
-
-
-
-    console.log(currentWord)
+   
     if (this.state.endGame) {
       console.log(currentPlayer.playerId)
       return <Redirect
