@@ -91,3 +91,17 @@ export function setupListenerRequest
     createListener(listenerPath, listenerHandler, listeners[index])
   }
 
+  export function shuffleArray(arr) {
+    console.log("starting array: ", arr)
+    for (let i = arr.length -1; i > 0; i--) {
+      const j = Math.floor((Math.random() * (i + 1)))
+      // console.log(j)
+      const temp = arr[i]
+      // console.log(temp)
+      arr[i] = arr[j]
+      arr[j] = temp
+    }
+    console.log("shuffled arr: ", arr)
+    return arr;
+    // return new Promise((res,rej) => res(arr))
+  }
