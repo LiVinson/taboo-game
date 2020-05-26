@@ -7,9 +7,9 @@ export function confirmGameCode(gamecode) {
     try {
       const ref = database.ref(`games/${gamecode}/status`)
       ref.once("value").then(function (snapshot) {
-        const value = snapshot.val() || "does not exist"
+        const value = snapshot.val()
         console.log(value)
-        if (value === "pending" || "adding") {
+        if (value === "new") {
           resolve(true)
         } else {
           resolve(false)
