@@ -16,7 +16,7 @@ export default class PlayGame extends React.Component {
       endType: {
         type:"numberOfTurns",
         value: {
-          numberOfTurns: 2,
+          numberOfTurns: 1,
           team1Rotations: 0,
           team2Rotations: 0
         },
@@ -507,14 +507,15 @@ export default class PlayGame extends React.Component {
       return <Redirect
         to={{
           pathname: `/end/${this.state.gamecode}/${currentPlayer.playerId}`,
-          state: {
-            team1Score: this.state.team1.score,
-            team2Score: this.state.team2.score
+          state: {            
+              players: this.state.team1.players.concat(this.state.team2.players),
+              team1Score: this.state.team1.score,
+              team2Score: this.state.team2.score
           }
         }}
         />
     } else if (loading) {
-      return <p>Loading Works</p>
+        return <p>Loading Works</p>
     } else {
       return (
         <div style={{ height: "100%" }}>
