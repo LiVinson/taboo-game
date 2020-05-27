@@ -39,9 +39,11 @@ export default function Home() {
                 </div>
                 <div className="taboo-card__list-container">
                     <ul className="taboo-card__list">
-                        <li className="taboo-card__list-item">Create New Game</li>                    
-                        <li className="taboo-card__list-item">Join Game</li>                    
-                        <li className="taboo-card__list-item">How to Play</li>                    
+                        <li className="taboo-card__list-item">Taboo!</li>                    
+                        <li className="taboo-card__list-item">Taboo!</li>                    
+                        <li className="taboo-card__list-item">Taboo!</li>        
+                        <li className="taboo-card__list-item">Taboo!</li> 
+                        <li className="taboo-card__list-item">Taboo!</li>             
                     </ul>
                 </div>
             </div>
@@ -52,9 +54,11 @@ export default function Home() {
                 </div>
                 <div className="taboo-card__list-container">
                     <ul className="taboo-card__list">
-                        <li className="taboo-card__list-item">Create New Game</li>                    
-                        <li className="taboo-card__list-item">Join Game</li>                    
-                        <li className="taboo-card__list-item">How to Play</li>                    
+                    <li className="taboo-card__list-item">Taboo!</li>                    
+                    <li className="taboo-card__list-item">Taboo!</li>                    
+                    <li className="taboo-card__list-item">Taboo!</li>        
+                    <li className="taboo-card__list-item">Taboo!</li> 
+                    <li className="taboo-card__list-item">Taboo!</li>          
                     </ul>
                 </div>
             </div>            

@@ -1,36 +1,35 @@
 
 .wrapper {
-    background-image: linear-gradient(to bottom, #fff 0%, #fff 50%,
+    background-image: linear-gradient(to bottom, var(--color-white) 0%, var(--color-white) 50%,
          70%, var(--color-primary) 90%);
-    padding: 20px 25px;
+    padding: 2rem 2.5rem;
 }
 
 .header {
     background: none;
     font-family: 'Oswald', sans-serif;
-    font-size: 30px;
+    font-size: 3rem;
     color: var(--color-primary);
-    text-shadow: 0px 10px 10px #C4C4C4;
+    text-shadow: 0px 1remx 1rem #C4C4C4;
 }
 
 .header--large {
-    font-size: 60px;
+    font-size: 6rem;
     text-align: center;
-    margin: 20px 0;
+    margin: 2rem 0;
 }
 
 .subheading {
-    font-size: 20px;
+    font-size: 2rem;
     text-align: center;
-    padding: 0 10px;
-    color: #757575;
-    margin-bottom: 50px;
+    padding: 0 1rem;
+    color: var( --color-gray-dark-1);
+    margin-bottom: 5rem;
     font-weight: 400;
-
 }
 
 .subheading__focus-text {
-    color: #1982C4;
+    color: var(--color-primary-light);
 }
 
 /* Card Component */
@@ -38,30 +37,31 @@
 .taboo-card {
     background-color: var(--color-primary);
     margin: 0 auto;
-    max-width:78%; 
-    padding: 20px;
+    max-width:30rem; 
+    padding: 2rem;
     border-radius: 2px;
-    box-shadow: 0px 8px 10px rgba(0,0,0,.9);
-    color:#1982C4;
+    box-shadow: 0px .8rem 1rem rgba(0,0,0,.9);
+    //Used for inheritance on child components
+    color: var(--color-primary-light);
 }
 
-.taboo-card--bottom {
-    background-color: #A23B72;
-    color: #A23B72
+.taboo-card--bottom {    
+    color:  var( --color-tertiary);
+    background-color: currentColor;
 }
 
 .taboo-card--middle {
-    background-color: #EE5B2C;
-    color: #EE5B2C;
+    color:  var( --color-secondary);
+    background-color: currentColor;
 
 }
 
 .taboo-card__word-container
  {
-    background-color: #F7F9F9;
-    padding: 15px;
+    background-color: var(--color-off-white);
+    padding: 1.5rem;
     text-align: center;   
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
     border-radius: 2px;
     color:inherit;
 
@@ -69,7 +69,7 @@
 
 .taboo-card__word {
     font-family: 'Oswald', sans-serif;
-    font-size: 36px;
+    font-size: 3.5rem;
     color: inherit;
     font-weight: 600;
     text-transform: uppercase;
@@ -77,8 +77,8 @@
 }
 
 .taboo-card__list-container {
-    background-color: #F7F9F9;
-    padding: 15px;
+    background-color: var(--color-off-white);
+    padding: 1.5rem;
     text-align: center;  
     border-radius: 2px;
 
@@ -91,9 +91,9 @@
 
 .taboo-card__list-item {
     font-family: 'Oswald', sans-serif;
-    font-size: 24px;
+    font-size: 2.5rem;
     position: relative;
-    padding-bottom:15px;
+    padding-bottom:1.5rem;
 }
 
 /* .taboo-card__list-item:not(:last-child) { */
@@ -103,8 +103,8 @@
 .taboo-card__list-item:after {
     content:"";
     display:block;
-    width: 100px;
+    width: 10rem;
     margin: 0 auto;
-    padding-top:10px;
+    padding-top:1rem;
     border-bottom: #C4C4C4 2px solid; 
 }
