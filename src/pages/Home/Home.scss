@@ -3,6 +3,7 @@
     background-image: linear-gradient(to bottom, var(--color-white) 0%, var(--color-white) 50%,
          70%, var(--color-primary) 90%);
     padding: 2rem 2.5rem;
+    min-height:100vh;
 }
 
 .header {
@@ -10,22 +11,25 @@
     font-family: 'Oswald', sans-serif;
     font-size: 3rem;
     color: var(--color-primary);
-    text-shadow: 0px 1remx 1rem #C4C4C4;
+    text-shadow: 0px 1rem 1rem rgba(0,0,0,.6);
+    text-transform:uppercase;
 }
 
 .header--large {
     font-size: 6rem;
     text-align: center;
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
 .subheading {
-    font-size: 2rem;
+    font-size: 2.2rem;
     text-align: center;
     padding: 0 1rem;
     color: var( --color-gray-dark-1);
-    margin-bottom: 5rem;
+    margin-bottom: 7rem;
     font-weight: 400;
+    font-family: 'Oswald', sans-serif;
+
 }
 
 .subheading__focus-text {
@@ -35,31 +39,56 @@
 /* Card Component */
 
 .taboo-card {
+    position: relative;
     background-color: var(--color-primary);
     margin: 0 auto;
-    max-width:30rem; 
+    width:30rem; 
     padding: 2rem;
     border-radius: 2px;
     box-shadow: 0px .8rem 1rem rgba(0,0,0,.9);
     //Used for inheritance on child components
     color: var(--color-primary-light);
+    z-index: 15;
+
+
+    //Main taboo card on home screen
+    &--home &__word-container &__word {
+        font-size: 4rem;
+    }
+
+    &--home &__list-container {
+        padding-top:2rem;
+        padding-bottom:2rem;
+    }
 }
+
+
 
 .taboo-card--bottom {    
     color:  var( --color-tertiary);
     background-color: currentColor;
+    position: absolute;
+    bottom:15rem;
+    right: 5rem;
+    z-index: 5;
+    transform: rotate(-45deg);
 }
 
 .taboo-card--middle {
     color:  var( --color-secondary);
     background-color: currentColor;
+    position: absolute;
+    left:8rem;
+    bottom:12rem;
+    z-index: 10;
+    transform: rotate(45deg)
 
 }
 
 .taboo-card__word-container
  {
     background-color: var(--color-off-white);
-    padding: 1.5rem;
+    padding: 1.2rem;
     text-align: center;   
     margin-bottom: 1.5rem;
     border-radius: 2px;
@@ -81,6 +110,7 @@
     padding: 1.5rem;
     text-align: center;  
     border-radius: 2px;
+
 
 }
 
