@@ -1,0 +1,110 @@
+
+.wrapper {
+    background-image: linear-gradient(to bottom, #fff 0%, #fff 50%,
+         70%, var(--color-primary) 90%);
+    padding: 20px 25px;
+}
+
+.header {
+    background: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    color: var(--color-primary);
+    text-shadow: 0px 10px 10px #C4C4C4;
+}
+
+.header--large {
+    font-size: 60px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.subheading {
+    font-size: 20px;
+    text-align: center;
+    padding: 0 10px;
+    color: #757575;
+    margin-bottom: 50px;
+    font-weight: 400;
+
+}
+
+.subheading__focus-text {
+    color: #1982C4;
+}
+
+/* Card Component */
+
+.taboo-card {
+    background-color: var(--color-primary);
+    margin: 0 auto;
+    max-width:78%; 
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 0px 8px 10px rgba(0,0,0,.9);
+    color:#1982C4;
+}
+
+.taboo-card--bottom {
+    background-color: #A23B72;
+    color: #A23B72
+}
+
+.taboo-card--middle {
+    background-color: #EE5B2C;
+    color: #EE5B2C;
+
+}
+
+.taboo-card__word-container
+ {
+    background-color: #F7F9F9;
+    padding: 15px;
+    text-align: center;   
+    margin-bottom: 15px;
+    border-radius: 2px;
+    color:inherit;
+
+}
+
+.taboo-card__word {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    color: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+   
+}
+
+.taboo-card__list-container {
+    background-color: #F7F9F9;
+    padding: 15px;
+    text-align: center;  
+    border-radius: 2px;
+
+}
+
+.taboo-card__list {
+    list-style-type: none;
+
+}
+
+.taboo-card__list-item {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    position: relative;
+    padding-bottom:15px;
+}
+
+/* .taboo-card__list-item:not(:last-child) { */
+    /* padding-bottom:15px;
+} */
+
+.taboo-card__list-item:after {
+    content:"";
+    display:block;
+    width: 100px;
+    margin: 0 auto;
+    padding-top:10px;
+    border-bottom: #C4C4C4 2px solid; 
+}
