@@ -9,6 +9,11 @@ import { createNewGame } from "../../utils/API"
 
 export default function Home() {
   return (
+    /*Components:
+      Wrapper
+      Header w/ and w/o subheading
+      Taboo cards with type property: null, home, middle, or bottom
+    */
 
     <div className="wrapper">
       <header>
@@ -35,40 +40,33 @@ export default function Home() {
       </div>
 
       <div className="taboo-card taboo-card--middle">
-      <div className="taboo-card__word-container">
-        <p className="taboo-card__word">Taboo!</p>
+        <div className="taboo-card__word-container">
+          <p className="taboo-card__word">Taboo!</p>
+        </div>
+        <div className="taboo-card__list-container">
+          <ul className="taboo-card__list">
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+          </ul>
+        </div>
       </div>
-      <div className="taboo-card__list-container">
-        <ul className="taboo-card__list">
-          <li className="taboo-card__list-item">Taboo!</li>
-          <li className="taboo-card__list-item">Taboo!</li>
-          <li className="taboo-card__list-item">Taboo!</li>
-          <li className="taboo-card__list-item">Taboo!</li>
-        </ul>
+
+      <div className="taboo-card taboo-card--bottom">
+        <div className="taboo-card__word-container">
+          <p className="taboo-card__word">Taboo!</p>
+        </div>
+        <div className="taboo-card__list-container">
+          <ul className="taboo-card__list">
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+          </ul>
+        </div>
       </div>
     </div>
-
-
-    <div className="taboo-card taboo-card--bottom">
-      <div className="taboo-card__word-container">
-        <p className="taboo-card__word">Taboo!</p>
-      </div>
-      <div className="taboo-card__list-container">
-        <ul className="taboo-card__list">
-          <li className="taboo-card__list-item">Taboo!</li>
-          <li className="taboo-card__list-item">Taboo!</li>
-          <li className="taboo-card__list-item">Taboo!</li>
-          <li className="taboo-card__list-item">Taboo!</li>
-        </ul>
-      </div>
-    </div>
-
-
-    </div>
-    
-    
-
-
   )
 }
 
