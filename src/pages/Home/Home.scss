@@ -2,58 +2,29 @@
 .wrapper {
     background-image: linear-gradient(to bottom, var(--color-white) 0%, var(--color-white) 50%,
          70%, var(--color-primary) 90%);
-    padding: 2rem 2.5rem;
+    padding: 1rem 0rem 6rem 0rem;
     min-height:100vh;
     position: relative;
     overflow:hidden; 
 
 }
 
-.header {
-    background: none;
-    font-family: 'Oswald', sans-serif;
-    font-size: 3rem;
-    color: var(--color-primary);
-    text-shadow: 0px 1rem 1rem rgba(0,0,0,.6);
-    text-transform:uppercase;
-}
-
-//For main homescreen only, display larger text.
-.header--large {
-    font-size: 6rem;
-    text-align: center;
-    margin: 1rem 0;
-}
-
-
-
-.subheading {
-    font-size: 2.2rem;
-    text-align: center;
-    padding: 0 1rem;
-    color: var( --color-gray-dark-1);
-    margin-bottom: 7rem;
-    font-weight: 400;
-    font-family: 'Oswald', sans-serif;
-
-}
-
-.subheading__focus-text {
-    color: var(--color-primary-light);
-}
 
 /* Card Component */
 
 .taboo-card {
-    position: relative;
-    background-color: var(--color-primary);
-    min-width:30rem; 
+    width:30rem; 
+    margin: 0 auto;
     padding: 2rem;
     border-radius: 2px;
+    position: relative;
+    z-index: 15;
+    background-color: var(--color-primary);
+
     box-shadow: 0px .8rem 1rem rgba(0,0,0,.9);
     //Used for inheritance on child components
     color: var(--color-primary-light);
-    z-index: 15;
+    
 
 
     //Main taboo card on home screen, make text and padding larger
@@ -70,20 +41,20 @@
         color:  var( --color-tertiary);
         background-color: currentColor;
         position: absolute;
-        bottom:13rem;
+        bottom:9rem;
         right: 8rem;
         z-index: 5;
-        transform: rotate(-45deg);
+        transform: rotate(-42deg);
     }
 
     &--middle {
         color:  var( --color-secondary);
         background-color: currentColor;
         position: absolute;
-        bottom:12rem;
+        bottom:8rem;
         left:7rem;
         z-index: 10;
-        transform: rotate(45deg)
+        transform: rotate(42deg)
     }
 
     &__word-container
@@ -134,6 +105,19 @@
         padding-top:1rem;
         border-bottom: #C4C4C4 2px solid; 
     }
+}
+
+.footer-line {        
+        width: 60%;
+        height:1px;
+        position: absolute;
+        bottom:3rem;
+        left: 50%;
+        margin-left: -30%;
+        border-bottom: var(--color-off-white) solid 2px;
+        box-shadow: 0px 2px 1rem rgba(0,0,0,.9);
+
+
 }
 
 

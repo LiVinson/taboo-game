@@ -1,6 +1,7 @@
 import React from "react"
 import { Redirect } from "react-router-dom"
 import "./Home.scss"
+import Header from "../../components/Header"
 
 import Modal from "../../components/Modal"
 import JoinForm from "../../components/JoinForm"
@@ -16,15 +17,8 @@ export default function Home() {
     */
 
     <div className="wrapper">
-      <header>
-        <h1 className="header header--large">Taboo!</h1>
-        <p className="subheading">
-          The team game that’s all about what you{" "}
-          <span className="subheading__focus-text">say,</span> and what you{" "}
-          <span className="subheading__focus-text">don’t!</span>
-        </p>
-      </header>
-
+    <Header homepage={true} />
+      <main>
       <div className="taboo-card taboo-card--home">
         <div className="taboo-card__word-container">
           <p className="taboo-card__word">Menu</p>
@@ -66,6 +60,9 @@ export default function Home() {
           </ul>
         </div>
       </div>
+      </main>
+      <div className="footer-line"></div>
+
     </div>
   )
 }
