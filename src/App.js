@@ -1,6 +1,6 @@
 import React from "react"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import "./App.css"
+import "./App.scss"
 import Container from "./components/Container"
 import Navbar from "./components/Navbar"
 import Home from "./pages/Home"
@@ -12,15 +12,12 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Container>
-          <Navbar />
           <Switch>
             <Route path={"/"} exact component={Home} />
             <Route path="/new/:gamecode/:playerId" component={New} />
             <Route path="/play/:gamecode/:playerId" component={Game} />
             <Route path="/end/:gamecode/:playerId" component={EndGame}/>
             </Switch>
-        </Container>
       </Router>
     )
   }

@@ -1,11 +1,76 @@
 import React from "react"
-import Modal from "../components/Modal"
 import { Redirect } from "react-router-dom"
-import JoinForm from "../components/JoinForm"
-import { createNewCode } from "../utils/helpers"
-import { createNewGame } from "../utils/API"
+import "./Home.scss"
 
-export default class Home extends React.Component {
+import Modal from "../../components/Modal"
+import JoinForm from "../../components/JoinForm"
+import { createNewCode } from "../../utils/helpers"
+import { createNewGame } from "../../utils/API"
+
+export default function Home() {
+  return (
+    /*Components:
+      Wrapper
+      Header w/ and w/o subheading
+      Taboo cards with type property: null, home, middle, or bottom
+    */
+
+    <div className="wrapper">
+      <header>
+        <h1 className="header header--large">Taboo!</h1>
+        <p className="subheading">
+          The team game that’s all about what you{" "}
+          <span className="subheading__focus-text">say,</span> and what you{" "}
+          <span className="subheading__focus-text">don’t!</span>
+        </p>
+      </header>
+
+      <div className="taboo-card taboo-card--home">
+        <div className="taboo-card__word-container">
+          <p className="taboo-card__word">Menu</p>
+        </div>
+        <div className="taboo-card__list-container">
+          <ul className="taboo-card__list">
+            <li className="taboo-card__list-item">Create New Game</li>
+            <li className="taboo-card__list-item">Join Game</li>
+            <li className="taboo-card__list-item">How to Play</li>
+            <li className="taboo-card__list-item">Submit a Card</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="taboo-card taboo-card--middle">
+        <div className="taboo-card__word-container">
+          <p className="taboo-card__word">Taboo!</p>
+        </div>
+        <div className="taboo-card__list-container">
+          <ul className="taboo-card__list">
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="taboo-card taboo-card--bottom">
+        <div className="taboo-card__word-container">
+          <p className="taboo-card__word">Taboo!</p>
+        </div>
+        <div className="taboo-card__list-container">
+          <ul className="taboo-card__list">
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+            <li className="taboo-card__list-item">Taboo!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export class Home2 extends React.Component {
   constructor(props) {
     super(props)
 
