@@ -1,9 +1,18 @@
 
+// body,
+// #root
+//  {
+//      position:relative;
+//     overflow:hidden; 
+// }
 .wrapper {
     background-image: linear-gradient(to bottom, var(--color-white) 0%, var(--color-white) 50%,
          70%, var(--color-primary) 90%);
     padding: 2rem 2.5rem;
     min-height:100vh;
+    position: relative;
+    overflow:hidden; 
+
 }
 
 .header {
@@ -15,11 +24,14 @@
     text-transform:uppercase;
 }
 
+//For main homescreen only, display larger text.
 .header--large {
     font-size: 6rem;
     text-align: center;
     margin: 1rem 0;
 }
+
+
 
 .subheading {
     font-size: 2.2rem;
@@ -41,8 +53,7 @@
 .taboo-card {
     position: relative;
     background-color: var(--color-primary);
-    margin: 0 auto;
-    width:30rem; 
+    min-width:30rem; 
     padding: 2rem;
     border-radius: 2px;
     box-shadow: 0px .8rem 1rem rgba(0,0,0,.9);
@@ -51,7 +62,7 @@
     z-index: 15;
 
 
-    //Main taboo card on home screen
+    //Main taboo card on home screen, make text and padding larger
     &--home &__word-container &__word {
         font-size: 4rem;
     }
@@ -60,81 +71,76 @@
         padding-top:2rem;
         padding-bottom:2rem;
     }
+
+    &--bottom {    
+        color:  var( --color-tertiary);
+        background-color: currentColor;
+        position: absolute;
+        bottom:13rem;
+        right: 8rem;
+        z-index: 5;
+        transform: rotate(-45deg);
+    }
+
+    &--middle {
+        color:  var( --color-secondary);
+        background-color: currentColor;
+        position: absolute;
+        bottom:12rem;
+        left:7rem;
+        z-index: 10;
+        transform: rotate(45deg)
+    }
+
+    &__word-container
+    {
+        background-color: var(--color-off-white);
+        padding: 1.2rem;
+        text-align: center;   
+        margin-bottom: 1.5rem;
+        border-radius: 2px;
+        color:inherit;
+
+    }
+
+    &__word {
+        font-family: 'Oswald', sans-serif;
+        font-size: 3.5rem;
+        color: inherit;
+        font-weight: 600;
+        text-transform: uppercase;
+    
+    }
+
+    &__list-container {
+        background-color: var(--color-off-white);
+        padding: 1.5rem;
+        text-align: center;  
+        border-radius: 2px;
+    }
+
+    &__list {
+        list-style-type: none;
+
+    }
+
+    &__list-item {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2.5rem;
+        position: relative;
+        padding-bottom:1.5rem;
+    }
+
+
+    &__list-item:after {
+        content:"";
+        display:block;
+        width: 10rem;
+        margin: 0 auto;
+        padding-top:1rem;
+        border-bottom: #C4C4C4 2px solid; 
+    }
 }
 
 
 
-.taboo-card--bottom {    
-    color:  var( --color-tertiary);
-    background-color: currentColor;
-    position: absolute;
-    bottom:15rem;
-    right: 5rem;
-    z-index: 5;
-    transform: rotate(-45deg);
-}
-
-.taboo-card--middle {
-    color:  var( --color-secondary);
-    background-color: currentColor;
-    position: absolute;
-    left:8rem;
-    bottom:12rem;
-    z-index: 10;
-    transform: rotate(45deg)
-
-}
-
-.taboo-card__word-container
- {
-    background-color: var(--color-off-white);
-    padding: 1.2rem;
-    text-align: center;   
-    margin-bottom: 1.5rem;
-    border-radius: 2px;
-    color:inherit;
-
-}
-
-.taboo-card__word {
-    font-family: 'Oswald', sans-serif;
-    font-size: 3.5rem;
-    color: inherit;
-    font-weight: 600;
-    text-transform: uppercase;
-   
-}
-
-.taboo-card__list-container {
-    background-color: var(--color-off-white);
-    padding: 1.5rem;
-    text-align: center;  
-    border-radius: 2px;
-
-
-}
-
-.taboo-card__list {
-    list-style-type: none;
-
-}
-
-.taboo-card__list-item {
-    font-family: 'Oswald', sans-serif;
-    font-size: 2.5rem;
-    position: relative;
-    padding-bottom:1.5rem;
-}
-
-/* .taboo-card__list-item:not(:last-child) { */
-    /* padding-bottom:15px;
-} */
-
-.taboo-card__list-item:after {
-    content:"";
-    display:block;
-    width: 10rem;
-    margin: 0 auto;
-    padding-top:1rem;
-    border-bottom: #C4C4C4 2px solid; 
-}
