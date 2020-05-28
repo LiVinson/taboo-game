@@ -1,6 +1,7 @@
 import React from "react"
 import { Redirect } from "react-router-dom"
 import "./Home.scss"
+import Wrapper from "../../components/Wrapper"
 import Header from "../../components/Header"
 
 import Modal from "../../components/Modal"
@@ -16,54 +17,53 @@ export default function Home() {
       Taboo cards with type property: null, home, middle, or bottom
     */
 
-    <div className="wrapper">
-    <Header homepage={true} />
+    <Wrapper>
+      <Header homepage={true} />
       <main>
-      <div className="taboo-card taboo-card--home">
-        <div className="taboo-card__word-container">
-          <p className="taboo-card__word">Menu</p>
+        <div className="taboo-card taboo-card--home">
+          <div className="taboo-card__word-container">
+            <p className="taboo-card__word">Menu</p>
+          </div>
+          <div className="taboo-card__list-container">
+            <ul className="taboo-card__list">
+              <li className="taboo-card__list-item">Create New Game</li>
+              <li className="taboo-card__list-item">Join Game</li>
+              <li className="taboo-card__list-item">How to Play</li>
+              <li className="taboo-card__list-item">Submit a Card</li>
+            </ul>
+          </div>
         </div>
-        <div className="taboo-card__list-container">
-          <ul className="taboo-card__list">
-            <li className="taboo-card__list-item">Create New Game</li>
-            <li className="taboo-card__list-item">Join Game</li>
-            <li className="taboo-card__list-item">How to Play</li>
-            <li className="taboo-card__list-item">Submit a Card</li>
-          </ul>
-        </div>
-      </div>
 
-      <div className="taboo-card taboo-card--middle">
-        <div className="taboo-card__word-container">
-          <p className="taboo-card__word">Taboo!</p>
+        <div className="taboo-card taboo-card--middle">
+          <div className="taboo-card__word-container">
+            <p className="taboo-card__word">Taboo!</p>
+          </div>
+          <div className="taboo-card__list-container">
+            <ul className="taboo-card__list">
+              <li className="taboo-card__list-item">Taboo!</li>
+              <li className="taboo-card__list-item">Taboo!</li>
+              <li className="taboo-card__list-item">Taboo!</li>
+              <li className="taboo-card__list-item">Taboo!</li>
+            </ul>
+          </div>
         </div>
-        <div className="taboo-card__list-container">
-          <ul className="taboo-card__list">
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-          </ul>
-        </div>
-      </div>
 
-      <div className="taboo-card taboo-card--bottom">
-        <div className="taboo-card__word-container">
-          <p className="taboo-card__word">Taboo!</p>
+        <div className="taboo-card taboo-card--bottom">
+          <div className="taboo-card__word-container">
+            <p className="taboo-card__word">Taboo!</p>
+          </div>
+          <div className="taboo-card__list-container">
+            <ul className="taboo-card__list">
+              <li className="taboo-card__list-item">Taboo!</li>
+              <li className="taboo-card__list-item">Taboo!</li>
+              <li className="taboo-card__list-item">Taboo!</li>
+              <li className="taboo-card__list-item">Taboo!</li>
+            </ul>
+          </div>
         </div>
-        <div className="taboo-card__list-container">
-          <ul className="taboo-card__list">
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-          </ul>
-        </div>
-      </div>
       </main>
       <div className="footer-line"></div>
-
-    </div>
+    </Wrapper>
   )
 }
 
