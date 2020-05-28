@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom"
 import "./Home.scss"
 import Wrapper from "../../components/Wrapper"
 import Header from "../../components/Header"
+import TabooCard from "../../components/TabooCard"
 
 import Modal from "../../components/Modal"
 import JoinForm from "../../components/JoinForm"
@@ -19,50 +20,28 @@ export default function Home() {
 
     <Wrapper>
       <Header homepage={true} />
-      <main>
-        <div className="taboo-card taboo-card--home">
-          <div className="taboo-card__word-container">
-            <p className="taboo-card__word">Menu</p>
-          </div>
-          <div className="taboo-card__list-container">
-            <ul className="taboo-card__list">
-              <li className="taboo-card__list-item">Create New Game</li>
-              <li className="taboo-card__list-item">Join Game</li>
-              <li className="taboo-card__list-item">How to Play</li>
-              <li className="taboo-card__list-item">Submit a Card</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="taboo-card taboo-card--middle">
-          <div className="taboo-card__word-container">
-            <p className="taboo-card__word">Taboo!</p>
-          </div>
-          <div className="taboo-card__list-container">
-            <ul className="taboo-card__list">
-              <li className="taboo-card__list-item">Taboo!</li>
-              <li className="taboo-card__list-item">Taboo!</li>
-              <li className="taboo-card__list-item">Taboo!</li>
-              <li className="taboo-card__list-item">Taboo!</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="taboo-card taboo-card--bottom">
-          <div className="taboo-card__word-container">
-            <p className="taboo-card__word">Taboo!</p>
-          </div>
-          <div className="taboo-card__list-container">
-            <ul className="taboo-card__list">
-              <li className="taboo-card__list-item">Taboo!</li>
-              <li className="taboo-card__list-item">Taboo!</li>
-              <li className="taboo-card__list-item">Taboo!</li>
-              <li className="taboo-card__list-item">Taboo!</li>
-            </ul>
-          </div>
-        </div>
-      </main>
-      <div className="footer-line"></div>
+      
+        <TabooCard
+          type="home"
+          tabooWord="Menu"
+          list={[
+            "Create New Game",
+            "Join Game",
+            "How to Play",
+            "Sumbit a Card",
+          ]}
+        />
+        <TabooCard
+          type="middle"
+          tabooWord="Taboo"
+          list={["Taboo!", "Taboo!", "Taboo!", "Taboo!"]}
+        />
+        <TabooCard
+          tabooWord="Menu"
+          type="bottom"
+          list={["Taboo!", "Taboo!", "Taboo!", "Taboo!"]}
+        />
+        <div className="footer-line"></div>
     </Wrapper>
   )
 }
