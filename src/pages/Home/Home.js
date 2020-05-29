@@ -1,5 +1,5 @@
 import React from "react"
-import { Redirect } from "react-router-dom"
+import { Redirect, Link } from "react-router-dom"
 import "./Home.scss"
 import Wrapper from "../../components/Wrapper"
 import Header from "../../components/Header"
@@ -10,41 +10,21 @@ import JoinForm from "../../components/JoinForm"
 import { createNewCode } from "../../utils/helpers"
 import { createNewGame } from "../../utils/API"
 
-export default function Home() {
-  return (
-    /*Components:
-      Wrapper
-      Header w/ and w/o subheading
-      Taboo cards with type property: null, home, middle, or bottom
-    */
-
-    <Wrapper>
-      <Header homepage={true} />
-      
+export default function Home({props}) {
+  return (    
         <TabooCard
           type="home"
           tabooWord="Menu"
           list={[
-            "Create New Game",
+            <Link to="/create">Create New Game</Link>,
             "Join Game",
             "How to Play",
             "Sumbit a Card",
-          ]}
-        />
-        <TabooCard
-          type="middle"
-          tabooWord="Taboo"
-          list={["Taboo!", "Taboo!", "Taboo!", "Taboo!"]}
-        />
-        <TabooCard
-          tabooWord="Menu"
-          type="bottom"
-          list={["Taboo!", "Taboo!", "Taboo!", "Taboo!"]}
-        />
-        <div className="footer-line"></div>
-    </Wrapper>
+            ]}
+           /> 
   )
 }
+
 
 export class Home2 extends React.Component {
   constructor(props) {
