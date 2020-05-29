@@ -1,11 +1,10 @@
 import React from "react"
-import "./Create.scss"
+import "./CreateGame.scss"
 import TabooCard from "../../components/TabooCard"
 
 
-export default function Create({props}) {
+export default function CreateGame({props}) {
   return (
-
         <TabooCard
           tabooWord="Create New Game"
           list={null}
@@ -15,7 +14,5 @@ export default function Create({props}) {
                 <input/>
             </form>
         </TabooCard>
-
-
   )
 }

@@ -5,7 +5,7 @@ import "./Header.scss"
 export default function Header({ location }){
   const pathname = location.pathname
   let headerLgClassName = null
-  if (["/", "/create", "/join"].includes(pathname)) {
+  if (["/", "/create", "/join", "/rules/setup",  "/rules/0", "/rules/1", "/rules/2", "/rules/3", "/rules/4", ].includes(pathname)) {
     headerLgClassName="header--large"
   }
     return (

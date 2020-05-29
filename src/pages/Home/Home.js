@@ -1,8 +1,6 @@
 import React from "react"
 import { Redirect, Link } from "react-router-dom"
 import "./Home.scss"
-import Wrapper from "../../components/Wrapper"
-import Header from "../../components/Header"
 import TabooCard from "../../components/TabooCard"
 
 import Modal from "../../components/Modal"
@@ -17,8 +15,8 @@ export default function Home({props}) {
           tabooWord="Menu"
           list={[
             <Link to="/create">Create New Game</Link>,
-            "Join Game",
-            "How to Play",
+            <Link to="/join">Join Game</Link>,
+            <Link to="/rules/0">How to Play</Link>,
             "Sumbit a Card",
             ]}
            /> 

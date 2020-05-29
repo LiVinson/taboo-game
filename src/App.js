@@ -1,13 +1,18 @@
 import React from "react"
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 import "./App.scss"
-import Container from "./components/Container"
-import Navbar from "./components/Navbar"
+
 import Home from "./pages/Home"
-import Create from "./pages/Create"
+import CreateGame from "./pages/CreateGame"
+import JoinGame from "./pages/JoinGame"
+import Rules from "./pages/Rules"
+
+
 import New from "./pages/New"
 import Game from "./pages/PlayGame"
 import EndGame from "./pages/EndGame"
+
+
 
 import Wrapper from "./components/Wrapper"
 import Header from "./components/Header"
@@ -20,7 +25,11 @@ class App extends React.Component {
                 <Route component={Header}  />
                 <Switch>
                   <Route path={"/"} exact component={Home}  />
-                  <Route path="/create" component={Create} />
+                  <Route path="/create" component={CreateGame} />
+                  <Route path="/join" component={JoinGame} />
+                  <Route path="/rules/:topic" component={Rules} />
+                  
+
                   <Route path="/new/:gamecode/:playerId" component={New} />
                   <Route path="/play/:gamecode/:playerId" component={Game} />
                   <Route path="/end/:gamecode/:playerId" component={EndGame}/>
