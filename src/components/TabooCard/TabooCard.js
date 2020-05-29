@@ -1,7 +1,7 @@
 import React from "react"
 import "./TabooCard.scss"
 
-export default function TabooCard({ type, tabooWord, list }) {
+export default function TabooCard({ type, tabooWord, list, children }) {
   let secondaryClass = null
   if (type) {
     secondaryClass = `taboo-card--${type}`
@@ -12,9 +12,12 @@ export default function TabooCard({ type, tabooWord, list }) {
           <p className="taboo-card__word">{tabooWord}</p>
         </div>
         <div className="taboo-card__list-container">
+        {children ? children :
           <ul className="taboo-card__list">
-            {list.map((item,index) => <li key={index}className="taboo-card__list-item">{item}</li>)}
-          </ul>
+          {list.map((item,index) => <li key={index}className="taboo-card__list-item">{item}</li>)}
+        </ul>
+        }
+
         </div>
       </div>
 
