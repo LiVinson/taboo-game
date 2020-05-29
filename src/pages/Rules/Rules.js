@@ -6,10 +6,21 @@ import rules from "./rulesText"
 export default function Rules({ match }) {
   const { topic } = match.params
   console.log(topic)
+
+  const buttonObj={
+    left: {
+      text: "Back",
+      handleClick: () => {console.log("Back!")}
+    },
+    right: {
+      text: "Next",
+      handleClick: () => {console.log("Next!")}
+    }
+  }
   return (
     <TabooCard
          tabooWord="How to Play" list={null}
-         buttons={true}
+         buttonObj={buttonObj}
     >
       <RulesText topic={topic} />
     </TabooCard>

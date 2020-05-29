@@ -1,5 +1,5 @@
 import React from "react"
-import { Redirect, Link } from "react-router-dom"
+import { Redirect, NavLink } from "react-router-dom"
 import "./Home.scss"
 import TabooCard from "../../components/TabooCard"
 
@@ -9,14 +9,16 @@ import { createNewCode } from "../../utils/helpers"
 import { createNewGame } from "../../utils/API"
 
 export default function Home({props}) {
+
+
   return (    
         <TabooCard
           type="home"
           tabooWord="Menu"
           list={[
-            <Link to="/create">Create New Game</Link>,
-            <Link to="/join">Join Game</Link>,
-            <Link to="/rules/0">How to Play</Link>,
+            <NavLink className="taboo-card__link" to="/create">Create New Game</NavLink>,
+            <NavLink className="taboo-card__link" to="/join">Join Game</NavLink>,
+            <NavLink className="taboo-card__link" to="/rules/0">How to Play</NavLink>,
             "Sumbit a Card",
             ]}
            /> 

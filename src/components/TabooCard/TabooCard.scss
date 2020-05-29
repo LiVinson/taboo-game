@@ -91,4 +91,15 @@
         padding-top:1rem;
         border-bottom: #C4C4C4 2px solid; 
     }
+
+    &__link:link,
+    &__link:visited {
+        color: var(--color-primary);
+        text-decoration: none;
+        text-shadow: 0px .4rem .4rem rgba(0,0,0,.7);
+    }
+
+    &__link:focus {
+        text-shadow: 0px .2rem .4rem rgba(0,0,0,.7);
+    }
 }
