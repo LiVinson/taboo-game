@@ -1,14 +1,8 @@
 import React from "react"
-// import TabooCardButton from "../TabooCardButton"
 
-export default function ButtonGroup({ buttonInfo=false }) {
-
-    if (!buttonInfo) {
-        return null
-    }
-    
-    const { handleClick:leftHandleClick, text:leftText} = buttonInfo.left
-    const { handleClick:rightHandleClick, text:rightText} = buttonInfo.right
+export default function ButtonGroup(buttons) {       
+    const { handleClick:leftHandleClick, text:leftText} = buttons[0]
+    const { handleClick:rightHandleClick, text:rightText} = buttons[1]
 
     return (
         <div>

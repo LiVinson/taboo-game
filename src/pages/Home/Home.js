@@ -8,10 +8,11 @@ import JoinForm from "../../components/JoinForm"
 import { createNewCode } from "../../utils/helpers"
 import { createNewGame } from "../../utils/API"
 
-export default function Home({props}) {
+export default function Home() {
 
 
   return (    
+    //Main menu taboo card.
         <TabooCard
           type="home"
           tabooWord="Menu"
@@ -19,7 +20,7 @@ export default function Home({props}) {
             <NavLink className="taboo-card__link" to="/create">Create New Game</NavLink>,
             <NavLink className="taboo-card__link" to="/join">Join Game</NavLink>,
             <NavLink className="taboo-card__link" to="/rules/0">How to Play</NavLink>,
-            "Sumbit a Card",
+            "Submit a Card",
             ]}
            /> 
   )
