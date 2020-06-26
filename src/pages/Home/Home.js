@@ -3,40 +3,31 @@ import { Redirect, NavLink, Switch, Route } from "react-router-dom"
 import "./Home.scss"
 import TabooCard from "../../components/TabooCard"
 import MainMenu from "../../components/MainMenu"
+import CreateGame from "../../components/CreateGame"
+import JoinGame from "../../components/JoinGame"
+import Rules from "../../components/Rules"
+
 
 import Modal from "../../components/Modal"
 import JoinForm from "../../components/JoinForm"
 import { createNewCode } from "../../utils/helpers"
 import { createNewGame } from "../../utils/API"
 
-export default function Home(props) {
+export default function Home({ match }) {
 
-  //return series of routes based on current url
-  const path = props.match.path
+  const { path }  = match
+    //return one os series of routes based on current home path
+
 return (
   <Switch>
-    <Route path={path} component={MainMenu} />
+    <Route path={path} exact component={MainMenu} />
+    <Route path={`${path}/create`} component={CreateGame} />
+    <Route path={`${path}/join`} component={JoinGame} />
+    <Route path={`${path}/rules/:topic`} component={Rules} />
   </Switch>
 )
 
-
-
-
-  // return (    
-  //   //Main menu taboo card.
-  //       <TabooCard
-  //         type="home"
-  //         tabooWord="Menu"
-  //         list={[
-  //           <NavLink className="taboo-card__link" to="/create">Create New Game</NavLink>,
-  //           <NavLink className="taboo-card__link" to="/join">Join Game</NavLink>,
-  //           <NavLink className="taboo-card__link" to="/rules/0">How to Play</NavLink>,
-  //           "Submit a Card",
-  //           ]}
-  //          /> 
-  // )
 }
-
 
 export class Home2 extends React.Component {
   constructor(props) {

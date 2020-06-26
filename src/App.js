@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import "./App.scss"
 
 import Home from "./pages/Home"
-import CreateGame from "./pages/CreateGame"
-import JoinGame from "./pages/JoinGame"
-import Rules from "./pages/Rules"
+// import CreateGame from "./pages/CreateGame"
+// import JoinGame from "./pages/JoinGame"
+// import Rules from "./pages/Rules"
 
 
 import New from "./pages/New"
@@ -25,9 +25,7 @@ class App extends React.Component {
                 <Route component={Header}  />
                 <Switch>
                   <Route path="/home" component={Home}  />
-                  <Route path="/create" component={CreateGame} />
-                  <Route path="/join" component={JoinGame} />
-                  <Route path="/rules/:topic" component={Rules} />
+
                   
 
                   <Route path="/new/:gamecode/:playerId" component={New} />

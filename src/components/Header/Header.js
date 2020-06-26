@@ -11,7 +11,7 @@ export default function Header({ location }){
     return (
         <header>
         <h1 className={`header ${headerLgClassName}`}>Taboo!</h1>
-        {pathname === "/" ? 
+        {pathname === "/home" ? 
             <p className="subheading">
             The team game that’s all about what you{" "}
             <span className="subheading__focus-text">say,</span> and what you{" "}

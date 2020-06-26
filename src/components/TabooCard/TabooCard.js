@@ -14,12 +14,16 @@ export default function TabooCard({
   tabooWord,
   list,
   buttons,
-  children  
+  children,
+    
 }) {
   let secondaryClass = null
+  //types: home, middle, bottom
   if (type) {
     secondaryClass = `taboo-card--${type}`
   }
+
+  
   return (
     //Wraps entire card
     <div className={`taboo-card ${secondaryClass}`}>

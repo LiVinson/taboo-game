@@ -11,7 +11,9 @@
     //Used for inheritance on child components
     color: var(--color-primary-light);
     
-
+    &--home {
+        margin-top: 6rem;
+    }
 
     //Main taboo card on home screen, make text and padding larger
     &--home &__word-container &__word {
