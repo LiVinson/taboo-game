@@ -1,11 +1,13 @@
 import React from "react"
+import PropTypes from "prop-types"
 import "./Header.scss"
 
 
 export default function Header({ location }){
   const pathname = location.pathname
   let headerLgClassName = null
-  if (["/", "/home", "/create", "/join", "/rules/setup",  "/rules/0", "/rules/1", "/rules/2", "/rules/3", "/rules/4", ].includes(pathname)) {
+  //If on one of the home routes, make header larger
+  if (pathname.includes("home")) {
     headerLgClassName="header--large"
   }
     return (
@@ -20,4 +22,8 @@ export default function Header({ location }){
         } 
       </header>
     )
+}
+
+Header.propTypes = {
+  location: PropTypes.object.isRequired
 }

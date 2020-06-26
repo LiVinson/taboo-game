@@ -1,6 +1,6 @@
 import React from "react"
 import TabooCard from "./TabooCard"
-import ButtonGroup from "../ButtonGroup"
+import ButtonGroup from "components/ButtonGroup"
 import { shallow, mount } from "enzyme"
 
 it("renders div with 'type' class of prop provided ", () => {

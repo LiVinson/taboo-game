@@ -1,7 +1,7 @@
 import React from "react"
 import "./TabooCard.scss"
-import ButtonGroup from "../ButtonGroup"
-
+import ButtonGroup from "components/ButtonGroup"
+import PropTypes from "prop-types"
 /*
 Props:
    type(Used for styling cards differently)
@@ -21,9 +21,7 @@ export default function TabooCard({
   //types: home, middle, bottom
   if (type) {
     secondaryClass = `taboo-card--${type}`
-  }
-
-  
+  }  
   return (
     //Wraps entire card
     <div className={`taboo-card ${secondaryClass}`}>
@@ -50,32 +48,12 @@ export default function TabooCard({
   )
 }
 
-/*
-
-  <div className={`taboo-card ${secondaryClass}`}>
-        <div className="taboo-card__word-container">
-          <p className="taboo-card__word">Taboo!</p>
-        </div>
-        <div className="taboo-card__list-container">
-          <ul className="taboo-card__list">
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-          </ul>
-        </div>
-      </div>
-
-      <div className={`taboo-card ${secondaryClass}`}>
-        <div className="taboo-card__word-container">
-          <p className="taboo-card__word">Taboo!</p>
-        </div>
-        <div className="taboo-card__list-container">
-          <ul className="taboo-card__list">
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-            <li className="taboo-card__list-item">Taboo!</li>
-          </ul>
-        </div>
-      </div>*/
+TabooCard.propTypes = {
+  type: PropTypes.string,
+  tabooWord: PropTypes.string.isRequired,
+  list: PropTypes.array,
+  buttons: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    click: PropTypes.func.isRequired
+  }))
+}

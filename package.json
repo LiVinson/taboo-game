@@ -40,6 +40,7 @@
     ]
   },
   "devDependencies": {
+    "prop-types": "^15.7.2",
     "react-test-renderer": "^16.13.1"
   }
 }

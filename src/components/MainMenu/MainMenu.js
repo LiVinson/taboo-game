@@ -1,9 +1,8 @@
 import React from "react"
-import {  NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
+import PropTypes from "prop-types"
 import "./MainMenu.scss"
-import TabooCard from "../../components/TabooCard"
-
-
+import TabooCard from "components/TabooCard"
 
 export default function MainMenu({ match }) {
     const { path } = match
@@ -20,4 +19,8 @@ export default function MainMenu({ match }) {
             ]}
            /> 
   )
+}
+
+MainMenu.propTypes = {
+  match: PropTypes.object.isRequired
 }

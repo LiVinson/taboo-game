@@ -1,6 +1,7 @@
 import React from "react"
-import TabooCard from "../../components/TabooCard"
 import { Redirect } from "react-router-dom"
+import PropTypes from "prop-types"
+import TabooCard from "components/TabooCard"
 import rules from "./rulesText"
 
 export default function Rules({ match }) {
@@ -29,15 +30,19 @@ export default function Rules({ match }) {
       buttons={buttonInfo}
       type="home"
     >
-      <RulesText topic={topic} />
+      <RulesText topicId={parseInt(topic)} />
     </TabooCard>
   )
 }
 
-function RulesText({ topic }) {
-  console.log(topic)
+Rules.propTypes = {
+  match: PropTypes.object.isRequired
+}
 
-  const rulesInfo = rules[parseInt(topic)]
+function RulesText({ topicId }) {
+  console.log(topicId)
+
+  const rulesInfo = rules[topicId]
 
   if (rulesInfo) {
     return (
@@ -51,4 +56,8 @@ function RulesText({ topic }) {
   } else {
     return <Redirect to="/404" />
   }
+}
+
+RulesText.propTypes = {
+  topicId: PropTypes.number.isRequired
 }

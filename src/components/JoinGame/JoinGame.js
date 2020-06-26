@@ -1,5 +1,5 @@
 import React from "react"
-import TabooCard from "../../components/TabooCard"
+import TabooCard from "components/TabooCard"
 
 export default function JoinGame() {
   return (

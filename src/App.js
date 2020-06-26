@@ -1,41 +1,38 @@
 import React from "react"
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
-import "./App.scss"
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom"
+import "App.scss"
 
-import Home from "./pages/Home"
-// import CreateGame from "./pages/CreateGame"
-// import JoinGame from "./pages/JoinGame"
-// import Rules from "./pages/Rules"
+import Home from "pages/Home"
+import New from "pages/New"
+import Game from "pages/PlayGame"
+import EndGame from "pages/EndGame"
+import Wrapper from "components/Wrapper"
+import Header from "components/Header"
+import LayeredCards from "components/LayeredCards"
 
-
-import New from "./pages/New"
-import Game from "./pages/PlayGame"
-import EndGame from "./pages/EndGame"
-
-
-
-import Wrapper from "./components/Wrapper"
-import Header from "./components/Header"
-import LayeredCards from "./components/LayeredCards"
 class App extends React.Component {
   render() {
     return (
       <Router>
-          <Wrapper>         
-                <Route component={Header}  />
-                <Switch>
-                  <Route path="/home" component={Home}  />
-
-                  
-
-                  <Route path="/new/:gamecode/:playerId" component={New} />
-                  <Route path="/play/:gamecode/:playerId" component={Game} />
-                  <Route path="/end/:gamecode/:playerId" component={EndGame}/>
-              </Switch>
-          <LayeredCards/>
+        <Wrapper>
+          <Route component={Header} />
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
+            <Route path="/home" component={Home} />
+            <Route path="/new/:gamecode/:playerId" component={New} />
+            <Route path="/play/:gamecode/:playerId" component={Game} />
+            <Route path="/end/:gamecode/:playerId" component={EndGame} />
+          </Switch>
+          <LayeredCards />
           <div className="footer-line"></div>
         </Wrapper>
-
       </Router>
     )
   }
