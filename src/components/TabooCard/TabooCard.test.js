@@ -1,13 +1,58 @@
-//Returns a 'card' with a taboo word, a body, and sometimes a set of buttons.
+import React from "react"
+import TabooCard from "./TabooCard"
+import ButtonGroup from "../ButtonGroup"
+import { shallow, mount } from "enzyme"
 
-//Taboo Tests
+it("renders div with 'type' class of prop provided ", () => {
+  const props = {
+    type: "home",
+    tabooWord: "taboo",
+    list: ["word1", "word2", "word3"],
 
-//When a children prop is passed, renders the children inside .taboo-card__list-container
+  }
+  const TabooCardComponent = shallow(<TabooCard {...props} />)
+  expect(TabooCardComponent.hasClass("taboo-card--home"))
+})
 
-//When a children prop is not passed, renders the list component with # of list items = length of list
+it("Renders children prop if it is provided", () => {
+  const props = {
+    type: "home",
+    tabooWord: "taboo",
 
-// If a buttons prop is provided, ButtonGroup component is rendered.
+  }
 
-//If buttons prop is not provided, no buttons are rendered
+  const TabooCardComponent = shallow(
+    <TabooCard {...props}>
+      <h1>I am a child property</h1>
+    </TabooCard>
+  )
+  expect(TabooCardComponent.contains(<h1>I am a child property</h1>)).toEqual(true)
+})
 
-//If type is provided, class of .taboo-card--${type} is renderd 
+it("Renders list prop if children prop is not passed", () => {
+    const props = {
+      type: "home",
+      tabooWord: "taboo",
+      list: ["word1", "word2", "word3"],
+ 
+    }
+  
+    const TabooCardComponent = mount(<TabooCard {...props} />)
+    expect(TabooCardComponent.prop("children")).toEqual(undefined)
+    
+    expect(TabooCardComponent.find("ul.taboo-card__list").children()).toHaveLength(props.list.length)
+
+  })
+
+  it("renders ButtonGroup if button prop is provided", () => {
+    const props = {
+        type: "home",
+        tabooWord: "taboo",
+        list: ["word1", "word2", "word3"],
+        buttons: [{text: "Back", handleClick: jest.fn()}, {text: "Next", handleClick: jest.fn()}]
+      }
+      const TabooCardComponent = mount(<TabooCard {...props}/>)
+      expect(TabooCardComponent.find(ButtonGroup)).toHaveLength(1)
+  })
+
+

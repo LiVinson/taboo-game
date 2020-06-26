@@ -43,14 +43,4 @@ class App extends React.Component {
   }
 }
 
-/*
-
-Next Steps:
-- Before generating game code, ask for username.
-- Create player object.
-- Generate game code and attach listner (done)
-- If waiting is empty, add player as unassigned and set as host.
-- Save player's id in state.
-- On click of start game: assign players to a team and set team name.
-*/
 export default App

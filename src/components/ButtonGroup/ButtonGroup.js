@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function ButtonGroup(buttons) {       
+export default function ButtonGroup({ buttons }) {       
     const { handleClick:leftHandleClick, text:leftText} = buttons[0]
     const { handleClick:rightHandleClick, text:rightText} = buttons[1]
 

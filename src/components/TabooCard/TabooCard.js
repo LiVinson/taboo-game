@@ -13,8 +13,8 @@ export default function TabooCard({
   type,
   tabooWord,
   list,
-  children,
   buttons,
+  children  
 }) {
   let secondaryClass = null
   if (type) {
@@ -40,7 +40,7 @@ export default function TabooCard({
             ))}
           </ul>
         )}
-        { buttons ? <ButtonGroup buttonInfo={buttons} /> : null}
+        { buttons ? <ButtonGroup buttons={buttons} /> : null}
       </div>
     </div>
   )
