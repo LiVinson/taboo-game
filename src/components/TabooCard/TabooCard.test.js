@@ -2,6 +2,19 @@ import React from "react"
 import TabooCard from "./TabooCard"
 import ButtonGroup from "components/ButtonGroup"
 import { shallow, mount } from "enzyme"
+import renderer from "react-test-renderer"
+
+it("renders correctly", ()=> {
+  const props = {
+    type: "home",
+    tabooWord: "taboo",
+    list: ["word1", "word2", "word3"],
+
+  }
+  const TabooCardComponent = renderer.create(<TabooCard {...props} />).toJSON()
+
+  expect(TabooCardComponent).toMatchSnapshot()
+})
 
 it("renders div with 'type' class of prop provided ", () => {
   const props = {

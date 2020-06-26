@@ -53,7 +53,7 @@ TabooCard.propTypes = {
   tabooWord: PropTypes.string.isRequired,
   list: PropTypes.array,
   buttons: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    click: PropTypes.func.isRequired
+    type: PropTypes.string,
+    click: PropTypes.func
   }))
 }
