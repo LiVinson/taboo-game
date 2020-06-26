@@ -24,7 +24,7 @@ class App extends React.Component {
           <Wrapper>         
                 <Route component={Header}  />
                 <Switch>
-                  <Route path={"/"} exact component={Home}  />
+                  <Route path="/home" component={Home}  />
                   <Route path="/create" component={CreateGame} />
                   <Route path="/join" component={JoinGame} />
                   <Route path="/rules/:topic" component={Rules} />

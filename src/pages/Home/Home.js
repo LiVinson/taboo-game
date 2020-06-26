@@ -1,29 +1,40 @@
 import React from "react"
-import { Redirect, NavLink } from "react-router-dom"
+import { Redirect, NavLink, Switch, Route } from "react-router-dom"
 import "./Home.scss"
 import TabooCard from "../../components/TabooCard"
+import MainMenu from "../../components/MainMenu"
 
 import Modal from "../../components/Modal"
 import JoinForm from "../../components/JoinForm"
 import { createNewCode } from "../../utils/helpers"
 import { createNewGame } from "../../utils/API"
 
-export default function Home() {
+export default function Home(props) {
+
+  //return series of routes based on current url
+  const path = props.match.path
+return (
+  <Switch>
+    <Route path={path} component={MainMenu} />
+  </Switch>
+)
 
 
-  return (    
-    //Main menu taboo card.
-        <TabooCard
-          type="home"
-          tabooWord="Menu"
-          list={[
-            <NavLink className="taboo-card__link" to="/create">Create New Game</NavLink>,
-            <NavLink className="taboo-card__link" to="/join">Join Game</NavLink>,
-            <NavLink className="taboo-card__link" to="/rules/0">How to Play</NavLink>,
-            "Submit a Card",
-            ]}
-           /> 
-  )
+
+
+  // return (    
+  //   //Main menu taboo card.
+  //       <TabooCard
+  //         type="home"
+  //         tabooWord="Menu"
+  //         list={[
+  //           <NavLink className="taboo-card__link" to="/create">Create New Game</NavLink>,
+  //           <NavLink className="taboo-card__link" to="/join">Join Game</NavLink>,
+  //           <NavLink className="taboo-card__link" to="/rules/0">How to Play</NavLink>,
+  //           "Submit a Card",
+  //           ]}
+  //          /> 
+  // )
 }
 
 
