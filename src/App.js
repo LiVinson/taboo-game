@@ -8,9 +8,9 @@ import {
 import "App.scss"
 
 import Home from "pages/Home"
-import New from "pages/New"
-import Game from "pages/PlayGame"
-import EndGame from "pages/EndGame"
+// import New from "pages/New"
+// import Game from "pages/PlayGame"
+// import EndGame from "pages/EndGame"
 import Wrapper from "components/Wrapper"
 import Header from "components/Header"
 import LayeredCards from "components/LayeredCards"
@@ -26,9 +26,13 @@ class App extends React.Component {
               <Redirect to="/home" />
             </Route>
             <Route path="/home" component={Home} />
-            <Route path="/new/:gamecode/:playerId" component={New} />
+            {/*
+                        <Route path="/new/:gamecode/:playerId" component={New} />
             <Route path="/play/:gamecode/:playerId" component={Game} />
             <Route path="/end/:gamecode/:playerId" component={EndGame} />
+            
+            */}
+
           </Switch>
           <LayeredCards />
           <div className="footer-line"></div>

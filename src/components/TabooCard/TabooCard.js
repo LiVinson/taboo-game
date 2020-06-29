@@ -1,6 +1,6 @@
 import React from "react"
 import "./TabooCard.scss"
-import ButtonGroup from "components/ButtonGroup"
+import ButtonContainer from "components/ButtonContainer"
 import PropTypes from "prop-types"
 /*
 Props:
@@ -24,7 +24,7 @@ export default function TabooCard({
   }  
   return (
     //Wraps entire card
-    <div className={`taboo-card ${secondaryClass}`}>
+    <div className={`taboo-card ${secondaryClass ? secondaryClass: ""}`}>
       {/* Contains taboo word*/}
       <div className="taboo-card__word-container">
         <p className="taboo-card__word">{tabooWord}</p>
@@ -42,8 +42,9 @@ export default function TabooCard({
             ))}
           </ul>
         )}
-        { buttons ? <ButtonGroup buttons={buttons} /> : null}
       </div>
+      { buttons ? <ButtonContainer buttons={buttons} /> : null}
+
     </div>
   )
 }

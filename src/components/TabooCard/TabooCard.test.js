@@ -1,6 +1,6 @@
 import React from "react"
 import TabooCard from "./TabooCard"
-import ButtonGroup from "components/ButtonGroup"
+import ButtonContainer from "components/ButtonContainer"
 import { shallow, mount } from "enzyme"
 import renderer from "react-test-renderer"
 
@@ -57,7 +57,7 @@ it("Renders list prop if children prop is not passed", () => {
 
   })
 
-  it("renders ButtonGroup if button prop is provided", () => {
+  it("renders ButtonContainer if button prop is provided", () => {
     const props = {
         type: "home",
         tabooWord: "taboo",
@@ -65,7 +65,7 @@ it("Renders list prop if children prop is not passed", () => {
         buttons: [{text: "Back", handleClick: jest.fn()}, {text: "Next", handleClick: jest.fn()}]
       }
       const TabooCardComponent = mount(<TabooCard {...props}/>)
-      expect(TabooCardComponent.find(ButtonGroup)).toHaveLength(1)
+      expect(TabooCardComponent.find(ButtonContainer)).toHaveLength(1)
   })
 
 

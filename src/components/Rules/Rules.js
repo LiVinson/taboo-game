@@ -4,46 +4,59 @@ import PropTypes from "prop-types"
 import TabooCard from "components/TabooCard"
 import rules from "./rulesText"
 
-export default function Rules({ match }) {
-  //A number that determines index of rule to display
-  const { topic } = match.params
-  console.log(topic)
+export default class Rules extends React.Component {
+  displayPreviousRule = () => {
+    const currentTopicId = parseInt(this.props.match.params.topic)
+    if (currentTopicId > 0) {
+      this.props.history.push(`/home/rules/${currentTopicId - 1}`)
+    } else {
+      this.props.history.push("/home")
+    }
+  }
 
-  const buttonInfo = [
-    {
-      text: "Back",
-      handleClick: () => {
-        console.log("Back!")
+  displayNextRule = () => {
+    const currentTopicId = parseInt(this.props.match.params.topic)
+    if (currentTopicId < rules.length - 1) {
+      this.props.history.push(`/home/rules/${currentTopicId + 1}`)
+    } else {
+      this.props.history.push("/home")
+    }
+  }
+
+  render() {
+    const currentTopicId = parseInt(this.props.match.params.topic)
+    const ruleBtns = [
+      {
+        text: currentTopicId > 0 ? "Back" : "Close",
+        handleClick: this.displayPreviousRule,
       },
-    },
-    {
-      text: "Next",
-      handleClick: () => {
-        console.log("Next!")
+      {
+        text: currentTopicId < rules.length ? "Next" : "Close",
+        handleClick: this.displayNextRule,
+        type:"primary-color"
       },
-    },
-  ]
-  return (
-    <TabooCard
-      tabooWord="How to Play"
-      list={null}
-      buttons={buttonInfo}
-      type="home"
-    >
-      <RulesText topicId={parseInt(topic)} />
-    </TabooCard>
-  )
+    ]
+
+    return (
+      <TabooCard
+        tabooWord="How to Play"
+        list={null}
+        buttons={ruleBtns}
+        type="home"
+      >
+        <RulesText topicId={currentTopicId} />
+      </TabooCard>
+    )
+  }
 }
 
 Rules.propTypes = {
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 }
 
 function RulesText({ topicId }) {
-  console.log(topicId)
-
   const rulesInfo = rules[topicId]
-
   if (rulesInfo) {
     return (
       <React.Fragment>
@@ -59,5 +72,5 @@ function RulesText({ topicId }) {
 }
 
 RulesText.propTypes = {
-  topicId: PropTypes.number.isRequired
+  topicId: PropTypes.number.isRequired,
 }
