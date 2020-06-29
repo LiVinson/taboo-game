@@ -20,7 +20,7 @@
     font-size: 2.2rem;
     text-align: center;
     width: 30rem;
-    margin: 0 auto 6rem;
+    margin: 0 auto;
     color: var( --color-gray-dark-1);
 
     font-weight: 400;
@@ -29,5 +29,5 @@
 }
 
 .subheading__focus-text {
-    color: var(--color-primary-light);
+    color: var(--color-primary--light);
 }

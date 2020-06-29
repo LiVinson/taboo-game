@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders large header correctly 1`] = `
+<header>
+  <h1
+    className="header header--large"
+  >
+    Taboo!
+  </h1>
+  <h3
+    className="subheading"
+  >
+    The team game that’s all about what you
+     
+    <span
+      className="subheading__focus-text"
+    >
+      say,
+    </span>
+     and what you
+     
+    <span
+      className="subheading__focus-text"
+    >
+      don’t!
+    </span>
+  </h3>
+</header>
+`;
+
+exports[`Renders regular header correctly 1`] = `
+<header>
+  <h1
+    className="header null"
+  >
+    Taboo!
+  </h1>
+</header>
+`;

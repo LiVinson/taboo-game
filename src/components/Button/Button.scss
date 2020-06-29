@@ -1,0 +1,27 @@
+.button {
+    border:none;
+    color: var(--color-primary);
+    background-color: var(--color-off-white);
+    font-size:2rem;
+    width:47%;
+    padding: 1rem 0rem;
+
+
+    &--lg {
+
+    }
+
+    &--primary-color {
+        color: var(--color-off-white);
+        background-color: var(--color-primary--light);
+
+
+        &--lg {
+
+        }
+    }
+
+
+  
+
+}

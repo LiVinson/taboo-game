@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="taboo-card taboo-card--home"
+>
+  <div
+    className="taboo-card__word-container"
+  >
+    <p
+      className="taboo-card__word"
+    >
+      taboo
+    </p>
+  </div>
+  <div
+    className="taboo-card__list-container"
+  >
+    <ul
+      className="taboo-card__list"
+    >
+      <li
+        className="taboo-card__list-item"
+      >
+        word1
+      </li>
+      <li
+        className="taboo-card__list-item"
+      >
+        word2
+      </li>
+      <li
+        className="taboo-card__list-item"
+      >
+        word3
+      </li>
+    </ul>
+  </div>
+</div>
+`;

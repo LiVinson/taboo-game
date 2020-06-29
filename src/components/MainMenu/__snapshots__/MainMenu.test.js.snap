@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="taboo-card taboo-card--home"
+>
+  <div
+    className="taboo-card__word-container"
+  >
+    <p
+      className="taboo-card__word"
+    >
+      Menu
+    </p>
+  </div>
+  <div
+    className="taboo-card__list-container"
+  >
+    <ul
+      className="taboo-card__list"
+    >
+      <li
+        className="taboo-card__list-item"
+      >
+        <a
+          aria-current={null}
+          className="taboo-card__link"
+          href="/home/create"
+          onClick={[Function]}
+        >
+          Create New Game
+        </a>
+      </li>
+      <li
+        className="taboo-card__list-item"
+      >
+        <a
+          aria-current={null}
+          className="taboo-card__link"
+          href="/home/join"
+          onClick={[Function]}
+        >
+          Join Game
+        </a>
+      </li>
+      <li
+        className="taboo-card__list-item"
+      >
+        <a
+          aria-current={null}
+          className="taboo-card__link"
+          href="/home/rules/0"
+          onClick={[Function]}
+        >
+          How to Play
+        </a>
+      </li>
+      <li
+        className="taboo-card__list-item"
+      >
+        Submit a Card
+      </li>
+    </ul>
+  </div>
+</div>
+`;

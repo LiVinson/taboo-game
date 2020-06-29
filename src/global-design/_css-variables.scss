@@ -1,3 +1,5 @@
+//Used for global variables
+
 //--------------COLORS------------
 
 :root {
@@ -5,9 +7,12 @@
     --color-secondary: #ee5b2c;
     --color-tertiary: #a23b72;
 
-    --color-primary-light: #1982C4;
+    --color-primary--light: #58b1e9;
 
     --color-white: #fff;
     --color-off-white: #f7f9f9;
     --color-gray-dark-1: #757575;
+
+    --font-family--display: 'Oswald', sans-serif;
+    --font-family--text: 'Roboto', "Arial"
 }
