@@ -6,7 +6,7 @@ import TabooCard from "components/TabooCard"
 export default function CreateGame(props) {
   return (
         <TabooCard
-          tabooWord="Create New Game"
+          tabooWord="New Game"
           list={null}
           type="home"
            > 
