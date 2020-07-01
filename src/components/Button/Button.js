@@ -1,10 +1,13 @@
 import React from "react"
 import "./Button.scss"
 
+//Takes in object of properties passed down. Typically includes type, onClick, text, and any other required attributes
+const Button = (props) => {
+  const btnProperties = {
+    ...props,
+    className: `button ${props.type ? "button--" + props.type : ""}`,
+  }
 
-const Button = ({text, handleClick, type}) => {
-
-
-  return <button className={`button ${type ? "button--"+type: ""}`} onClick={handleClick}>{text}</button>
+  return <button {...btnProperties}>{props.text}</button>
 }
 export default Button

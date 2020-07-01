@@ -9,8 +9,8 @@ export default function ButtonContainer({ buttons }) {
   return (
     <div className="btnContainer">
       {buttons.map((buttonInfo, index) => {
-        const { text, handleClick, type } = buttonInfo
-        return <Button key={index} text={text} handleClick={handleClick} type={type ? type : null}/> })
+        
+        return <Button key={index} {...buttonInfo}/> })
       }
 
     </div>
