@@ -5,22 +5,29 @@ import "./MainMenu.scss"
 import TabooCard from "components/TabooCard"
 
 export default function MainMenu({ match }) {
-    const { path } = match
-  return (    
-    //Main menu taboo card.
-        <TabooCard
-          type="home"
-          tabooWord="Menu"
-          list={[
-            <NavLink className="taboo-card__link" to={`${path}/create`}>Create New Game</NavLink>,
-            <NavLink className="taboo-card__link" to={`${path}/join`}>Join Game</NavLink>,
-            <NavLink className="taboo-card__link" to={`${path}/rules/0`}>How to Play</NavLink>,
-            "Submit a Card",
-            ]}
-           /> 
-  )
+  const { path } = match
+  //Main menu taboo card.
+  const cardInfo = {
+    type: "home",
+    tabooWord: "Menu",
+    list: [
+      <NavLink className="taboo-card__link" to={`${path}/create`}>
+        Create New Game
+      </NavLink>,
+      <NavLink className="taboo-card__link" to={`${path}/join`}>
+        Join Game
+      </NavLink>,
+      <NavLink className="taboo-card__link" to={`${path}/rules/0`}>
+        How to Play
+      </NavLink>,
+      <NavLink className="taboo-card__link" to="/submit">
+        Submit a Card
+      </NavLink>,
+    ],
+  }
+  return <TabooCard {...cardInfo} />
 }
 
 MainMenu.propTypes = {
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
 }
