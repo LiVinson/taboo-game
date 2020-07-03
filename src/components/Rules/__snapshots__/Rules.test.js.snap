@@ -28,13 +28,16 @@ exports[`renders correctly 1`] = `
   >
     <button
       className="button "
-      onClick={[Function]}
+      handleClick={[Function]}
+      text="Close"
     >
       Close
     </button>
     <button
       className="button button--primary-color"
-      onClick={[Function]}
+      handleClick={[Function]}
+      text="Next"
+      type="primary-color"
     >
       Next
     </button>

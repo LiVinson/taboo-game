@@ -1,62 +1,85 @@
 import React from "react"
-import { shallow, mount } from "enzyme"
+import { shallow } from "enzyme"
 import renderer from "react-test-renderer"
+import "jest-styled-components"
+import { ThemeProvider } from "styled-components"
+import theme from "../../global-design/theme"
 import Header from "./Header"
+import { Title, Subheading } from "components/Header/style.js"
 
-it("Renders large header correctly", () => {
+
+
+//-------------- Title --------------------
+
+test("Title renders correctly when large", () => {
+  const props = {
+    large: true,
+  }
+  const wrapper = renderer.create(<Title theme={theme} {...props} />).toJSON()
+  expect(wrapper).toMatchSnapshot()
+})
+test("Title renders correctly when small", () => {
+  const props = {
+    large: false,
+  }
+  const wrapper = renderer.create(<Title theme={theme} {...props} />).toJSON()
+  expect(wrapper).toMatchSnapshot()
+})
+
+test("Title renders the larger title when large prop is true", () => {
+  const props = {
+    large: true,
+  }
+  const wrapper = shallow(<Title {...props} theme={theme} />)
+  expect(wrapper).toHaveStyleRule("font-size", "6rem")
+  expect(wrapper).toHaveStyleRule("text-align", "center")
+})
+
+test("Title renders the smaller title when large is small", () => {
+  const props = {
+    large: false,
+  }
+  const wrapper = shallow(<Title {...props} theme={theme} />)
+  expect(wrapper).toHaveStyleRule("font-size", "3rem")
+})
+
+//-------------- Subheading --------------------
+test("Subheading renders correctly", () => {
+  const wrapper = renderer.create(<Subheading theme={theme} />).toJSON()
+  expect(wrapper).toMatchSnapshot()
+})
+
+//--------------Header--------------------
+test("Header renders correctly on home route", () => {
   const props = {
     location: {
       pathname: "/home",
     },
   }
-  const HeaderComponent = renderer.create(<Header {...props} />).toJSON()
-  expect(HeaderComponent).toMatchSnapshot()
+
+  const wrapper = renderer
+    .create(
+      <ThemeProvider theme={theme}>
+        <Header  {...props} />
+      </ThemeProvider>
+    )
+    .toJSON()
+  expect(wrapper).toMatchSnapshot()
 })
 
-it("Renders regular header correctly", () => {
+test("Header renders correctly when not on home route", () => {
   const props = {
     location: {
       pathname: "/play",
     },
   }
-  const HeaderComponent = renderer.create(<Header {...props} />).toJSON()
-  expect(HeaderComponent).toMatchSnapshot()
-})
 
-it("Receives a location prop with pathname property", () => {
-  const props = {
-    location: {
-      pathname: "/home",
-    },
-  }
-
-  const HeaderComponent = mount(<Header {...props} />)
-
-  expect(HeaderComponent.prop("location")).toMatchObject({
-    pathname: "/home",
-  })
-})
-
-it("renders large header and subheading on home route", () => {
-  const props = {
-    location: {
-      pathname: "/home",
-    },
-  }
-
-  const HeaderComponent = shallow(<Header {...props} />)
-  expect(HeaderComponent.find("h1.header--large")).toHaveLength(1)
-  expect(HeaderComponent.find("h3.subheading")).toHaveLength(1)
-})
-
-it("renders reular header and no subheader on none-home route", () => {
-  const props = {
-    location: {
-      pathname: "/play",
-    },
-  }
-
-  const HeaderComponent = shallow(<Header {...props} />)
-  expect(HeaderComponent.find("h1.header--large")).toHaveLength(0)
-  expect(HeaderComponent.find("h3.subheading")).toHaveLength(0)
+  const wrapper = renderer
+    .create(
+      <ThemeProvider theme={theme}>
+        <Header  {...props} />u
+      </ThemeProvider>
+    )
+    .toJSON()
+  expect(wrapper).toMatchSnapshot()
 })
