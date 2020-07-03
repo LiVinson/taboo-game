@@ -6,13 +6,15 @@ exports[`renders correctly 1`] = `
 >
   <button
     className="button "
-    onClick={[MockFunction]}
+    handleClick={[MockFunction]}
+    text="Back"
   >
     Back
   </button>
   <button
     className="button "
-    onClick={[MockFunction]}
+    handleClick={[MockFunction]}
+    text="Next"
   >
     Next
   </button>

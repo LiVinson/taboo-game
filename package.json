@@ -41,7 +41,9 @@
   },
   "devDependencies": {
     "formik": "^2.1.4",
+    "jest-styled-components": "^7.0.2",
     "prop-types": "^15.7.2",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.13.1",
+    "styled-components": "^5.1.1"
   }
 }

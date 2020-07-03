@@ -1,25 +1,22 @@
 import React from "react"
 import PropTypes from "prop-types"
-import "./Header.scss"
+import {  StyledHeader, Title, Subheading, FocusSpan} from "./style.js"
+
 
 export default function Header({ location }) {
-  const pathname = location.pathname
-  let headerLgClassName = null
-  //If on one of the home routes, make header larger
-  if (pathname.includes("home")) {
-    headerLgClassName = "header--large"
-  }
+  const homeRoute = location.pathname.includes("home")
+  const homeRouteExact = location.pathname === ("/home")
   return (
-    <header>
-      <h1 className={`header ${headerLgClassName}`}>Taboo!</h1>
-      {pathname === "/home" ? (
-        <h3 className="subheading">
+    <StyledHeader>
+      <Title large={homeRoute}>Taboo!</Title>
+      {homeRouteExact && (
+        <Subheading>
           The team game that’s all about what you{" "}
-          <span className="subheading__focus-text">say,</span> and what you{" "}
-          <span className="subheading__focus-text">don’t!</span>
-        </h3>
-      ) : null}
-    </header>
+          <FocusSpan>say,</FocusSpan> and what you{" "}
+          <FocusSpan>don’t!</FocusSpan>
+        </Subheading>
+      )}
+    </StyledHeader>
   )
 }
 

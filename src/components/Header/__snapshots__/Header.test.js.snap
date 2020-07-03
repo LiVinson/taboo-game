@@ -1,26 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders large header correctly 1`] = `
-<header>
+exports[`Header renders correctly on home route 1`] = `
+.c0 {
+  margin-top: 4rem;
+}
+
+.c1 {
+  background: none;
+  font-family: 'Oswald',sans-serif;
+  font-size: 3rem;
+  color: #1982C4;
+  text-shadow: 0px 1rem 1rem rgba(0,0,0,0.6);
+  text-transform: uppercase;
+  font-size: 6rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.c2 {
+  font-size: 2.2rem;
+  text-align: center;
+  width: 30rem;
+  margin: 0 auto;
+  font-weight: 400;
+  font-family: 'Oswald',sans-serif;
+  color: #757575;
+}
+
+.c3 {
+  color: #1982C4;
+}
+
+<header
+  className="c0"
+>
   <h1
-    className="header header--large"
+    className="c1"
   >
     Taboo!
   </h1>
   <h3
-    className="subheading"
+    className="c2"
   >
     The team game that’s all about what you
      
     <span
-      className="subheading__focus-text"
+      className="c3"
     >
       say,
     </span>
      and what you
      
     <span
-      className="subheading__focus-text"
+      className="c3"
     >
       don’t!
     </span>
@@ -28,12 +60,79 @@ exports[`Renders large header correctly 1`] = `
 </header>
 `;
 
-exports[`Renders regular header correctly 1`] = `
-<header>
-  <h1
-    className="header null"
+exports[`Header renders correctly when not on home route 1`] = `
+Array [
+  .c0 {
+  margin-top: 4rem;
+}
+
+.c1 {
+  background: none;
+  font-family: 'Oswald',sans-serif;
+  font-size: 3rem;
+  color: #1982C4;
+  text-shadow: 0px 1rem 1rem rgba(0,0,0,0.6);
+  text-transform: uppercase;
+}
+
+<header
+    className="c0"
   >
-    Taboo!
-  </h1>
-</header>
+    <h1
+      className="c1"
+    >
+      Taboo!
+    </h1>
+  </header>,
+  "u",
+]
+`;
+
+exports[`Subheading renders correctly 1`] = `
+.c0 {
+  font-size: 2.2rem;
+  text-align: center;
+  width: 30rem;
+  margin: 0 auto;
+  font-weight: 400;
+  font-family: 'Oswald',sans-serif;
+  color: #757575;
+}
+
+<h3
+  className="c0"
+/>
+`;
+
+exports[`Title renders correctly when large 1`] = `
+.c0 {
+  background: none;
+  font-family: 'Oswald',sans-serif;
+  font-size: 3rem;
+  color: #1982C4;
+  text-shadow: 0px 1rem 1rem rgba(0,0,0,0.6);
+  text-transform: uppercase;
+  font-size: 6rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+<h1
+  className="c0"
+/>
+`;
+
+exports[`Title renders correctly when small 1`] = `
+.c0 {
+  background: none;
+  font-family: 'Oswald',sans-serif;
+  font-size: 3rem;
+  color: #1982C4;
+  text-shadow: 0px 1rem 1rem rgba(0,0,0,0.6);
+  text-transform: uppercase;
+}
+
+<h1
+  className="c0"
+/>
 `;
