@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sc-AxjAm kpaJfL"
+  type="home"
+>
+  <div
+    className="sc-AxirZ idjIhI"
+  >
+    Menu
+  </div>
+  <div
+    className="sc-AxiKw cRerAt"
+  >
+    <ul
+      className="sc-AxhCb lgZvpc"
+    >
+      <li
+        className="sc-AxhUy hPwAZu"
+      >
+        <a
+          className="sc-AxgMl llVgAT"
+          href="/home/create"
+          onClick={[Function]}
+          text="Create New Game"
+        >
+          Create New Game
+        </a>
+      </li>
+      <li
+        className="sc-AxhUy hPwAZu"
+      >
+        <a
+          className="sc-AxgMl llVgAT"
+          href="/home/join"
+          onClick={[Function]}
+          text="Join Game"
+        >
+          Join Game
+        </a>
+      </li>
+      <li
+        className="sc-AxhUy hPwAZu"
+      >
+        <a
+          className="sc-AxgMl llVgAT"
+          href="/home/rules/0"
+          onClick={[Function]}
+          text="How to Play"
+        >
+          How to Play
+        </a>
+      </li>
+      <li
+        className="sc-AxhUy hPwAZu"
+      >
+        <a
+          className="sc-AxgMl llVgAT"
+          href="/submit"
+          onClick={[Function]}
+          text="Submit a Card"
+        >
+          Submit a Card
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

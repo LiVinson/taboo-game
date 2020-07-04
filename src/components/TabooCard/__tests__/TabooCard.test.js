@@ -3,8 +3,8 @@ import { shallow, mount } from "enzyme"
 import renderer from "react-test-renderer"
 import "jest-styled-components"
 import { ThemeProvider } from "styled-components"
-import theme from "../../global-design/theme"
-import TabooCard from "./TabooCard"
+import theme from "../../../global-design/theme"
+import TabooCard from "../TabooCard"
 import ButtonContainer from "components/ButtonContainer"
 
 test("TabooCard renders correctly when list is passed ", () => {
