@@ -7,14 +7,14 @@ export const StyledHeader = styled.header`
 export const Title = styled.h1`
   background: none;
   font-family: ${(props) => props.theme.text.display};
-  font-size: 3rem;
+  font-size: ${(props) => props.theme.fontSize.medium};
   color: ${(props) => props.theme.color.primary};
   text-shadow: 0px 1rem 1rem rgba(0, 0, 0, 0.6);
   text-transform: uppercase;
   ${(props) =>
     props.large &&
     css`
-      font-size: 6rem;
+      font-size: ${(props) => props.theme.fontSize.xlarge};
       text-align: center;
       margin: 1rem 0;
     `}
@@ -22,7 +22,7 @@ export const Title = styled.h1`
 Title.displayName="Title"
 
 export const Subheading = styled.h3`
-  font-size: 2.2rem;
+  font-size: ${(props) => props.theme.fontSize.small};
   text-align: center;
   width: 30rem;
   margin: 0 auto;

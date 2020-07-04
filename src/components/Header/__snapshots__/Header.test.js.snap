@@ -8,11 +8,11 @@ exports[`Header renders correctly on home route 1`] = `
 .c1 {
   background: none;
   font-family: 'Oswald',sans-serif;
-  font-size: 3rem;
+  font-size: 2.7rem;
   color: #1982C4;
   text-shadow: 0px 1rem 1rem rgba(0,0,0,0.6);
   text-transform: uppercase;
-  font-size: 6rem;
+  font-size: 7rem;
   text-align: center;
   margin: 1rem 0;
 }
@@ -61,31 +61,28 @@ exports[`Header renders correctly on home route 1`] = `
 `;
 
 exports[`Header renders correctly when not on home route 1`] = `
-Array [
-  .c0 {
+.c0 {
   margin-top: 4rem;
 }
 
 .c1 {
   background: none;
   font-family: 'Oswald',sans-serif;
-  font-size: 3rem;
+  font-size: 2.7rem;
   color: #1982C4;
   text-shadow: 0px 1rem 1rem rgba(0,0,0,0.6);
   text-transform: uppercase;
 }
 
 <header
-    className="c0"
+  className="c0"
+>
+  <h1
+    className="c1"
   >
-    <h1
-      className="c1"
-    >
-      Taboo!
-    </h1>
-  </header>,
-  "u",
-]
+    Taboo!
+  </h1>
+</header>
 `;
 
 exports[`Subheading renders correctly 1`] = `
@@ -108,11 +105,11 @@ exports[`Title renders correctly when large 1`] = `
 .c0 {
   background: none;
   font-family: 'Oswald',sans-serif;
-  font-size: 3rem;
+  font-size: 2.7rem;
   color: #1982C4;
   text-shadow: 0px 1rem 1rem rgba(0,0,0,0.6);
   text-transform: uppercase;
-  font-size: 6rem;
+  font-size: 7rem;
   text-align: center;
   margin: 1rem 0;
 }
@@ -126,7 +123,7 @@ exports[`Title renders correctly when small 1`] = `
 .c0 {
   background: none;
   font-family: 'Oswald',sans-serif;
-  font-size: 3rem;
+  font-size: 2.7rem;
   color: #1982C4;
   text-shadow: 0px 1rem 1rem rgba(0,0,0,0.6);
   text-transform: uppercase;

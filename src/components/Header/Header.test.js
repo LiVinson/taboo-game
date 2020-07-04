@@ -31,7 +31,7 @@ test("Title renders the larger title when large prop is true", () => {
     large: true,
   }
   const wrapper = shallow(<Title {...props} theme={theme} />)
-  expect(wrapper).toHaveStyleRule("font-size", "6rem")
+  expect(wrapper).toHaveStyleRule("font-size", "7rem")
   expect(wrapper).toHaveStyleRule("text-align", "center")
 })
 
@@ -40,7 +40,7 @@ test("Title renders the smaller title when large is small", () => {
     large: false,
   }
   const wrapper = shallow(<Title {...props} theme={theme} />)
-  expect(wrapper).toHaveStyleRule("font-size", "3rem")
+  expect(wrapper).toHaveStyleRule("font-size", "2.7rem")
 })
 
 //-------------- Subheading --------------------
@@ -77,7 +77,7 @@ test("Header renders correctly when not on home route", () => {
   const wrapper = renderer
     .create(
       <ThemeProvider theme={theme}>
-        <Header  {...props} />u
+        <Header  {...props} />
       </ThemeProvider>
     )
     .toJSON()
