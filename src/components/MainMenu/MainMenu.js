@@ -1,28 +1,19 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
 import PropTypes from "prop-types"
-import "./MainMenu.scss"
 import TabooCard from "components/TabooCard"
+import TextLink from "components/TextLink"
 
-export default function MainMenu({ match }) {
+const MainMenu = ({ match }) => {
   const { path } = match
-  //Main menu taboo card.
+
   const cardInfo = {
     type: "home",
     tabooWord: "Menu",
     list: [
-      <NavLink className="taboo-card__link" to={`${path}/create`}>
-        Create New Game
-      </NavLink>,
-      <NavLink className="taboo-card__link" to={`${path}/join`}>
-        Join Game
-      </NavLink>,
-      <NavLink className="taboo-card__link" to={`${path}/rules/0`}>
-        How to Play
-      </NavLink>,
-      <NavLink className="taboo-card__link" to="/submit">
-        Submit a Card
-      </NavLink>,
+      <TextLink to={`${path}/create`} text={"Create New Game"} />,
+      <TextLink to={`${path}/join`} text={"Join Game"} />,
+      <TextLink to={`${path}/rules/0`} text={"How to Play"} />,
+      <TextLink to="/submit" text={"Submit a Card"} />,
     ],
   }
   return <TabooCard {...cardInfo} />
@@ -31,3 +22,5 @@ export default function MainMenu({ match }) {
 MainMenu.propTypes = {
   match: PropTypes.object.isRequired,
 }
+
+export default MainMenu

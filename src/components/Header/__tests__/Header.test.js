@@ -3,8 +3,8 @@ import { shallow } from "enzyme"
 import renderer from "react-test-renderer"
 import "jest-styled-components"
 import { ThemeProvider } from "styled-components"
-import theme from "../../global-design/theme"
-import Header from "./Header"
+import theme from "../../../global-design/theme"
+import Header from "../Header"
 import { Title, Subheading } from "components/Header/style.js"
 
 
