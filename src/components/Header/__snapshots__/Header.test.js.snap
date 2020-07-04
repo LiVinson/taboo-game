@@ -61,8 +61,7 @@ exports[`Header renders correctly on home route 1`] = `
 `;
 
 exports[`Header renders correctly when not on home route 1`] = `
-Array [
-  .c0 {
+.c0 {
   margin-top: 4rem;
 }
 
@@ -76,16 +75,14 @@ Array [
 }
 
 <header
-    className="c0"
+  className="c0"
+>
+  <h1
+    className="c1"
   >
-    <h1
-      className="c1"
-    >
-      Taboo!
-    </h1>
-  </header>,
-  "u",
-]
+    Taboo!
+  </h1>
+</header>
 `;
 
 exports[`Subheading renders correctly 1`] = `

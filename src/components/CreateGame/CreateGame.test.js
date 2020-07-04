@@ -27,7 +27,7 @@ it("navigates back to /home when back is selected", ()=> {
     const CreateGameComponent = shallow(<CreateGame />)
     CreateGameComponent.find("button").at(1).simulate("click")
     expect(CreateGameComponent.instance().handlePreviousBtn).toHaveBeenCalledTimes(1)
-}
+})
 /*
     Contains one form element
     Contains two buttons

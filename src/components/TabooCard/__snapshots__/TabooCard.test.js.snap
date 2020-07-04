@@ -1,36 +1,166 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`TabooCard applies style based on type prop provided 1`] = `
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  z-index: 15;
+  background-color: currentColor;
+  box-shadow: 0px 0.8rem 1rem rgba(0,0,0,0.9);
+  color: #1982C4;
+  color: #ee5b2c;
+  position: absolute;
+  bottom: 8rem;
+  left: 7rem;
+  z-index: 10;
+  -webkit-transform: rotate(42deg);
+  -ms-transform: rotate(42deg);
+  transform: rotate(42deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
 <div
-  className="taboo-card taboo-card--home"
+  className="c0"
+  type="middle"
 >
   <div
-    className="taboo-card__word-container"
+    className="c1"
   >
-    <p
-      className="taboo-card__word"
-    >
-      taboo
-    </p>
+    taboo
   </div>
   <div
-    className="taboo-card__list-container"
+    className="c2"
   >
     <ul
-      className="taboo-card__list"
+      className="c3"
     >
       <li
-        className="taboo-card__list-item"
+        className="c4"
       >
         word1
       </li>
       <li
-        className="taboo-card__list-item"
+        className="c4"
       >
         word2
       </li>
       <li
-        className="taboo-card__list-item"
+        className="c4"
+      >
+        word3
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`TabooCard renders correctly when list is passed  1`] = `
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  z-index: 15;
+  background-color: currentColor;
+  box-shadow: 0px 0.8rem 1rem rgba(0,0,0,0.9);
+  color: #1982C4;
+  margin-top: 6rem;
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+<div
+  className="c0"
+  type="home"
+>
+  <div
+    className="c1"
+  >
+    taboo
+  </div>
+  <div
+    className="c2"
+  >
+    <ul
+      className="c3"
+    >
+      <li
+        className="c4"
+      >
+        word1
+      </li>
+      <li
+        className="c4"
+      >
+        word2
+      </li>
+      <li
+        className="c4"
       >
         word3
       </li>
