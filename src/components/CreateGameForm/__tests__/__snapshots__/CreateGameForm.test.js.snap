@@ -18,11 +18,11 @@ exports[`CreateGameForm renders correctly 1`] = `
       Enter Your Name
     </label>
     <input
-      className="sc-AxhUy fSvRvz"
+      className="sc-AxhUy dcifbi"
       name="name"
       onBlur={[Function]}
       onChange={[Function]}
-      placeholder="Sammy"
+      placeholder=""
       tabIndex="1"
       type="text"
       value=""

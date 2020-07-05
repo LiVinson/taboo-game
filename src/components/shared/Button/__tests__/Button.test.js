@@ -1,10 +1,10 @@
 import React from "react"
 import renderer from "react-test-renderer"
-import { shallow, mount } from "enzyme"
+import { mount } from "enzyme"
 import "jest-styled-components"
 import { ThemeProvider } from "styled-components"
-import theme from "../../../global-design/theme"
-import { Button, PrimaryButton } from ".."
+import theme from "../../../../global-design/theme"
+import { Button, PrimaryButton } from "../index.js"
 
 test("Button renders correctly", () => {
   const props = {

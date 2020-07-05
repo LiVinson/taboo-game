@@ -53,6 +53,7 @@ export const StyledTextInput = styled.input`
   font-size: 2.2rem;
   border-radius: 2%;
   text-align: center;
+  text-transform:uppercase;
   &::placeholder {
     font-size: 1.8rem;
     font-style: italic;

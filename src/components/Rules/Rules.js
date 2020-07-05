@@ -3,6 +3,9 @@ import { Redirect } from "react-router-dom"
 import PropTypes from "prop-types"
 import TabooCard from "components/TabooCard"
 import rules from "./rulesText"
+import { RulesTitle, RulesText } from "./style"
+
+
 
 export default class Rules extends React.Component {
   displayPreviousRule = () => {
@@ -25,26 +28,20 @@ export default class Rules extends React.Component {
 
   render() {
     const currentTopicId = parseInt(this.props.match.params.topic)
-    const ruleBtns = [
+    const buttonInfo = [
       {
         text: currentTopicId > 0 ? "Back" : "Close",
-        handleClick: this.displayPreviousRule,
+        onClick: this.displayPreviousRule,
       },
       {
-        text: currentTopicId < rules.length ? "Next" : "Close",
-        handleClick: this.displayNextRule,
-        type:"primary-color"
+        text: currentTopicId < rules.length -1 ? "Next" : "Close",
+        onClick: this.displayNextRule,
       },
     ]
 
     return (
-      <TabooCard
-        tabooWord="How to Play"
-        list={null}
-        buttons={ruleBtns}
-        type="home"
-      >
-        <RulesText topicId={currentTopicId} />
+      <TabooCard tabooWord="How to Play" buttons={buttonInfo} type="home">
+        <DisplayRulesText topicId={currentTopicId} />
       </TabooCard>
     )
   }
@@ -55,14 +52,14 @@ Rules.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
-function RulesText({ topicId }) {
+function DisplayRulesText({ topicId }) {
   const rulesInfo = rules[topicId]
   if (rulesInfo) {
     return (
       <React.Fragment>
-        <h5>{rulesInfo.title}</h5>
+        <RulesTitle>{rulesInfo.title}</RulesTitle>
         {rulesInfo.text.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
+          <RulesText key={index}>{paragraph}</RulesText>
         ))}
       </React.Fragment>
     )
@@ -71,6 +68,6 @@ function RulesText({ topicId }) {
   }
 }
 
-RulesText.propTypes = {
+DisplayRulesText.propTypes = {
   topicId: PropTypes.number.isRequired,
 }
