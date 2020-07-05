@@ -1,12 +1,11 @@
 import React from "react"
-import Button from "./Button"
+import Button from "../Button"
 import renderer from "react-test-renderer"
 import { shallow } from "enzyme"
 
 it("renders correctly", () => {
-
-    const ButtonComponent = renderer.create(<Button/>).toJSON()
-    expect(ButtonComponent).toMatchSnapshot()
+    const wrapper = renderer.create(<Button/>).toJSON()
+    expect(wrapper).toMatchSnapshot()
 })
 
 /*

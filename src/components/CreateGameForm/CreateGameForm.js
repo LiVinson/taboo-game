@@ -158,7 +158,8 @@ const CreateGameForm = (props) => {
           </FormSection>
           {/* Submit Button is passed down to Taboo Card for UI consistency reasons*/}
         </Form>
-      )}
+        )
+      }
     </Formik>
   )
 }
