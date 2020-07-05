@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders correctly 1`] = `
+.c0 {
+  border: none;
+  color: #ee5b2c;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: var(--font-family--display);
+  text-transform: uppercase;
+}
+
+.c0:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+<button
+  className="c0"
+  onClick={[MockFunction]}
+>
+  Button
+</button>
+`;
+
+exports[`Primary button renders correctly 1`] = `
+.c0 {
+  border: none;
+  color: #ee5b2c;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: var(--font-family--display);
+  text-transform: uppercase;
+  color: #f7f9f9;
+  background-color: #ee5b2c;
+  width: 47%;
+}
+
+.c0:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c0:active {
+  -webkit-filter: brightness(1.2);
+  filter: brightness(1.2);
+}
+
+<button
+  className="sc-AxjAm c0"
+  onClick={[MockFunction]}
+>
+  Button
+</button>
+`;

@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layered cards renders correctly 1`] = `
+Array [
+  .c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  z-index: 15;
+  background-color: currentColor;
+  box-shadow: 0px 0.8rem 1rem rgba(0,0,0,0.9);
+  color: #1982C4;
+  color: #ee5b2c;
+  position: absolute;
+  bottom: 8rem;
+  left: 7rem;
+  z-index: 10;
+  -webkit-transform: rotate(42deg);
+  -ms-transform: rotate(42deg);
+  transform: rotate(42deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+<div
+    className="c0"
+    type="middle"
+  >
+    <div
+      className="c1"
+    >
+      Taboo!
+    </div>
+    <div
+      className="c2"
+    >
+      <ul
+        className="c3"
+      >
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+      </ul>
+    </div>
+  </div>,
+  .c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  z-index: 15;
+  background-color: currentColor;
+  box-shadow: 0px 0.8rem 1rem rgba(0,0,0,0.9);
+  color: #1982C4;
+  color: var(--color-tertiary);
+  position: absolute;
+  bottom: 9rem;
+  right: 8rem;
+  z-index: 5;
+  -webkit-transform: rotate(-42deg);
+  -ms-transform: rotate(-42deg);
+  transform: rotate(-42deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+<div
+    className="c0"
+    type="bottom"
+  >
+    <div
+      className="c1"
+    >
+      Taboo!
+    </div>
+    <div
+      className="c2"
+    >
+      <ul
+        className="c3"
+      >
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+      </ul>
+    </div>
+  </div>,
+]
+`;

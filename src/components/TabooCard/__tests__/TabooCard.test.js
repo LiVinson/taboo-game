@@ -66,7 +66,6 @@ test("TabooCard renders list prop if children prop is not passed", () => {
       <TabooCard {...props} />
     </ThemeProvider>
   )
-  console.log(wrapper)
   expect(wrapper.find("ul").children()).toHaveLength(props.list.length)
 })
 
