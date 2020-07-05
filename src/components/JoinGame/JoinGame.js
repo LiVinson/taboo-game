@@ -25,11 +25,10 @@ class JoinGame extends React.Component {
   render() {
     const { name, gamecode } = this.state
     const buttonInfo = [
-      { text: "Back", className: "button", onClick: this.handleBackClick },
+      { text: "Back", onClick: this.handleBackClick},
       {
         form: "joinGameForm",
-        text: "Submit",
-        className: "button",
+        text: "Join",
         type: "submit",
       },
     ]

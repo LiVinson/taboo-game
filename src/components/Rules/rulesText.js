@@ -2,7 +2,7 @@
 const rules = [
     {
         title: "Setup",
-        text: ["There are 2 teams per game. Each round, a giver is chosen from one team, and a watcher is chosen from the other team.</p><> The giver and watcher will rotate between teams after each round."]
+        text: ["There are 2 teams per game. Each round, a giver is chosen from one team, and a watcher is chosen from the other team. The giver and watcher will rotate between teams after each round."]
 
     }, {
         title: "Giver",

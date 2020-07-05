@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Button, PrimaryButton } from "components/Button"
+import { Button, PrimaryButton } from "components/shared/Button"
 import { StyledButtonContainer } from "./style"
 
 //Appears at bottom of Taboo Card when a buttons prop is passed to taboo.

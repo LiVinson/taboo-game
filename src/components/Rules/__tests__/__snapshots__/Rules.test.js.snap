@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rules render correctly 1`] = `
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  z-index: 15;
+  background-color: currentColor;
+  box-shadow: 0px 0.8rem 1rem rgba(0,0,0,0.9);
+  color: #1982C4;
+  margin-top: 6rem;
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+}
+
+.c6 {
+  border: none;
+  color: #ee5b2c;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: var(--font-family--display);
+  text-transform: uppercase;
+}
+
+.c6:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c7 {
+  border: none;
+  color: #ee5b2c;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: var(--font-family--display);
+  text-transform: uppercase;
+  color: #f7f9f9;
+  background-color: #ee5b2c;
+  width: 47%;
+}
+
+.c7:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c7:active {
+  -webkit-filter: brightness(1.2);
+  filter: brightness(1.2);
+}
+
+.c5 {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c3 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  color: #333333;
+}
+
+.c3::after {
+  display: block;
+  content: "";
+  width: 80%;
+  height: 1.5px;
+  background-color: #ebebeb;
+  margin: 0.8rem auto 1rem auto;
+}
+
+.c4 {
+  font-size: 1.6rem;
+  text-align: justify;
+  padding: 0 .5rem;
+  margin-bottom: .5rem;
+  color: #333333;
+}
+
+<div
+  className="c0"
+  type="home"
+>
+  <div
+    className="c1"
+  >
+    How to Play
+  </div>
+  <div
+    className="c2"
+  >
+    <h5
+      className="c3"
+    >
+      Setup
+    </h5>
+    <p
+      className="c4"
+    >
+      There are 2 teams per game. Each round, a giver is chosen from one team, and a watcher is chosen from the other team. The giver and watcher will rotate between teams after each round.
+    </p>
+  </div>
+  <div
+    className="c5"
+  >
+    <button
+      className="c6"
+      onClick={[Function]}
+    >
+      Close
+    </button>
+    <button
+      className="c7"
+      onClick={[Function]}
+    >
+      Next
+    </button>
+  </div>
+</div>
+`;
