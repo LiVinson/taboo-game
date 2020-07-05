@@ -5,7 +5,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom"
-import "App.scss"
+
 
 import Home from "pages/Home"
 // import New from "pages/New"

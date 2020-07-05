@@ -1,5 +1,4 @@
 import React from "react"
-import "./CreateGame.scss"
 import TabooCard from "components/TabooCard"
 import CreateGameForm from "components/CreateGameForm"
 
@@ -26,8 +25,7 @@ export default class CreateGame extends React.Component {
   }
 
   handleBackClick = () => {
-    console.log(this)
-    this.props.history.push("/home")
+     this.props.history.push("/home")
   }
   render() {
     const buttonInfo = [

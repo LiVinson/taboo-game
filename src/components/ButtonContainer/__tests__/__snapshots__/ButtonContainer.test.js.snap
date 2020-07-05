@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button renders correctly 1`] = `
-.c0 {
+exports[`Button Container renders correctly 1`] = `
+.c1 {
   border: none;
   color: #ee5b2c;
   background-color: #f7f9f9;
@@ -13,7 +13,7 @@ exports[`Button renders correctly 1`] = `
   text-transform: uppercase;
 }
 
-.c0:active {
+.c1:active {
   outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
@@ -22,16 +22,7 @@ exports[`Button renders correctly 1`] = `
   transform: translateY(2px);
 }
 
-<button
-  className="c0"
-  onClick={[MockFunction]}
->
-  Button
-</button>
-`;
-
-exports[`Primary button renders correctly 1`] = `
-.c0 {
+.c2 {
   border: none;
   color: #ee5b2c;
   background-color: #f7f9f9;
@@ -46,7 +37,7 @@ exports[`Primary button renders correctly 1`] = `
   width: 47%;
 }
 
-.c0:active {
+.c2:active {
   outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
@@ -55,15 +46,37 @@ exports[`Primary button renders correctly 1`] = `
   transform: translateY(2px);
 }
 
-.c0:active {
+.c2:active {
   -webkit-filter: brightness(1.2);
   filter: brightness(1.2);
 }
 
-<button
-  className="sc-AxjAm c0"
-  onClick={[MockFunction]}
+.c0 {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+<div
+  className="c0"
 >
-  Button
-</button>
+  <button
+    className="c1"
+    onClick={[MockFunction]}
+  >
+    Back
+  </button>
+  <button
+    className="c2"
+    onClick={[MockFunction]}
+  >
+    Next
+  </button>
+</div>
 `;

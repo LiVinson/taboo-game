@@ -1,32 +1,66 @@
 import React from "react"
-import Button from "../Button"
 import renderer from "react-test-renderer"
-import { shallow } from "enzyme"
+import { shallow, mount } from "enzyme"
+import "jest-styled-components"
+import { ThemeProvider } from "styled-components"
+import theme from "../../../global-design/theme"
+import { Button, PrimaryButton } from ".."
 
-it("renders correctly", () => {
-    const wrapper = renderer.create(<Button/>).toJSON()
-    expect(wrapper).toMatchSnapshot()
+test("Button renders correctly", () => {
+  const props = {
+    text: "Button",
+    onClick: jest.fn()
+ 
+  }
+  const wrapper = renderer
+    .create(
+      <ThemeProvider theme={theme}>
+        <Button {...props} />
+      </ThemeProvider>
+    )
+    .toJSON()
+  expect(wrapper).toMatchSnapshot()
+  expect(wrapper).toHaveStyleRule("background-color", theme.color.offWhite)
+
+
 })
+
+test("Primary button renders correctly", () => {
+    const props = {
+      text: "Button",
+      onClick: jest.fn()   
+    }
+
+    const wrapper = renderer
+      .create(
+        <ThemeProvider theme={theme}>
+          <PrimaryButton {...props} />
+        </ThemeProvider>
+      )
+      .toJSON()
+    expect(wrapper).toMatchSnapshot()
+    expect(wrapper).not.toHaveStyleRule("background-color", theme.color.offWhite)
+
+  })
 
 /*
     receives a text prop and a handleClick property
 */
-it("displays text received as prop", () => {
-    const props = {
-        text: "A button",
-        handleClick: jest.fn()
-    }
-    const ButtonComponent = shallow(<Button {...props} />)
-    expect(ButtonComponent.find("button").text()).toEqual("A button")
+test("Button displays text received as prop", () => {
+  const props = {
+    text: "A button",
+    handleClick: jest.fn(),
+  }
+  const wrapper = mount(<Button {...props} theme={theme} />)
+  expect(wrapper.find("button").text()).toEqual("A button")
 })
 
-
-it("calls handleClick prop on click of button", () => {
-    const props = {
-        text: "A button",
-        handleClick: jest.fn()
-    }
-    const ButtonComponent = shallow(<Button {...props} />)
-    ButtonComponent.find("button").simulate("click")
-    expect(props.handleClick.mock.calls.length).toBe(1)
+test("Button calls handleClick prop when clicked", () => {
+  const props = {
+    text: "A button",
+    onClick: jest.fn(),
+  }
+  const wrapper = mount(<Button {...props} theme={theme}/>)
+  wrapper.find("button").simulate("click")
+  expect(props.onClick.mock.calls.length).toBe(1)
 })
