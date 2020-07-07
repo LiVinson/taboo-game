@@ -9,14 +9,7 @@ import {
 } from "./style"
 import ButtonContainer from "components/ButtonContainer"
 
-
-const TabooCard = ({
-  type,
-  tabooWord,
-  list,
-  buttons,
-  children,
-}) => {
+const TabooCard = ({ type, tabooWord, list, buttons, children }) => {
   return (
     <StyledTabooCard type={type}>
       <TabooWordContainer>{tabooWord}</TabooWordContainer>
@@ -32,7 +25,6 @@ TabooCard.propTypes = {
   list: PropTypes.array,
   buttons: PropTypes.arrayOf(PropTypes.object),
 }
-
 
 const TabooList = ({ list }) => {
   return (
@@ -53,7 +45,14 @@ const TabooListItem = ({ listItem }) => {
 }
 
 TabooListItem.propTypes = {
-  listItem: PropTypes.any
+  listItem: PropTypes.any,
 }
 
+export const TabooCardTop = ({ tabooWord, margin=false }) => {
+  return (
+    <StyledTabooCard margin={margin} >
+      <TabooWordContainer>{tabooWord}</TabooWordContainer>
+    </StyledTabooCard>
+  )
+}
 export default TabooCard

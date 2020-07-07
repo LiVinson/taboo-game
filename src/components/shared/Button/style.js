@@ -34,3 +34,13 @@ export const StyledPrimaryButton = styled(StyledButton)`
     filter: brightness(1.2);
   }
 `
+export const StyledLargeButton = styled(StyledButton)`
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 3rem;
+  flex: 1 0 100%;
+  margin-top: ${props => props.margin && "1.2rem"};
+  border: solid 3px ${(props) => props.theme.color.secondary};
+  background-color: ${(props) => props.theme.color.lightGray2};
+  font-weight:600;
+`

@@ -25,7 +25,6 @@ exports[`TabooCard applies style based on type prop provided 1`] = `
   background-color: #f7f9f9;
   padding: 1.2rem;
   text-align: center;
-  margin-bottom: 1.5rem;
   border-radius: 2px;
   font-family: 'Oswald',sans-serif;
   font-size: 4rem;
@@ -40,6 +39,7 @@ exports[`TabooCard applies style based on type prop provided 1`] = `
   text-align: center;
   border-radius: 2px;
   font-size: 4rem;
+  margin-top: 1.5rem;
 }
 
 .c3 {
@@ -99,14 +99,12 @@ exports[`TabooCard renders correctly when list is passed  1`] = `
   background-color: currentColor;
   box-shadow: 0px 0.8rem 1rem rgba(0,0,0,0.9);
   color: #1982C4;
-  margin-top: 6rem;
 }
 
 .c1 {
   background-color: #f7f9f9;
   padding: 1.2rem;
   text-align: center;
-  margin-bottom: 1.5rem;
   border-radius: 2px;
   font-family: 'Oswald',sans-serif;
   font-size: 4rem;
@@ -121,6 +119,7 @@ exports[`TabooCard renders correctly when list is passed  1`] = `
   text-align: center;
   border-radius: 2px;
   font-size: 4rem;
+  margin-top: 1.5rem;
 }
 
 .c3 {

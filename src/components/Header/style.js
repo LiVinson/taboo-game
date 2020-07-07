@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components"
 
 export const StyledHeader = styled.header`
-    margin-top: 4rem;
+    margin-top: ${props => props.large ? "4rem" : "2rem"};
+    margin-bottom: ${props => props.subheading ? "4rem" : "3rem"};
 `
 
 export const Title = styled.h1`
@@ -9,12 +10,14 @@ export const Title = styled.h1`
   font-family: ${(props) => props.theme.text.display};
   font-size: ${(props) => props.theme.fontSize.medium};
   color: ${(props) => props.theme.color.primary};
-  text-shadow: 0px 1rem 1rem rgba(0, 0, 0, 0.6);
+  text-shadow: 0px .5rem .5rem rgba(0, 0, 0, 0.6);
   text-transform: uppercase;
+
   ${(props) =>
     props.large &&
     css`
       font-size: ${(props) => props.theme.fontSize.xlarge};
+      text-shadow: 0px 1rem 1rem rgba(0, 0, 0, 0.6);
       text-align: center;
       margin: 1rem 0;
     `}
@@ -22,7 +25,7 @@ export const Title = styled.h1`
 Title.displayName="Title"
 
 export const Subheading = styled.h3`
-  font-size: ${(props) => props.theme.fontSize.small};
+  font-size: 2.7rem;
   text-align: center;
   width: 30rem;
   margin: 0 auto;
