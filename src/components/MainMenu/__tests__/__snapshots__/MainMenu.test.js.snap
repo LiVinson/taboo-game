@@ -2,16 +2,16 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="sc-AxjAm kpaJfL"
+  className="sc-AxjAm lcQul"
   type="home"
 >
   <div
-    className="sc-AxirZ idjIhI"
+    className="sc-AxirZ hJFEXp"
   >
     Menu
   </div>
   <div
-    className="sc-AxiKw cRerAt"
+    className="sc-AxiKw jcwHUa"
   >
     <ul
       className="sc-AxhCb lgZvpc"
@@ -20,7 +20,7 @@ exports[`renders correctly 1`] = `
         className="sc-AxhUy hPwAZu"
       >
         <a
-          className="sc-AxmLO gFmKbP"
+          className="sc-fzozJi cKkbkO"
           href="/home/create"
           onClick={[Function]}
           text="Create New Game"
@@ -32,7 +32,7 @@ exports[`renders correctly 1`] = `
         className="sc-AxhUy hPwAZu"
       >
         <a
-          className="sc-AxmLO gFmKbP"
+          className="sc-fzozJi cKkbkO"
           href="/home/join"
           onClick={[Function]}
           text="Join Game"
@@ -44,7 +44,7 @@ exports[`renders correctly 1`] = `
         className="sc-AxhUy hPwAZu"
       >
         <a
-          className="sc-AxmLO gFmKbP"
+          className="sc-fzozJi cKkbkO"
           href="/home/rules/0"
           onClick={[Function]}
           text="How to Play"
@@ -56,7 +56,7 @@ exports[`renders correctly 1`] = `
         className="sc-AxhUy hPwAZu"
       >
         <a
-          className="sc-AxmLO gFmKbP"
+          className="sc-fzozJi cKkbkO"
           href="/submit"
           onClick={[Function]}
           text="Submit a Card"

@@ -26,7 +26,6 @@ Array [
   background-color: #f7f9f9;
   padding: 1.2rem;
   text-align: center;
-  margin-bottom: 1.5rem;
   border-radius: 2px;
   font-family: 'Oswald',sans-serif;
   font-size: 4rem;
@@ -41,6 +40,7 @@ Array [
   text-align: center;
   border-radius: 2px;
   font-size: 4rem;
+  margin-top: 1.5rem;
 }
 
 .c3 {
@@ -116,7 +116,6 @@ Array [
   background-color: #f7f9f9;
   padding: 1.2rem;
   text-align: center;
-  margin-bottom: 1.5rem;
   border-radius: 2px;
   font-family: 'Oswald',sans-serif;
   font-size: 4rem;
@@ -131,6 +130,7 @@ Array [
   text-align: center;
   border-radius: 2px;
   font-size: 4rem;
+  margin-top: 1.5rem;
 }
 
 .c3 {

@@ -6,8 +6,9 @@ import {  StyledHeader, Title, Subheading, FocusSpan} from "./style.js"
 export default function Header({ location }) {
   const homeRoute = location.pathname.includes("home")
   const homeRouteExact = location.pathname === ("/home")
+
   return (
-    <StyledHeader>
+    <StyledHeader large={homeRoute} subheading={homeRouteExact}>
       <Title large={homeRoute}>Taboo!</Title>
       {homeRouteExact && (
         <Subheading>

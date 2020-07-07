@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Wrapper renders correctly 1`] = `
+.c0 {
+  padding: 1rem 2.5rem 6rem 2.5rem;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient( to bottom, #fff 0%, #fff 50%,70%, #1982C4 90%);
+}
+
+<div
+  className="c0"
+>
+  <h1>
+    I am a child element
+  </h1>
+</div>
+`;

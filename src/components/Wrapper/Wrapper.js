@@ -1,15 +1,17 @@
 import React from "react"
 import PropTypes from "prop-types"
-import "./Wrapper.scss"
+import { StyledWrapper } from "./style"
 
-export default function Wrapper({ children }) {
+const Wrapper = ({ children }) => {
     return (
-        <div className="wrapper">
+        <StyledWrapper>
             {children}
-        </div>
+        </StyledWrapper>
     )
 }
 
 Wrapper.propTypes = {
     children: PropTypes.node.isRequired
 }
+
+export default Wrapper

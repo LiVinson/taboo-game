@@ -8,6 +8,7 @@ import {
 
 
 import Home from "pages/Home"
+import Waiting from "pages/Waiting"
 // import New from "pages/New"
 // import Game from "pages/PlayGame"
 // import EndGame from "pages/EndGame"
@@ -26,6 +27,7 @@ class App extends React.Component {
               <Redirect to="/home" />
             </Route>
             <Route path="/home" component={Home} />
+            <Route path="/waiting/:gamecode/:playerId" component={Waiting} />
             {/*
                         <Route path="/new/:gamecode/:playerId" component={New} />
             <Route path="/play/:gamecode/:playerId" component={Game} />
