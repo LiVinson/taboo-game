@@ -1,10 +1,10 @@
 import React from "react"
 import { Redirect, NavLink, Switch, Route } from "react-router-dom"
 import "./Home.scss"
-import MainMenu from "../../components/MainMenu"
-import CreateGame from "../../components/CreateGame"
-import JoinGame from "../../components/JoinGame"
-import Rules from "../../components/Rules"
+import MainMenu from "components/MainMenu"
+import CreateGame from "components/CreateGame"
+import JoinGame from "components/JoinGame"
+import Rules from "components/Rules"
 
 
 // import Modal from "../../components/Modal"

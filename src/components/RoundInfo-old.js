@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function RoundInfo({ round, giver, watcher, turn }) {
+ function RoundInfo({ round, giver, watcher, turn }) {
   const giverTeam = turn === 1 ? "Team 1" : "Team 2"
   const watcherTeam = turn === 2 ? "Team 1" : "Team 2"
 

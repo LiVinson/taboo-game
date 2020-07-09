@@ -16,7 +16,8 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         box-sizing:border-box;
-        font-family: var(--font-family--text)
+        font-family: var(--font-family--text);
+        line-height:1.4;
         
     }
 `
