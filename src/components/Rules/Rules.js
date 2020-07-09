@@ -6,53 +6,84 @@ import rules from "./rulesText"
 import { RulesTitle, RulesText } from "./style"
 
 
-
+/*
+  Can be displayed in 2 ways: on it's own route or within the play route.
+  If on home route closing instructions goes back to /home. If on play route,
+  calls a callback provided from GameInfo that will toggle Rules closed.
+*/
 export default class Rules extends React.Component {
-  displayPreviousRule = () => {
-    const currentTopicId = parseInt(this.props.match.params.topic)
-    if (currentTopicId > 0) {
-      this.props.history.push(`/home/rules/${currentTopicId - 1}`)
-    } else {
-      this.props.history.push("/home")
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentRule: 0,
     }
   }
 
-  displayNextRule = () => {
-    const currentTopicId = parseInt(this.props.match.params.topic)
-    if (currentTopicId < rules.length - 1) {
-      this.props.history.push(`/home/rules/${currentTopicId + 1}`)
+  displayPreviousRule = (event) => {
+    const { currentRule } = this.state
+    if (currentRule > 0) {
+      this.setState((state) => {
+        return {
+          currentRule: state.currentRule - 1,
+        }
+      })
     } else {
-      this.props.history.push("/home")
+      if (this.props.toggleGameInfo) {
+        this.props.toggleGameInfo(event)
+      } else {
+        this.props.history.push("/home")
+      }
+    }
+  }
+
+  displayNextRule = (event) => {
+    const { currentRule } = this.state
+    if (currentRule < rules.length - 1) {
+      this.setState((state) => {
+        return {
+          currentRule: state.currentRule + 1,
+        }
+      })
+    } else {
+      if (this.props.toggleGameInfo) {
+        this.props.toggleGameInfo(event)
+      } else {
+        this.props.history.push("/home")
+      }
     }
   }
 
   render() {
-    const currentTopicId = parseInt(this.props.match.params.topic)
+    const { currentRule } = this.state
     const buttonInfo = [
       {
-        text: currentTopicId > 0 ? "Back" : "Close",
+        text: currentRule > 0 ? "Back" : "Close",
         onClick: this.displayPreviousRule,
+        name: this.props.toggleGameInfo && "showRules",
+        type:"button"
       },
       {
-        text: currentTopicId < rules.length -1 ? "Next" : "Close",
+        text: currentRule < rules.length - 1 ? "Next" : "Close",
         onClick: this.displayNextRule,
+        name: this.props.toggleGameInfo && "showRules",
+        type:"button"
       },
     ]
 
     return (
       <TabooCard tabooWord="How to Play" buttons={buttonInfo} type="home">
-        <DisplayRulesText topicId={currentTopicId} />
+        <DisplayRulesText topicId={currentRule} />
       </TabooCard>
     )
   }
 }
 
 Rules.propTypes = {
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
+  toggleGameInfo: PropTypes.func
 }
 
-function DisplayRulesText({ topicId }) {
+const DisplayRulesText = ({ topicId }) => {
   const rulesInfo = rules[topicId]
   if (rulesInfo) {
     return (

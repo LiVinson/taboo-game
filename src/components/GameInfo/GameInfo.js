@@ -1,4 +1,5 @@
 import React from "react"
+import Rules from "components/Rules"
 import { TextButton } from "components/shared/Button"
 import { StyledGameInfo } from "./style"
 class GameInfo extends React.Component {
@@ -10,8 +11,8 @@ class GameInfo extends React.Component {
     }
   }
     toggleGameInfo = (event) => {
-        const gameInfo = event.target.name
-        console.log("toggle ", gameInfo)
+      console.log(event)
+        const gameInfo = event.target.name 
         this.setState((state) => {
             return {
                 [gameInfo]: !state[gameInfo]
@@ -27,8 +28,10 @@ class GameInfo extends React.Component {
 
     return (
         <StyledGameInfo>
-            <TextButton {...buttonInfo[0]}/>
-            <TextButton {...buttonInfo[1]}/>
+            {this.state.showRules ? <Rules toggleGameInfo={this.toggleGameInfo}/> : <TextButton {...buttonInfo[0]}/> }
+            {this.state.showTeams ? "Show the Teams" : <TextButton {...buttonInfo[1]}/> }
+
+            
         </StyledGameInfo>)
   }
 }
