@@ -1,14 +1,13 @@
 import styled from "styled-components"
 
 export const StyledRoundInfo = styled.div`
-    margin-bottom:1rem;
     width:100%;
     max-width: 40rem;
     display:flex;
     flex-wrap:wrap;
     text-align:center;
     justify-content:space-around;
-    margin: 0 auto 1rem auto;
+    margin: 0 auto .5rem auto;
     
 `
 export const RoundData = styled.p`

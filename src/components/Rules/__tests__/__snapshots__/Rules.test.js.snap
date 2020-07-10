@@ -153,12 +153,14 @@ exports[`Rules render correctly 1`] = `
     <button
       className="c6"
       onClick={[Function]}
+      type="button"
     >
       Close
     </button>
     <button
       className="c7"
       onClick={[Function]}
+      type="button"
     >
       Next
     </button>

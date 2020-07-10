@@ -1,13 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
-import TabooCard from "components/TabooCard"
+import { TabooCard } from "components/shared/TabooCard"
 import TextLink from "components/TextLink"
 
 const MainMenu = ({ match }) => {
   const { path } = match
 
   const cardInfo = {
-    type: "home",
+    // type: "home",
     tabooWord: "Menu",
     list: [
       <TextLink to={`${path}/create`} text={"Create New Game"} />,

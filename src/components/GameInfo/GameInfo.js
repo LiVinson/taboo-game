@@ -1,7 +1,9 @@
 import React from "react"
 import Rules from "components/Rules"
+import PlayerListCard from "components/PlayerListCard"
 import { TextButton } from "components/shared/Button"
 import { StyledGameInfo } from "./style"
+
 class GameInfo extends React.Component {
   constructor(props) {
     super(props)
@@ -10,30 +12,58 @@ class GameInfo extends React.Component {
       showTeams: false,
     }
   }
-    toggleGameInfo = (event) => {
-      console.log(event)
-        const gameInfo = event.target.name 
-        this.setState((state) => {
-            return {
-                [gameInfo]: !state[gameInfo]
-            }
-        })
-    } 
-  
+  toggleGameInfo = (event) => {
+    const gameInfo = event.target.name
+    this.setState((state) => {
+      return {
+        [gameInfo]: !state[gameInfo],
+      }
+    })
+  }
 
   render() {
-      const buttonInfo=[
-          {text:"View Rules", type:"button", onClick: this.toggleGameInfo, name:"showRules"},
-          {text:"View Teams", type:"button", onClick: this.toggleGameInfo, name:"showTeams"}]
+    const buttonInfo = [
+      {
+        text: this.state.showRules ? "Hide Rules" : "Show Rules",
+        type: "button",
+        onClick: this.toggleGameInfo,
+        name: "showRules",
+      },
+      {
+        text: this.state.showTeams ? "Hide Teams" : "Show Teams",
+        type: "button",
+        onClick: this.toggleGameInfo,
+        name: "showTeams",
+      },
+    ]
 
+    //dummy data - to be retrieved from firebase using gamecode
+    const players = [
+      { name: "Alexa", team: "team1" },
+      { name: "Stephen", team: "team1" },
+      { name: "Yumani", team: "team2" },
+      { name: "Faith", team: "team1" },
+      { name: "Lisa", team: "team2" },
+      { name: "Danielle", team: "team2" },
+    ]
+
+    const { showRules, showTeams } = this.state
     return (
-        <StyledGameInfo>
-            {this.state.showRules ? <Rules toggleGameInfo={this.toggleGameInfo}/> : <TextButton {...buttonInfo[0]}/> }
-            {this.state.showTeams ? "Show the Teams" : <TextButton {...buttonInfo[1]}/> }
-
-            
-        </StyledGameInfo>)
+      <StyledGameInfo>
+      {<TextButton {...buttonInfo[0]} />}
+      {<TextButton {...buttonInfo[1]} />}
+      {showRules && <Rules toggleGameInfo={this.toggleGameInfo} />}
+      {showTeams && (
+        <PlayerListCard
+          players={players}
+          currentPlayer="TBD"       
+        />
+      )}
+      </StyledGameInfo>
+    )
   }
 }
 
 export default GameInfo
+
+

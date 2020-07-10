@@ -1,4 +1,4 @@
-import TabooCard from "../TabooCard"
+import { TabooCard } from "components/shared/TabooCard"
 import React from "react"
 
 export default function LayeredCards() {

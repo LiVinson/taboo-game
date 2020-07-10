@@ -48,14 +48,17 @@ export const StyledLargeButton = styled(StyledButton)`
 
 export const StyledTextButton = styled.button`
   font-size: 2.5rem;
-  font-weight:300;
+  font-weight:400;
   background-color:inherit;
   color: ${props => props.theme.color.primary};
   border:none;
   padding: .8rem;
   padding-bottom: 0rem;
   font-family: ${props => props.theme.text.display};
-  line-height:1;
+  width: fit-content;
+  &:nth-child(2){
+    margin-bottom: 2rem;
+  }
   &::after {
     content:"";
     display:block;
@@ -64,5 +67,12 @@ export const StyledTextButton = styled.button`
     background-color:currentColor;
     margin-top: .5rem;
     
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    color: ${props => props.theme.color.tertiary};
+
   }
 `

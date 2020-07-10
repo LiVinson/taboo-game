@@ -1,6 +1,7 @@
 import React from "react"
-import TabooCard, { TabooCardTop } from "components/TabooCard"
-import { Instructions, StyledTeamList, PlayerList, PlayerTitle, Player } from "./style"
+import { TabooCardTop } from "components/shared/TabooCard"
+import PlayerListCard from "components/PlayerListCard"
+import { Instructions } from "./style"
 
 const Waiting = (props) => {
   const { gamecode } = props.match.params
@@ -26,6 +27,9 @@ const Waiting = (props) => {
         disabled:false
     }
   ]
+  //dummy data - to be retrieved from firebase using gamecode
+  const players = [{name: "Alexa", team: "unassigned" }, {name: "Stephen", team: "team1" }, {name: "Yumani", team: "team2" },{name: "Faith", team: "team1" },{name: "Lisa", team: "unassigned" }, {name: "Danielle", team: "team2" }]
+
   return (
     <React.Fragment>
       <Instructions>
@@ -33,40 +37,11 @@ const Waiting = (props) => {
         picked a team, select PLAY to start!
       </Instructions>
       <TabooCardTop margin={true} tabooWord={gamecode} />
-      <TabooCard tabooWord="Players" buttons={buttonInfo}>
-        <TeamList
-          title="Unassigned"
-          players={["Lisa", "Alexa"]}
-          currentPlayerId={playerId}
-        />
-        <TeamList
-          title="Team 1"
-          players={["Faith", "Stephen"]}
-          currentPlayerId={playerId}
-        />
-        <TeamList
-          title="Team 2"
-          players={["Danielle", "Yumani"]}
-          currentPlayerId={playerId}
-        />
-      </TabooCard>
+     
+      <PlayerListCard players={players} currentPlayer={playerId} buttonInfo={buttonInfo} />
     </React.Fragment>
   )
 }
 
-//players will need to be array of objects with player names and id.
-//Compare playerId to currentPlayer to determine if style and icon
-const TeamList = ({ title, players, currentPlayer }) => {
-  return (
-    <StyledTeamList>
-      <PlayerTitle>{title}</PlayerTitle>
-      <PlayerList>
-        {players.map((player, index) => (
-          <Player key={index}>{player}</Player>
-        ))}
-      </PlayerList>
-    </StyledTeamList>
-  )
-}
 
 export default Waiting

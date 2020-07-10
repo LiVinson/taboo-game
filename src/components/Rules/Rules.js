@@ -1,7 +1,7 @@
 import React from "react"
 import { Redirect } from "react-router-dom"
 import PropTypes from "prop-types"
-import TabooCard from "components/TabooCard"
+import { ButtonTabooCard } from "components/shared/TabooCard"
 import rules from "./rulesText"
 import { RulesTitle, RulesText } from "./style"
 
@@ -71,9 +71,9 @@ export default class Rules extends React.Component {
     ]
 
     return (
-      <TabooCard tabooWord="How to Play" buttons={buttonInfo} type="home">
+      <ButtonTabooCard tabooWord="How to Play" buttons={buttonInfo} type="home">
         <DisplayRulesText topicId={currentRule} />
-      </TabooCard>
+      </ButtonTabooCard>
     )
   }
 }
