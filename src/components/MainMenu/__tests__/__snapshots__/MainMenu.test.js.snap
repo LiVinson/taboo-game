@@ -3,7 +3,6 @@
 exports[`renders correctly 1`] = `
 <div
   className="sc-AxjAm lcQul"
-  type="home"
 >
   <div
     className="sc-AxirZ hJFEXp"

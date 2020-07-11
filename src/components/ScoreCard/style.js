@@ -13,5 +13,5 @@ export const Scores = styled.ul`
       background-color: ${(props) => props.theme.color.lightGray2};
       margin: 0.8rem auto 1rem auto;
     }
-  }
+  
 `

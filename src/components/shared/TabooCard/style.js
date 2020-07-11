@@ -13,6 +13,10 @@ export const StyledTabooCard = styled.div`
     box-shadow: 0px 0.8rem 1rem rgba(0, 0, 0, 0.9);
     color: ${(props) => props.theme.color.primary};
 
+    &:not(:first-child){
+        margin-bottom:2rem;
+    }
+
     ${(props) =>
     props.type === "middle" &&
     css`
