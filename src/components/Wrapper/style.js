@@ -6,11 +6,12 @@ export const StyledWrapper = styled.div`
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  background-image: ${(props) => (css`
+  background-color: ${props => props.theme.color.lightGray1};
+  /* background-image: ${(props) => (css`
     linear-gradient(
       to bottom,
       ${props.theme.color.white} 0%,
       ${props.theme.color.white} 50%, 70%,
       ${props.theme.color.primary} 90%)`
-    )} 
+    )}  */
 `

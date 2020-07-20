@@ -1,10 +1,10 @@
 import React from "react"
 import { Redirect, NavLink, Switch, Route } from "react-router-dom"
 import "./Home.scss"
-import MainMenu from "../../components/MainMenu"
-import CreateGame from "../../components/CreateGame"
-import JoinGame from "../../components/JoinGame"
-import Rules from "../../components/Rules"
+import MainMenu from "components/MainMenu"
+import CreateGame from "components/CreateGame"
+import JoinGame from "components/JoinGame"
+import Rules from "components/Rules"
 
 
 // import Modal from "../../components/Modal"
@@ -22,7 +22,7 @@ return (
     <Route path={path} exact component={MainMenu} />
     <Route path={`${path}/create`} component={CreateGame} />
     <Route path={`${path}/join`} component={JoinGame} />
-    <Route path={`${path}/rules/:topic`} component={Rules} />
+    <Route path={`${path}/rules`} component={Rules} />
   </Switch>
 )
 

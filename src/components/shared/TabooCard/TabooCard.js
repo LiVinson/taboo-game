@@ -9,12 +9,11 @@ import {
 } from "./style"
 import ButtonContainer from "components/ButtonContainer"
 
-const TabooCard = ({ type, tabooWord, list, buttons, children }) => {
+export const TabooCard = ({ type, tabooWord, list, children }) => {
   return (
     <StyledTabooCard type={type}>
       <TabooWordContainer>{tabooWord}</TabooWordContainer>
       <TabooBody>{children ? children : <TabooList list={list} />}</TabooBody>
-      {buttons && <ButtonContainer buttons={buttons} />}
     </StyledTabooCard>
   )
 }
@@ -23,7 +22,24 @@ TabooCard.propTypes = {
   type: PropTypes.string,
   tabooWord: PropTypes.string.isRequired,
   list: PropTypes.array,
-  buttons: PropTypes.arrayOf(PropTypes.object),
+  children: PropTypes.node
+}
+
+export const ButtonTabooCard = ({tabooWord, list, buttons, children}) => {
+  return (
+    <StyledTabooCard>
+      <TabooWordContainer>{tabooWord}</TabooWordContainer>
+      <TabooBody>{children ? children : <TabooList list={list} />}</TabooBody>
+      <ButtonContainer buttons={buttons} />
+    </StyledTabooCard>
+  )
+}
+
+ButtonTabooCard.propTypes = {
+  tabooWord: PropTypes.string.isRequired,
+  buttons: PropTypes.array.isRequired,
+  list: PropTypes.array,
+  children: PropTypes.node
 }
 
 const TabooList = ({ list }) => {
@@ -55,4 +71,4 @@ export const TabooCardTop = ({ tabooWord, margin=false }) => {
     </StyledTabooCard>
   )
 }
-export default TabooCard
+

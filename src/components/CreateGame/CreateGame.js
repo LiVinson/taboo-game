@@ -1,5 +1,5 @@
 import React from "react"
-import TabooCard from "components/TabooCard"
+import { ButtonTabooCard } from "components/shared/TabooCard"
 import CreateGameForm from "components/CreateGameForm"
 
 export default class CreateGame extends React.Component {
@@ -9,7 +9,6 @@ export default class CreateGame extends React.Component {
     //Used for Form initial values
     this.state = {
       name: "",
-      gameMode: "remote",
       endGameMethod: "turns",
       turnsValue: 2,
       timeValue: 60,
@@ -38,12 +37,12 @@ export default class CreateGame extends React.Component {
       },
     ]
     return (
-      <TabooCard tabooWord="New Game" type="home" buttons={buttonInfo}>
+      <ButtonTabooCard tabooWord="New Game" buttons={buttonInfo}>
         <CreateGameForm
           initialValues={this.state}
           handleSubmit={this.handleSubmit}
         />
-      </TabooCard>
+      </ButtonTabooCard>
     )
   }
 }

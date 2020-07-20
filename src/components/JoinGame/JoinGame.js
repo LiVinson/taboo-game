@@ -1,5 +1,5 @@
 import React from "react"
-import TabooCard from "components/TabooCard"
+import {ButtonTabooCard} from "components/shared/TabooCard"
 import JoinGameForm from "components/JoinGameForm"
 
 class JoinGame extends React.Component {
@@ -33,11 +33,11 @@ class JoinGame extends React.Component {
       },
     ]
     return (
-      <TabooCard tabooWord="Join Game" type="home" buttons={buttonInfo}>
+      <ButtonTabooCard tabooWord="Join Game" type="home" buttons={buttonInfo}>
         <JoinGameForm 
           initialValues={{name, gamecode}}
           handleSubmit={this.handleSubmit} />
-      </TabooCard>
+      </ButtonTabooCard>
     )
   }
 }

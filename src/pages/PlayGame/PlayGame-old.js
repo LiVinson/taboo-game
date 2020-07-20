@@ -1,14 +1,14 @@
-import React from "react"
+/*import React from "react"
 import { Redirect } from "react-router-dom"
-import Team from "../components/Team"
-import { retrieveGameInformation, attachListener, updateRoundStatus, updateCardInfo, updateTeamScores} from "../utils/API"
-import { convertFBObjectToArray, setupListenerRequest, shuffleArray } from "../utils/helpers"
-import ScoreCard from "../components/ScoreCard"
-import RoundInfo from "../components/RoundInfo"
-import GameContainer from "../components/GameContainer"
+import Team from "../../components/Team"
+import { retrieveGameInformation, attachListener, updateRoundStatus, updateCardInfo, updateTeamScores} from "../../utils/API"
+import { convertFBObjectToArray, setupListenerRequest, shuffleArray } from "../../utils/helpers"
+import ScoreCard from "../../components/ScoreCard"
+import RoundInfo from "../../components/RoundInfo"
+import GameContainer from "../../components/GameContainer"
 
 
-export default class PlayGame extends React.Component {
+ class PlayGame extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -519,7 +519,7 @@ export default class PlayGame extends React.Component {
     } else {
       return (
         <div style={{ height: "100%" }}>
-          {/*Add score*/}
+          {/*Add score}
           <div style={{ width: "33%", float: "left", height: "100%" }}>
             <ScoreCard score1={team1.score} score2={team2.score} />
             <Team players={team1.players} teamName="Team 1" />
@@ -559,8 +559,8 @@ export default class PlayGame extends React.Component {
               //button to start round
               //you are giver message
               //you are watcher message            
-            */}
-          {/*game div - in round round:
+            */
+          /*game div - in round round:
                   //timer 
                   //giver:
                     //current card
@@ -569,7 +569,7 @@ export default class PlayGame extends React.Component {
                     //current card
                   
                     
-            */}
+            }
         </div>
       )
     }
@@ -587,3 +587,5 @@ function onCurrentTeam(player, turn) {
 function currentActivePlayer(player, activeId) {
   return player.playerId === activeId
 }
+
+*/

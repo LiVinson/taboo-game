@@ -22,6 +22,10 @@ Array [
   transform: rotate(42deg);
 }
 
+.c0:not(:first-child) {
+  margin-bottom: 2rem;
+}
+
 .c1 {
   background-color: #f7f9f9;
   padding: 1.2rem;
@@ -110,6 +114,10 @@ Array [
   -webkit-transform: rotate(-42deg);
   -ms-transform: rotate(-42deg);
   transform: rotate(-42deg);
+}
+
+.c0:not(:first-child) {
+  margin-bottom: 2rem;
 }
 
 .c1 {

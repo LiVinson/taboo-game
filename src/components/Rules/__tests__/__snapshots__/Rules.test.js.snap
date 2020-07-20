@@ -13,6 +13,10 @@ exports[`Rules render correctly 1`] = `
   color: #1982C4;
 }
 
+.c0:not(:first-child) {
+  margin-bottom: 2rem;
+}
+
 .c1 {
   background-color: #f7f9f9;
   padding: 1.2rem;
@@ -126,7 +130,6 @@ exports[`Rules render correctly 1`] = `
 
 <div
   className="c0"
-  type="home"
 >
   <div
     className="c1"
@@ -153,12 +156,14 @@ exports[`Rules render correctly 1`] = `
     <button
       className="c6"
       onClick={[Function]}
+      type="button"
     >
       Close
     </button>
     <button
       className="c7"
       onClick={[Function]}
+      type="button"
     >
       Next
     </button>

@@ -1,5 +1,5 @@
 import React from "react"
-import { StyledButton, StyledPrimaryButton, StyledLargeButton} from "./style"
+import { StyledButton, StyledPrimaryButton, StyledLargeButton, StyledTextButton} from "./style"
 
 //Takes in object of properties passed down. Typically includes type, onClick, text, and any other required attributes
 export const Button = (props) => {
@@ -13,4 +13,8 @@ export const PrimaryButton = (props) => {
 
 export const LargeButton = (props) => {
   return <StyledLargeButton {...props}>{props.text}</StyledLargeButton>
+}
+
+export const TextButton = (props) => {
+  return <StyledTextButton {...props}>{props.text}</StyledTextButton>
 }

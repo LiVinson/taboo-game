@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
 
 export const StyledHeader = styled.header`
-    margin-top: ${props => props.large ? "4rem" : "2rem"};
+    margin-top: ${props => props.large ? "3rem" : "2rem"};
     margin-bottom: ${props => props.subheading ? "4rem" : "3rem"};
 `
 
