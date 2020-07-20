@@ -16,6 +16,7 @@ export default class CreateGame extends React.Component {
     }
   }
 
+
   //Update to creating player id, submitting to firebase, redirecting to 'Waiting Room'
   handleSubmit(values, setSubmitting) {
     alert(JSON.stringify(values, null, 2))
@@ -41,6 +42,7 @@ export default class CreateGame extends React.Component {
         <CreateGameForm
           initialValues={this.state}
           handleSubmit={this.handleSubmit}
+          inputRef={this.inputRef}
         />
       </ButtonTabooCard>
     )

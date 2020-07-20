@@ -42,7 +42,7 @@ const CreateGameForm = (props) => {
             <TextLabel htmlFor="name">
               Enter Your Name
             </TextLabel>
-            <Field name="name" type="text" as={TextInput} placeholder=""  tabIndex="1"/>
+            <Field maxLength={20} name="name" type="text" as={TextInput} placeholder=""  tabIndex="1"/>
             <ErrorMessage name="name" component={ErrorText} />
           </FormSection>
 
