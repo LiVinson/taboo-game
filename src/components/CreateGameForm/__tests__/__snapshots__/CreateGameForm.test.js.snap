@@ -34,56 +34,6 @@ exports[`CreateGameForm renders correctly 1`] = `
     <p
       className="sc-AxiKw jjCqLL"
     >
-      Game Mode 
-    </p>
-    <div
-      className="sc-AxhCb hNWIJV"
-    >
-      <input
-        checked={true}
-        className="sc-AxgMl kjdsxc"
-        id="remote"
-        name="gameMode"
-        onBlur={[Function]}
-        onChange={[Function]}
-        tabIndex="2"
-        type="radio"
-        value="remote"
-      />
-      <label
-        className="sc-Axmtr fJjLoh"
-        htmlFor="remote"
-      >
-        Remote
-      </label>
-    </div>
-    <div
-      className="sc-AxhCb hNWIJV"
-    >
-      <input
-        checked={false}
-        className="sc-AxgMl kjdsxc"
-        id="inPerson"
-        name="gameMode"
-        onBlur={[Function]}
-        onChange={[Function]}
-        type="radio"
-        value="inPerson"
-      />
-      <label
-        className="sc-Axmtr fJjLoh"
-        htmlFor="inPerson"
-      >
-        In Person
-      </label>
-    </div>
-  </div>
-  <div
-    className="sc-AxirZ gKpSjo"
-  >
-    <p
-      className="sc-AxiKw jjCqLL"
-    >
       End Game Method
     </p>
     <div

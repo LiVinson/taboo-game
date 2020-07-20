@@ -1,19 +1,13 @@
-import { TabooCard } from "components/shared/TabooCard"
-import React from "react"
+import { TabooCard } from 'components/shared/TabooCard'
+import React from 'react'
 
 export default function LayeredCards() {
-  return (
-    <React.Fragment>
-      <TabooCard
-        type="middle"
-        tabooWord="Taboo!"
-        list={["Taboo!", "Taboo!", "Taboo!", "Taboo!"]}
-      />
-      <TabooCard
-        tabooWord="Taboo!"
-        type="bottom"
-        list={["Taboo!", "Taboo!", "Taboo!", "Taboo!"]}
-      />
-    </React.Fragment>
-  )
+	return (
+		<React.Fragment>
+			<TabooCard type="layer1"tabooWord="Taboo!" list={['Taboo!', 'Taboo!', 'Taboo!', 'Taboo!']} />
+			<TabooCard type="layer2" tabooWord="Taboo!" list={['Taboo!', 'Taboo!', 'Taboo!', 'Taboo!']} />
+      <TabooCard type="layer3" tabooWord="Taboo!" list={['Taboo!', 'Taboo!', 'Taboo!', 'Taboo!']} />
+
+      </React.Fragment>
+	)
 }

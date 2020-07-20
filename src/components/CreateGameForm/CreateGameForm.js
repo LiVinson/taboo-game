@@ -46,7 +46,7 @@ const CreateGameForm = (props) => {
             <ErrorMessage name="name" component={ErrorText} />
           </FormSection>
 
-          <FormSection padding="1rem">
+          {/*<FormSection padding="1rem">
             <FormSectionTitle>Game Mode </FormSectionTitle>
             <InputGroup>
               <Field
@@ -70,7 +70,7 @@ const CreateGameForm = (props) => {
               />
               <Label htmlFor="inPerson">In Person</Label>
             </InputGroup>
-          </FormSection>
+      </FormSection> */}
           {/* Radio button and drop down combination. Drop down for # of turns/amount of time is disabled if 
                 corresponding radio button for that option is not selected */}
 

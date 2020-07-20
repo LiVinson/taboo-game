@@ -16,26 +16,37 @@ export const StyledTabooCard = styled.div`
     &:not(:first-child){
         margin-bottom:2rem;
     }
-
+    
     ${(props) =>
-    props.type === "middle" &&
+    props.type === "layer3" &&
     css`
-        color: ${(props) => props.theme.color.secondary};;
+        color: ${(props) => props.theme.color.secondary};
         position: absolute;
         bottom: 8rem;
         left: 7rem;
-        z-index: 10;
+        z-index: -5;
+        transform: rotate(-20deg);
+    `}
+
+    ${(props) =>
+    props.type === "layer2" &&
+    css`
+        color: ${(props) => props.theme.color.primary2};
+        position: absolute;
+        bottom: 8rem;
+        left: 7rem;
+        z-index: -10;
         transform: rotate(42deg);
     `}
 
   ${(props) =>
-    props.type === "bottom" &&
+    props.type === "layer1" &&
     css`
-      color: var(--color-tertiary);
+      color: ${(props) => props.theme.color.tertiary};
       position: absolute;
       bottom: 9rem;
       right: 8rem;
-      z-index: 5;
+      z-index: -15;
       transform: rotate(-42deg);
     `}
 

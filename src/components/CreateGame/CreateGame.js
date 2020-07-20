@@ -9,7 +9,6 @@ export default class CreateGame extends React.Component {
     //Used for Form initial values
     this.state = {
       name: "",
-      gameMode: "remote",
       endGameMethod: "turns",
       turnsValue: 2,
       timeValue: 60,

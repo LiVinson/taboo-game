@@ -2,7 +2,7 @@
 
 exports[`Header renders correctly on home route 1`] = `
 .c0 {
-  margin-top: 4rem;
+  margin-top: 3rem;
   margin-bottom: 4rem;
 }
 
