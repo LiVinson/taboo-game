@@ -1,5 +1,6 @@
 import React from "react"
-import { StyledTeamList, PlayerTitle, PlayerList, Player } from "./style"
+import { StyledTeamList, PlayerTitle, PlayerList, Player, StyledStar } from "./style"
+
 
 //players will need to be array of objects with player names and id.
 //Compare playerId to currentPlayer to determine if style and icon
@@ -9,7 +10,9 @@ const TeamList = ({ title, players, currentPlayer }) => {
       <PlayerTitle>{title}</PlayerTitle>
       <PlayerList>
         {players.map((player, index) => (
-          <Player key={index}>{player.name}</Player>
+          // Players will see a start next to their own name
+          <Player key={index}>{player.name} {currentPlayer === player.id ? <StyledStar/> : null}</Player>          
+
         ))}
       </PlayerList>
     </StyledTeamList>

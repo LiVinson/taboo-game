@@ -19,15 +19,6 @@ exports[`renders correctly 1`] = `
         className="sc-AxhUy hPwAZu"
       >
         <a
-          href="/home/create"
-        >
-          Test
-        </a>
-      </li>
-      <li
-        className="sc-AxhUy hPwAZu"
-      >
-        <a
           className="sc-fzoLsD gVPnmc"
           href="/home/create"
           onClick={[Function]}
