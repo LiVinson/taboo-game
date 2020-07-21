@@ -69,10 +69,13 @@ export const StyledTextButton = styled.button`
     
   }
 
+  &:visited {
+    color: ${props => props.theme.color.primary};
+  }
   &:active,
   &:focus {
     outline: none;
-    color: ${props => props.theme.color.tertiary};
+    color: ${props => props.theme.color.grayDark2};
 
   }
 `

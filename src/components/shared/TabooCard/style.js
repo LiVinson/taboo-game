@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 
 
 export const StyledTabooCard = styled.div`
-    width: 28rem;
+    width: 30rem;
     margin: 0 auto;
     margin-bottom: ${props => props.margin && "3rem"};
     padding: 2rem;
