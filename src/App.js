@@ -12,7 +12,7 @@ import Waiting from "pages/Waiting"
 import PlayGame from "pages/PlayGame"
 // import New from "pages/New"
 // import Game from "pages/PlayGame"
-// import EndGame from "pages/EndGame"
+import EndGame from "pages/EndGame"
 import Container from "components/Container"
 import Header from "components/Header"
 import LayeredCards from "components/LayeredCards"
@@ -30,6 +30,7 @@ class App extends React.Component {
             <Route path="/home" component={Home} />
             <Route path="/waiting/:gamecode/:playerId" component={Waiting} />
             <Route path="/play/:gamecode/:playerId" component={PlayGame} />
+            <Route path="/end/:gamecode/:playerId" component={EndGame} />
 
             {/*
                         <Route path="/new/:gamecode/:playerId" component={New} />

@@ -3,7 +3,7 @@
 exports[`Layered cards renders correctly 1`] = `
 Array [
   .c0 {
-  width: 28rem;
+  width: 30rem;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 2px;
@@ -14,13 +14,13 @@ Array [
   color: #1982C4;
   color: #a23b72;
   position: absolute;
-  bottom: 9rem;
-  right: 3rem;
+  top: 66%;
+  left: 50%;
   z-index: -15;
-  -webkit-transform: rotate(-5deg);
-  -ms-transform: rotate(-5deg);
-  transform: rotate(-5deg);
-  box-shadow: 0px 0.1rem .3rem rgba(0,0,0,0.7);
+  -webkit-transform: translate(-50%,-50%) rotate(-5deg);
+  -ms-transform: translate(-50%,-50%) rotate(-5deg);
+  transform: translate(-50%,-50%) rotate(-5deg);
+  box-shadow: 0px 0.1rem 0.3rem rgba(0,0,0,0.7);
 }
 
 .c0:not(:first-child) {
@@ -98,7 +98,7 @@ Array [
     </div>
   </div>,
   .c0 {
-  width: 28rem;
+  width: 30rem;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 2px;
@@ -109,13 +109,13 @@ Array [
   color: #1982C4;
   color: #8AC926;
   position: absolute;
-  bottom: 10rem;
-  left: 4rem;
+  top: 66%;
+  left: 50%;
   z-index: -10;
-  -webkit-transform: rotate(16deg);
-  -ms-transform: rotate(16deg);
-  transform: rotate(16deg);
-  box-shadow: 0px 0.3rem .6rem rgba(0,0,0,0.7);
+  -webkit-transform: translate(-50%,-50%) rotate(16deg);
+  -ms-transform: translate(-50%,-50%) rotate(16deg);
+  transform: translate(-50%,-50%) rotate(16deg);
+  box-shadow: 0px 0.3rem 0.6rem rgba(0,0,0,0.7);
 }
 
 .c0:not(:first-child) {
@@ -193,7 +193,7 @@ Array [
     </div>
   </div>,
   .c0 {
-  width: 28rem;
+  width: 30rem;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 2px;
@@ -204,13 +204,13 @@ Array [
   color: #1982C4;
   color: #ee5b2c;
   position: absolute;
-  bottom: 11rem;
-  left: 4rem;
+  top: 66%;
+  left: 50%;
   z-index: -5;
-  -webkit-transform: rotate(-20deg);
-  -ms-transform: rotate(-20deg);
-  transform: rotate(-20deg);
-  box-shadow: 0px 0.6rem .8rem rgba(0,0,0,0.7);
+  -webkit-transform: translate(-50%,-50%) rotate(-20deg);
+  -ms-transform: translate(-50%,-50%) rotate(-20deg);
+  transform: translate(-50%,-50%) rotate(-20deg);
+  box-shadow: 0px 0.6rem 0.8rem rgba(0,0,0,0.7);
 }
 
 .c0:not(:first-child) {

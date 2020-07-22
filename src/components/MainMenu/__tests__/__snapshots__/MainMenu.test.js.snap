@@ -2,21 +2,21 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="sc-AxjAm dElvew"
+  className="sc-AxjAm kVKpnR"
 >
   <div
-    className="sc-AxirZ fcJZej"
+    className="sc-AxirZ hSFVUy"
   >
     Menu
   </div>
   <div
-    className="sc-AxiKw jcwHUa"
+    className="sc-AxiKw llchXe"
   >
     <ul
-      className="sc-AxhCb lgZvpc"
+      className="sc-AxhCb kUMwYV"
     >
       <li
-        className="sc-AxhUy hPwAZu"
+        className="sc-AxhUy kWmTzm"
       >
         <a
           className="sc-fzoLsD gVPnmc"
@@ -28,7 +28,7 @@ exports[`renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="sc-AxhUy hPwAZu"
+        className="sc-AxhUy kWmTzm"
       >
         <a
           className="sc-fzoLsD gVPnmc"
@@ -40,7 +40,7 @@ exports[`renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="sc-AxhUy hPwAZu"
+        className="sc-AxhUy kWmTzm"
       >
         <a
           className="sc-fzoLsD gVPnmc"
@@ -52,7 +52,7 @@ exports[`renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="sc-AxhUy hPwAZu"
+        className="sc-AxhUy kWmTzm"
       >
         <a
           className="sc-fzoLsD gVPnmc"

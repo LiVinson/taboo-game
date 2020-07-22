@@ -3,7 +3,7 @@ import { ButtonTabooCard, TabooCard } from "components/shared/TabooCard"
 import TeamList from "components/TeamList"
 
 
-const PlayerListCard = ({ players, currentPlayer, buttonInfo }) => {
+const PlayerListCard = ({ players, currentPlayer, buttonInfo, tabooWord="Players" }) => {
   const team1 = players.filter((player) => player.team === "team1")
   const team2 = players.filter((player) => player.team === "team2")
   const unassigned = players.filter((player) => player.team === "unassigned")
@@ -39,12 +39,12 @@ const PlayerListCard = ({ players, currentPlayer, buttonInfo }) => {
 
   if (buttonInfo) {
     return (
-      <ButtonTabooCard tabooWord="Players" buttons={buttonInfo}>
+      <ButtonTabooCard tabooWord={tabooWord} buttons={buttonInfo}>
         {list}
       </ButtonTabooCard>
     )
   } else {
-    return <TabooCard tabooWord="Players">{list}</TabooCard>
+    return <TabooCard tabooWord={tabooWord}> {list}</TabooCard>
   }
 }
 
