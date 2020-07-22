@@ -13,7 +13,7 @@ import PlayGame from "pages/PlayGame"
 // import New from "pages/New"
 // import Game from "pages/PlayGame"
 // import EndGame from "pages/EndGame"
-import Wrapper from "components/Wrapper"
+import Container from "components/Container"
 import Header from "components/Header"
 import LayeredCards from "components/LayeredCards"
 
@@ -21,7 +21,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Wrapper>
+        <Container>
           <Route component={Header} />
           <Switch>
             <Route exact path="/">
@@ -41,7 +41,7 @@ class App extends React.Component {
           </Switch>
           <LayeredCards />
           <div className="footer-line"></div>
-        </Wrapper>
+        </Container>
       </Router>
     )
   }

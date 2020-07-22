@@ -19,6 +19,8 @@ const GlobalStyle = createGlobalStyle`
         font-family: var(--font-family--text);
         line-height:1.4;
         
+        
+        
     }
 `
 
