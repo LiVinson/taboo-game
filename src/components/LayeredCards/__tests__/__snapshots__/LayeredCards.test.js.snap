@@ -3,7 +3,7 @@
 exports[`Layered cards renders correctly 1`] = `
 Array [
   .c0 {
-  width: 30rem;
+  width: 28rem;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 2px;
@@ -12,14 +12,15 @@ Array [
   background-color: currentColor;
   box-shadow: 0px 0.8rem 1rem rgba(0,0,0,0.9);
   color: #1982C4;
-  color: #ee5b2c;
+  color: #a23b72;
   position: absolute;
-  bottom: 8rem;
-  left: 7rem;
-  z-index: 10;
-  -webkit-transform: rotate(42deg);
-  -ms-transform: rotate(42deg);
-  transform: rotate(42deg);
+  bottom: 9rem;
+  right: 3rem;
+  z-index: -15;
+  -webkit-transform: rotate(-5deg);
+  -ms-transform: rotate(-5deg);
+  transform: rotate(-5deg);
+  box-shadow: 0px 0.1rem .3rem rgba(0,0,0,0.7);
 }
 
 .c0:not(:first-child) {
@@ -60,7 +61,7 @@ Array [
 
 <div
     className="c0"
-    type="middle"
+    type="layer1"
   >
     <div
       className="c1"
@@ -97,7 +98,7 @@ Array [
     </div>
   </div>,
   .c0 {
-  width: 30rem;
+  width: 28rem;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 2px;
@@ -106,14 +107,15 @@ Array [
   background-color: currentColor;
   box-shadow: 0px 0.8rem 1rem rgba(0,0,0,0.9);
   color: #1982C4;
-  color: var(--color-tertiary);
+  color: #8AC926;
   position: absolute;
-  bottom: 9rem;
-  right: 8rem;
-  z-index: 5;
-  -webkit-transform: rotate(-42deg);
-  -ms-transform: rotate(-42deg);
-  transform: rotate(-42deg);
+  bottom: 10rem;
+  left: 4rem;
+  z-index: -10;
+  -webkit-transform: rotate(16deg);
+  -ms-transform: rotate(16deg);
+  transform: rotate(16deg);
+  box-shadow: 0px 0.3rem .6rem rgba(0,0,0,0.7);
 }
 
 .c0:not(:first-child) {
@@ -154,7 +156,102 @@ Array [
 
 <div
     className="c0"
-    type="bottom"
+    type="layer2"
+  >
+    <div
+      className="c1"
+    >
+      Taboo!
+    </div>
+    <div
+      className="c2"
+    >
+      <ul
+        className="c3"
+      >
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+      </ul>
+    </div>
+  </div>,
+  .c0 {
+  width: 28rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  z-index: 15;
+  background-color: currentColor;
+  box-shadow: 0px 0.8rem 1rem rgba(0,0,0,0.9);
+  color: #1982C4;
+  color: #ee5b2c;
+  position: absolute;
+  bottom: 11rem;
+  left: 4rem;
+  z-index: -5;
+  -webkit-transform: rotate(-20deg);
+  -ms-transform: rotate(-20deg);
+  transform: rotate(-20deg);
+  box-shadow: 0px 0.6rem .8rem rgba(0,0,0,0.7);
+}
+
+.c0:not(:first-child) {
+  margin-bottom: 2rem;
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+<div
+    className="c0"
+    type="layer3"
   >
     <div
       className="c1"

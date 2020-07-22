@@ -1,11 +1,11 @@
-import React from "react"
-import { Redirect, NavLink, Switch, Route } from "react-router-dom"
-import "./Home.scss"
-import MainMenu from "components/MainMenu"
-import CreateGame from "components/CreateGame"
-import JoinGame from "components/JoinGame"
-import Rules from "components/Rules"
-
+import React from 'react'
+import { Redirect, NavLink, Switch, Route } from 'react-router-dom'
+import './Home.scss'
+import MainMenu from 'components/MainMenu'
+import CreateGame from 'components/CreateGame'
+import JoinGame from 'components/JoinGame'
+import Rules from 'components/Rules'
+import LayeredCards from 'components/LayeredCards'
 
 // import Modal from "../../components/Modal"
 // import JoinForm from "../../components/JoinForm"
@@ -13,19 +13,19 @@ import Rules from "components/Rules"
 // import { createNewGame } from "../../utils/API"
 
 export default function Home({ match }) {
+	const { path } = match
+	//return one of series of routes based on current home path
 
-  const { path }  = match
-    //return one of series of routes based on current home path
+	return (
 
-return (
-  <Switch>
-    <Route path={path} exact component={MainMenu} />
-    <Route path={`${path}/create`} component={CreateGame} />
-    <Route path={`${path}/join`} component={JoinGame} />
-    <Route path={`${path}/rules`} component={Rules} />
-  </Switch>
-)
+			<Switch>
+				<Route path={path} exact component={MainMenu} />
+				<Route path={`${path}/create`} component={CreateGame} />
+				<Route path={`${path}/join`} component={JoinGame} />
+				<Route path={`${path}/rules`} component={Rules} />
+			</Switch>
 
+	)
 }
 /*
 class Home2 extends React.Component {
@@ -66,24 +66,24 @@ class Home2 extends React.Component {
     Users code to create a game object in firebase
     Passes gamecode to function to create player id
   */
-  // createGame(e) {
-  //   e.target.disabled = true
-  //   createNewCode().then((gamecode) => {
-  //     createNewGame(gamecode)
-  //       .then((res) => this.createPlayerCode(gamecode))
-  //       .catch((err) => {
-  //         console.log(
-  //           "There was an error creating a new game with gamecode: ",
-  //           gamecode
-  //         )
-  //       })
-  //   })
-  // }
+// createGame(e) {
+//   e.target.disabled = true
+//   createNewCode().then((gamecode) => {
+//     createNewGame(gamecode)
+//       .then((res) => this.createPlayerCode(gamecode))
+//       .catch((err) => {
+//         console.log(
+//           "There was an error creating a new game with gamecode: ",
+//           gamecode
+//         )
+//       })
+//   })
+// }
 
-  /*Generates a player id
+/*Generates a player id
   sets state and redirects to Game "Waiting room"
   */
- /*
+/*
   createPlayerCode(gamecode) {
     createNewCode().then((playerId) => {
       console.log(playerId)

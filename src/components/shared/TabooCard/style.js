@@ -22,10 +22,12 @@ export const StyledTabooCard = styled.div`
     css`
         color: ${(props) => props.theme.color.secondary};
         position: absolute;
-        bottom: 8rem;
-        left: 7rem;
+        bottom: 11rem;
+        left: 4rem;
         z-index: -5;
         transform: rotate(-20deg);
+        box-shadow: 0px 0.6rem .8rem rgba(0, 0, 0, 0.7);
+
     `}
 
     ${(props) =>
@@ -33,10 +35,12 @@ export const StyledTabooCard = styled.div`
     css`
         color: ${(props) => props.theme.color.primary2};
         position: absolute;
-        bottom: 8rem;
-        left: 7rem;
+        bottom: 10rem;
+        left: 4rem;
         z-index: -10;
-        transform: rotate(42deg);
+        transform: rotate(16deg);
+        box-shadow: 0px 0.3rem .6rem rgba(0, 0, 0, 0.7);
+
     `}
 
   ${(props) =>
@@ -45,9 +49,11 @@ export const StyledTabooCard = styled.div`
       color: ${(props) => props.theme.color.tertiary};
       position: absolute;
       bottom: 9rem;
-      right: 8rem;
+      right: 3rem;
       z-index: -15;
-      transform: rotate(-42deg);
+      transform: rotate(-5deg);
+      box-shadow: 0px 0.1rem .3rem rgba(0, 0, 0, 0.7);
+
     `}
 
 `
@@ -56,8 +62,7 @@ StyledTabooCard.displayName = "StyledTabooCard"
 export const TabooWordContainer = styled.div`
     background-color: ${(props) => props.theme.color.offWhite};
     padding: 1.2rem;
-    text-align: center;
-   
+    text-align: center;   
     border-radius: 2px;
     font-family: ${(props) => props.theme.text.display};
     font-size: ${(props) => props.theme.fontSize.large};

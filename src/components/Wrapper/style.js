@@ -7,6 +7,7 @@ export const StyledWrapper = styled.div`
   position: relative;
   overflow: hidden;
   background-color: ${props => props.theme.color.lightGray1};
+  z-index:0;
   /* background-image: ${(props) => (css`
     linear-gradient(
       to bottom,

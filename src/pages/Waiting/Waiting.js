@@ -6,6 +6,7 @@ import { Instructions } from "./style"
 const Waiting = (props) => {
   const { gamecode } = props.match.params
   const { playerId } = props.match.params
+  console.log(playerId)
   const buttonInfo = [
     {
       text: "Team 1",
@@ -28,7 +29,7 @@ const Waiting = (props) => {
     }
   ]
   //dummy data - to be retrieved from firebase using gamecode
-  const players = [{name: "Alexa", team: "unassigned" }, {name: "Stephen", team: "team1" }, {name: "Yumani", team: "team2" },{name: "Faith", team: "team1" },{name: "Lisa", team: "unassigned" }, {name: "Danielle", team: "team2" }]
+  const players = [{id:"123", name: "Alexa", team: "unassigned" }, {id:"456", name: "Stephen", team: "team1" }, {id:"789", name: "Yumani", team: "team2" },{id:"012", name: "Faith", team: "team1" },{id:"345", name: "Lisa", team: "unassigned" }, {id: "678", name: "Danielle", team: "team2" }]
 
   return (
     <React.Fragment>

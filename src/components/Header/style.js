@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 
 export const StyledHeader = styled.header`
     margin-top: ${props => props.large ? "3rem" : "2rem"};
-    margin-bottom: ${props => props.subheading ? "4rem" : "3rem"};
+    margin-bottom: ${props => props.subheading ? "5rem" : "3rem"};
 `
 
 export const Title = styled.h1`
@@ -17,7 +17,7 @@ export const Title = styled.h1`
     props.large &&
     css`
       font-size: ${(props) => props.theme.fontSize.xlarge};
-      text-shadow: 0px 1rem 1rem rgba(0, 0, 0, 0.6);
+      text-shadow: 0px .3rem .6rem rgba(0, 0, 0, 0.6);
       text-align: center;
       margin: 1rem 0;
     `}
