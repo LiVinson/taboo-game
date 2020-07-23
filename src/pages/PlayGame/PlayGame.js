@@ -3,22 +3,20 @@ import RoundInfo from 'components/RoundInfo'
 import GameInfo from 'components/GameInfo'
 import PreRound from 'components/PreRound'
 import InRound from 'components/InRound'
-import PostRound from "components/PostRound"
+import PostRound from 'components/PostRound'
 
 class PlayGame extends React.Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			roundStatus: 'postRound',
+			roundStatus: 'preRound',
 		}
 	}
 
 	startRound = () => {
 		console.log('start round')
 	}
-
-
 
 	render() {
 		const dummyRoundData = {
@@ -33,13 +31,13 @@ class PlayGame extends React.Component {
 				word: 'Simba',
 				taboo: ['something', 'something', 'something', 'something', 'something'],
 				status: 'correct',
-      },
-      {
+			},
+			{
 				word: 'Mufasa',
 				taboo: ['something', 'something', 'something', 'something', 'something'],
 				status: 'correct',
-      },
-      {
+			},
+			{
 				word: 'Scar',
 				taboo: ['something', 'something', 'something', 'something', 'something'],
 				status: 'correct',
@@ -61,8 +59,8 @@ class PlayGame extends React.Component {
 				<RoundInfo round={1} watcher="Stephen" giver="Danielle" />
 				<GameInfo />
 				{this.state.roundStatus === 'preRound' && <PreRound {...dummyRoundData} />}
-        {this.state.roundStatus === 'inProgress' && <InRound {...dummyRoundData} />}
-        {this.state.roundStatus === 'postRound' && <PostRound cardsPlayed={dummyPostRoundData} />}
+				{this.state.roundStatus === 'inProgress' && <InRound {...dummyRoundData} />}
+				{this.state.roundStatus === 'postRound' && <PostRound cardsPlayed={dummyPostRoundData} />}
 			</React.Fragment>
 		)
 	}

@@ -61,11 +61,11 @@ export const TeamGameCard = ({ role, giver, watcher }) => {
   return (
     <React.Fragment>
       {role === "giverTeam" ? (
-        <TabooCard tabooWord="Relax!">
+        <TabooCard tabooWord="Guess!">
           <InstructionsText>
-            It’s the other team’s turn to give clues and guess!{" "}
-            <KeyWord>{watcher.name}</KeyWord> will be watching to make sure{" "}
-            <KeyWord>{giver.name}</KeyWord> doesn’t say any Taboo words.
+            It's your teams turn to guess the word!{" "}
+            <KeyWord>{giver.name}</KeyWord> is giving the clues and {" "}
+            <KeyWord>{watcher.name}</KeyWord> will be making sure they don't say anything Taboo!
           </InstructionsText>
         </TabooCard>
       ) : (
