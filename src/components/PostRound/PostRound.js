@@ -1,6 +1,7 @@
 import React from 'react'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import { PlayedCardList, TabooRadio, TabooLabel, TabooWord } from './style'
+import { LargeButton } from "components/shared/Button"
 
 const TabooSelection = ({ word, status, onChange }) => {
 	return (
@@ -24,8 +25,6 @@ const TabooSelection = ({ word, status, onChange }) => {
     ✔ On click button, call function to > change the status(log for now)
     Word displays on new card list.
     On submit, call function to check if game is over
-
-
 */
 
 class PostRound extends React.Component {
@@ -96,7 +95,9 @@ class PostRound extends React.Component {
 							<TabooSelection key={index} word={card.word} onChange={this.handleCardSelection} status="discard"/>
 						))}
 					</PlayedCardList>
-				</ButtonTabooCard>
+                </ButtonTabooCard>
+                <LargeButton text="Confirm!" onClick={() => console.log("Confirming cards.")}/>
+
 			</React.Fragment>
 		)
 	}

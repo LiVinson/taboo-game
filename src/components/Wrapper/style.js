@@ -2,12 +2,14 @@ import styled, { css } from "styled-components"
 
 export const StyledWrapper = styled.div`
 
-  padding: 1rem 2.5rem 6rem 2.5rem;
+  padding: 1rem .5rem 6rem .5rem;
   min-height: 100vh;
   position: relative;
-  overflow: hidden;
   background-color: ${props => props.theme.color.lightGray1};
   z-index:0;
+  width: 30rem;
+  max-width:100%;
+  margin: 0 auto;
   /* background-image: ${(props) => (css`
     linear-gradient(
       to bottom,

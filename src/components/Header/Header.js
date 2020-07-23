@@ -4,12 +4,12 @@ import {  StyledHeader, Title, Subheading, FocusSpan} from "./style.js"
 
 
 export default function Header({ location }) {
-  const homeRoute = location.pathname.includes("home")
+  const homeOrEndRoute = location.pathname.includes("home") || location.pathname.includes("end")
   const homeRouteExact = location.pathname === ("/home")
 
   return (
-    <StyledHeader large={homeRoute} subheading={homeRouteExact}>
-      <Title large={homeRoute}>Taboo!</Title>
+    <StyledHeader large={homeOrEndRoute} subheading={homeRouteExact}>
+      <Title large={homeOrEndRoute}>Taboo!</Title>
       {homeRouteExact && (
         <Subheading>
           The team game that’s all about what you{" "}
