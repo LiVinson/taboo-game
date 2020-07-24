@@ -5,7 +5,7 @@ export const StyledWrapper = styled.div`
   padding: 1rem .5rem 6rem .5rem;
   min-height: 100vh;
   position: relative;
-  background-color: ${props => props.theme.color.lightGray1};
+  /* background-color: ${props => props.theme.color.offWhite}; */
   z-index:0;
   width: 30rem;
   max-width:100%;

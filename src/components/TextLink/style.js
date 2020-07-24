@@ -9,7 +9,6 @@ export const StyledTextLink = styled(Link)`
   &:visited {
     color: currentColor;
     text-decoration: none;
-    text-shadow: 0px 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
     transform: translateY(0)
 
   }
