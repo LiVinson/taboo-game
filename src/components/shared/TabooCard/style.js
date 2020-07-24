@@ -12,7 +12,7 @@ export const StyledTabooCard = styled.div`
     /* box-shadow: 0px 0.8rem 1rem rgba(0, 0, 0, 0.9); */
     color: ${(props) => props.theme.color.primary};
 
-
+/* Creates a box shadow on bottom left corner of card  */
 	&:before {
 		z-index: -1;
 		position: absolute;
@@ -27,9 +27,9 @@ export const StyledTabooCard = styled.div`
 		transform: rotate(-3deg);
   
 	}
-    &:not(:first-child){
+    /* &:not(:first-child){
         margin-bottom:2rem;
-    }
+    } */
     
     ${(props) =>
 		props.type === 'layer3' &&
@@ -41,6 +41,7 @@ export const StyledTabooCard = styled.div`
 			z-index: -5;
 			transform: translate(-50%, -50%) rotate(-20deg);
 			box-shadow: 0px 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
+			margin-bottom:0rem;
 
 			&:before {
 				display:none
@@ -57,6 +58,7 @@ export const StyledTabooCard = styled.div`
 			z-index: -10;
 			transform: translate(-50%, -50%) rotate(16deg);
 			box-shadow: 0px 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
+			margin-bottom:0rem;
 			&:before {
 				display:none
 			}
@@ -72,6 +74,7 @@ export const StyledTabooCard = styled.div`
 			z-index: -15;
 			transform: translate(-50%, -50%) rotate(-5deg);
 			box-shadow: 0px 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
+			margin-bottom:0rem;
 			&:before {
 				display:none
 			}

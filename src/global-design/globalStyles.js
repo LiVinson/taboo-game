@@ -17,11 +17,9 @@ const GlobalStyle = createGlobalStyle`
     body {
         box-sizing:border-box;
         font-family: var(--font-family--text);
-        line-height:1.4;
-
-        
-        
-        
+        line-height:1.4; 
+        min-height: 100vh;
+        max-width: 100vw;             
     }
 `
 

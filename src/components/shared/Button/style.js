@@ -12,13 +12,13 @@ import styled from "styled-components"
 
 export const StyledButton = styled.button`
   border: none;
-  color: ${(props) => props.theme.color.secondary};
+  color: ${(props) => props.theme.color.primary};
   background-color: ${(props) => props.theme.color.offWhite};
   width: 47%;
   padding: 0.6rem 0rem;
   border-radius: 2px;
   font-size: 2.3rem;
-  font-family: var(--font-family--display);
+  font-family:  ${(props) => props.theme.text.display};
   text-transform: uppercase;
 
   &:active {
@@ -29,7 +29,7 @@ export const StyledButton = styled.button`
 `
 export const StyledPrimaryButton = styled(StyledButton)`
   color: ${(props) => props.theme.color.offWhite};
-  background-color: ${(props) => props.theme.color.secondary};
+  background-color: ${(props) => props.theme.color.primary2};
   width: 47%;
   &:active {
     filter: brightness(1.2);
