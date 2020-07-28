@@ -1,8 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyledTabooCard, TabooWordContainer, TabooBody, StyledTabooList, StyledListItem } from './style'
+import {
+	StyledTabooCard,
+	StyledLayeredTabooCard,
+	TabooWordContainer,
+	TabooBody,
+	StyledTabooList,
+	StyledListItem,
+} from './style'
 import ButtonContainer from 'components/ButtonContainer'
 
+//Primary TabooCard component used for main menu and game
 export const TabooCard = ({ type, tabooWord, list, children }) => {
 	return (
 		<StyledTabooCard type={type}>
@@ -19,6 +27,7 @@ TabooCard.propTypes = {
 	children: PropTypes.node,
 }
 
+//Same as TAbooCard, but includes 2 -3 buttons
 export const ButtonTabooCard = ({ tabooWord, list, buttons, children }) => {
 	return (
 		<StyledTabooCard>
@@ -34,6 +43,18 @@ ButtonTabooCard.propTypes = {
 	buttons: PropTypes.array.isRequired,
 	list: PropTypes.array,
 	children: PropTypes.node,
+}
+
+//Used for background element
+export const LayeredTabooCard = ({ tabooWord, list, layer }) => {
+	return (
+		<StyledLayeredTabooCard layer={layer}>
+			<TabooWordContainer>{tabooWord}</TabooWordContainer>
+			<TabooBody>
+				<TabooList list={list} />
+			</TabooBody>
+		</StyledLayeredTabooCard>
+	)
 }
 
 const TabooList = ({ list }) => {

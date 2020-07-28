@@ -1,4 +1,4 @@
-import { TabooCard, ButtonTabooCard, TabooCardTop } from "./TabooCard"
+import { TabooCard, ButtonTabooCard, LayeredTabooCard, TabooCardTop } from "./TabooCard"
 
-export { TabooCard, ButtonTabooCard, TabooCardTop };
+export { TabooCard, ButtonTabooCard,  LayeredTabooCard, TabooCardTop };
 

@@ -6,7 +6,7 @@ export const Scores = styled.div`
 	color: ${(props) => props.theme.color.grayDark2};
 	text-align: center;
 	/* adds alpha to lighten the color without impacting children opacity */
-	background-color: ${(props) => props.theme.color.offWhite}80;
+	background-color: ${(props) => props.theme.color.offWhite}DD;
 	border: solid 2px ${(props) => props.theme.color.accent3};
 	border-radius: 3px;
 	margin-bottom: 2rem;
@@ -15,7 +15,7 @@ export const Scores = styled.div`
 
 export const ScoreTitle = styled.p`
 	font-size: 2.5rem;
-	color: ${(props) => props.theme.color.primary};
+	color: ${(props) => props.theme.color.accent3};
 	&:after {
 		display: block;
 		content: '';
