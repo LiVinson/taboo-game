@@ -3,7 +3,7 @@ import { ButtonTabooCard, TabooCard } from "components/shared/TabooCard"
 import TeamList from "components/TeamList"
 
 
-const PlayerListCard = ({ players, currentPlayer, buttonInfo, tabooWord="Players" }) => {
+const PlayerListCard = ({ players, currentPlayer, buttonInfo, tabooWord="Players", team1Score, team2Score }) => {
   const team1 = players.filter((player) => player.team === "team1")
   const team2 = players.filter((player) => player.team === "team2")
   const unassigned = players.filter((player) => player.team === "unassigned")
@@ -15,15 +15,15 @@ const PlayerListCard = ({ players, currentPlayer, buttonInfo, tabooWord="Players
     <React.Fragment>
       {team1.length > 0 ? (
         <TeamList
-          title="Team 1"
+          title={team1Score ? `Team 1 - ${team1Score} points`: "Team 1"}
           players={team1}
           currentPlayer={currentPlayer}
         />
       ) : null}
       {team2.length > 0 ? (
         <TeamList
-          title="Team 2"
-          players={team2}
+        title={team2Score ? `Team 2 - ${team2Score} points`: "Team 2"}
+        players={team2}
           currentPlayer={currentPlayer}
         />
       ) : null}

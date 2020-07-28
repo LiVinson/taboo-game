@@ -19,14 +19,20 @@ import PlayerListCard from 'components/PlayerListCard'
     
     let winMessage = ''
 	if (team1Score > team2Score) {
-		winMessage = 'Team 1 Win!'
+		winMessage = 'Team 1 Wins!'
 	} else if (team2Score > team1Score) {
 		winMessage = 'Team 2 Wins!'
 	} else {
 		winMessage = "It's a Tie!"
 	}
 
-	return <PlayerListCard players={players} currentPlayer={currentPlayer} tabooWord={winMessage} />
+  return <PlayerListCard 
+    players={players}
+    currentPlayer={currentPlayer} 
+    tabooWord={winMessage}
+    team1Score = {team1Score}
+    team2Score = {team2Score}
+    />
 }
 
 export default EndGame
