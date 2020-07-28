@@ -56,11 +56,12 @@ class PlayGame extends React.Component {
 
 		return (
 			<React.Fragment>
-				<RoundInfo round={1} watcher="Stephen" giver="Danielle" />
 				<GameInfo />
+				<RoundInfo round={1} watcher="Stephen" giver="Danielle" />
 				{this.state.roundStatus === 'preRound' && <PreRound {...dummyRoundData} />}
 				{this.state.roundStatus === 'inProgress' && <InRound {...dummyRoundData} />}
 				{this.state.roundStatus === 'postRound' && <PostRound cardsPlayed={dummyPostRoundData} />}
+				{/* Links for Rules and Teams*/}
 			</React.Fragment>
 		)
 	}

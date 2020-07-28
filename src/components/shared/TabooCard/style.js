@@ -34,7 +34,7 @@ export const StyledTabooCard = styled.div`
     ${(props) =>
 		props.type === 'layer3' &&
 		css`
-			color: ${(props) => props.theme.color.secondary};
+			color: ${(props) => props.theme.color.accent2};
 			position: absolute;
 			top: 66%;
 			left: 50%;
@@ -51,7 +51,7 @@ export const StyledTabooCard = styled.div`
     ${(props) =>
 		props.type === 'layer2' &&
 		css`
-			color: ${(props) => props.theme.color.primary2};
+			color: ${(props) => props.theme.color.accent1};
 			position: absolute;
 			top: 66%;
 			left: 50%;
@@ -67,7 +67,7 @@ export const StyledTabooCard = styled.div`
   ${(props) =>
 		props.type === 'layer1' &&
 		css`
-			color: ${(props) => props.theme.color.tertiary};
+			color: ${(props) => props.theme.color.accent3};
 			position: absolute;
 			top: 66%;
 			left: 50%;

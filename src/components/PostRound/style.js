@@ -17,7 +17,7 @@ export const TabooRadio = styled.input`
 	display: none;
 	&:checked + label {
         background-color: ${props => props.theme.color.lightGray2};
-        border: solid 1px ${props => props.theme.color.secondary}
+        border: solid 1px ${props => props.theme.color.accent2}
 	}
 `
 

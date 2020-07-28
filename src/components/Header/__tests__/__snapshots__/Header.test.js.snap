@@ -12,19 +12,21 @@ exports[`Header renders correctly on home route 1`] = `
   font-size: 2.7rem;
   color: #1982C4;
   text-transform: uppercase;
+  font-weight: 300;
   font-size: 7rem;
   text-align: center;
   margin: 1rem 0;
 }
 
 .c2 {
-  font-size: 2.7rem;
+  font-size: 2.4rem;
   text-align: center;
   width: 30rem;
   margin: 0 auto;
-  font-weight: 400;
-  font-family: 'Oswald',sans-serif;
+  font-weight: 300;
   color: #757575;
+  background-color: rgba(247,249,249,.5);
+  line-height: 1.3;
 }
 
 .c3 {
@@ -72,6 +74,7 @@ exports[`Header renders correctly when not on home route 1`] = `
   font-size: 2.7rem;
   color: #1982C4;
   text-transform: uppercase;
+  font-weight: 300;
 }
 
 <header
@@ -87,13 +90,14 @@ exports[`Header renders correctly when not on home route 1`] = `
 
 exports[`Subheading renders correctly 1`] = `
 .c0 {
-  font-size: 2.7rem;
+  font-size: 2.4rem;
   text-align: center;
   width: 30rem;
   margin: 0 auto;
-  font-weight: 400;
-  font-family: 'Oswald',sans-serif;
+  font-weight: 300;
   color: #757575;
+  background-color: rgba(247,249,249,.5);
+  line-height: 1.3;
 }
 
 <h3
@@ -108,6 +112,7 @@ exports[`Title renders correctly when large 1`] = `
   font-size: 2.7rem;
   color: #1982C4;
   text-transform: uppercase;
+  font-weight: 300;
   font-size: 7rem;
   text-align: center;
   margin: 1rem 0;
@@ -125,6 +130,7 @@ exports[`Title renders correctly when small 1`] = `
   font-size: 2.7rem;
   color: #1982C4;
   text-transform: uppercase;
+  font-weight: 300;
 }
 
 <h1

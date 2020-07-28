@@ -3,13 +3,13 @@
 exports[`Button Container renders correctly 1`] = `
 .c1 {
   border: none;
-  color: #ee5b2c;
+  color: #1982C4;
   background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
   border-radius: 2px;
   font-size: 2.3rem;
-  font-family: var(--font-family--display);
+  font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
 }
 
@@ -22,18 +22,22 @@ exports[`Button Container renders correctly 1`] = `
   transform: translateY(2px);
 }
 
+.c1:focus {
+  outline: dotted 2px #8AC926;
+}
+
 .c2 {
   border: none;
-  color: #ee5b2c;
+  color: #1982C4;
   background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
   border-radius: 2px;
   font-size: 2.3rem;
-  font-family: var(--font-family--display);
+  font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
   color: #f7f9f9;
-  background-color: #ee5b2c;
+  background-color: #8AC926;
   width: 47%;
 }
 
@@ -46,9 +50,17 @@ exports[`Button Container renders correctly 1`] = `
   transform: translateY(2px);
 }
 
+.c2:focus {
+  outline: dotted 2px #8AC926;
+}
+
 .c2:active {
   -webkit-filter: brightness(1.2);
   filter: brightness(1.2);
+}
+
+.c2:focus {
+  outline: dotted 2px #f7f9f9;
 }
 
 .c0 {
