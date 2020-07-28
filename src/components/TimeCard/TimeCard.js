@@ -1,17 +1,18 @@
 import React from "react"
-import { TabooCardTop } from "components/shared/TabooCard"
+import { ProgressBar, Bar } from "./style"
 
-const TimeCard = ({timeRemaining, timeUp}) => {
+const TimeCard = ({endTime, totalTime}) => {
 
-    //calcuate difference between date.now and ending time in seconds
-    //display difference.
-    //every second, check if now = ending time: timeUp and display "Time's Up"
-        //not: display new difference
+    //pass in ending Time based on when giver clicked Start (stored in firebase)
+    //Use moment to get difference between now and endTime
+    //pass in (endTime-now)/totalTime converted to perentage for the width.
+    //add additional styling for when time is < 50% and less than 10%
+    //look into adding svg timer inside bar
 
     return (
-        <TabooCardTop tabooWord={timeRemaining} />
-            
- 
+        <ProgressBar>
+            <Bar width="80%"></Bar>
+        </ProgressBar>
     )
 }
 

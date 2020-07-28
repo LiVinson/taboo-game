@@ -22,8 +22,6 @@ const InRound = ({ giver, watcher }) => {
 	const role = 'watcherTeam'
 	return (
 		<React.Fragment>
-			<ScoreCard teamScores={[2, 3]} />
-
 			<TimeCard timeRemaining={'2:00'} timeUp={() => console.log('time up')} />
 			{role === 'giver' && <GiverGameCard />}
 			{role === 'watcher' && <WatcherGameCard />}

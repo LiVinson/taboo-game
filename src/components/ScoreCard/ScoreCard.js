@@ -1,19 +1,21 @@
-import React from "react"
-import { TabooCard } from "components/shared/TabooCard"
-import { Scores } from "./style"
+import React from 'react'
+import { Scores, ScoreTitle, ScoreList, Score } from './style'
 
-const ScoreCard = ({teamScores}) => {
-  return (
-    <TabooCard tabooWord="Score">
-      <Scores>
-        {teamScores.map((score, index) => (
-          <li key={index}>
-            Team {index + 1}: <span>{score}</span>
-          </li>
-        ))}
-      </Scores>
-    </TabooCard>
-  )
+const ScoreCard = ({ teamScores }) => {
+	return (
+
+		<Scores>
+			<ScoreTitle>Scores</ScoreTitle>
+			<ScoreList>
+				{teamScores.map((score, index) => (
+					<Score key={index}>
+						Team {index + 1}: <span>{score}</span>
+					</Score>
+				))}
+			</ScoreList>
+		</Scores>
+
+	)
 }
 
 export default ScoreCard

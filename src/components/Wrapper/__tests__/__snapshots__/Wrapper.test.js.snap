@@ -2,10 +2,9 @@
 
 exports[`Wrapper renders correctly 1`] = `
 .c0 {
-  padding: 1rem .5rem 6rem .5rem;
+  padding: 1rem 0rem 6rem 0rem;
   min-height: 100vh;
   position: relative;
-  background-color: #f1f1f1;
   z-index: 0;
   width: 30rem;
   max-width: 100%;

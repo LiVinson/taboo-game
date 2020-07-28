@@ -1,9 +1,9 @@
 const theme = {
   color: {
     primary: "#1982C4", //light blue
-    primary2: "#8AC926", //lime green
-    secondary: "#ee5b2c", //orange
-    tertiary: "#a23b72", //purple
+    accent1: "#8AC926", //lime green
+    accent2: "#ee5b2c", //orange
+    accent3: "#a23b72", //purple
     primaryLight: "#58b1e9", //light-blue
     white: "#fff",
     offWhite: "#f7f9f9",

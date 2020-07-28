@@ -106,7 +106,7 @@ StyledTextLabel.displayName = "StyledTextLabel"
 
 export const StyledErrorText = styled.span`
   font-size: 1.4rem;
-  color: ${(props) => props.theme.color.secondary};
+  color: ${(props) => props.theme.color.accent2};
 `
 
 StyledErrorText.displayName = "StyledErrorText"

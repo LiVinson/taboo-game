@@ -10,6 +10,6 @@ export const InstructionsText = styled.p`
 `
 
 export const KeyWord = styled.span`
-    color: ${props => props.theme.color.secondary};
+    color: ${props => props.theme.color.accent2};
 
 `
