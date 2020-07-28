@@ -10,7 +10,7 @@ class PlayGame extends React.Component {
 		super(props)
 
 		this.state = {
-			roundStatus: 'preRound',
+			roundStatus: 'postRound', //preRound, InProgress, postRound
 		}
 	}
 
