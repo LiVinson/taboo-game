@@ -41,7 +41,7 @@ export const StyledLayeredTabooCard = styled(StyledTabooCard)`
 		css`
 			color: ${(props) => props.theme.color.accent2};
 			z-index: -5;
-			transform: translate(-50%, -50%) rotate(-20deg);
+			transform: translate(-50%,-50%) rotate(-20deg);
 		`}
 
 		${({ layer }) =>
@@ -49,7 +49,7 @@ export const StyledLayeredTabooCard = styled(StyledTabooCard)`
 			css`
 				color: ${(props) => props.theme.color.accent1};
 				z-index: -10;
-				transform: translate(-50%, -50%) rotate(16deg);
+				transform: translate(-50%,-50%) rotate(16deg);
 			`}
 
 		${({ layer }) =>
@@ -57,7 +57,7 @@ export const StyledLayeredTabooCard = styled(StyledTabooCard)`
 			css`
 				color: ${(props) => props.theme.color.accent3};
 				z-index: -15;
-				transform: translate(-50%, -50%) rotate(-5deg);
+				transform: translate(-50%,-50%) rotate(-5deg);
 			`}
 	/* Removes the box shadow from left corner from standard taboo card */
 	&:before {

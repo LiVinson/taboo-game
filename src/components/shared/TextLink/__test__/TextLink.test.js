@@ -9,6 +9,7 @@ test("TextLink renders correctly", () => {
     to: "/home",
     text: "I'm a Link",
   }
+  //Memory Router used so <Link> can be rendered in tests
   const wrapper = renderer
     .create(
       <MemoryRouter>
