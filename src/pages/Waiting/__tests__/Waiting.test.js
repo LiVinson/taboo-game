@@ -5,7 +5,10 @@ import { shallow } from "enzyme"
 test("Waiting renders without crashing", ()=> {
     const props = {
         match: {
-            params: "/waiting/90210/12345"
+            params: {
+                gamecode: "90210",
+                playerId: "12345"
+            }
         }
     }
     shallow(<Waiting {...props} />)

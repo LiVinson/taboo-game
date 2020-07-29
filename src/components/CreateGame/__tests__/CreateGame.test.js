@@ -27,7 +27,6 @@ test("CreateGame has correct default values for state", () => {
   )
   expect(wrapper.find(CreateGame)).toHaveLength(1)
   expect(wrapper.find(CreateGame).state("name")).toBe("")
-  expect(wrapper.find(CreateGame).state("gameMode")).toBe("remote")
   expect(wrapper.find(CreateGame).state("endGameMethod")).toBe("turns")
   expect(wrapper.find(CreateGame).state("turnsValue")).toBe(2)
   expect(wrapper.find(CreateGame).state("timeValue")).toBe(60)

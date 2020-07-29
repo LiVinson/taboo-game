@@ -1,12 +1,12 @@
 // import React from "react"
 import { Form } from "formik"
-import styled, { attrs } from "styled-components"
+import styled from "styled-components"
 
 //General Form Sections
 export const StyledForm = styled(Form)`
   text-align: left;
   font-size: ${(props) => props.theme.fontSize.small};
-  font-family: var(--font-family--display);
+  font-family: ${(props) => props.theme.text.display};
   color: ${(props) => props.theme.color.grayDark2};
 `
 

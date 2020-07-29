@@ -6,7 +6,6 @@ import { Instructions } from "./style"
 const Waiting = (props) => {
   const { gamecode } = props.match.params
   const { playerId } = props.match.params
-  console.log(playerId)
   const buttonInfo = [
     {
       text: "Team 1",
