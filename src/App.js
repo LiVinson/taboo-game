@@ -24,13 +24,6 @@ class App extends React.Component {
 						<Route path="/waiting/:gamecode/:playerId" component={Waiting} />
 						<Route path="/play/:gamecode/:playerId" component={PlayGame} />
 						<Route path="/end/:gamecode/:playerId" component={EndGame} />
-
-						{/*
-                        <Route path="/new/:gamecode/:playerId" component={New} />
-            <Route path="/play/:gamecode/:playerId" component={Game} />
-            <Route path="/end/:gamecode/:playerId" component={EndGame} />
-            
-            */}
 					</Switch>
 					<LayeredCards />
 				</Container>

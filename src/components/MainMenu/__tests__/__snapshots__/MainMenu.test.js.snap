@@ -2,24 +2,24 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="sc-AxjAm kNRNPx"
+  className="sc-AxjAm fAwBWA"
 >
   <div
-    className="sc-AxirZ bZhlys"
+    className="sc-AxiKw dGnLMo"
   >
     Menu
   </div>
   <div
-    className="sc-AxiKw llchXe"
+    className="sc-AxhCb JZaCe"
   >
     <ul
-      className="sc-AxhCb kUMwYV"
+      className="sc-AxhUy jJntqQ"
     >
       <li
-        className="sc-AxhUy kWmTzm"
+        className="sc-AxgMl cDzLXU"
       >
         <a
-          className="sc-fzoLsD bIkLzc"
+          className="sc-fzpans kbOtnQ"
           href="/home/create"
           onClick={[Function]}
           text="Create New Game"
@@ -28,10 +28,10 @@ exports[`renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="sc-AxhUy kWmTzm"
+        className="sc-AxgMl cDzLXU"
       >
         <a
-          className="sc-fzoLsD bIkLzc"
+          className="sc-fzpans kbOtnQ"
           href="/home/join"
           onClick={[Function]}
           text="Join Game"
@@ -40,10 +40,10 @@ exports[`renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="sc-AxhUy kWmTzm"
+        className="sc-AxgMl cDzLXU"
       >
         <a
-          className="sc-fzoLsD bIkLzc"
+          className="sc-fzpans kbOtnQ"
           href="/home/rules"
           onClick={[Function]}
           text="How to Play"
@@ -52,10 +52,10 @@ exports[`renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="sc-AxhUy kWmTzm"
+        className="sc-AxgMl cDzLXU"
       >
         <a
-          className="sc-fzoLsD bIkLzc"
+          className="sc-fzpans kbOtnQ"
           href="/submit"
           onClick={[Function]}
           text="Submit a Card"

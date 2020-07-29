@@ -7,7 +7,6 @@ const MainMenu = ({ match }) => {
   const { path } = match
 
   const cardInfo = {
-    // type: "home",
     tabooWord: "Menu",
     list: [
       <TextLink to={`${path}/create`} text={"Create New Game"} />,

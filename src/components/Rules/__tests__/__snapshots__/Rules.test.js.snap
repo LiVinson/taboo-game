@@ -70,7 +70,8 @@ exports[`Rules render correctly 1`] = `
 }
 
 .c6:focus {
-  outline: dotted 2px #8AC926;
+  border: none;
+  outline: solid 2px #8AC926;
 }
 
 .c7 {
@@ -98,7 +99,8 @@ exports[`Rules render correctly 1`] = `
 }
 
 .c7:focus {
-  outline: dotted 2px #8AC926;
+  border: none;
+  outline: solid 2px #8AC926;
 }
 
 .c7:active {
@@ -107,7 +109,7 @@ exports[`Rules render correctly 1`] = `
 }
 
 .c7:focus {
-  outline: dotted 2px #f7f9f9;
+  outline: solid 2px #f7f9f9;
 }
 
 .c5 {

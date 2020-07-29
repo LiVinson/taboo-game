@@ -24,6 +24,7 @@ test("Wrapper renders correctly", () => {
 
 test("Wrapper renders props.children", () => {
   const children = <h1>I am a child element</h1>
+  //Pass prop directly instead of wrapping with ThemeProvider, due to shallow rendering
   const WrapperComponent = shallow(<Wrapper theme={theme}>{children}</Wrapper>)
   expect(WrapperComponent.contains(children)).toBe(true)
 })

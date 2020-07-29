@@ -10,236 +10,15 @@ Array [
   position: relative;
   background-color: currentColor;
   color: #1982C4;
-  color: #a23b72;
   position: absolute;
   top: 66%;
   left: 50%;
-  z-index: -15;
-  -webkit-transform: translate(-50%,-50%) rotate(-5deg);
-  -ms-transform: translate(-50%,-50%) rotate(-5deg);
-  transform: translate(-50%,-50%) rotate(-5deg);
-  box-shadow: 0px 0.1rem 0.3rem rgba(0,0,0,0.3);
   margin-bottom: 0rem;
-}
-
-.c0:before {
-  z-index: -1;
-  position: absolute;
-  content: "";
-  bottom: 1.2rem;
-  left: .5rem;
-  width: 50%;
-  top: 80%;
-  max-width: 300px;
-  background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
-  -webkit-transform: rotate(-3deg);
-  -ms-transform: rotate(-3deg);
-  transform: rotate(-3deg);
-}
-
-.c0:before {
-  display: none;
-}
-
-.c1 {
-  background-color: #f7f9f9;
-  padding: 1.2rem;
-  text-align: center;
-  border-radius: 2px;
-  font-family: 'Oswald',sans-serif;
-  font-size: 4rem;
-  color: inherit;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.c2 {
-  background-color: #f7f9f9;
-  padding: 1.5rem;
-  text-align: center;
-  border-radius: 2px;
-  font-size: 4rem;
-  margin-top: 1.5rem;
-}
-
-.c3 {
-  list-style-type: none;
-}
-
-.c4 {
-  font-family: 'Oswald',sans-serif;
-  font-size: 2.7rem;
-  position: relative;
-  padding-bottom: 1.5rem;
-}
-
-<div
-    className="c0"
-    type="layer1"
-  >
-    <div
-      className="c1"
-    >
-      Taboo!
-    </div>
-    <div
-      className="c2"
-    >
-      <ul
-        className="c3"
-      >
-        <li
-          className="c4"
-        >
-          Taboo!
-        </li>
-        <li
-          className="c4"
-        >
-          Taboo!
-        </li>
-        <li
-          className="c4"
-        >
-          Taboo!
-        </li>
-        <li
-          className="c4"
-        >
-          Taboo!
-        </li>
-      </ul>
-    </div>
-  </div>,
-  .c0 {
-  width: 30rem;
-  margin: 0 auto;
-  padding: 2rem;
-  border-radius: 2px;
-  position: relative;
-  background-color: currentColor;
-  color: #1982C4;
-  color: #8AC926;
-  position: absolute;
-  top: 66%;
-  left: 50%;
-  z-index: -10;
-  -webkit-transform: translate(-50%,-50%) rotate(16deg);
-  -ms-transform: translate(-50%,-50%) rotate(16deg);
-  transform: translate(-50%,-50%) rotate(16deg);
-  box-shadow: 0px 0.2rem 0.5rem rgba(0,0,0,0.3);
-  margin-bottom: 0rem;
-}
-
-.c0:before {
-  z-index: -1;
-  position: absolute;
-  content: "";
-  bottom: 1.2rem;
-  left: .5rem;
-  width: 50%;
-  top: 80%;
-  max-width: 300px;
-  background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
-  -webkit-transform: rotate(-3deg);
-  -ms-transform: rotate(-3deg);
-  transform: rotate(-3deg);
-}
-
-.c0:before {
-  display: none;
-}
-
-.c1 {
-  background-color: #f7f9f9;
-  padding: 1.2rem;
-  text-align: center;
-  border-radius: 2px;
-  font-family: 'Oswald',sans-serif;
-  font-size: 4rem;
-  color: inherit;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.c2 {
-  background-color: #f7f9f9;
-  padding: 1.5rem;
-  text-align: center;
-  border-radius: 2px;
-  font-size: 4rem;
-  margin-top: 1.5rem;
-}
-
-.c3 {
-  list-style-type: none;
-}
-
-.c4 {
-  font-family: 'Oswald',sans-serif;
-  font-size: 2.7rem;
-  position: relative;
-  padding-bottom: 1.5rem;
-}
-
-<div
-    className="c0"
-    type="layer2"
-  >
-    <div
-      className="c1"
-    >
-      Taboo!
-    </div>
-    <div
-      className="c2"
-    >
-      <ul
-        className="c3"
-      >
-        <li
-          className="c4"
-        >
-          Taboo!
-        </li>
-        <li
-          className="c4"
-        >
-          Taboo!
-        </li>
-        <li
-          className="c4"
-        >
-          Taboo!
-        </li>
-        <li
-          className="c4"
-        >
-          Taboo!
-        </li>
-      </ul>
-    </div>
-  </div>,
-  .c0 {
-  width: 30rem;
-  margin: 0 auto;
-  padding: 2rem;
-  border-radius: 2px;
-  position: relative;
-  background-color: currentColor;
-  color: #1982C4;
   color: #ee5b2c;
-  position: absolute;
-  top: 66%;
-  left: 50%;
   z-index: -5;
   -webkit-transform: translate(-50%,-50%) rotate(-20deg);
   -ms-transform: translate(-50%,-50%) rotate(-20deg);
   transform: translate(-50%,-50%) rotate(-20deg);
-  box-shadow: 0px 0.2rem 0.4rem rgba(0,0,0,0.3);
-  margin-bottom: 0rem;
 }
 
 .c0:before {
@@ -260,6 +39,18 @@ Array [
 
 .c0:before {
   display: none;
+}
+
+.c0:after {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  opacity: 0.5;
 }
 
 .c1 {
@@ -295,8 +86,247 @@ Array [
 }
 
 <div
-    className="c0"
-    type="layer3"
+    className="sc-AxjAm c0"
+  >
+    <div
+      className="c1"
+    >
+      Taboo!
+    </div>
+    <div
+      className="c2"
+    >
+      <ul
+        className="c3"
+      >
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+      </ul>
+    </div>
+  </div>,
+  .c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+  position: absolute;
+  top: 66%;
+  left: 50%;
+  margin-bottom: 0rem;
+  color: #8AC926;
+  z-index: -10;
+  -webkit-transform: translate(-50%,-50%) rotate(16deg);
+  -ms-transform: translate(-50%,-50%) rotate(16deg);
+  transform: translate(-50%,-50%) rotate(16deg);
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 1.2rem;
+  left: .5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c0:before {
+  display: none;
+}
+
+.c0:after {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  opacity: 0.5;
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+<div
+    className="sc-AxjAm c0"
+  >
+    <div
+      className="c1"
+    >
+      Taboo!
+    </div>
+    <div
+      className="c2"
+    >
+      <ul
+        className="c3"
+      >
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+        <li
+          className="c4"
+        >
+          Taboo!
+        </li>
+      </ul>
+    </div>
+  </div>,
+  .c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+  position: absolute;
+  top: 66%;
+  left: 50%;
+  margin-bottom: 0rem;
+  color: #a23b72;
+  z-index: -15;
+  -webkit-transform: translate(-50%,-50%) rotate(-5deg);
+  -ms-transform: translate(-50%,-50%) rotate(-5deg);
+  transform: translate(-50%,-50%) rotate(-5deg);
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 1.2rem;
+  left: .5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c0:before {
+  display: none;
+}
+
+.c0:after {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  opacity: 0.5;
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+<div
+    className="sc-AxjAm c0"
   >
     <div
       className="c1"
