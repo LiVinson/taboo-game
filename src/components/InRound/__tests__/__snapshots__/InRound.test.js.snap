@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <div
+    className="sc-AxjAm ldGgOs"
+  >
+    <div
+      className="sc-AxirZ ljZGdt"
+      width="80%"
+    />
+  </div>,
+  <div
+    className="sc-AxiKw cnMqsX"
+  >
+    <div
+      className="sc-AxhUy flvuPt"
+    >
+      Guess!
+    </div>
+    <div
+      className="sc-AxgMl fmQkUd"
+    >
+      <p
+        className="sc-fznyAO irPvyr"
+      >
+        It's your teams turn to guess the word! 
+        <span
+          className="sc-fznKkj dDFvLm"
+        />
+         is giving the clues and
+         
+        <span
+          className="sc-fznKkj dDFvLm"
+        />
+         will be making sure they don't say anything Taboo!
+      </p>
+    </div>
+  </div>,
+]
+`;

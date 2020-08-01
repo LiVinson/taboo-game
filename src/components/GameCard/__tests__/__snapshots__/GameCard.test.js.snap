@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GiverGameCard renders correctly 1`] = `
+<div
+  className="sc-AxjAm fAwBWA"
+>
+  <div
+    className="sc-AxiKw dGnLMo"
+  >
+    Simba
+  </div>
+  <div
+    className="sc-AxhCb JZaCe"
+  >
+    <ul
+      className="sc-AxhUy jJntqQ"
+    >
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Lion King
+      </li>
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Disney
+      </li>
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Mufasa
+      </li>
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Pride Rock
+      </li>
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Nala
+      </li>
+    </ul>
+  </div>
+  <div
+    className="sc-fzoLsD bLdJIe"
+  >
+    <button
+      className="sc-AxheI bYfwqV"
+      onClick={[Function]}
+    >
+      Skip!
+    </button>
+    <button
+      className="sc-AxheI sc-Axmtr jEDxKF"
+      onClick={[Function]}
+    >
+      Next!
+    </button>
+  </div>
+</div>
+`;
+
+exports[`TeamGameCard renders correctly 1`] = `
+<div
+  className="sc-AxjAm fAwBWA"
+>
+  <div
+    className="sc-AxiKw dGnLMo"
+  >
+    Relax!
+  </div>
+  <div
+    className="sc-AxhCb JZaCe"
+  >
+    <p
+      className="sc-fzpans ifLBye"
+    >
+      It’s the other team’s turn to give clues and guess! 
+      <span
+        className="sc-fzplWN kxXpQP"
+      >
+        Sam
+      </span>
+       will be watching to make sure 
+      <span
+        className="sc-fzplWN kxXpQP"
+      >
+        Joe
+      </span>
+       
+      doesn’t say any Taboo words.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`WatcherGameCard renders correctly 1`] = `
+<div
+  className="sc-AxjAm fAwBWA"
+>
+  <div
+    className="sc-AxiKw dGnLMo"
+  >
+    Simba
+  </div>
+  <div
+    className="sc-AxhCb JZaCe"
+  >
+    <ul
+      className="sc-AxhUy jJntqQ"
+    >
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Lion King
+      </li>
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Disney
+      </li>
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Mufasa
+      </li>
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Pride Rock
+      </li>
+      <li
+        className="sc-AxgMl cDzLXU"
+      >
+        Nala
+      </li>
+    </ul>
+  </div>
+  <div
+    className="sc-fzoLsD bLdJIe"
+  >
+    <button
+      className="sc-AxheI sc-AxmLO hTCvJk"
+      onClick={[Function]}
+    >
+      Buzzer!
+    </button>
+  </div>
+</div>
+`;

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sc-fzqNJr jAYKSu"
+  open={false}
+>
+  <button
+    className="sc-AxheI gqKLPq"
+    name="showRules"
+    onClick={[Function]}
+    type="button"
+  >
+    Show Rules
+  </button>
+  <button
+    className="sc-AxheI gqKLPq"
+    name="showTeams"
+    onClick={[Function]}
+    type="button"
+  >
+    Show Teams
+  </button>
+</div>
+`;
