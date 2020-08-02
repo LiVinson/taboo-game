@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sc-AxjAm fiXQlW"
+>
+  <p
+    className="sc-AxirZ fIsTEj"
+  >
+    Team 1
+  </p>
+  <ul
+    className="sc-AxiKw kWCkEn"
+  >
+    <li
+      className="sc-AxhCb kXtvGU"
+    >
+      Alexa
+       
+    </li>
+    <li
+      className="sc-AxhCb kXtvGU"
+    >
+      Stephen
+       
+    </li>
+    <li
+      className="sc-AxhCb kXtvGU"
+    >
+      Faith
+       
+    </li>
+  </ul>
+</div>
+`;

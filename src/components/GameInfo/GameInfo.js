@@ -42,13 +42,13 @@ class GameInfo extends React.Component {
 
 		//dummy data - to be retrieved from firebase using gamecode
 		const players = [
-			{ name: 'Alexa', team: 'team1' },
-			{ name: 'Stephen', team: 'team1' },
-			{ name: 'Yumani', team: 'team2' },
-			{ name: 'Faith', team: 'team1' },
-			{ name: 'Lisa', team: 'team2' },
-			{ name: 'Danielle', team: 'team2' },
-		]
+            { id: 12345, name: "Alexa", team: "team1" },
+            { id: 12346, name: "Stephen", team: "team1" },
+            { id: 12347, name: "Yumani", team: "team2" },
+            { id: 12348, name: "Faith", team: "team1" },
+            { id: 12349, name: "Lisa", team: "team2" },
+            { id: 12340, name: "Danielle", team: "team2" },
+          ]
 
 		const { showRules, showTeams } = this.state
 
@@ -57,7 +57,7 @@ class GameInfo extends React.Component {
 				{<Button {...buttonInfo[0]} />}
 				{<Button {...buttonInfo[1]} />}
 				{showRules && <Rules toggleGameInfo={this.toggleGameInfo} />}
-				{showTeams && <PlayerListCard players={players} currentPlayer="TBD" />}
+				{showTeams && <PlayerListCard players={players} currentPlayer="12349" />}
 			</StyledGameInfo>
 		)
 	}

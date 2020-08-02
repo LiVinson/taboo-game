@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { StyledTeamList, PlayerTitle, PlayerList, Player, StyledStar } from "./style"
 
 
@@ -19,6 +20,11 @@ const TeamList = ({ title, players, currentPlayer }) => {
   )
 }
 
+TeamList.propTypes = {
+  title: PropTypes.string.isRequired,
+  players: PropTypes.array.isRequired,
+  currentPlayer: PropTypes.string.isRequired
+}
 
 
 
