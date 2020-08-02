@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostRound renders correctly 1`] = `
+<div
+  className="sc-fzpans htoqaa"
+>
+  <div
+    className="sc-AxjAm fAwBWA"
+  >
+    <div
+      className="sc-AxiKw dGnLMo"
+    >
+      Correct!
+    </div>
+    <div
+      className="sc-AxhCb JZaCe"
+    >
+      <ul
+        className="sc-fzplWN escGkp"
+      >
+        <li
+          className="sc-fznyAO dYMzeO"
+        >
+          <input
+            className="sc-fznKkj GCeSL"
+            id="Simba"
+            name="tabooWord"
+            onChange={[Function]}
+            type="radio"
+            value="Simba"
+          />
+          <label
+            className="sc-fznZeY kYoYJP"
+            htmlFor="Simba"
+          >
+            Simba
+          </label>
+        </li>
+        <li
+          className="sc-fznyAO dYMzeO"
+        >
+          <input
+            className="sc-fznKkj GCeSL"
+            id="Mufasa"
+            name="tabooWord"
+            onChange={[Function]}
+            type="radio"
+            value="Mufasa"
+          />
+          <label
+            className="sc-fznZeY kYoYJP"
+            htmlFor="Mufasa"
+          >
+            Mufasa
+          </label>
+        </li>
+        <li
+          className="sc-fznyAO dYMzeO"
+        >
+          <input
+            className="sc-fznKkj GCeSL"
+            id="Scar"
+            name="tabooWord"
+            onChange={[Function]}
+            type="radio"
+            value="Scar"
+          />
+          <label
+            className="sc-fznZeY kYoYJP"
+            htmlFor="Scar"
+          >
+            Scar
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="sc-fzoLsD bLdJIe"
+    >
+      <button
+        className="sc-AxheI bYfwqV button"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Skip
+      </button>
+      <button
+        className="sc-AxheI sc-Axmtr jEDxKF button"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Discard
+      </button>
+    </div>
+  </div>
+  <div
+    className="sc-AxjAm fAwBWA"
+  >
+    <div
+      className="sc-AxiKw dGnLMo"
+    >
+      Skip!
+    </div>
+    <div
+      className="sc-AxhCb JZaCe"
+    >
+      <ul
+        className="sc-fzplWN escGkp"
+      >
+        <li
+          className="sc-fznyAO dYMzeO"
+        >
+          <input
+            className="sc-fznKkj GCeSL"
+            id="Voldemort"
+            name="tabooWord"
+            onChange={[Function]}
+            type="radio"
+            value="Voldemort"
+          />
+          <label
+            className="sc-fznZeY kYoYJP"
+            htmlFor="Voldemort"
+          >
+            Voldemort
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="sc-fzoLsD bLdJIe"
+    >
+      <button
+        className="sc-AxheI bYfwqV button"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Correct
+      </button>
+      <button
+        className="sc-AxheI sc-Axmtr jEDxKF button"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Discard
+      </button>
+    </div>
+  </div>
+  <div
+    className="sc-AxjAm fAwBWA"
+  >
+    <div
+      className="sc-AxiKw dGnLMo"
+    >
+      Discard!
+    </div>
+    <div
+      className="sc-AxhCb JZaCe"
+    >
+      <ul
+        className="sc-fzplWN escGkp"
+      >
+        <li
+          className="sc-fznyAO dYMzeO"
+        >
+          <input
+            className="sc-fznKkj GCeSL"
+            id="American Revolution"
+            name="tabooWord"
+            onChange={[Function]}
+            type="radio"
+            value="American Revolution"
+          />
+          <label
+            className="sc-fznZeY kYoYJP"
+            htmlFor="American Revolution"
+          >
+            American Revolution
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="sc-fzoLsD bLdJIe"
+    >
+      <button
+        className="sc-AxheI bYfwqV button"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Correct
+      </button>
+      <button
+        className="sc-AxheI sc-Axmtr jEDxKF button"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Skip
+      </button>
+    </div>
+  </div>
+  <button
+    className="sc-AxheI sc-AxmLO hTCvJk"
+    onClick={[MockFunction]}
+  >
+    Confirm!
+  </button>
+</div>
+`;

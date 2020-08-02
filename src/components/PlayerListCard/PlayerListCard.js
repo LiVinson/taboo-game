@@ -1,16 +1,13 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { ButtonTabooCard, TabooCard } from "components/shared/TabooCard"
 import TeamList from "components/TeamList"
-
 
 const PlayerListCard = ({ players, currentPlayer, buttonInfo, tabooWord="Players", team1Score, team2Score }) => {
   const team1 = players.filter((player) => player.team === "team1")
   const team2 = players.filter((player) => player.team === "team2")
   const unassigned = players.filter((player) => player.team === "unassigned")
 
-  // console.log(team1)
-  // console.log(team2)
-  // console.log(unassigned)
   const list = (
     <React.Fragment>
       {team1.length > 0 ? (
@@ -46,6 +43,15 @@ const PlayerListCard = ({ players, currentPlayer, buttonInfo, tabooWord="Players
   } else {
     return <TabooCard tabooWord={tabooWord}> {list}</TabooCard>
   }
+}
+
+PlayerListCard.propTypes = {
+  players: PropTypes.array.isRequired,
+  currentPlayer: PropTypes.string.isRequired,
+  buttonInfo: PropTypes.array,
+  tabooWord: PropTypes.string,
+  team1Score: PropTypes.string,
+  team2Score: PropTypes.string
 }
 
 export default PlayerListCard
