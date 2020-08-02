@@ -1,9 +1,9 @@
 import React from 'react'
+import PropTypes from "prop-types"
 import { Scores, ScoreTitle, ScoreList, Score } from './style'
 
 const ScoreCard = ({ teamScores }) => {
 	return (
-
 		<Scores>
 			<ScoreTitle>Scores</ScoreTitle>
 			<ScoreList>
@@ -18,4 +18,7 @@ const ScoreCard = ({ teamScores }) => {
 	)
 }
 
+ScoreCard.propTypes = {
+	teamScores: PropTypes.array.isRequired
+}
 export default ScoreCard

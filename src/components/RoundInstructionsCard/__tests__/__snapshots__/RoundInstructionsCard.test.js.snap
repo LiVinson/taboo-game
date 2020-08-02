@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RoundInstructionsCard renders correctly 1`] = `
+<div
+  className="sc-AxjAm fAwBWA"
+>
+  <div
+    className="sc-AxiKw dGnLMo"
+  >
+    Get Ready!
+  </div>
+  <div
+    className="sc-AxhCb JZaCe"
+  >
+    <p
+      className="sc-fzpans ifLBye"
+    >
+      It’s your turn to give clues to your team!
+       
+      <span
+        className="sc-fzplWN kxXpQP"
+      />
+       will be making sure you don’t say any taboo words.
+    </p>
+    <p
+      className="sc-fzpans ifLBye"
+    >
+      Select NEXT if your team guesses the word correctly or SKIP to go to the next card. Make sure to keep an eye on your time!
+    </p>
+  </div>
+  <div
+    className="sc-fzoLsD bLdJIe"
+  >
+    <button
+      className="sc-AxheI sc-AxmLO hTCvJk"
+      onClick={[Function]}
+    >
+      Start Round!
+    </button>
+  </div>
+</div>
+`;
