@@ -1,5 +1,9 @@
-const initState = {}
-const gameReducer = (state = initState, action) => {
+const initState = {
+	gameCode: null,
+	gameStatus: null
+}
+
+export const gameReducer = (state = initState, action) => {
 	switch (action.type) {
 		case 'CREATE_GAME':
 			console.log('creating game')
@@ -15,4 +19,4 @@ const gameReducer = (state = initState, action) => {
 	}
 }
 
-export default gameReducer
+
