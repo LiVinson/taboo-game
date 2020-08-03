@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Formik, Field, ErrorMessage } from "formik"
 import { 
   Form,
@@ -46,7 +47,9 @@ const CreateGameForm = (props) => {
             <ErrorMessage name="name" component={ErrorText} />
           </FormSection>
 
-          {/*<FormSection padding="1rem">
+          {/* Leaving for future:
+            
+            <FormSection padding="1rem">
             <FormSectionTitle>Game Mode </FormSectionTitle>
             <InputGroup>
               <Field
@@ -163,4 +166,7 @@ const CreateGameForm = (props) => {
   )
 }
 
+CreateGameForm.propTypes = {
+  initialValues: PropTypes.object.isRequired
+}
 export default CreateGameForm

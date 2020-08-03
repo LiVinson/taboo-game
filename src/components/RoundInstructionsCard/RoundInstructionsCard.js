@@ -23,8 +23,8 @@ const RoundInstructionsCard = ({ role, giver, watcher, startRound }) => {
 
 RoundInstructionsCard.propTypes = {
   role: PropTypes.string.isRequired,
-  giver: PropTypes.string.isRequired,
-  watcher: PropTypes.string.isRequired,
+  giver: PropTypes.object.isRequired,
+  watcher: PropTypes.object.isRequired,
   startRound: PropTypes.func
 }
 const displayGiverInstructions = (watcher, startRound) => {

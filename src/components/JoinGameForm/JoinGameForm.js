@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Formik, Field, ErrorMessage } from "formik"
 import {
   Form,
@@ -59,6 +60,10 @@ const JoinGameForm = (props) => {
       )}
     </Formik>
   )
+}
+
+JoinGameForm.propTypes = {
+  initialValues: PropTypes.object.isRequired
 }
 
 export default JoinGameForm

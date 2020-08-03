@@ -1,12 +1,10 @@
 import React from 'react'
 import { StyledFooterLine } from './style'
 
+/*Not currently used*/
 const FooterLine = () => {
-	return (
-	
+	return (	
 			<StyledFooterLine />
-
-		
 	)
 }
 
