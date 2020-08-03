@@ -6,13 +6,24 @@ import { ThemeProvider } from "styled-components"
 import theme from "../../../global-design/theme"
 
 test("CreateGame renders without crashing", () => {
-  shallow(<CreateGame />)
+  const props = {
+    history: {
+      push: jest.fn(),
+    },
+  }
+  shallow(<CreateGame {...props} />)
 })
 
 test("CreateGame contains a form element and 2 buttons", () => {
+  const props = {
+    history: {
+      push: jest.fn(),
+    },
+  }
+
   const wrapper = mount(
     <ThemeProvider theme={theme}>
-      <CreateGame />
+      <CreateGame {...props} />
     </ThemeProvider>
   )
   expect(wrapper.find("form").length).toBe(1)
@@ -20,14 +31,18 @@ test("CreateGame contains a form element and 2 buttons", () => {
 })
 
 test("CreateGame has correct default values for state", () => {
+  const props = {
+    history: {
+      push: jest.fn(),
+    },
+  }
   const wrapper = mount(
     <ThemeProvider theme={theme}>
-      <CreateGame />
+      <CreateGame {...props}/>
     </ThemeProvider>
   )
   expect(wrapper.find(CreateGame)).toHaveLength(1)
   expect(wrapper.find(CreateGame).state("name")).toBe("")
-  expect(wrapper.find(CreateGame).state("gameMode")).toBe("remote")
   expect(wrapper.find(CreateGame).state("endGameMethod")).toBe("turns")
   expect(wrapper.find(CreateGame).state("turnsValue")).toBe(2)
   expect(wrapper.find(CreateGame).state("timeValue")).toBe(60)

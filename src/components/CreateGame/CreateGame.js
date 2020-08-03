@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { ButtonTabooCard } from "components/shared/TabooCard"
 import CreateGameForm from "components/CreateGameForm"
 
@@ -47,4 +48,9 @@ export default class CreateGame extends React.Component {
       </ButtonTabooCard>
     )
   }
+}
+
+
+CreateGame.propTypes = {
+  history: PropTypes.object.isRequired
 }

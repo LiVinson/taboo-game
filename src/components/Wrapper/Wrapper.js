@@ -1,6 +1,5 @@
 import React from "react"
 import PropTypes from "prop-types"
-
 import { StyledWrapper } from "./style"
 
 const Wrapper = ({ children }) => {

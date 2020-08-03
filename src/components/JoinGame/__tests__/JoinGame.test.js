@@ -6,23 +6,40 @@ import { ThemeProvider } from "styled-components"
 import theme from "../../../global-design/theme"
 
 test("JoinGame renders without crashing", () => {
-  shallow(<JoinGame />)
+  const props = {
+    history: {
+      push: jest.fn()
+    }
+  }
+  shallow(<JoinGame {...props} />)
 })
 
 test("JoinGame contains a form element and 2 buttons", () => {
+  const props = {
+    history: {
+      push: jest.fn()
+    }
+  }
   const wrapper = mount(
     <ThemeProvider theme={theme}>
-      <JoinGame />
+      <JoinGame {...props} />
     </ThemeProvider>
   )
+
   expect(wrapper.find("form").length).toBe(1)
   expect(wrapper.find("button").length).toBe(2)
 })
 
 test("JoinGame has correct default values for state", () => {
+  const props = {
+    history: {
+      push: jest.fn()
+    }
+  }
+
   const wrapper = mount(
     <ThemeProvider theme={theme}>
-      <JoinGame />
+      <JoinGame {...props} />
     </ThemeProvider>
   )
   expect(wrapper.find(JoinGame)).toHaveLength(1)

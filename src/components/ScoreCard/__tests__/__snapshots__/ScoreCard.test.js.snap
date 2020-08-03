@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScoreCard renders correctly 1`] = `
+<div
+  className="sc-AxjAm fdAzhr"
+>
+  <p
+    className="sc-AxirZ ibSLEF"
+  >
+    Scores
+  </p>
+  <ul
+    className="sc-AxiKw eLvRRs"
+  >
+    <li
+      className="sc-AxhCb qAVjJ"
+    >
+      Team 
+      1
+      : 
+      <span>
+        12
+      </span>
+    </li>
+    <li
+      className="sc-AxhCb qAVjJ"
+    >
+      Team 
+      2
+      : 
+      <span>
+        10
+      </span>
+    </li>
+  </ul>
+</div>
+`;

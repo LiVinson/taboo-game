@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types"
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import { StyledPostRound, PlayedCardList, TabooRadio, TabooLabel, TabooWord, NoCardMessage } from './style'
 import { LargeButton } from 'components/shared/Button'
@@ -73,7 +74,7 @@ class PostRound extends React.Component {
 
 		return (
 			<StyledPostRound>
-				{/* Additional props baseed to buttons: if button should be disabled, and onClick containing current card status based on Taboo container it appears in, and new card status based on which button it is*/}
+				{/* Additional props passed to buttons: if button should be disabled, and onClick containing current card status based on Taboo container it appears in, and new card status based on which button it is*/}
 				<ButtonTabooCard
 					tabooWord="Correct!"
 					buttons={[
@@ -178,10 +179,17 @@ class PostRound extends React.Component {
 						)}
 					</PlayedCardList>
 				</ButtonTabooCard>
-				<LargeButton text="Confirm!" onClick={() => console.log('Confirming cards.')} />
+				{this.props.isWatcher ? <LargeButton text="Confirm!" onClick={this.props.confirmRoundEnd} /> : null}
 			</StyledPostRound>
 		)
 	}
+}
+
+PostRound.propTypes = {
+	cardsPlayed: PropTypes.array.isRequired,
+	confirmRoundEnd: PropTypes.func.isRequired,
+	isWatcher: PropTypes.bool.isRequired
+
 }
 
 export default PostRound

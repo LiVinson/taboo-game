@@ -11,9 +11,9 @@ import {
 import ButtonContainer from 'components/ButtonContainer'
 
 //Primary TabooCard component used for main menu and game
-export const TabooCard = ({ type, tabooWord, list, children }) => {
+export const TabooCard = ({ tabooWord, list, children }) => {
 	return (
-		<StyledTabooCard type={type}>
+		<StyledTabooCard >
 			<TabooWordContainer>{tabooWord}</TabooWordContainer>
 			<TabooBody>{children ? children : <TabooList list={list} />}</TabooBody>
 		</StyledTabooCard>
@@ -21,13 +21,12 @@ export const TabooCard = ({ type, tabooWord, list, children }) => {
 }
 
 TabooCard.propTypes = {
-	type: PropTypes.string,
 	tabooWord: PropTypes.string.isRequired,
 	list: PropTypes.array,
 	children: PropTypes.node,
 }
 
-//Same as TAbooCard, but includes 2 -3 buttons
+//Same as TabooCard, but includes 2 -3 buttons
 export const ButtonTabooCard = ({ tabooWord, list, buttons, children }) => {
 	return (
 		<StyledTabooCard>
@@ -57,6 +56,12 @@ export const LayeredTabooCard = ({ tabooWord, list, layer }) => {
 	)
 }
 
+LayeredTabooCard.propTypes = {
+	tabooWord: PropTypes.string.isRequired,
+	list: PropTypes.array.isRequired,
+	layer: PropTypes.string.isRequired
+}
+
 const TabooList = ({ list }) => {
 	return (
 		<StyledTabooList>
@@ -68,7 +73,7 @@ const TabooList = ({ list }) => {
 }
 
 TabooList.propTypes = {
-	list: PropTypes.array,
+	list: PropTypes.array.isRequired,
 }
 
 const TabooListItem = ({ listItem }) => {
@@ -85,4 +90,9 @@ export const TabooCardTop = ({ tabooWord, margin = false }) => {
 			<TabooWordContainer>{tabooWord}</TabooWordContainer>
 		</StyledTabooCard>
 	)
+}
+
+TabooCardTop.propTypes = {
+	tabooWord: PropTypes.string.isRequired,
+	margin: PropTypes.bool
 }

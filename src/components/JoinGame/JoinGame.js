@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import {ButtonTabooCard} from "components/shared/TabooCard"
 import JoinGameForm from "components/JoinGameForm"
 
@@ -42,4 +43,7 @@ class JoinGame extends React.Component {
   }
 }
 
+JoinGame.propTypes = {
+  history: PropTypes.object.isRequired
+}
 export default JoinGame

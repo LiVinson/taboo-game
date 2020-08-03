@@ -2,12 +2,7 @@
   "name": "taboo",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
+  "dependencies": {   
     "firebase": "^7.14.1",
     "node-sass": "^4.14.1",
     "query-string": "^6.12.1",
@@ -40,6 +35,11 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "formik": "^2.1.4",
     "jest-styled-components": "^7.0.2",
     "prop-types": "^15.7.2",

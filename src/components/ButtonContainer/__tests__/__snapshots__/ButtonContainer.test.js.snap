@@ -23,7 +23,8 @@ exports[`Button Container renders correctly 1`] = `
 }
 
 .c1:focus {
-  outline: dotted 2px #8AC926;
+  border: none;
+  outline: solid 2px #8AC926;
 }
 
 .c2 {
@@ -51,7 +52,8 @@ exports[`Button Container renders correctly 1`] = `
 }
 
 .c2:focus {
-  outline: dotted 2px #8AC926;
+  border: none;
+  outline: solid 2px #8AC926;
 }
 
 .c2:active {
@@ -60,7 +62,7 @@ exports[`Button Container renders correctly 1`] = `
 }
 
 .c2:focus {
-  outline: dotted 2px #f7f9f9;
+  outline: solid 2px #f7f9f9;
 }
 
 .c0 {

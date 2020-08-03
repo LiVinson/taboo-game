@@ -3,7 +3,7 @@
 exports[`CreateGameForm renders correctly 1`] = `
 <form
   action="#"
-  className="sc-AxjAm dOOriG"
+  className="sc-AxjAm hyBwHU"
   id="createGameForm"
   onReset={[Function]}
   onSubmit={[Function]}

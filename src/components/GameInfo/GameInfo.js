@@ -1,9 +1,10 @@
 import React from 'react'
 import Rules from 'components/Rules'
 import PlayerListCard from 'components/PlayerListCard'
-import { TextButton, Button, PrimaryButton } from 'components/shared/Button'
+import { Button } from 'components/shared/Button'
 import { StyledGameInfo } from './style'
 
+//Displays a link for Show Rules and Show Teams. On click, displays a TabooCard with Rules/Team and link changes to Hide Rules/Teams
 class GameInfo extends React.Component {
 	constructor(props) {
 		super(props)
@@ -28,26 +29,26 @@ class GameInfo extends React.Component {
 				type: 'button',
 				onClick: this.toggleGameInfo,
 				name: 'showRules',
-				border:true
+				border: true,
 			},
 			{
 				text: this.state.showTeams ? 'Hide Teams' : 'Show Teams',
 				type: 'button',
 				onClick: this.toggleGameInfo,
 				name: 'showTeams',
-				border:true
+				border: true,
 			},
 		]
 
 		//dummy data - to be retrieved from firebase using gamecode
 		const players = [
-			{ name: 'Alexa', team: 'team1' },
-			{ name: 'Stephen', team: 'team1' },
-			{ name: 'Yumani', team: 'team2' },
-			{ name: 'Faith', team: 'team1' },
-			{ name: 'Lisa', team: 'team2' },
-			{ name: 'Danielle', team: 'team2' },
-		]
+            { id: 12345, name: "Alexa", team: "team1" },
+            { id: 12346, name: "Stephen", team: "team1" },
+            { id: 12347, name: "Yumani", team: "team2" },
+            { id: 12348, name: "Faith", team: "team1" },
+            { id: 12349, name: "Lisa", team: "team2" },
+            { id: 12340, name: "Danielle", team: "team2" },
+          ]
 
 		const { showRules, showTeams } = this.state
 
@@ -56,7 +57,7 @@ class GameInfo extends React.Component {
 				{<Button {...buttonInfo[0]} />}
 				{<Button {...buttonInfo[1]} />}
 				{showRules && <Rules toggleGameInfo={this.toggleGameInfo} />}
-				{showTeams && <PlayerListCard players={players} currentPlayer="TBD" />}
+				{showTeams && <PlayerListCard players={players} currentPlayer="12349" />}
 			</StyledGameInfo>
 		)
 	}

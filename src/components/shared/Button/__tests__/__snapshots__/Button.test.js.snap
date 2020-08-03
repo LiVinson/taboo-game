@@ -23,7 +23,8 @@ exports[`Button renders correctly 1`] = `
 }
 
 .c0:focus {
-  outline: dotted 2px #8AC926;
+  border: none;
+  outline: solid 2px #8AC926;
 }
 
 <button
@@ -60,7 +61,8 @@ exports[`Primary button renders correctly 1`] = `
 }
 
 .c0:focus {
-  outline: dotted 2px #8AC926;
+  border: none;
+  outline: solid 2px #8AC926;
 }
 
 .c0:active {
@@ -69,7 +71,7 @@ exports[`Primary button renders correctly 1`] = `
 }
 
 .c0:focus {
-  outline: dotted 2px #f7f9f9;
+  outline: solid 2px #f7f9f9;
 }
 
 <button

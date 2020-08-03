@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RoundInfo renders correctly 1`] = `
+<div
+  className="sc-AxjAm jJJSIE"
+>
+  <p
+    className="sc-AxirZ ibSLEF"
+  >
+    Round: 
+    3
+  </p>
+  <div>
+    <p
+      className="sc-AxiKw kEKSvH"
+    >
+      Giver: 
+      Sam
+    </p>
+    <p
+      className="sc-AxiKw kEKSvH"
+    >
+      Watcher: 
+      Jo
+    </p>
+  </div>
+</div>
+`;

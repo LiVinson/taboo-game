@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sc-AxjAm fAwBWA"
+>
+  <div
+    className="sc-AxiKw dGnLMo"
+  >
+    Players
+  </div>
+  <div
+    className="sc-AxhCb JZaCe"
+  >
+     
+    <div
+      className="sc-fzpans jJotph"
+    >
+      <p
+        className="sc-fzplWN hygBPm"
+      >
+        Team 1
+      </p>
+      <ul
+        className="sc-fznyAO ilydmm"
+      >
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          Alexa
+           
+        </li>
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          Stephen
+           
+        </li>
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          Faith
+           
+        </li>
+      </ul>
+    </div>
+    <div
+      className="sc-fzpans jJotph"
+    >
+      <p
+        className="sc-fzplWN hygBPm"
+      >
+        Team 2
+      </p>
+      <ul
+        className="sc-fznyAO ilydmm"
+      >
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          Yumani
+           
+        </li>
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          Lisa
+           
+        </li>
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          Danielle
+           
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;

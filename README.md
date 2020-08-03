@@ -1,68 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Taboo
 
-## Available Scripts
+This project is a work in progress. Check back soon for a link to the deployed application.
 
-In the project directory, you can run:
+## About 📝
 
-### `yarn start`
+## Run Locally 🏃🏿‍♀️
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tools and Technology 💻
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Testing 🧪
 
-### `yarn test`
+Use yarn run tests to run tests.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Testing tools:
 
-### `yarn build`
+Jest: Test Runnner
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+React Test Renderer: Renders React component to pure JS objects. Used in conjunction with Jest to create snapshot files that determine if any UI changes have been made to component. This was used instead of enzyme with enzyme-to-json because this library rendered the entire theme object when rendering styled components. This meant that any change to the theme resulted ina change to the snapshot, even when unrelated to the component.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Enzyme: Provides shallow and full DOM rendering of components and an API to make assertions on  the comopnent instance. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Jest Styled Components: Used to help testing styled components. Allows snapshots to be rendered with the exact style information in snapshot instead of ambigious class names. Allows for better testing React components that make use of the theme prop. 
 
-### `yarn eject`
+## Contributions 🤝🏾
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I am not open to contributions to the code at this time, but I am always happy to hear feedback and suggestions. Feel free to reach out to me at contact@lisavinson.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## License 🔓
