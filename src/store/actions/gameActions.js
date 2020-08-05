@@ -54,15 +54,17 @@ export const createGame = ({ gamecode, endGameMethod, turnsValue, timeValue, ski
 
 */
 
-
-
 const createGame = (gamecode, gameDetails, getFirestore, dispatch) => {
 	const firestore = getFirestore()
 	console.log('creating game in firestore')
+	const newGame = {
+		...gameDetails,
+		createdAt: firestore.FieldValue.serverTimestamp(),
+	}
 	return firestore
 		.collection('games')
 		.doc(gamecode)
-		.set(gameDetails)
+		.set(newGame)
 		.then(() => {
 			console.log('firestore created the game. Time to dispatch')
 			dispatch({
@@ -81,24 +83,50 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 		return new Promise((resolve, reject) => {
 			//Creates a new game instance in firestore
 			createGame(gamecode, gameData, getFirestore, dispatch)
-			.then((response) => {
-				console.log(response)
-				//Creates a new anon user in firebase
-				createPlayer(hostPlayerName)
-				.then((player) => {
-					console.log(player)
-					//Adds user from firebase into game instance in firestore
-					addPlayer(player, gamecode, getFirestore, dispatch)
-					.then(res => {
-						console.log(res)
-						resolve(true)
-					})
+				.then((response) => {
+					console.log(response)
+					//Creates a new anon user in firebase and returns object with name and id
+					createPlayer(hostPlayerName)
+						.then((player) => {
+							const host = {
+								...player,
+								host: true,
+							}
+							//Adds user from firebase into game instance in firestore
+							addPlayer(host, gamecode, getFirestore, dispatch)
+								.then((res) => {
+									console.log(res)
+									resolve(true)
+								})
+								.catch((error) => {
+									console.log('something went wrong adding player to the game')
+									console.log(error)
+									dispatch({
+										type: 'ADD_PLAYER_ERROR',
+										error,
+									})
+									reject(error)
+								})
+						})
+						.catch((error) => {
+							console.log('something went wrong creating the player')
+							console.log(error)
+							dispatch({
+								type: 'CREATE_PLAYER_ERROR',
+								error,
+							})
+							reject(error)
+						})
 				})
-			}).catch(err => {
-				console.log("something went wrong : (")
-				console.log(err)
-			})
-		} )
-
+				.catch((error) => {
+					console.log('something went wrong creating the game')
+					console.log(error)
+					dispatch({
+						type: 'CREATE_GAME_ERROR',
+						error,
+					})
+					reject(error)
+				})
+		})
 	}
 }
