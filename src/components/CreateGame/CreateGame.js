@@ -1,56 +1,83 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { ButtonTabooCard } from "components/shared/TabooCard"
-import CreateGameForm from "components/CreateGameForm"
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import randomize from 'randomatic'
+import { ButtonTabooCard } from 'components/shared/TabooCard'
+import CreateGameForm from 'components/CreateGameForm'
+import { createNewGame } from 'store/actions/gameActions'
 
-export default class CreateGame extends React.Component {
-  constructor(props) {
-    super(props)
+class CreateGame extends React.Component {
+	constructor(props) {
+		super(props)
 
-    //Used for Form initial values
-    this.state = {
-      name: "",
-      endGameMethod: "turns",
-      turnsValue: 2,
-      timeValue: 60,
-      skipPenalty: "none",
-    }
-  }
+		//Used for Form initial values
+		this.state = {
+			name: '',
+			endGameMethod: 'turns',
+			turnsValue: 2,
+			timeValue: 60,
+			skipPenalty: 'none',
+		}
+	}
 
+	//pickle - decide if an onChange function is needed in form to update state when values are changed
 
-  //Update to creating player id, submitting to firebase, redirecting to 'Waiting Room'
-  handleSubmit(values, setSubmitting) {
-    alert(JSON.stringify(values, null, 2))
-    //Finishes Formik submission process
-    setSubmitting(false)
-  }
+	/*Creates game in firestore using form data, updates redux store
+    On success, creates an anonymous user in firebase and returns user info
+    On success, adds user to the game as as a player  
+  */
+	handleSubmit = (values, setSubmitting) => {
+		console.log('submit')
+		console.log(values)
+		const { endGameMethod, turnsValue, timeValue, skipPenalty, name } = values
+		const endValue = endGameMethod === 'turns' ? turnsValue : timeValue
+		const gamecode = randomize('A0', 6)
+		const gameData = {
+			status: 'new',
+			endGameMethod,
+			endValue,
+			skipPenalty,
+			players: [],
+		}
 
-  handleBackClick = () => {
-     this.props.history.push("/home")
-  }
-  render() {
-    const buttonInfo = [
-      { text: "Back", className: "button", onClick: this.handleBackClick },
-      {
-        form: "createGameForm",
-        text: "Submit",
-        className: "button",
-        type: "submit",
-      },
-    ]
-    return (
-      <ButtonTabooCard tabooWord="New Game" buttons={buttonInfo}>
-        <CreateGameForm
-          initialValues={this.state}
-          handleSubmit={this.handleSubmit}
-          inputRef={this.inputRef}
-        />
-      </ButtonTabooCard>
-    )
-  }
+		this.props.createNewGame(gamecode, gameData, name).then((response) => {
+			//finishes formik submission process
+			setSubmitting(false)
+			//redirect to waiting
+			console.log('all done')
+		})
+	}
+
+	handleBackClick = () => {
+		this.props.history.push('/home')
+	}
+
+	render() {
+		const buttonInfo = [
+			{ text: 'Back', className: 'button', onClick: this.handleBackClick },
+			{
+				form: 'createGameForm',
+				text: 'Submit',
+				className: 'button',
+				type: 'submit',
+			},
+		]
+		return (
+			<ButtonTabooCard tabooWord="New Game" buttons={buttonInfo}>
+				<CreateGameForm initialValues={this.state} handleSubmit={this.handleSubmit} inputRef={this.inputRef} />
+			</ButtonTabooCard>
+		)
+	}
 }
-
 
 CreateGame.propTypes = {
-  history: PropTypes.object.isRequired
+	history: PropTypes.object.isRequired,
 }
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		createNewGame: (gamecode, gameData, player) => dispatch(createNewGame(gamecode, gameData, player)),
+	}
+}
+
+export default connect(null, mapDispatchToProps)(CreateGame)

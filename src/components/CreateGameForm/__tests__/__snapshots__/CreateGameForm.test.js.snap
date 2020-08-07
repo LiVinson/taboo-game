@@ -19,6 +19,7 @@ exports[`CreateGameForm renders correctly 1`] = `
     </label>
     <input
       className="sc-AxhUy dcifbi"
+      id="name"
       maxLength={20}
       name="name"
       onBlur={[Function]}
