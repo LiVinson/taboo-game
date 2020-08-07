@@ -35,25 +35,13 @@
 //     }
 // }
 
-export const addPlayer = (player, gamecode, getFirestore, dispatch) => {
-	console.log('action to add player')
-	console.log(player)
-	return new Promise((resolve, reject) => {
-		const firestore = getFirestore()
-		return firestore
-			.collection('games')
-			.doc(gamecode)
-			.update({
-				players: firestore.FieldValue.arrayUnion(player),
-			})
-			.then(() => {
-				dispatch({
-					type: 'ADD_PLAYER',
-					payload: {
-						player,
-					},
-				})
-				resolve('player added')
-			})
-	})
+
+
+export const addPlayerSuccess = (player) => {
+	return {
+		type: 'ADD_PLAYER',
+		payload: {
+			player,
+		},
+	}
 }
