@@ -89,25 +89,24 @@ import CreateGame from '../CreateGame'
 		expect(props.history.push.mock.calls[0][0]).toBe('/home')
 	})
 
-	// test('Calls props.createNewGame with form data on submit', () => {
-	// 	const props = {
-	// 		history: {
-	// 			push: jest.fn(),
-	// 		},
-	// 	}
+	test('Calls props.createNewGame with form data on submit', () => {
+		const props = {
+			history: {
+				push: jest.fn(),
+			},
+		}
 
-	// 	const wrapper = mount(
-	// 		<Provider store={store}>
-	// 			<ThemeProvider theme={theme}>
-	// 				<CreateGame {...props} />
-	// 			</ThemeProvider>
-	// 		</Provider>
-	// 	)
+		const wrapper = mount(
+			<Provider store={store}>
+				<ThemeProvider theme={theme}>
+					<CreateGame {...props} />
+				</ThemeProvider>
+			</Provider>
+		)
 
-	// 	//finds input field, and sets the name and value attributes
-	// 	updateField(wrapper.find(CreateGame).find('input#name'), 'name', 'Sam')
-	// 	wrapper.find('form').simulate('submit')
+		//finds input field, and sets the name and value attributes
+		updateField(wrapper.find(CreateGame).find('input#name'), 'name', 'Sam')
+		wrapper.find('form').simulate('submit')
 
-	// 	expect(createNewGame).toHaveBeenCalled()
-	// })
-// })
+	})
+

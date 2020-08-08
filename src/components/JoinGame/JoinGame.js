@@ -21,6 +21,7 @@ class JoinGame extends React.Component {
 
 	//Update to creating player id, validating gamecode, redirecting to 'Waiting Room'
 	handleSubmit = (values, setSubmitting) => {
+		console.log("submitted", values)
 		this.setState(
 			{
 				name: values.name.toUpperCase(),

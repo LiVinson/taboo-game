@@ -20,7 +20,7 @@ class PlayGame extends React.Component {
 
 	render() {
 		const dummyRoundData = {
-			role: 'watcherTeam',
+			role: 'giver',
 			giver: { name: 'Danielle', playerId: 123 },
 			watcher: { name: 'Stephen', playerId: 345 },
 			startRound: this.startRound,
