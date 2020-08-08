@@ -24,14 +24,14 @@ class JoinGame extends React.Component {
 		this.setState(
 			{
 				name: values.name.toUpperCase(),
-        gamecode: values.gamecode.toUpperCase(),
-        submitting:true,
-        error:null //clear any previous form message if resubmitted
+				gamecode: values.gamecode.toUpperCase(),
+				submitting: true,
+				error: null, //clear any previous form message if resubmitted
 			},
 			() => {
-        const { gamecode, playerName } = this.state
+				const { gamecode, playerName } = this.state
 				this.props
-					.joinNewGame({  gamecode, playerName })
+					.joinNewGame({ gamecode, playerName })
 					.then((response) => {
 						console.log(response)
 						console.log('promise done: player has joined game. Redirecting.')
@@ -54,7 +54,7 @@ class JoinGame extends React.Component {
 	}
 
 	render() {
-		const { name, gamecode, error, loading } = this.state
+		const { name, gamecode, error, submitting } = this.state
 		const buttonInfo = [
 			{ text: 'Back', onClick: this.handleBackClick },
 			{
@@ -65,11 +65,11 @@ class JoinGame extends React.Component {
 		]
 
 		return this.state.redirect ? (
-			<Redirect to={`/waiting/${gamecode}/12345`} />
+			<Redirect to={`/waiting/${gamecode}`} />
 		) : (
 			<ButtonTabooCard tabooWord="Join Game" type="home" buttons={buttonInfo}>
 				<JoinGameForm initialValues={{ name, gamecode }} handleSubmit={this.handleSubmit} />
-				<p style={{ fontSize: '2rem' }}>{loading ? "Joining game" : error ? error : ""}</p>
+				<p style={{ fontSize: '2rem' }}>{submitting ? 'Joining game' : error ? error : ''}</p>
 			</ButtonTabooCard>
 		)
 	}

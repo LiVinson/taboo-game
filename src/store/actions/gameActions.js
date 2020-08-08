@@ -19,7 +19,7 @@ const createGameFailure = (error) => {
 }
 
 export const createNewGame = (gamecode, gameData, hostPlayerName) => {
-	return (dispatch, getState, { getFirebase, getFirestore }) => {
+	return (dispatch) => {
 		return new Promise((resolve, reject) => {
 			//Creates a new game instance in firestore
 			return createGame(gamecode, gameData)
@@ -38,7 +38,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 				})
 				.then((player) => {
 					dispatch(addPlayerSuccess(player))
-					resolve(player.playerId)
+					resolve(gamecode)
 				})
 				.catch((error) => {
 					dispatch(createGameFailure(error))
