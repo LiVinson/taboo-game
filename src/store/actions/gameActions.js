@@ -38,6 +38,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 				})
 				.then((player) => {
 					dispatch(addPlayerSuccess(player))
+					resolve(player.playerId)
 				})
 				.catch((error) => {
 					dispatch(createGameFailure(error))
@@ -65,6 +66,7 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 				})
 				.then((player) => {
 					dispatch(addPlayerSuccess(player))
+					resolve(player.playerId)
 				})
 				.catch((err) => {
 					//may add a joinGame error dispatch

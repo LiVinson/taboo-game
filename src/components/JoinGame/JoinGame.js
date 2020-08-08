@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import JoinGameForm from 'components/JoinGameForm'
@@ -12,30 +13,40 @@ class JoinGame extends React.Component {
 		this.state = {
 			name: '',
 			gamecode: '',
+			redirect: false,
+			submitting: false,
+			error: null,
 		}
 	}
+
 	//Update to creating player id, validating gamecode, redirecting to 'Waiting Room'
 	handleSubmit = (values, setSubmitting) => {
-		const gamecode = values.gamecode.toUpperCase()
-		console.log(gamecode)
-		this.props
-			.joinNewGame({ gamecode, playerName: values.name })
-			.then((response) => {
-				console.log('promise done')
-				//Finishes Formik submission process
-				setSubmitting(false)
-			})
-			.catch((error) => {
-				console.log('promise error')
-				console.log(error)
-			})
-		/*
-      call this.props.joinGame (passed from mapDispatchToProps)
-        call verifyGameCode
-        add player to the game
-        both successful: redirect to <Waiting />
-
-    */
+		this.setState(
+			{
+				name: values.name.toUpperCase(),
+        gamecode: values.gamecode.toUpperCase(),
+        submitting:true,
+        error:null //clear any previous form message if resubmitted
+			},
+			() => {
+        const { gamecode, playerName } = this.state
+				this.props
+					.joinNewGame({  gamecode, playerName })
+					.then((response) => {
+						console.log(response)
+						console.log('promise done: player has joined game. Redirecting.')
+						//Finishes Formik submission process
+						setSubmitting(false)
+						this.setState({
+							redirect: true,
+						})
+					})
+					.catch((error) => {
+						console.log('promise error')
+						console.log(error)
+					})
+			}
+		)
 	}
 
 	handleBackClick = () => {
@@ -43,7 +54,7 @@ class JoinGame extends React.Component {
 	}
 
 	render() {
-		const { name, gamecode } = this.state
+		const { name, gamecode, error, loading } = this.state
 		const buttonInfo = [
 			{ text: 'Back', onClick: this.handleBackClick },
 			{
@@ -52,9 +63,13 @@ class JoinGame extends React.Component {
 				type: 'submit',
 			},
 		]
-		return (
+
+		return this.state.redirect ? (
+			<Redirect to={`/waiting/${gamecode}/12345`} />
+		) : (
 			<ButtonTabooCard tabooWord="Join Game" type="home" buttons={buttonInfo}>
 				<JoinGameForm initialValues={{ name, gamecode }} handleSubmit={this.handleSubmit} />
+				<p style={{ fontSize: '2rem' }}>{loading ? "Joining game" : error ? error : ""}</p>
 			</ButtonTabooCard>
 		)
 	}
@@ -64,6 +79,13 @@ JoinGame.propTypes = {
 	history: PropTypes.object.isRequired,
 }
 
+// const mapStateToProps = (state) => {
+// 	console.log(state)
+// 	return {
+// 		gamecode: state.game.gamecode,
+// 		playerId: state.firebase.auth.uid
+// 	}
+// }
 const mapDispatchToProps = (dispatch) => {
 	return {
 		joinNewGame: (gameData) => dispatch(joinNewGame(gameData)),

@@ -86,7 +86,8 @@ export const addPlayer = (player, gamecode) => {
 				players: firebase.firestore.FieldValue.arrayUnion(player),
 			})
 			.then(() => {
-				resolve('player added')
+				console.log("player added to game")
+				resolve(player)
 			})
 			.catch((error) => {
 				reject(error)
