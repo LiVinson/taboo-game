@@ -19,6 +19,7 @@ exports[`JoinGameForm renders correctly 1`] = `
     </label>
     <input
       className="sc-AxhUy dcifbi"
+      id="name"
       name="name"
       onBlur={[Function]}
       onChange={[Function]}
@@ -39,6 +40,7 @@ exports[`JoinGameForm renders correctly 1`] = `
     </label>
     <input
       className="sc-AxhUy dcifbi"
+      id="gamecode"
       name="gamecode"
       onBlur={[Function]}
       onChange={[Function]}

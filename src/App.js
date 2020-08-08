@@ -21,7 +21,7 @@ class App extends React.Component {
 							<Redirect to="/home" />
 						</Route>
 						<Route path="/home" component={Home} />
-						<Route path="/waiting/:gamecode/:playerId" component={Waiting} />
+						<Route path="/waiting/:gamecode/" component={Waiting} />
 						<Route path="/play/:gamecode/:playerId" component={PlayGame} />
 						<Route path="/end/:gamecode/:playerId" component={EndGame} />
 					</Switch>

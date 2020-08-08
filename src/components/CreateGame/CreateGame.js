@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import randomize from 'randomatic'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
@@ -17,6 +18,9 @@ class CreateGame extends React.Component {
 			turnsValue: 2,
 			timeValue: 60,
 			skipPenalty: 'none',
+			redirect: false,
+			submitting: false,
+			error: null,
 		}
 	}
 
@@ -28,24 +32,39 @@ class CreateGame extends React.Component {
   */
 	handleSubmit = (values, setSubmitting) => {
 		console.log('submit')
-		console.log(values)
-		const { endGameMethod, turnsValue, timeValue, skipPenalty, name } = values
-		const endValue = endGameMethod === 'turns' ? turnsValue : timeValue
-		const gamecode = randomize('A0', 6)
-		const gameData = {
-			status: 'new',
-			endGameMethod,
-			endValue,
-			skipPenalty,
-			players: [],
-		}
+		this.setState(
+			{
+				name: values.name.toUpperCase(),
+				endGameMethod: values.endGameMethod,
+				turnsValue: values.turnsValue,
+				timeValue: values.timeValue,
+				skipPenalty: values.skipPenalty,
+			},
+			() => {
+				const { endGameMethod, turnsValue, timeValue, skipPenalty, name } = this.state
+				const endValue = endGameMethod === 'turns' ? turnsValue : timeValue
+				const gamecode = randomize('A0', 6)
+				const gameData = {
+					status: 'new',
+					endGameMethod,
+					endValue,
+					skipPenalty,
+					players: [],
+				}
 
-		this.props.createNewGame(gamecode, gameData, name).then((response) => {
-			//finishes formik submission process
-			setSubmitting(false)
-			//redirect to waiting
-			console.log('all done')
-		})
+				this.props.createNewGame(gamecode, gameData, name).then((response) => {
+					//finishes formik submission process
+					setSubmitting(false)
+					//redirect to waiting
+					console.log('all done')
+					console.log(response)
+					this.setState({
+						gamecode: response,
+						redirect: true,
+					})
+				})
+			}
+		)
 	}
 
 	handleBackClick = () => {
@@ -53,6 +72,8 @@ class CreateGame extends React.Component {
 	}
 
 	render() {
+		const { gamecode, error, submitting } = this.state
+
 		const buttonInfo = [
 			{ text: 'Back', className: 'button', onClick: this.handleBackClick },
 			{
@@ -62,9 +83,12 @@ class CreateGame extends React.Component {
 				type: 'submit',
 			},
 		]
-		return (
+		return this.state.redirect ? (
+			<Redirect to={`/waiting/${gamecode}`} />
+		) : (
 			<ButtonTabooCard tabooWord="New Game" buttons={buttonInfo}>
 				<CreateGameForm initialValues={this.state} handleSubmit={this.handleSubmit} inputRef={this.inputRef} />
+				<p style={{ fontSize: '2rem' }}>{submitting ? 'Creating new game' : error ? error : ''}</p>
 			</ButtonTabooCard>
 		)
 	}
