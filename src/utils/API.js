@@ -3,6 +3,7 @@ import firebase from './fbConfig'
 export const createGame = (gamecode, gameDetails, getFirestore) => {
 	console.log('creating game in firestore')
 	const newGame = {
+		gamecode,
 		...gameDetails,
 		createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 	}
