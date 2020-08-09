@@ -64,48 +64,42 @@ class Waiting extends React.Component {
 	}
 
 	render() {
-		// console.log(this.props)
-		const { gamecode } = this.props.match.params
-
-		const playerId = '12345'
-		const buttonInfo = [
-			{
-				text: 'Team 1',
-				onClick: () => {
-					console.log('Join Team 1')
-				},
-			},
-			{
-				text: 'Team 2',
-				onClick: () => {
-					console.log('Join Team 2')
-				},
-			},
-			{
-				text: 'Play!',
-				onClick: () => {
-					console.log('Start Game')
-				},
-				disabled: false,
-			},
-		]
-		//dummy data - to be retrieved from firebase using gamecode
-		const players = [
-			{ id: '123', name: 'Alexa', team: 'unassigned' },
-			{ id: '456', name: 'Stephen', team: 'team1' },
-			{ id: '789', name: 'Yumani', team: 'team2' },
-			{ id: '012', name: 'Faith', team: 'team1' },
-			{ id: '345', name: 'Lisa', team: 'unassigned' },
-			{ id: '678', name: 'Danielle', team: 'team2' },
-		]
-
 		if (this.state.loading) {
+			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
 		} else if (!this.state.gameVerified) {
+			//Style and add button to go back home
 			return <p>Game doesn't exist, or is already in progress</p>
 		} else if (!this.state.playerVerified) {
+			//Style and add button to go to Join route so user can join properly
 			return <p>Player didn't join properly</p>
 		} else {
+			const {gamecode} = this.props.match.params
+			const players = this.props.game[gamecode].players
+			const playerId = this.props.auth.uid
+			const currentPlayer = players.find(player => player.playerId === playerId)
+			const buttonInfo = [
+				{
+					text: 'Team 1',
+					onClick: () => {
+						console.log('Join Team 1')
+					},
+				},
+				{
+					text: 'Team 2',
+					onClick: () => {
+						console.log('Join Team 2')
+					},
+				},
+				{
+					text: 'Play!',
+					onClick: () => {
+						console.log('Start Game')
+					},
+					hidden: currentPlayer.host ? false: true, //only host player can see play button
+					disabled: false,
+				},
+			]
 			return (
 				<React.Fragment>
 					<Instructions>
@@ -113,8 +107,7 @@ class Waiting extends React.Component {
 						PLAY to start!
 					</Instructions>
 					<TabooCardTop margin={true} tabooWord={gamecode} />
-
-					<PlayerListCard players={players} currentPlayer={playerId} buttonInfo={buttonInfo} />
+					<PlayerListCard players={players} currentPlayer={currentPlayer} buttonInfo={buttonInfo} />
 				</React.Fragment>
 			)
 		}

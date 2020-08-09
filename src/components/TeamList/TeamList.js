@@ -10,11 +10,16 @@ const TeamList = ({ title, players, currentPlayer }) => {
     <StyledTeamList>
       <PlayerTitle>{title}</PlayerTitle>
       <PlayerList>
-        {players.map((player, index) => (
-          // Players will see a start next to their own name
-          <Player key={index}>{player.name} {currentPlayer === player.id ? <StyledStar/> : null}</Player>          
+        {players.length > 0 ?
+          players.map((player, index) => (
+            // Players will see a start next to their own name
+            <Player key={index}>{player.name} {currentPlayer.playerId === player.playerId ? <StyledStar/> : null}</Player>          
+          )) :
+            <p>No players added</p>
 
-        ))}
+          
+          }
+
       </PlayerList>
     </StyledTeamList>
   )
@@ -23,7 +28,7 @@ const TeamList = ({ title, players, currentPlayer }) => {
 TeamList.propTypes = {
   title: PropTypes.string.isRequired,
   players: PropTypes.array.isRequired,
-  currentPlayer: PropTypes.string.isRequired
+  currentPlayer: PropTypes.object.isRequired
 }
 
 

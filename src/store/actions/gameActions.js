@@ -32,7 +32,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 					return createPlayer(hostPlayerName)
 				})
 				.then((player) => {
-					const host = { ...player, host: true }
+					const host = { ...player, team: null, host: true }
 					//associates anonymous user with game instance in firestore
 					return addPlayer(host, gamecode)
 				})
@@ -57,6 +57,7 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 				})
 				.then(() => {
 					//creates anonymous user in firebase and updates displayName
+					console.log(playerName)
 					return createPlayer(playerName)
 				})
 				.then((playerData) => {

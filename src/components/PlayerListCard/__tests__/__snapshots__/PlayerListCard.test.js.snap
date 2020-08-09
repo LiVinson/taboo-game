@@ -29,18 +29,33 @@ exports[`renders correctly 1`] = `
         >
           Alexa
            
+          <svg
+            className="sc-fznZeY jcDVPA"
+          >
+            star-full.svg
+          </svg>
         </li>
         <li
           className="sc-fznKkj lnRDMo"
         >
           Stephen
            
+          <svg
+            className="sc-fznZeY jcDVPA"
+          >
+            star-full.svg
+          </svg>
         </li>
         <li
           className="sc-fznKkj lnRDMo"
         >
           Faith
            
+          <svg
+            className="sc-fznZeY jcDVPA"
+          >
+            star-full.svg
+          </svg>
         </li>
       </ul>
     </div>
@@ -60,18 +75,33 @@ exports[`renders correctly 1`] = `
         >
           Yumani
            
+          <svg
+            className="sc-fznZeY jcDVPA"
+          >
+            star-full.svg
+          </svg>
         </li>
         <li
           className="sc-fznKkj lnRDMo"
         >
           Lisa
            
+          <svg
+            className="sc-fznZeY jcDVPA"
+          >
+            star-full.svg
+          </svg>
         </li>
         <li
           className="sc-fznKkj lnRDMo"
         >
           Danielle
            
+          <svg
+            className="sc-fznZeY jcDVPA"
+          >
+            star-full.svg
+          </svg>
         </li>
       </ul>
     </div>
