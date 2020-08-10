@@ -28,17 +28,15 @@ export const verifyGameExists = (gamecode) => {
 		.doc(gamecode)
 		.get()
 		.then((game) => {
-			if (!game.exists) 
-				return Promise.reject(`game ${gamecode} does not exist`)
+			if (!game.exists) return Promise.reject(`game ${gamecode} does not exist`)
 
 			const gameInfo = game.data() //how data is accessed via firestore
 			if (gameInfo.status !== 'new')
 				return Promise.reject(`game ${gamecode} is already in progress! No additional players can join`) //can't join game already in progress
-			
+
 			return true
 		})
-		//any firestore errors will be caught in caller
-
+	//any firestore errors will be caught in caller
 }
 
 export const createPlayer = (playerName) => {
@@ -87,11 +85,48 @@ export const addPlayer = (player, gamecode) => {
 				players: firebase.firestore.FieldValue.arrayUnion(player),
 			})
 			.then(() => {
-				console.log("player added to game")
+				console.log('player added to game')
 				resolve(player)
 			})
 			.catch((error) => {
 				reject(error)
 			})
+	})
+}
+
+export const dbUpdateTeam = (gamecode, playerId, team) => {
+	console.log('updating team in firestore')
+	console.log(team)
+	return new Promise((resolve, reject) => {
+		const gamePath = firebase.firestore().collection('games').doc(gamecode)
+		return firebase.firestore().runTransaction((transaction) => {
+			//get the game document corresponding to gamecode
+			return transaction
+				.get(gamePath)
+				.then((game) => {
+					if (!game.exists) {
+						reject('Document does not exist')
+					}
+					const players = game.data().players
+					//find player object and update team property
+					console.log(players)
+					const updatedPlayers = players.map((player) => {
+						if (player.playerId !== playerId) return player
+						const updatedPlayer = {
+							...player,
+							team: team,
+						}
+						return updatedPlayer
+					})
+					console.log(updatedPlayers)
+					transaction.update(gamePath, { players: updatedPlayers })
+				})
+				.then(() => {
+					console.log('transaction succesfully committed ')
+				})
+				.catch((error) => {
+					console.log('transaction failed: ', error)
+				})
+		})
 	})
 }

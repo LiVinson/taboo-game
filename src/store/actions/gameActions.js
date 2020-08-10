@@ -1,9 +1,15 @@
 import { addPlayerSuccess } from 'store/actions/playerActions'
 import { createGame, createPlayer, addPlayer, verifyGameExists } from 'utils/API'
 
+const requestCreateGame = () => {
+	return {
+		type: 'REQUEST_CREATE_GAME',
+	}
+}
+
 const createGameSuccess = (gamecode, gameDetails) => {
 	return {
-		type: 'CREATE_GAME',
+		type: 'CREATE_GAME_SUCCESS',
 		payload: {
 			gamecode,
 			...gameDetails,
@@ -13,7 +19,7 @@ const createGameSuccess = (gamecode, gameDetails) => {
 
 const createGameFailure = (error) => {
 	return {
-		type: 'CREATE_GAME',
+		type: 'CREATE_GAME_FAILURE',
 		error,
 	}
 }
@@ -21,7 +27,7 @@ const createGameFailure = (error) => {
 export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 	return (dispatch) => {
 		return new Promise((resolve, reject) => {
-			//Creates a new game instance in firestore
+			dispatch(requestCreateGame())
 			return createGame(gamecode, gameData)
 				.then((res) => {
 					dispatch(createGameSuccess(gamecode, gameData))
@@ -61,7 +67,7 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 					return createPlayer(playerName)
 				})
 				.then((playerData) => {
-					const player = { ...playerData, host: false }
+					const player = { ...playerData, host: false, team: null }
 					//associates anonymous user with game instance in firestore
 					return addPlayer(player, gamecode)
 				})

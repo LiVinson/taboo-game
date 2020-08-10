@@ -1,41 +1,4 @@
-// const createPlayer = (playerName, gamecode) => {
-//     return (dispatch, getState, {getFirebase, getFirestore}) => {
-
-//         const firebase = getFirebase()
-//         console.log("creating player in firebase...")
-
-//         firebase
-//         .auth()
-//         .signInAnonymously()
-//         .then((res)=> {
-//             console.log("created a player in firebase")
-//             const user = firebase.auth().currentUser
-//             user.updateProfile({
-//                 displayName: playerName
-//             }).then(res => {
-//                 console.log("updated player name. dispatching...")
-//                 console.log(res)
-//                 dispatch({
-//                     type: "CREATE_PLAYER",
-//                     payload: {
-//                         uid: user.uid,
-//                         name: user.displayName
-//                     }
-//                 })
-//             })
-//             .catch(error => {
-//                 console.log("error adding player")
-//                 console.log(error)
-//                 dispatch({
-//                     type: "CREATE_PLAYER_ERROR",
-//                     error
-//                 })
-//             })
-//         })
-//     }
-// }
-
-
+import { dbUpdateTeam } from "utils/API"
 
 export const addPlayerSuccess = (player) => {
 	return {
@@ -45,3 +8,49 @@ export const addPlayerSuccess = (player) => {
 		},
 	}
 }
+
+const requestTeamUpdate = () => {
+	return {
+		type: "TEAM_UPDATE_REQUEST"
+	}
+}
+
+export const teamUpdateSuccess = () => {
+	return {
+		type: "TEAM_UPDATE_SUCCESS"
+	}
+}
+
+export const teamUpdateFailure = (error) => {
+	return {
+		type: "TEAM_UPDATE_FAILURE",
+		error
+	}
+}
+
+export const updateTeam = (gamecode, team) => {
+	return (dispatch, getState, firebase) => {
+
+		//dispatch that player team is changing
+		return new Promise((resolve, reject) => {
+			dispatch(requestTeamUpdate)
+			const state = getState()
+			console.log(team)
+			console.log(state)
+			const playerId = state.firebase.auth.uid
+			dbUpdateTeam(gamecode, playerId, team)
+			.then(response => {
+				console.log("team update successful")
+				console.log(response)
+				dispatch(teamUpdateSuccess())
+			})
+			.catch(error => {
+				console.log("team update failed")
+				console.log(error)
+				dispatch(teamUpdateFailure(error))
+			})
+		})
+
+	}
+}
+

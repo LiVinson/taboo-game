@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
 import { Instructions } from './style'
-import { verifyGameExists } from 'utils/API'
+import { updateTeam } from "store/actions/playerActions"
 
 class Waiting extends React.Component {
 	constructor(props) {
@@ -63,6 +63,26 @@ class Waiting extends React.Component {
 		}
 	}
 
+	handleTeamClick(event) {
+		const newTeam = event.target.value
+		const playerId = this.props.auth.uid
+		const { gamecode } = this.props.match.params
+		const players = this.props.game[gamecode].players
+		const currentPlayer = players.find(player => player.playerId === playerId)
+		if (currentPlayer.team === newTeam) {
+			console.log("player is already on team ", newTeam)
+			return
+		} 
+		this.props.updateTeam(gamecode, newTeam)
+		//Take current player
+		//Compare current team to the button clicked
+		//If current team !== requested team: Send request to update team
+	}
+
+	handlePlayGame() {
+
+	}
+
 	render() {
 		if (this.state.loading) {
 			//Update with actual loading component
@@ -81,14 +101,16 @@ class Waiting extends React.Component {
 			const buttonInfo = [
 				{
 					text: 'Team 1',
-					onClick: () => {
-						console.log('Join Team 1')
+					value: "team 1",
+					onClick: (e) => {
+						this.handleTeamClick(e)
 					},
 				},
 				{
 					text: 'Team 2',
-					onClick: () => {
-						console.log('Join Team 2')
+					value: "team 2",
+					onClick: (e) => {
+						this.handleTeamClick(e)
 					},
 				},
 				{
@@ -126,7 +148,13 @@ const mapStateToProps = (state, prevProps) => {
 	}
 }
 
+const mapDispatchToProps = (dispatch) => {
+	return {
+		updateTeam: (gamecode, team) => dispatch(updateTeam(gamecode, team))
+	}
+}
+
 export default compose(
-	connect(mapStateToProps),
+	connect(mapStateToProps, mapDispatchToProps),
 	firestoreConnect((props) => [{ collection: 'games', doc: props.match.params.gamecode }])
 )(Waiting)
