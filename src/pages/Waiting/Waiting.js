@@ -1,11 +1,13 @@
 import React from 'react'
+import { Redirect } from "react-router-dom"
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
 import { Instructions } from './style'
-import { updateTeam } from "store/actions/playerActions"
+import { updateTeam } from 'store/actions/playerActions'
+import { updateGameStatus } from 'store/actions/gameActions'
 
 class Waiting extends React.Component {
 	constructor(props) {
@@ -63,30 +65,43 @@ class Waiting extends React.Component {
 		}
 	}
 
+	/*Get current player and compare current team to the team button clicked
+	If current team !== requested team: Send request to update team in firestore
+	*/
 	handleTeamClick(event) {
 		const newTeam = event.target.value
 		const playerId = this.props.auth.uid
 		const { gamecode } = this.props.match.params
 		const players = this.props.game[gamecode].players
-		const currentPlayer = players.find(player => player.playerId === playerId)
+		const currentPlayer = players.find((player) => player.playerId === playerId)
 		if (currentPlayer.team === newTeam) {
-			console.log("player is already on team ", newTeam)
+			console.log('player is already on team ', newTeam)
 			return
-		} 
+		}
 		this.props.updateTeam(gamecode, newTeam)
-		//Take current player
-		//Compare current team to the button clicked
-		//If current team !== requested team: Send request to update team
 	}
 
 	handlePlayGame() {
-
+		const { gamecode } = this.props.match.params
+		const players = this.props.game[gamecode].players
+		const unassignedPlayers = players.filter((player) => !player.team)
+		if (unassignedPlayers.length > 0) {
+			console.log("can't start game, there are unassigned players")
+			return
+		}
+		this.props.updateGameStatus(gamecode)
 	}
 
 	render() {
+		const { gamecode } = this.props.match.params
+
 		if (this.state.loading) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
+		} else if (this.props.game[gamecode].status === "in progress") {
+			console.log(gamecode)
+			return <Redirect to={`/play/${gamecode}`} />
+
 		} else if (!this.state.gameVerified) {
 			//Style and add button to go back home
 			return <p>Game doesn't exist, or is already in progress</p>
@@ -94,21 +109,20 @@ class Waiting extends React.Component {
 			//Style and add button to go to Join route so user can join properly
 			return <p>Player didn't join properly</p>
 		} else {
-			const {gamecode} = this.props.match.params
 			const players = this.props.game[gamecode].players
 			const playerId = this.props.auth.uid
-			const currentPlayer = players.find(player => player.playerId === playerId)
+			const currentPlayer = players.find((player) => player.playerId === playerId)
 			const buttonInfo = [
 				{
 					text: 'Team 1',
-					value: "team 1",
+					value: 'team 1',
 					onClick: (e) => {
 						this.handleTeamClick(e)
 					},
 				},
 				{
 					text: 'Team 2',
-					value: "team 2",
+					value: 'team 2',
 					onClick: (e) => {
 						this.handleTeamClick(e)
 					},
@@ -116,9 +130,9 @@ class Waiting extends React.Component {
 				{
 					text: 'Play!',
 					onClick: () => {
-						console.log('Start Game')
+						this.handlePlayGame()
 					},
-					hidden: currentPlayer.host ? false: true, //only host player can see play button
+					hidden: currentPlayer.host ? false : true, //only host player can see play button
 					disabled: false,
 				},
 			]
@@ -150,7 +164,8 @@ const mapStateToProps = (state, prevProps) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateTeam: (gamecode, team) => dispatch(updateTeam(gamecode, team))
+		updateTeam: (gamecode, team) => dispatch(updateTeam(gamecode, team)),
+		updateGameStatus: (gamecode) => dispatch(updateGameStatus(gamecode, 'in progress')),
 	}
 }
 

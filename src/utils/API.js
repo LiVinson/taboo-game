@@ -123,10 +123,35 @@ export const dbUpdateTeam = (gamecode, playerId, team) => {
 				})
 				.then(() => {
 					console.log('transaction succesfully committed ')
+					resolve()
 				})
 				.catch((error) => {
 					console.log('transaction failed: ', error)
+					reject()
 				})
 		})
+	})
+}
+
+export const dbUpdateGameStatus = (gamecode, status) => {
+	console.log('updating game status')
+	console.log(status)
+	console.log(gamecode)
+	return new Promise((resolve, reject) => {
+		return firebase
+			.firestore()
+			.collection('games')
+			.doc(gamecode)
+			.update({
+				status: status,
+			})
+			.then(() => {
+				console.log('game updated to ', status)
+				resolve()
+			})
+			.catch((error) => {
+				console.log('error updating game')
+				reject(error)
+			})
 	})
 }

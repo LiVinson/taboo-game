@@ -1,5 +1,5 @@
 import { addPlayerSuccess } from 'store/actions/playerActions'
-import { createGame, createPlayer, addPlayer, verifyGameExists } from 'utils/API'
+import { createGame, createPlayer, addPlayer, verifyGameExists, dbUpdateGameStatus } from 'utils/API'
 
 const requestCreateGame = () => {
 	return {
@@ -20,6 +20,26 @@ const createGameSuccess = (gamecode, gameDetails) => {
 const createGameFailure = (error) => {
 	return {
 		type: 'CREATE_GAME_FAILURE',
+		error,
+	}
+}
+
+const requestUpdateGameStatus = (error) => {
+	return {
+		type: 'REQUEST_UPDATE_GAME_STATUS',
+	}
+}
+
+const updateGameStatusSuccess = (status) => {
+	return {
+		status,
+		type: 'UPDATE_GAME_STATUS_SUCCESS',
+	}
+}
+
+const updateGameStatusFailure = (error) => {
+	return {
+		type: 'REQUEST_UPDATE_GAME_FAILURE',
 		error,
 	}
 }
@@ -81,5 +101,20 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 					reject(err)
 				})
 		})
+	}
+}
+
+export const updateGameStatus = (gamecode, status) => {
+	return (dispatch) => {
+		// return new Promise((resolve, reject) => {
+			dispatch(requestUpdateGameStatus)
+			dbUpdateGameStatus(gamecode, status)
+				.then(() => {
+					dispatch(updateGameStatusSuccess(status))
+				})
+				.catch((error) => {
+					dispatch(updateGameStatusFailure(error))
+				})
+		// })
 	}
 }
