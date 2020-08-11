@@ -9,7 +9,7 @@ import TeamList from "components/TeamList"
 test("renders correctly", () => {
     const props = {
         players: [
-			{ name: 'Alexa', team: 'team1' },
+			{ name: 'Alexa', team: null },
 			{ name: 'Stephen', team: 'team1' },
 			{ name: 'Yumani', team: 'team2' },
 			{ name: 'Faith', team: 'team1' },

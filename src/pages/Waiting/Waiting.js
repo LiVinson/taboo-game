@@ -9,7 +9,7 @@ import { Instructions } from './style'
 import { updateTeam } from 'store/actions/playerActions'
 import { updateGameStatus } from 'store/actions/gameActions'
 
-class Waiting extends React.Component {
+export class Waiting extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {

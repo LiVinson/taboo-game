@@ -19,7 +19,7 @@ exports[`renders correctly 1`] = `
       <p
         className="sc-fzplWN hygBPm"
       >
-        Team 1
+        Unassigned
       </p>
       <ul
         className="sc-fznyAO ilydmm"
@@ -35,28 +35,22 @@ exports[`renders correctly 1`] = `
             star-full.svg
           </svg>
         </li>
-        <li
-          className="sc-fznKkj lnRDMo"
-        >
-          Stephen
-           
-          <svg
-            className="sc-fznZeY jcDVPA"
-          >
-            star-full.svg
-          </svg>
-        </li>
-        <li
-          className="sc-fznKkj lnRDMo"
-        >
-          Faith
-           
-          <svg
-            className="sc-fznZeY jcDVPA"
-          >
-            star-full.svg
-          </svg>
-        </li>
+      </ul>
+    </div>
+    <div
+      className="sc-fzpans jJotph"
+    >
+      <p
+        className="sc-fzplWN hygBPm"
+      >
+        Team 1
+      </p>
+      <ul
+        className="sc-fznyAO ilydmm"
+      >
+        <p>
+          No players added
+        </p>
       </ul>
     </div>
     <div
@@ -70,39 +64,9 @@ exports[`renders correctly 1`] = `
       <ul
         className="sc-fznyAO ilydmm"
       >
-        <li
-          className="sc-fznKkj lnRDMo"
-        >
-          Yumani
-           
-          <svg
-            className="sc-fznZeY jcDVPA"
-          >
-            star-full.svg
-          </svg>
-        </li>
-        <li
-          className="sc-fznKkj lnRDMo"
-        >
-          Lisa
-           
-          <svg
-            className="sc-fznZeY jcDVPA"
-          >
-            star-full.svg
-          </svg>
-        </li>
-        <li
-          className="sc-fznKkj lnRDMo"
-        >
-          Danielle
-           
-          <svg
-            className="sc-fznZeY jcDVPA"
-          >
-            star-full.svg
-          </svg>
-        </li>
+        <p>
+          No players added
+        </p>
       </ul>
     </div>
   </div>
