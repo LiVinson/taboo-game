@@ -1,53 +1,96 @@
-import React from "react"
-import renderer from "react-test-renderer"
-import { mount } from "enzyme"
+import React from 'react'
+import renderer from 'react-test-renderer'
+import { mount } from 'enzyme'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
-import PlayerListCard from "../PlayerListCard"
-import TeamList from "components/TeamList"
+import PlayerListCard from '../PlayerListCard'
+import TeamList from 'components/TeamList'
 
-test("renders correctly", () => {
-    const props = {
-        players: [
-			{ name: 'Alexa', team: null },
-			{ name: 'Stephen', team: 'team1' },
-			{ name: 'Yumani', team: 'team2' },
-			{ name: 'Faith', team: 'team1' },
-			{ name: 'Lisa', team: 'team2' },
-			{ name: 'Danielle', team: 'team2' },
+test('renders correctly', () => {
+	const props = {
+		players: [
+			{
+				host: true,
+				name: 'player1',
+				playerId: '90210',
+			},
+			{
+				host: false,
+				name: 'player2',
+				playerId: '12345',
+			},
+			{
+				host: false,
+				name: 'player3',
+				playerId: '12345',
+			},
+			{
+				host: false,
+				name: 'player4',
+				playerId: '12345',
+			},
 		],
-        currentPlayer: "Lisa",
-        tabooWord: "Players"
-    }
+		currentPlayer: {
+			host: true,
+			name: 'player1',
+			playerId: '90210',
+		},
+		tabooWord: 'Players',
+	}
 
-    const wrapper = renderer.create(
-        <ThemeProvider theme={theme}>
-            <PlayerListCard {...props}/>
-        </ThemeProvider>
-        ).toJSON()
+	const wrapper = renderer
+		.create(
+			<ThemeProvider theme={theme}>
+				<PlayerListCard {...props} />
+			</ThemeProvider>
+		)
+		.toJSON()
 
-    expect(wrapper).toMatchSnapshot()
+	expect(wrapper).toMatchSnapshot()
 })
 
-test("renders TeamList for team1, team2, and unassigned platersplayers", () => {
-    const props = {
-        players: [
-			{ name: 'Alexa', team: 'team1' },
-			{ name: 'Stephen', team: 'team1' },
-			{ name: 'Yumani', team: 'team2' },
-			{ name: 'Faith', team: 'team1' },
-			{ name: 'Lisa', team: 'team2' },
-			{ name: 'Danielle', team: 'unassigned' },
+test('renders TeamList for team1, team2, and unassigned platersplayers', () => {
+	const props = {
+		players: [
+			{
+				host: true,
+				name: 'player1',
+				playerId: '90210',
+				team: 'team 1',
+			},
+			{
+				host: false,
+				name: 'player2',
+				playerId: '12345',
+				team: 'team 1',
+			},
+			{
+				host: false,
+				name: 'player3',
+				playerId: '12345',
+				team: 'team 2',
+			},
+			{
+				host: false,
+				name: 'player4',
+				playerId: '12345',
+				team: null,
+			},
 		],
-        currentPlayer: "Lisa",
-        tabooWord: "Players"
-    }
+		currentPlayer: {
+			host: true,
+			name: 'player1',
+			playerId: '90210',
+			team: 'team 1',
+		},
+		tabooWord: 'Players',
+	}
 
-    const wrapper = mount(
-        <ThemeProvider theme={theme}>
-            <PlayerListCard {...props}/>
-        </ThemeProvider>
-    )
+	const wrapper = mount(
+		<ThemeProvider theme={theme}>
+			<PlayerListCard {...props} />
+		</ThemeProvider>
+	)
 
-    expect(wrapper.find(TeamList)).toHaveLength(3)
+	expect(wrapper.find(TeamList)).toHaveLength(3)
 })

@@ -27,13 +27,31 @@ exports[`renders correctly 1`] = `
         <li
           className="sc-fznKkj lnRDMo"
         >
-          Alexa
+          player1
            
           <svg
             className="sc-fznZeY jcDVPA"
           >
             star-full.svg
           </svg>
+        </li>
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          player2
+           
+        </li>
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          player3
+           
+        </li>
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          player4
+           
         </li>
       </ul>
     </div>

@@ -15,9 +15,7 @@ const TeamList = ({ title, players, currentPlayer }) => {
             // Players will see a start next to their own name
             <Player key={index}>{player.name} {currentPlayer.playerId === player.playerId ? <StyledStar/> : null}</Player>          
           )) :
-            <p>No players added</p>
-
-          
+            <p>No players added</p>          
           }
 
       </PlayerList>
