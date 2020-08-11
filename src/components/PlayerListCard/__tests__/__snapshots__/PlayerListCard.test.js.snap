@@ -19,7 +19,7 @@ exports[`renders correctly 1`] = `
       <p
         className="sc-fzplWN hygBPm"
       >
-        Team 1
+        Unassigned
       </p>
       <ul
         className="sc-fznyAO ilydmm"
@@ -27,21 +27,48 @@ exports[`renders correctly 1`] = `
         <li
           className="sc-fznKkj lnRDMo"
         >
-          Alexa
+          player1
+           
+          <svg
+            className="sc-fznZeY jcDVPA"
+          >
+            star-full.svg
+          </svg>
+        </li>
+        <li
+          className="sc-fznKkj lnRDMo"
+        >
+          player2
            
         </li>
         <li
           className="sc-fznKkj lnRDMo"
         >
-          Stephen
+          player3
            
         </li>
         <li
           className="sc-fznKkj lnRDMo"
         >
-          Faith
+          player4
            
         </li>
+      </ul>
+    </div>
+    <div
+      className="sc-fzpans jJotph"
+    >
+      <p
+        className="sc-fzplWN hygBPm"
+      >
+        Team 1
+      </p>
+      <ul
+        className="sc-fznyAO ilydmm"
+      >
+        <p>
+          No players added
+        </p>
       </ul>
     </div>
     <div
@@ -55,24 +82,9 @@ exports[`renders correctly 1`] = `
       <ul
         className="sc-fznyAO ilydmm"
       >
-        <li
-          className="sc-fznKkj lnRDMo"
-        >
-          Yumani
-           
-        </li>
-        <li
-          className="sc-fznKkj lnRDMo"
-        >
-          Lisa
-           
-        </li>
-        <li
-          className="sc-fznKkj lnRDMo"
-        >
-          Danielle
-           
-        </li>
+        <p>
+          No players added
+        </p>
       </ul>
     </div>
   </div>

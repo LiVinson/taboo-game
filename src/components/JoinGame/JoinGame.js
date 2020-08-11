@@ -24,7 +24,7 @@ class JoinGame extends React.Component {
 		console.log("submitted", values)
 		this.setState(
 			{
-				name: values.name.toUpperCase(),
+				playerName: values.name.toUpperCase(),
 				gamecode: values.gamecode.toUpperCase(),
 				submitting: true,
 				error: null, //clear any previous form message if resubmitted

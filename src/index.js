@@ -26,6 +26,8 @@ const rrfProps = {
 	config: fbConfig,
 	dispatch: store.dispatch,
 	createFirestoreInstance,
+	presence: 'presence',
+	sessions: 'sessions',
 }
 
 ReactDOM.render(

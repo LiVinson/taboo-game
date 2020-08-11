@@ -1,9 +1,15 @@
 import { addPlayerSuccess } from 'store/actions/playerActions'
-import { createGame, createPlayer, addPlayer, verifyGameExists } from 'utils/API'
+import { createGame, createPlayer, addPlayer, verifyGameExists, dbUpdateGameStatus } from 'utils/API'
+
+const requestCreateGame = () => {
+	return {
+		type: 'REQUEST_CREATE_GAME',
+	}
+}
 
 const createGameSuccess = (gamecode, gameDetails) => {
 	return {
-		type: 'CREATE_GAME',
+		type: 'CREATE_GAME_SUCCESS',
 		payload: {
 			gamecode,
 			...gameDetails,
@@ -13,7 +19,27 @@ const createGameSuccess = (gamecode, gameDetails) => {
 
 const createGameFailure = (error) => {
 	return {
-		type: 'CREATE_GAME',
+		type: 'CREATE_GAME_FAILURE',
+		error,
+	}
+}
+
+const requestUpdateGameStatus = (error) => {
+	return {
+		type: 'REQUEST_UPDATE_GAME_STATUS',
+	}
+}
+
+const updateGameStatusSuccess = (status) => {
+	return {
+		status,
+		type: 'UPDATE_GAME_STATUS_SUCCESS',
+	}
+}
+
+const updateGameStatusFailure = (error) => {
+	return {
+		type: 'REQUEST_UPDATE_GAME_FAILURE',
 		error,
 	}
 }
@@ -21,7 +47,7 @@ const createGameFailure = (error) => {
 export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 	return (dispatch) => {
 		return new Promise((resolve, reject) => {
-			//Creates a new game instance in firestore
+			dispatch(requestCreateGame())
 			return createGame(gamecode, gameData)
 				.then((res) => {
 					dispatch(createGameSuccess(gamecode, gameData))
@@ -32,7 +58,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 					return createPlayer(hostPlayerName)
 				})
 				.then((player) => {
-					const host = { ...player, host: true }
+					const host = { ...player, team: null, host: true }
 					//associates anonymous user with game instance in firestore
 					return addPlayer(host, gamecode)
 				})
@@ -57,10 +83,11 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 				})
 				.then(() => {
 					//creates anonymous user in firebase and updates displayName
+					console.log(playerName)
 					return createPlayer(playerName)
 				})
 				.then((playerData) => {
-					const player = { ...playerData, host: false }
+					const player = { ...playerData, host: false, team: null }
 					//associates anonymous user with game instance in firestore
 					return addPlayer(player, gamecode)
 				})
@@ -74,5 +101,20 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 					reject(err)
 				})
 		})
+	}
+}
+
+export const updateGameStatus = (gamecode, status) => {
+	return (dispatch) => {
+		// return new Promise((resolve, reject) => {
+			dispatch(requestUpdateGameStatus)
+			dbUpdateGameStatus(gamecode, status)
+				.then(() => {
+					dispatch(updateGameStatusSuccess(status))
+				})
+				.catch((error) => {
+					dispatch(updateGameStatusFailure(error))
+				})
+		// })
 	}
 }

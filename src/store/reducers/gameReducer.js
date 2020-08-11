@@ -4,14 +4,21 @@ const initState = {
 	endGameMethod: null,
 	endValue: null,
 	skipPenalty: null,
-	creationTime: null
+	creationTime: null,
 }
 
 export const gameReducer = (state = initState, action) => {
 	switch (action.type) {
-		case 'CREATE_GAME':
-			console.log('creating game in store')			
+		case 'REQUEST_CREATE_GAME':
+			console.log('requesting new game...')
+			return state
+		case 'CREATE_GAME_SUCCESS':
+			console.log('sucessfully created game in store')
 			return Object.assign({}, state, action.payload)
+		case 'CREATE_GAME_FAILURE':
+			console.log('creating new game failed')
+			console.log(action.error)
+			return state
 		case 'UPDATE_GAME_STATUS':
 			console.log('updating game status')
 			return state
@@ -22,5 +29,3 @@ export const gameReducer = (state = initState, action) => {
 			return state
 	}
 }
-
-
