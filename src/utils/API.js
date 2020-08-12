@@ -1,6 +1,6 @@
 import firebase from './fbConfig'
 
-export const createGame = (gamecode, gameDetails, getFirestore) => {
+export const createGame = (gamecode, gameDetails) => {
 	console.log('creating game in firestore')
 	const newGame = {
 		gamecode,
@@ -15,7 +15,10 @@ export const createGame = (gamecode, gameDetails, getFirestore) => {
 		.set(newGame)
 		.then(() => {
 			console.log('firestore created the game. Time to dispatch')
-			return true
+			return
+		})
+		.catch((error) => {
+			throw error
 		})
 }
 
@@ -28,70 +31,67 @@ export const verifyGameExists = (gamecode) => {
 		.doc(gamecode)
 		.get()
 		.then((game) => {
-			if (!game.exists) return Promise.reject(`game ${gamecode} does not exist`)
-
+			if (!game.exists) throw new Error(`${gamecode} does not exist`)
 			const gameInfo = game.data() //how data is accessed via firestore
-			if (gameInfo.status !== 'new')
-				return Promise.reject(`game ${gamecode} is already in progress! No additional players can join`) //can't join game already in progress
-
-			return true
+			if (gameInfo.status !== 'new') throw new Error(`${gamecode} is ${gameInfo.status} and can't be joined!`)
+			return
 		})
-	//any firestore errors will be caught in caller
+		.catch((error) => {
+			throw error
+		})
 }
 
 export const createPlayer = (playerName) => {
 	console.log('creating player in firebase...')
-	return new Promise((resolve, reject) => {
-		return firebase
-			.auth()
-			.signInAnonymously()
-			.then((res) => {
-				console.log('created a player in firebase')
-				const user = firebase.auth().currentUser
-				user.updateProfile({
+	return firebase
+		.auth()
+		.signInAnonymously()
+		.then((res) => {
+			console.log('created a player in firebase')
+			const user = firebase.auth().currentUser
+			return user
+				.updateProfile({
 					displayName: playerName,
 				})
-					.then(() => {
-						console.log('updated username in firebase')
-						const player = {
-							playerId: user.uid,
-							name: user.displayName,
-						}
-						resolve(player)
-					})
-					.catch((error) => {
-						console.log('there was an error updating usernamein firebase ')
-						console.log(error)
-						reject(error)
-					})
-			})
-			.catch((error) => {
-				console.log('there was an error creating user')
-				console.log(error)
-				reject(error)
-			})
-	})
+				.then(() => {
+					console.log('updated username in firebase')
+					const player = {
+						playerId: user.uid,
+						name: user.displayName,
+					}
+					// resolve(player)
+					return player
+				})
+				.catch((error) => {
+					console.log('there was an error updating username in firebase ')
+					console.log(error)
+					throw error
+				})
+		})
+		.catch((error) => {
+			console.log('there was an error creating user')
+			console.log(error)
+			throw error
+		})
 }
 
 export const addPlayer = (player, gamecode) => {
 	console.log('action player in firestore to ', gamecode)
 	console.log(player)
-	return new Promise((resolve, reject) => {
-		return firebase
-			.firestore()
-			.collection('games')
-			.doc(gamecode)
-			.update({
-				players: firebase.firestore.FieldValue.arrayUnion(player),
-			})
-			.then(() => {
-				console.log('player added to game')
-				resolve(player)
-			})
-			.catch((error) => {
-				reject(error)
-			})
-	})
+	return firebase
+		.firestore()
+		.collection('games')
+		.doc(gamecode)
+		.update({
+			players: firebase.firestore.FieldValue.arrayUnion(player),
+		})
+		.then(() => {
+			console.log('player added to game')
+			return player
+		})
+		.catch((error) => {
+			throw error
+		})
 }
 
 export const dbUpdateTeam = (gamecode, playerId, team) => {

@@ -1,19 +1,19 @@
-// const initState = {
-// 	error: null,
-// }
 
-// export const errorReducer = (state=initState, action) => {
-// 	switch (action.type) {
-// 		case 'CREATE_GAME_ERROR':
-// 			console.log(action.error)
-// 			return Object.assign({}, state, { error: action.error })
-// 		case 'CREATE_PLAYER_ERROR':
-// 			console.log(action.error)
-// 			return Object.assign({}, state, { error: action.error })
-// 		case 'ADD_PLAYER_ERROR':
-// 			console.log(action.error)
-// 			return Object.assign({}, state, { error: action.error })
-// 		default:
-// 			return state
-// 	}
-// }
+export const errorReducer = (state={}, action) => {
+    if(!action.error) {
+        return {
+            ...state,
+            error: null
+        }
+    }
+    console.log("there was an error")
+    console.log(action.type)
+    console.log(action.payload)
+    return {
+        ...state,
+        error: {
+            type: action.type,
+            errorMessage: action.payload
+        }
+    }
+}

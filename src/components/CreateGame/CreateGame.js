@@ -5,9 +5,12 @@ import { connect } from 'react-redux'
 import randomize from 'randomatic'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import CreateGameForm from 'components/CreateGameForm'
+import Pending from 'components/shared/Pending'
+import ErrorMessage from 'components/shared/ErrorMessage'
 import { createNewGame } from 'store/actions/gameActions'
+import { clearErrors } from 'store/actions/errorActions'
 
-class CreateGame extends React.Component {
+export class CreateGame extends React.Component {
 	constructor(props) {
 		super(props)
 
@@ -19,12 +22,8 @@ class CreateGame extends React.Component {
 			timeValue: 60,
 			skipPenalty: 'none',
 			redirect: false,
-			submitting: false,
-			error: null,
 		}
 	}
-
-	//pickle - decide if an onChange function is needed in form to update state when values are changed
 
 	/*Creates game in firestore using form data, updates redux store
     On success, creates an anonymous user in firebase and returns user info
@@ -40,9 +39,11 @@ class CreateGame extends React.Component {
 				timeValue: values.timeValue,
 				skipPenalty: values.skipPenalty,
 			},
+			//Wait until state update is complete to create gameData object
 			() => {
 				const { endGameMethod, turnsValue, timeValue, skipPenalty, name } = this.state
 				const endValue = endGameMethod === 'turns' ? turnsValue : timeValue
+				//6 characters of capital letters and numbers
 				const gamecode = randomize('A0', 6)
 				const gameData = {
 					status: 'new',
@@ -51,15 +52,13 @@ class CreateGame extends React.Component {
 					skipPenalty,
 					players: [],
 				}
+				console.log("setstate done")
 
-				this.props.createNewGame(gamecode, gameData, name).then((response) => {
+				this.props.createNewGame(gamecode, gameData, name).then(() => {
 					//finishes formik submission process
 					setSubmitting(false)
-					//redirect to waiting
-					console.log('all done')
-					console.log(response)
+					//redirect to Waiting
 					this.setState({
-						gamecode: response,
 						redirect: true,
 					})
 				})
@@ -71,24 +70,26 @@ class CreateGame extends React.Component {
 		this.props.history.push('/home')
 	}
 
+	componentWillUnmount() {
+		this.props.clearGameErrors()
+	}
 	render() {
-		const { gamecode, error, submitting } = this.state
-
 		const buttonInfo = [
 			{ text: 'Back', className: 'button', onClick: this.handleBackClick },
 			{
 				form: 'createGameForm',
 				text: 'Submit',
-				className: 'button',
 				type: 'submit',
+				disabled: this.props.isPending,
 			},
 		]
 		return this.state.redirect ? (
-			<Redirect to={`/waiting/${gamecode}`} />
+			<Redirect to={`/waiting/${this.props.gamecode}`} />
 		) : (
 			<ButtonTabooCard tabooWord="New Game" buttons={buttonInfo}>
-				<CreateGameForm initialValues={this.state} handleSubmit={this.handleSubmit} inputRef={this.inputRef} />
-				<p style={{ fontSize: '2rem' }}>{submitting ? 'Creating new game' : error ? error : ''}</p>
+				<CreateGameForm initialValues={this.state} handleSubmit={this.handleSubmit} />
+				{this.props.isPending ? <Pending speed={300} message="Creating new game" /> : null}
+				{this.props.error ? <ErrorMessage error={this.props.error.message} /> : null}
 			</ButtonTabooCard>
 		)
 	}
@@ -96,12 +97,26 @@ class CreateGame extends React.Component {
 
 CreateGame.propTypes = {
 	history: PropTypes.object.isRequired,
+	error: PropTypes.object,
+	isPending: PropTypes.bool.isRequired,
+	gamecode: PropTypes.string.isRequired,
+	createNewGame: PropTypes.func.isRequired,
+	clearGameErrors: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = (state) => {
+	return {
+		error: state.game.error ? state.game.error.errorMessage : state.game.error,
+		isPending: state.game.pending,
+		gamecode: state.game.gamecode,
+	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		createNewGame: (gamecode, gameData, player) => dispatch(createNewGame(gamecode, gameData, player)),
+		clearGameErrors: () => dispatch(clearErrors('CLEAR_GAME_ERRORS')),
 	}
 }
 
-export default connect(null, mapDispatchToProps)(CreateGame)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateGame)

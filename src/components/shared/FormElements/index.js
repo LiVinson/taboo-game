@@ -54,4 +54,4 @@ export const Label = (props) => <StyledLabel {...props}/>
 
 export const TextLabel = (props) => <StyledTextLabel {...props} />
 
-export const ErrorText = (props) => <StyledErrorText{...props} />
+export const ErrorText = (props) => <StyledErrorText {...props} />

@@ -1,112 +1,193 @@
 import React from 'react'
-import configureStore from 'redux-mock-store'
-import { Provider } from 'react-redux'
 import { shallow, mount } from 'enzyme'
+import renderer from 'react-test-renderer'
 import 'jest-styled-components'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
-import CreateGame from '../CreateGame'
-// import createNewGame from "store/actions/__mocks__/createNewGame"
-// import { createNewGame } from 'store/actions/gameActions'
+import { CreateGame } from '../CreateGame'
+import { ButtonTabooCard } from 'components/shared/TabooCard'
+import CreateGameForm from 'components/CreateGameForm'
+import Pending from 'components/shared/Pending'
+import ErrorMessage from 'components/shared/ErrorMessage'
 
-	// jest.mock('store/actions/gameActions', () => ({
-	// 	__esModule: true,
-	// 	createNewGame: jest.fn().mockImplementation(()=> {
-	// 		console.log("mock!")
-	// 		Promise.resolve(true)
-	// 	})
-	// }))
+//*NOTE*: randomatic npm package is mocked to return CODE00 for gamecode
 
-	const mockStore = configureStore([])
-	let store
-
-	const updateField = (wrapper, name, value) => {
-		wrapper.simulate('change', {
-			persist: () => {},
-			target: {
-				name,
-				value,
-			},
-		})
+describe('CreateGame functionality and rendering', () => {
+	const defaultProps = {
+		history: {
+			push: jest.fn(),
+		},
+		error: null,
+		isPending: false,
+		gamecode: '',
+		createNewGame: jest.fn(() => Promise.resolve()),
+		clearGameErrors: jest.fn(),
 	}
 
-	beforeEach(() => {
-		store = mockStore({})
-		store.dispatch = jest.fn()
-	})
+	const formValues = {
+		name: 'Sam',
+		endGameMethod: 'turns',
+		turnsValue: 2,
+		timeValue: 60,
+		skipPenalty: false,
+	}
 
 	test('CreateGame renders without crashing', () => {
 		const props = {
-			history: {
-				push: jest.fn(),
-			},
-			createNewGame: jest.fn(),
+			...defaultProps,
 		}
 
-		shallow(
-			<Provider store={store}>
+		shallow(<CreateGame {...props} />)
+	})
+
+	/* ---------------------SNAPSHOT TESTS & RENDERING ------------------------------- */
+	test('CreateGame renders correctly with default props', () => {
+		const props = {
+			...defaultProps,
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<CreateGame {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
+
+		expect(wrapper).toMatchSnapshot()
+	})
+
+	test('CreateGame renders correctly with isPending props true', () => {
+		const props = {
+			...defaultProps,
+			isPending: true,
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<CreateGame {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
+
+		expect(wrapper).toMatchSnapshot()
+	})
+
+	test('CreateGame renders correctly with error props true', () => {
+		const props = {
+			...defaultProps,
+			error: new Error('There was an error creating game.'),
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<CreateGame {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
+
+		expect(wrapper).toMatchSnapshot()
+	})
+
+	test('CreateGame renders a ButtonTabooCard with a Form', () => {
+		const props = {
+			...defaultProps,
+		}
+
+		const wrapper = shallow(
+			<ThemeProvider theme={theme}>
 				<CreateGame {...props} />
-			</Provider>
+			</ThemeProvider>
 		)
+		//Need to use find to access CreateGame due to ThemeProvider wrapper and use .dive() for child components due to shallow rendering
+		const component = wrapper.find(CreateGame)
+		expect(component.dive().find(ButtonTabooCard).length).toBe(1)
+		expect(component.dive().find(CreateGameForm).length).toBe(1)
+
 	})
 
-	test('CreateGame contains a form element and 2 buttons', () => {
+	/* --------------------- FUNCTIONALITY & PROPS ------------------------------- */
+
+	test('navigates back to /home when handleBackClick is called', () => {
 		const props = {
-			history: {
-				push: jest.fn(),
-			},
+			...defaultProps,
 		}
+		const wrapper = shallow(<CreateGame {...props} />)
 
-		const wrapper = mount(
-			<Provider store={store}>
-				<ThemeProvider theme={theme}>
-					<CreateGame {...props} />
-				</ThemeProvider>
-			</Provider>
-		)
-
-		expect(wrapper.find('form').length).toBe(1)
-		expect(wrapper.find('button').length).toBe(2)
-	})
-
-	test('navigates back to /home when back is selected', () => {
-		const props = {
-			history: {
-				push: jest.fn(),
-			},
-			createNewGame: jest.fn(() => Promise.resolve()),
-		}
-		const wrapper = mount(
-			<Provider store={store}>
-				<ThemeProvider theme={theme}>
-					<CreateGame {...props} />
-				</ThemeProvider>
-			</Provider>
-		)
-		wrapper.find('button').at(0).simulate('click')
-		expect(props.history.push.mock.calls[0].length).toBe(1)
-		//Check the argument the push method was called with (equals the new url)
-		expect(props.history.push.mock.calls[0][0]).toBe('/home')
+		wrapper.instance().handleBackClick()
+		expect(props.history.push).toHaveBeenCalled()
+		expect(props.history.push).toHaveBeenCalledWith('/home')
 	})
 
 	test('Calls props.createNewGame with form data on submit', () => {
 		const props = {
-			history: {
-				push: jest.fn(),
-			},
+			...defaultProps,
 		}
 
-		const wrapper = mount(
-			<Provider store={store}>
-				<ThemeProvider theme={theme}>
-					<CreateGame {...props} />
-				</ThemeProvider>
-			</Provider>
-		)
+		const setSubmittingMock = jest.fn()
 
-		//finds input field, and sets the name and value attributes
-		updateField(wrapper.find(CreateGame).find('input#name'), 'name', 'Sam')
-		wrapper.find('form').simulate('submit')
+		const wrapper = shallow(<CreateGame {...props} />)
 
+		wrapper.instance().handleSubmit(formValues, setSubmittingMock)
+		//setTimout gives time for the React.setState to run and it's callback before running test
+		setTimeout(() => {
+			const { endGameMethod, endValue, skipPenalty, name } = wrapper.state()
+			const gameData = {
+				status: 'new',
+				endGameMethod,
+				endValue,
+				skipPenalty,
+				players: [],
+			}
+			expect(props.createNewGame).toHaveBeenCalled()
+			expect(props.createNewGame).toHaveBeenCalledWith('CODE00', gameData, name)
+		}, 75)
 	})
 
+	test('Does not render Pending component when props.isPending is false', () => {
+		const props = {
+			...defaultProps,
+		}
+		const wrapper = shallow(<CreateGame {...props} />)
+		expect(wrapper.find(Pending)).toHaveLength(0)
+	})
+
+	test('renders Pending component when props.isPending is true', () => {
+		const props = {
+			...defaultProps,
+			isPending: true,
+		}
+		const wrapper = shallow(<CreateGame {...props} />)
+		expect(wrapper.find(Pending)).toHaveLength(1)
+	})
+
+	test('Does not render ErrorMessage component when props.isPending is false', () => {
+		const props = {
+			...defaultProps,
+		}
+		const wrapper = shallow(<CreateGame {...props} />)
+		expect(wrapper.find(ErrorMessage)).toHaveLength(0)
+	})
+
+	test('renders ErrorMessage component when props.isPending is true', () => {
+		const props = {
+			...defaultProps,
+			error: new Error('There was an error creating game.'),
+		}
+		const wrapper = shallow(<CreateGame {...props} />)
+		expect(wrapper.find(ErrorMessage)).toHaveLength(1)
+	})
+
+	test('CreateGame calls props.clearGameErrors on unmount', () => {
+		const props = {
+			...defaultProps,
+			error: new Error('There was an error creating game.'),
+		}
+		const wrapper = mount(
+			<ThemeProvider theme={theme}>
+				<CreateGame {...props} />
+			</ThemeProvider>
+		)
+		wrapper.unmount()
+		expect(props.clearGameErrors).toHaveBeenCalled()
+	})
+})

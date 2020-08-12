@@ -1,106 +1,186 @@
 import React from 'react'
-import configureStore from 'redux-mock-store'
-import { Provider } from 'react-redux'
 import { shallow, mount } from 'enzyme'
+import renderer from 'react-test-renderer'
 import 'jest-styled-components'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
-import JoinGame from '../JoinGame'
-// jest.mock('react-redux')
-const mockStore = configureStore([])
-let store
+import {JoinGame} from '../JoinGame'
+import { ButtonTabooCard } from 'components/shared/TabooCard'
+import JoinGameForm from 'components/JoinGameForm'
+import Pending from 'components/shared/Pending'
+import ErrorMessage from 'components/shared/ErrorMessage'
 
-
-//Used to update a formik field before submitting form
-const updateField = (wrapper, name, value) => {
-	wrapper.simulate('change', {
-		persist: () => {},
-		target: {
-			name,
-			value,
+describe('JoinGame functionality and rendering', () => {
+	const defaultProps = {
+		history: {
+			push: jest.fn(),
 		},
+		error: null,
+		isPending: false,
+		gamecode: '',
+		joinNewGame: jest.fn(() => Promise.resolve()),
+		clearGameErrors: jest.fn(),
+	}
+
+	const formValues = {
+		name: 'Sam',
+		gamecode: 'code12',
+	}
+
+	test('JoinGame renders without crashing', () => {
+		const props = {
+			...defaultProps,
+		}
+		shallow(<JoinGame {...props} />)
 	})
-}
 
-beforeEach(() => {
-	store = mockStore({})
-	store.dispatch = jest.fn()
-})
+	/* ---------------------SNAPSHOT TESTS & RENDERING ------------------------------- */
 
-test('JoinGame renders without crashing', () => {
-	const props = {
-		history: {
-			push: jest.fn(),
-		},
-		joinNewGame: (data) => store.dispatch(jest.fn(() => Promise.resolve('12345'))),
-	}
-	shallow(
-		<Provider store={store}>
-			<JoinGame.reactComponent {...props} />
-		</Provider>
-	)
-})
+	test('JoinGame renders correctly with default props', () => {
+		const props = {
+			...defaultProps,
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<JoinGame {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
 
-test('JoinGame contains a form element and 2 buttons', () => {
-	const props = {
-		history: {
-			push: jest.fn(),
-		},
-		joinNewGame: (data) => store.dispatch(jest.fn(() => Promise.resolve('12345'))),
-	}
-	const wrapper = mount(
-		<Provider store={store}>
+		expect(wrapper).toMatchSnapshot()
+	})
+
+	test('JoinGame renders correctly with isPending props true', () => {
+		const props = {
+			...defaultProps,
+			isPending: true,
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<JoinGame {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
+
+		expect(wrapper).toMatchSnapshot()
+	})
+
+	test('JoinGame renders correctly with error props true', () => {
+		const props = {
+			...defaultProps,
+			error: new Error('There was an error creating game.'),
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<JoinGame {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
+
+		expect(wrapper).toMatchSnapshot()
+	})
+	test('JoinGame renders a ButtonTabooCard with a Form', () => {
+		const props = {
+			...defaultProps,
+		}
+
+		const wrapper = shallow(
 			<ThemeProvider theme={theme}>
 				<JoinGame {...props} />
 			</ThemeProvider>
-		</Provider>
-	)
+		)
+		//Need to use find to access JoinGame due to ThemeProvider wrapper and use .dive() for child components due to shallow rendering
+		const component = wrapper.find(JoinGame)
+		expect(component.dive().find(ButtonTabooCard).length).toBe(1)
+		expect(component.dive().find(JoinGameForm).length).toBe(1)
 
-	expect(wrapper.find('form').length).toBe(1)
-	expect(wrapper.find('button').length).toBe(2)
-})
+	})
 
-test('Join Game navigates back to /home when back is selected', () => {
-	const props = {
-		history: {
-			push: jest.fn(),
-			joinNewGame: (data) => store.dispatch(jest.fn(() => Promise.resolve('12345'))),
-		},
-	}
-	const wrapper = mount(
-		<Provider store={store}>
+	/* --------------------- FUNCTIONALITY & PROPS ------------------------------- */
+
+	test('JoinGame navigates back to /home when handleBackClick is called', () => {
+		const props = {
+			...defaultProps,
+		}
+		const wrapper = shallow(<JoinGame {...props} />)
+
+		wrapper.instance().handleBackClick()
+		expect(props.history.push).toHaveBeenCalled()
+		expect(props.history.push).toHaveBeenCalledWith('/home')
+	})
+
+	test('Calls props.joinNewGame with form data on submit', () => {
+		const props = {
+			...defaultProps,
+		}
+
+		const setSubmittingMock = jest.fn()
+		const wrapper = shallow(<JoinGame {...props} />)
+
+		wrapper.instance().handleSubmit(formValues, setSubmittingMock)
+		//setTimout gives time for the React.setState to run and it's callback before running test
+		setTimeout(() => {
+			const { endGameMethod, endValue, skipPenalty, name } = wrapper.state()
+			const gameData = {
+				status: 'new',
+				endGameMethod,
+				endValue,
+				skipPenalty,
+				players: [],
+			}
+			expect(props.joinNewGame).toHaveBeenCalled()
+			expect(props.joinNewGame).toHaveBeenCalledWith('CODE00', gameData, name)
+		}, 75)
+	})
+
+	test('Does not render Pending component when props.isPending is false', () => {
+		const props = {
+			...defaultProps,
+		}
+		const wrapper = shallow(<JoinGame {...props} />)
+		expect(wrapper.find(Pending)).toHaveLength(0)
+	})
+
+	test('renders Pending component when props.isPending is true', () => {
+		const props = {
+			...defaultProps,
+			isPending: true,
+		}
+		const wrapper = shallow(<JoinGame {...props} />)
+		expect(wrapper.find(Pending)).toHaveLength(1)
+	})
+
+	test('Does not render ErrorMessage component when props.isPending is false', () => {
+		const props = {
+			...defaultProps,
+		}
+		const wrapper = shallow(<JoinGame {...props} />)
+		expect(wrapper.find(ErrorMessage)).toHaveLength(0)
+	})
+
+	test('renders ErrorMessage component when props.isPending is true', () => {
+		const props = {
+			...defaultProps,
+			error: new Error('There was an error creating game.'),
+		}
+		const wrapper = shallow(<JoinGame {...props} />)
+		expect(wrapper.find(ErrorMessage)).toHaveLength(1)
+	})
+
+	test('JoinGame calls props.clearGameErrors on unmount', () => {
+		const props = {
+			...defaultProps,
+			error: new Error('There was an error creating game.'),
+		}
+		const wrapper = mount(
 			<ThemeProvider theme={theme}>
 				<JoinGame {...props} />
 			</ThemeProvider>
-		</Provider>
-	)
-	wrapper.find('button').at(0).simulate('click')
-	expect(props.history.push.mock.calls[0].length).toBe(1)
-	//Check the argument the push method was called with (equals the new url)
-	expect(props.history.push.mock.calls[0][0]).toBe('/home')
-})
-
-test('props.joinNewGame is called when form is submitted', () => {
-	const props = {
-		history: {
-			push: jest.fn(),
-			joinNewGame: (data) => store.dispatch(jest.fn(() => Promise.resolve('12345'))),
-		},
-  }
-  
-	const wrapper = mount(
-		<Provider store={store}>
-			<ThemeProvider theme={theme}>
-				<JoinGame {...props} />
-			</ThemeProvider>
-		</Provider>
-	)
-
-	console.log(wrapper.find(JoinGame).props())
-
-	//finds input field, and sets the name and value attributes
-	// updateField(wrapper.find(JoinGame).find('input#name'), 'name', 'Sam')
-	// updateField(wrapper.find(JoinGame).find('input#gamecode'), 'gamecode', 'F03156')
-	// wrapper.find('form').simulate('submit')
-	// expect(wrapper.find(JoinGame).props.joinNewGame).toHaveBeenCalled()
+		)
+		wrapper.unmount()
+		expect(props.clearGameErrors).toHaveBeenCalled()
+	})
 })
