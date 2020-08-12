@@ -103,7 +103,6 @@ describe('CreateGame functionality and rendering', () => {
 		expect(component.dive().find(ButtonTabooCard).length).toBe(1)
 		expect(component.dive().find(CreateGameForm).length).toBe(1)
 
-		// expect(wrapper.find(CreateGame).dive().find("form").length).toBe(2)
 	})
 
 	/* --------------------- FUNCTIONALITY & PROPS ------------------------------- */

@@ -9,7 +9,7 @@ import ErrorMessage from 'components/shared/ErrorMessage'
 import { joinNewGame } from 'store/actions/gameActions'
 import { clearErrors } from 'store/actions/errorActions'
 
-class JoinGame extends React.Component {
+export class JoinGame extends React.Component {
 	constructor(props) {
 		super(props)
 
@@ -22,7 +22,7 @@ class JoinGame extends React.Component {
 
 	//Update to creating player id, validating gamecode, redirecting to 'Waiting Room'
 	handleSubmit = (values, setSubmitting) => {
-		console.log('submitted', values)
+		// console.log('submitted', values)
 		this.setState(
 			{
 				playerName: values.name.toUpperCase(),
@@ -50,8 +50,9 @@ class JoinGame extends React.Component {
 	componentWillUnmount() {
 		this.props.clearGameErrors()
 	}
+
 	render() {
-		console.log(this.props)
+		// console.log(this.props)
 		const { name, gamecode } = this.state
 		const buttonInfo = [
 			{ text: 'Back', onClick: this.handleBackClick },
@@ -77,10 +78,15 @@ class JoinGame extends React.Component {
 
 JoinGame.propTypes = {
 	history: PropTypes.object.isRequired,
+	error: PropTypes.object,
+	isPending: PropTypes.bool.isRequired,
+	gamecode: PropTypes.string.isRequired,
+	joinNewGame: PropTypes.func.isRequired,
+	clearGameErrors: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
-	console.log(state)
+	// console.log(state)
 	return {
 		error: state.game.error ? state.game.error.errorMessage : state.game.error,
 		isPending: state.game.pending,

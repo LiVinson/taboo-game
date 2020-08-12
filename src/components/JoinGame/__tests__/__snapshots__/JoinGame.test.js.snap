@@ -1,0 +1,830 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JoinGame functionality and rendering JoinGame renders correctly with default props 1`] = `
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 1.2rem;
+  left: .5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c8 {
+  border: none;
+  color: #1982C4;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+}
+
+.c8:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c8:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c9 {
+  border: none;
+  color: #1982C4;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #f7f9f9;
+  background-color: #8AC926;
+  width: 47%;
+}
+
+.c9:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c9:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c9:active {
+  -webkit-filter: brightness(1.2);
+  filter: brightness(1.2);
+}
+
+.c9:focus {
+  outline: solid 2px #f7f9f9;
+}
+
+.c7 {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c3 {
+  text-align: left;
+  font-size: 2.2rem;
+  font-family: 'Oswald',sans-serif;
+  color: #333333;
+}
+
+.c4 {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.c6 {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  background-color: #ebebeb;
+  font-size: 2.2rem;
+  border-radius: 2%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.c6::-webkit-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:focus {
+  outline: none;
+  border: solid 1px #1982C4;
+}
+
+.c5 {
+  font-size: 1.6rem;
+  display: inline-block;
+  font-size: 1.8;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    Join Game
+  </div>
+  <div
+    className="c2"
+  >
+    <form
+      action="#"
+      className="c3"
+      id="joinGameForm"
+      onReset={[Function]}
+      onSubmit={[Function]}
+    >
+      <div
+        className="c4"
+      >
+        <label
+          className="sc-fzqNJr c5"
+          htmlFor="name"
+        >
+          Enter Your Name
+        </label>
+        <input
+          className="c6"
+          id="name"
+          name="name"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          tabIndex="1"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="c4"
+      >
+        <label
+          className="sc-fzqNJr c5"
+          htmlFor="gamecode"
+        >
+          Enter a Game Code
+        </label>
+        <input
+          className="c6"
+          id="gamecode"
+          name="gamecode"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          tabIndex="1"
+          type="text"
+          value=""
+        />
+      </div>
+    </form>
+  </div>
+  <div
+    className="c7"
+  >
+    <button
+      className="c8"
+      onClick={[Function]}
+    >
+      Back
+    </button>
+    <button
+      className="c9"
+      disabled={false}
+      form="joinGameForm"
+      type="submit"
+    >
+      Join
+    </button>
+  </div>
+</div>
+`;
+
+exports[`JoinGame functionality and rendering JoinGame renders correctly with error props true 1`] = `
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 1.2rem;
+  left: .5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c9 {
+  border: none;
+  color: #1982C4;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+}
+
+.c9:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c9:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c10 {
+  border: none;
+  color: #1982C4;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #f7f9f9;
+  background-color: #8AC926;
+  width: 47%;
+}
+
+.c10:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c10:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c10:active {
+  -webkit-filter: brightness(1.2);
+  filter: brightness(1.2);
+}
+
+.c10:focus {
+  outline: solid 2px #f7f9f9;
+}
+
+.c8 {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c3 {
+  text-align: left;
+  font-size: 2.2rem;
+  font-family: 'Oswald',sans-serif;
+  color: #333333;
+}
+
+.c4 {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.c6 {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  background-color: #ebebeb;
+  font-size: 2.2rem;
+  border-radius: 2%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.c6::-webkit-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:focus {
+  outline: none;
+  border: solid 1px #1982C4;
+}
+
+.c5 {
+  font-size: 1.6rem;
+  display: inline-block;
+  font-size: 1.8;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.c7 {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: red;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    Join Game
+  </div>
+  <div
+    className="c2"
+  >
+    <form
+      action="#"
+      className="c3"
+      id="joinGameForm"
+      onReset={[Function]}
+      onSubmit={[Function]}
+    >
+      <div
+        className="c4"
+      >
+        <label
+          className="sc-fzqNJr c5"
+          htmlFor="name"
+        >
+          Enter Your Name
+        </label>
+        <input
+          className="c6"
+          id="name"
+          name="name"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          tabIndex="1"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="c4"
+      >
+        <label
+          className="sc-fzqNJr c5"
+          htmlFor="gamecode"
+        >
+          Enter a Game Code
+        </label>
+        <input
+          className="c6"
+          id="gamecode"
+          name="gamecode"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          tabIndex="1"
+          type="text"
+          value=""
+        />
+      </div>
+    </form>
+    <p
+      className="c7"
+    >
+      There was an error creating game.
+    </p>
+  </div>
+  <div
+    className="c8"
+  >
+    <button
+      className="c9"
+      onClick={[Function]}
+    >
+      Back
+    </button>
+    <button
+      className="c10"
+      disabled={false}
+      form="joinGameForm"
+      type="submit"
+    >
+      Join
+    </button>
+  </div>
+</div>
+`;
+
+exports[`JoinGame functionality and rendering JoinGame renders correctly with isPending props true 1`] = `
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 1.2rem;
+  left: .5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c9 {
+  border: none;
+  color: #1982C4;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+}
+
+.c9:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c9:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c10 {
+  border: none;
+  color: #1982C4;
+  background-color: #f7f9f9;
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border-radius: 2px;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #f7f9f9;
+  background-color: #8AC926;
+  width: 47%;
+}
+
+.c10:active {
+  outline: none;
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c10:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c10:active {
+  -webkit-filter: brightness(1.2);
+  filter: brightness(1.2);
+}
+
+.c10:focus {
+  outline: solid 2px #f7f9f9;
+}
+
+.c8 {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c3 {
+  text-align: left;
+  font-size: 2.2rem;
+  font-family: 'Oswald',sans-serif;
+  color: #333333;
+}
+
+.c4 {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.c6 {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  background-color: #ebebeb;
+  font-size: 2.2rem;
+  border-radius: 2%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.c6::-webkit-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:focus {
+  outline: none;
+  border: solid 1px #1982C4;
+}
+
+.c5 {
+  font-size: 1.6rem;
+  display: inline-block;
+  font-size: 1.8;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.c7 {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #1982C4;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    Join Game
+  </div>
+  <div
+    className="c2"
+  >
+    <form
+      action="#"
+      className="c3"
+      id="joinGameForm"
+      onReset={[Function]}
+      onSubmit={[Function]}
+    >
+      <div
+        className="c4"
+      >
+        <label
+          className="sc-fzqNJr c5"
+          htmlFor="name"
+        >
+          Enter Your Name
+        </label>
+        <input
+          className="c6"
+          id="name"
+          name="name"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          tabIndex="1"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="c4"
+      >
+        <label
+          className="sc-fzqNJr c5"
+          htmlFor="gamecode"
+        >
+          Enter a Game Code
+        </label>
+        <input
+          className="c6"
+          id="gamecode"
+          name="gamecode"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          tabIndex="1"
+          type="text"
+          value=""
+        />
+      </div>
+    </form>
+    <p
+      className="c7"
+    >
+      Joining game 
+    </p>
+  </div>
+  <div
+    className="c8"
+  >
+    <button
+      className="c9"
+      onClick={[Function]}
+    >
+      Back
+    </button>
+    <button
+      className="c10"
+      disabled={true}
+      form="joinGameForm"
+      type="submit"
+    >
+      Join
+    </button>
+  </div>
+</div>
+`;
