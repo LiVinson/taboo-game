@@ -9,8 +9,7 @@ import {
   StyledDropDown,
   StyledLabel,
   StyledTextLabel,
-  StyledErrorText,
-  StyledSubmitMessage
+  StyledErrorText
 } from "./style.js"
 
 export const Form = (props) => {

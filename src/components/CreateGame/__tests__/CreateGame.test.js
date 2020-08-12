@@ -5,12 +5,12 @@ import 'jest-styled-components'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
 import { CreateGame } from '../CreateGame'
+import { ButtonTabooCard } from 'components/shared/TabooCard'
+import CreateGameForm from 'components/CreateGameForm'
 import Pending from 'components/shared/Pending'
 import ErrorMessage from 'components/shared/ErrorMessage'
 
-
-//Snapshot testing based on prop values 
-
+//*NOTE*: randomatic npm package is mocked to return CODE00 for gamecode
 
 describe('CreateGame functionality and rendering', () => {
 	const defaultProps = {
@@ -52,14 +52,14 @@ describe('CreateGame functionality and rendering', () => {
 				</ThemeProvider>
 			)
 			.toJSON()
-	
+
 		expect(wrapper).toMatchSnapshot()
 	})
 
 	test('CreateGame renders correctly with isPending props true', () => {
 		const props = {
 			...defaultProps,
-			isPending: true
+			isPending: true,
 		}
 		const wrapper = renderer
 			.create(
@@ -68,14 +68,14 @@ describe('CreateGame functionality and rendering', () => {
 				</ThemeProvider>
 			)
 			.toJSON()
-	
+
 		expect(wrapper).toMatchSnapshot()
 	})
 
 	test('CreateGame renders correctly with error props true', () => {
 		const props = {
 			...defaultProps,
-			error : new Error("There was an error creating game.")
+			error: new Error('There was an error creating game.'),
 		}
 		const wrapper = renderer
 			.create(
@@ -84,41 +84,39 @@ describe('CreateGame functionality and rendering', () => {
 				</ThemeProvider>
 			)
 			.toJSON()
-	
+
 		expect(wrapper).toMatchSnapshot()
 	})
 
-
-	test('CreateGame contains a form element and 2 buttons', () => {
+	test('CreateGame renders a ButtonTabooCard with a Form', () => {
 		const props = {
 			...defaultProps,
 		}
 
-		const wrapper = mount(
+		const wrapper = shallow(
 			<ThemeProvider theme={theme}>
 				<CreateGame {...props} />
 			</ThemeProvider>
 		)
+		//Need to use find to access CreateGame due to ThemeProvider wrapper and use .dive() for child components due to shallow rendering
+		const component = wrapper.find(CreateGame)
+		expect(component.dive().find(ButtonTabooCard).length).toBe(1)
+		expect(component.dive().find(CreateGameForm).length).toBe(1)
 
-		expect(wrapper.find('form').length).toBe(1)
-		expect(wrapper.find('button').length).toBe(2)
+		// expect(wrapper.find(CreateGame).dive().find("form").length).toBe(2)
 	})
 
-		/* --------------------- FUNCTIONALITY & PROPS ------------------------------- */
+	/* --------------------- FUNCTIONALITY & PROPS ------------------------------- */
 
-	test('navigates back to /home when back is selected', () => {
+	test('navigates back to /home when handleBackClick is called', () => {
 		const props = {
 			...defaultProps,
 		}
-		const wrapper = mount(
-			<ThemeProvider theme={theme}>
-				<CreateGame {...props} />
-			</ThemeProvider>
-		)
-		wrapper.find('button').at(0).simulate('click')
-		expect(props.history.push.mock.calls[0].length).toBe(1)
-		//Check the argument the push method was called with (equals the new url)
-		expect(props.history.push.mock.calls[0][0]).toBe('/home')
+		const wrapper = shallow(<CreateGame {...props} />)
+
+		wrapper.instance().handleBackClick()
+		expect(props.history.push).toHaveBeenCalled()
+		expect(props.history.push).toHaveBeenCalledWith('/home')
 	})
 
 	test('Calls props.createNewGame with form data on submit', () => {
@@ -174,9 +172,23 @@ describe('CreateGame functionality and rendering', () => {
 	test('renders ErrorMessage component when props.isPending is true', () => {
 		const props = {
 			...defaultProps,
-			error : new Error("There was an error creating game.")
+			error: new Error('There was an error creating game.'),
 		}
 		const wrapper = shallow(<CreateGame {...props} />)
 		expect(wrapper.find(ErrorMessage)).toHaveLength(1)
+	})
+
+	test('CreateGame calls props.clearGameErrors on unmount', () => {
+		const props = {
+			...defaultProps,
+			error: new Error('There was an error creating game.'),
+		}
+		const wrapper = mount(
+			<ThemeProvider theme={theme}>
+				<CreateGame {...props} />
+			</ThemeProvider>
+		)
+		wrapper.unmount()
+		expect(props.clearGameErrors).toHaveBeenCalled()
 	})
 })
