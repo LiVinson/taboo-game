@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import randomize from 'randomatic'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import CreateGameForm from 'components/CreateGameForm'
+import Pending from "components/shared/Pending"
 import { createNewGame } from 'store/actions/gameActions'
 
 class CreateGame extends React.Component {
@@ -20,7 +21,7 @@ class CreateGame extends React.Component {
 			skipPenalty: 'none',
 			redirect: false,
 			submitting: false,
-			error: null,
+			error: null
 		}
 	}
 
@@ -39,10 +40,13 @@ class CreateGame extends React.Component {
 				turnsValue: values.turnsValue,
 				timeValue: values.timeValue,
 				skipPenalty: values.skipPenalty,
+				submitting: true
 			},
+			//Wait until state update is complete 
 			() => {
 				const { endGameMethod, turnsValue, timeValue, skipPenalty, name } = this.state
 				const endValue = endGameMethod === 'turns' ? turnsValue : timeValue
+				//6 characters of capital letters and numbers
 				const gamecode = randomize('A0', 6)
 				const gameData = {
 					status: 'new',
@@ -71,8 +75,11 @@ class CreateGame extends React.Component {
 		this.props.history.push('/home')
 	}
 
+
+
 	render() {
-		const { gamecode, error, submitting } = this.state
+		console.log(this.props)
+		const { gamecode, submitting } = this.state
 
 		const buttonInfo = [
 			{ text: 'Back', className: 'button', onClick: this.handleBackClick },
@@ -81,14 +88,15 @@ class CreateGame extends React.Component {
 				text: 'Submit',
 				className: 'button',
 				type: 'submit',
+				disabled: submitting
 			},
 		]
 		return this.state.redirect ? (
 			<Redirect to={`/waiting/${gamecode}`} />
 		) : (
 			<ButtonTabooCard tabooWord="New Game" buttons={buttonInfo}>
-				<CreateGameForm initialValues={this.state} handleSubmit={this.handleSubmit} inputRef={this.inputRef} />
-				<p style={{ fontSize: '2rem' }}>{submitting ? 'Creating new game' : error ? error : ''}</p>
+				<CreateGameForm initialValues={this.state} handleSubmit={this.handleSubmit} />
+				{submitting ? <Pending speed={300} message="Creating new game"/> : null}
 			</ButtonTabooCard>
 		)
 	}
@@ -98,10 +106,16 @@ CreateGame.propTypes = {
 	history: PropTypes.object.isRequired,
 }
 
+const mapStateToProps = (state) => {
+	console.log(state)
+	return {
+		error: state.error
+	}
+}
 const mapDispatchToProps = (dispatch) => {
 	return {
 		createNewGame: (gamecode, gameData, player) => dispatch(createNewGame(gamecode, gameData, player)),
 	}
 }
 
-export default connect(null, mapDispatchToProps)(CreateGame)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateGame)
