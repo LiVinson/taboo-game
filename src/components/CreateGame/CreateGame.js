@@ -7,8 +7,8 @@ import { ButtonTabooCard } from 'components/shared/TabooCard'
 import CreateGameForm from 'components/CreateGameForm'
 import Pending from "components/shared/Pending"
 import ErrorMessage from "components/shared/ErrorMessage"
-
 import { createNewGame } from 'store/actions/gameActions'
+import { clearErrors } from "store/actions/errorActions"
 
 class CreateGame extends React.Component {
 	constructor(props) {
@@ -69,6 +69,9 @@ class CreateGame extends React.Component {
 		this.props.history.push('/home')
 	}
 
+	componentWillUnmount() {
+		this.props.clearGameErrors()
+	}
 	render() {
 
 		const buttonInfo = [
@@ -76,7 +79,6 @@ class CreateGame extends React.Component {
 			{
 				form: 'createGameForm',
 				text: 'Submit',
-				className: 'button',
 				type: 'submit',
 				disabled: this.props.isPending
 			},
@@ -109,6 +111,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		createNewGame: (gamecode, gameData, player) => dispatch(createNewGame(gamecode, gameData, player)),
+		clearGameErrors: () => dispatch(clearErrors("CLEAR_GAME_ERRORS"))
 	}
 }
 

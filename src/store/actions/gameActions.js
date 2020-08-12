@@ -17,6 +17,23 @@ const createGameSuccess = (gamecode) => {
 	}
 }
 
+const requestJoinGame = (gamecode) => {
+	return {
+		type: 'REQUEST_JOIN_GAME',
+		payload: {
+			gamecode
+		}
+	}
+}
+
+const joinGameSuccess = (gamecode) => {
+	return {
+		type: 'JOIN_GAME_SUCCESS',
+		payload: {
+			gamecode,
+		},
+	}
+}
 const requestUpdateGameStatus = () => {
 	return {
 		type: 'REQUEST_UPDATE_GAME_STATUS',
@@ -40,7 +57,6 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 						const host = { ...player, team: null, host: true }
 						//associates anonymous user with game instance in firestore
 						addPlayer(host, gamecode).then((player) => {
-							dispatch(addPlayerSuccess(player))
 							dispatch(createGameSuccess(gamecode))
 							resolve()
 						})
@@ -55,29 +71,24 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 
 export const joinNewGame = ({ gamecode, playerName }) => {
 	return (dispatch) => {
-		return new Promise((resolve, reject) => {
-			return verifyGameExists(gamecode)
+		//reject not needed. Any error updated in store. Promise needed to allow for calling Formik function on completion of creation
+
+		return new Promise((resolve) => {
+			dispatch(requestJoinGame())
+			verifyGameExists(gamecode)
 				.then(() => {
-					return true
+					createPlayer(playerName).then((playerData) => {
+						const player = { ...playerData, host: false, team: null }
+						addPlayer(player, gamecode).then(() => {
+							dispatch(joinGameSuccess(gamecode))
+							resolve()
+						})
+					})
 				})
-				.then(() => {
-					//creates anonymous user in firebase and updates displayName
-					console.log(playerName)
-					return createPlayer(playerName)
-				})
-				.then((playerData) => {
-					const player = { ...playerData, host: false, team: null }
-					//associates anonymous user with game instance in firestore
-					return addPlayer(player, gamecode)
-				})
-				.then((player) => {
-					dispatch(addPlayerSuccess(player))
-					resolve(player.playerId)
-				})
-				.catch((err) => {
-					//may add a joinGame error dispatch
-					console.log(err)
-					reject(err)
+				.catch((error) => {
+					console.log("there was an error joining the game")
+					console.log(error)
+					dispatch(errorActionCreator('JOIN_GAME_FAILURE', error))
 				})
 		})
 	}
