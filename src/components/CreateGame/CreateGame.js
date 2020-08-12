@@ -5,12 +5,12 @@ import { connect } from 'react-redux'
 import randomize from 'randomatic'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import CreateGameForm from 'components/CreateGameForm'
-import Pending from "components/shared/Pending"
-import ErrorMessage from "components/shared/ErrorMessage"
+import Pending from 'components/shared/Pending'
+import ErrorMessage from 'components/shared/ErrorMessage'
 import { createNewGame } from 'store/actions/gameActions'
-import { clearErrors } from "store/actions/errorActions"
+import { clearErrors } from 'store/actions/errorActions'
 
-class CreateGame extends React.Component {
+export class CreateGame extends React.Component {
 	constructor(props) {
 		super(props)
 
@@ -52,12 +52,13 @@ class CreateGame extends React.Component {
 					skipPenalty,
 					players: [],
 				}
+				console.log("setstate done")
 
 				this.props.createNewGame(gamecode, gameData, name).then(() => {
 					//finishes formik submission process
 					setSubmitting(false)
-					//redirect to Waiting	
-					this.setState({	
+					//redirect to Waiting
+					this.setState({
 						redirect: true,
 					})
 				})
@@ -73,14 +74,13 @@ class CreateGame extends React.Component {
 		this.props.clearGameErrors()
 	}
 	render() {
-
 		const buttonInfo = [
 			{ text: 'Back', className: 'button', onClick: this.handleBackClick },
 			{
 				form: 'createGameForm',
 				text: 'Submit',
 				type: 'submit',
-				disabled: this.props.isPending
+				disabled: this.props.isPending,
 			},
 		]
 		return this.state.redirect ? (
@@ -88,8 +88,8 @@ class CreateGame extends React.Component {
 		) : (
 			<ButtonTabooCard tabooWord="New Game" buttons={buttonInfo}>
 				<CreateGameForm initialValues={this.state} handleSubmit={this.handleSubmit} />
-				{this.props.isPending ? <Pending speed={300} message="Creating new game"/> : null}
-				{this.props.error ? <ErrorMessage error={this.props.error.message}/> : null}
+				{this.props.isPending ? <Pending speed={300} message="Creating new game" /> : null}
+				{this.props.error ? <ErrorMessage error={this.props.error.message} /> : null}
 			</ButtonTabooCard>
 		)
 	}
@@ -97,21 +97,25 @@ class CreateGame extends React.Component {
 
 CreateGame.propTypes = {
 	history: PropTypes.object.isRequired,
+	error: PropTypes.object,
+	isPending: PropTypes.bool.isRequired,
+	gamecode: PropTypes.string.isRequired,
+	createNewGame: PropTypes.func.isRequired,
+	clearGameErrors: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
-	// console.log(state)
 	return {
 		error: state.game.error ? state.game.error.errorMessage : state.game.error,
 		isPending: state.game.pending,
-		gamecode: state.game.gamecode
+		gamecode: state.game.gamecode,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		createNewGame: (gamecode, gameData, player) => dispatch(createNewGame(gamecode, gameData, player)),
-		clearGameErrors: () => dispatch(clearErrors("CLEAR_GAME_ERRORS"))
+		clearGameErrors: () => dispatch(clearErrors('CLEAR_GAME_ERRORS')),
 	}
 }
 

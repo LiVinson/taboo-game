@@ -2,7 +2,8 @@ import { errorReducer } from './errorReducer'
 
 const initState = {
 	pending: false,
-	gamecode: null,
+	gamecode: "",
+	error: null
 }
 
 export const gameReducer = (state = initState, action) => {
