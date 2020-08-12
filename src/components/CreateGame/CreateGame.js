@@ -6,6 +6,8 @@ import randomize from 'randomatic'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import CreateGameForm from 'components/CreateGameForm'
 import Pending from "components/shared/Pending"
+import ErrorMessage from "components/shared/ErrorMessage"
+
 import { createNewGame } from 'store/actions/gameActions'
 
 class CreateGame extends React.Component {
@@ -20,12 +22,8 @@ class CreateGame extends React.Component {
 			timeValue: 60,
 			skipPenalty: 'none',
 			redirect: false,
-			submitting: false,
-			error: null
 		}
 	}
-
-	//pickle - decide if an onChange function is needed in form to update state when values are changed
 
 	/*Creates game in firestore using form data, updates redux store
     On success, creates an anonymous user in firebase and returns user info
@@ -40,9 +38,8 @@ class CreateGame extends React.Component {
 				turnsValue: values.turnsValue,
 				timeValue: values.timeValue,
 				skipPenalty: values.skipPenalty,
-				submitting: true
 			},
-			//Wait until state update is complete 
+			//Wait until state update is complete to create gameData object
 			() => {
 				const { endGameMethod, turnsValue, timeValue, skipPenalty, name } = this.state
 				const endValue = endGameMethod === 'turns' ? turnsValue : timeValue
@@ -56,14 +53,11 @@ class CreateGame extends React.Component {
 					players: [],
 				}
 
-				this.props.createNewGame(gamecode, gameData, name).then((response) => {
+				this.props.createNewGame(gamecode, gameData, name).then(() => {
 					//finishes formik submission process
 					setSubmitting(false)
-					//redirect to waiting
-					console.log('all done')
-					console.log(response)
-					this.setState({
-						gamecode: response,
+					//redirect to Waiting	
+					this.setState({	
 						redirect: true,
 					})
 				})
@@ -75,11 +69,7 @@ class CreateGame extends React.Component {
 		this.props.history.push('/home')
 	}
 
-
-
 	render() {
-		console.log(this.props)
-		const { gamecode, submitting } = this.state
 
 		const buttonInfo = [
 			{ text: 'Back', className: 'button', onClick: this.handleBackClick },
@@ -88,15 +78,16 @@ class CreateGame extends React.Component {
 				text: 'Submit',
 				className: 'button',
 				type: 'submit',
-				disabled: submitting
+				disabled: this.props.isPending
 			},
 		]
 		return this.state.redirect ? (
-			<Redirect to={`/waiting/${gamecode}`} />
+			<Redirect to={`/waiting/${this.props.gamecode}`} />
 		) : (
 			<ButtonTabooCard tabooWord="New Game" buttons={buttonInfo}>
 				<CreateGameForm initialValues={this.state} handleSubmit={this.handleSubmit} />
-				{submitting ? <Pending speed={300} message="Creating new game"/> : null}
+				{this.props.isPending ? <Pending speed={300} message="Creating new game"/> : null}
+				{this.props.error ? <ErrorMessage error={this.props.error.message}/> : null}
 			</ButtonTabooCard>
 		)
 	}
@@ -107,11 +98,14 @@ CreateGame.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state)
+	// console.log(state)
 	return {
-		error: state.error
+		error: state.game.error ? state.game.error.errorMessage : state.game.error,
+		isPending: state.game.pending,
+		gamecode: state.game.gamecode
 	}
 }
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		createNewGame: (gamecode, gameData, player) => dispatch(createNewGame(gamecode, gameData, player)),

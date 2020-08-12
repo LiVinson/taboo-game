@@ -1,5 +1,6 @@
 import { addPlayerSuccess } from 'store/actions/playerActions'
 import { createGame, createPlayer, addPlayer, verifyGameExists, dbUpdateGameStatus } from 'utils/API'
+import { errorActionCreator } from './errorActions'
 
 const requestCreateGame = () => {
 	return {
@@ -7,68 +8,46 @@ const requestCreateGame = () => {
 	}
 }
 
-const createGameSuccess = (gamecode, gameDetails) => {
+const createGameSuccess = (gamecode) => {
 	return {
 		type: 'CREATE_GAME_SUCCESS',
 		payload: {
 			gamecode,
-			...gameDetails,
 		},
 	}
 }
 
-const createGameFailure = (error) => {
-	return {
-		type: 'CREATE_GAME_FAILURE',
-		error,
-	}
-}
-
-const requestUpdateGameStatus = (error) => {
+const requestUpdateGameStatus = () => {
 	return {
 		type: 'REQUEST_UPDATE_GAME_STATUS',
 	}
 }
 
-const updateGameStatusSuccess = (status) => {
+const updateGameStatusSuccess = () => {
 	return {
-		status,
 		type: 'UPDATE_GAME_STATUS_SUCCESS',
-	}
-}
-
-const updateGameStatusFailure = (error) => {
-	return {
-		type: 'REQUEST_UPDATE_GAME_FAILURE',
-		error,
 	}
 }
 
 export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 	return (dispatch) => {
-		return new Promise((resolve, reject) => {
+		//reject not needed. Any error updated in store. Promise needed to allow for calling Formik function on completion of creation
+		return new Promise((resolve) => {
 			dispatch(requestCreateGame())
-			return createGame(gamecode, gameData)
-				.then((res) => {
-					dispatch(createGameSuccess(gamecode, gameData))
-					return res
-				})
+			createGame(gamecode, gameData)
 				.then(() => {
-					//creates anonymous user in firebase and updates displayName
-					return createPlayer(hostPlayerName)
-				})
-				.then((player) => {
-					const host = { ...player, team: null, host: true }
-					//associates anonymous user with game instance in firestore
-					return addPlayer(host, gamecode)
-				})
-				.then((player) => {
-					dispatch(addPlayerSuccess(player))
-					resolve(gamecode)
+					createPlayer(hostPlayerName).then((player) => {
+						const host = { ...player, team: null, host: true }
+						//associates anonymous user with game instance in firestore
+						addPlayer(host, gamecode).then((player) => {
+							dispatch(addPlayerSuccess(player))
+							dispatch(createGameSuccess(gamecode))
+							resolve()
+						})
+					})
 				})
 				.catch((error) => {
-					dispatch(createGameFailure(error))
-					reject(error)
+					dispatch(errorActionCreator('CREATE_GAME_FAILURE', error))
 				})
 		})
 	}
@@ -107,14 +86,14 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 export const updateGameStatus = (gamecode, status) => {
 	return (dispatch) => {
 		// return new Promise((resolve, reject) => {
-			dispatch(requestUpdateGameStatus)
-			dbUpdateGameStatus(gamecode, status)
-				.then(() => {
-					dispatch(updateGameStatusSuccess(status))
-				})
-				.catch((error) => {
-					dispatch(updateGameStatusFailure(error))
-				})
+		dispatch(requestUpdateGameStatus)
+		dbUpdateGameStatus(gamecode, status)
+			.then(() => {
+				dispatch(updateGameStatusSuccess(status))
+			})
+			.catch((error) => {
+				dispatch(errorActionCreator('UPDATE_GAME_FAILURE', error))
+			})
 		// })
 	}
 }

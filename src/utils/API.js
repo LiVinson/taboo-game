@@ -1,6 +1,6 @@
 import firebase from './fbConfig'
 
-export const createGame = (gamecode, gameDetails, getFirestore) => {
+export const createGame = (gamecode, gameDetails) => {
 	console.log('creating game in firestore')
 	const newGame = {
 		gamecode,
@@ -15,7 +15,10 @@ export const createGame = (gamecode, gameDetails, getFirestore) => {
 		.set(newGame)
 		.then(() => {
 			console.log('firestore created the game. Time to dispatch')
-			return true
+			return
+		})
+		.catch((error) => {
+			throw error
 		})
 }
 
@@ -41,42 +44,44 @@ export const verifyGameExists = (gamecode) => {
 
 export const createPlayer = (playerName) => {
 	console.log('creating player in firebase...')
-	return new Promise((resolve, reject) => {
+	// return new Promise((resolve, reject) => {
 		return firebase
 			.auth()
 			.signInAnonymously()
 			.then((res) => {
 				console.log('created a player in firebase')
 				const user = firebase.auth().currentUser
-				user.updateProfile({
+				return user.updateProfile({
 					displayName: playerName,
-				})
-					.then(() => {
+				}).then(() => {
 						console.log('updated username in firebase')
 						const player = {
 							playerId: user.uid,
 							name: user.displayName,
 						}
-						resolve(player)
+						// resolve(player)
+						return player
 					})
 					.catch((error) => {
-						console.log('there was an error updating usernamein firebase ')
+						console.log('there was an error updating username in firebase ')
 						console.log(error)
-						reject(error)
+						throw error
+						// reject(error)
 					})
 			})
 			.catch((error) => {
 				console.log('there was an error creating user')
 				console.log(error)
-				reject(error)
+				// reject(error)
+				throw error
 			})
-	})
+	// })
 }
 
 export const addPlayer = (player, gamecode) => {
 	console.log('action player in firestore to ', gamecode)
 	console.log(player)
-	return new Promise((resolve, reject) => {
+	// return new Promise((resolve, reject) => {
 		return firebase
 			.firestore()
 			.collection('games')
@@ -86,12 +91,12 @@ export const addPlayer = (player, gamecode) => {
 			})
 			.then(() => {
 				console.log('player added to game')
-				resolve(player)
+				return player
 			})
 			.catch((error) => {
-				reject(error)
+				throw error
 			})
-	})
+	// })
 }
 
 export const dbUpdateTeam = (gamecode, playerId, team) => {
