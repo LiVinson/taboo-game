@@ -54,7 +54,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 			createGame(gamecode, gameData)
 				.then(() => {
 					createPlayer(hostPlayerName).then((player) => {
-						const host = { ...player, team: null, host: true }
+						const host = { ...player, team: null, online:true, host: true }
 						//associates anonymous user with game instance in firestore
 						addPlayer(host, gamecode).then((player) => {
 							dispatch(createGameSuccess(gamecode))

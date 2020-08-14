@@ -77,6 +77,7 @@ export const createPlayer = (playerName) => {
 
 export const addPlayer = (player, gamecode) => {
 	console.log('action player in firestore to ', gamecode)
+
 	console.log(player)
 	return firebase
 		.firestore()

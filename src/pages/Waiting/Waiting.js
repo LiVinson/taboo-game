@@ -24,11 +24,6 @@ export class Waiting extends React.Component {
 		//While game is loading, check if game data from firestore and auth data from firebase have been received
 		//before verifying  gamecode and player
 		if (this.state.loading && this.props.gameDataReceived && this.props.auth.isLoaded) {
-			// const { gamecode } = this.props.match.params
-			// const game = this.props.game?.[gamecode] //object with game data
-			// const playerId = this.props.auth?.uid
-			// console.log(game)
-			// console.log(playerId)
 			this.verifyGameInfo()
 		}
 	}
