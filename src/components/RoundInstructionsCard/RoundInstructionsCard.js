@@ -3,32 +3,36 @@ import PropTypes from 'prop-types'
 import { TabooCard, ButtonTabooCard } from 'components/shared/TabooCard'
 import { InstructionsText, KeyWord } from './style'
 
-const RoundInstructionsCard = ({ currentPlayer, giver, watcher, startRound }) => {
+const RoundInstructionsCard = ({ role, giver, watcher, startRound }) => {
 	let instructions
-	//On the giving team
-	if (currentPlayer.team === giver.team) {
-		instructions =
-			currentPlayer.playerId === giver.playerId
-				? displayGiverInstructions(watcher, startRound)
-				: displayGiverTeamInstructions(giver, watcher)
-
-		//On the watching team
-	} else {
-    instructions = currentPlayer.playerId === watcher.playerId 
-    ? displayWatcherInstructions(giver)
-    : displayWatcherTeamInstructions(giver, watcher)
-
+	//Determine the instructions based on current player's team and role
+	switch (role) {
+		case 'giver':
+			instructions = displayGiverInstructions(watcher, startRound)
+			break
+		case 'watcher':
+			instructions = displayWatcherInstructions(giver)
+			break
+		case 'giverTeam':
+			instructions = displayGiverTeamInstructions(giver, watcher)
+			break
+		case 'watcherTeam':
+			instructions = displayWatcherTeamInstructions(giver, watcher)
+			break
+		default:
+			instructions = ''
 	}
 
 	return instructions
 }
 
 RoundInstructionsCard.propTypes = {
-	currentPlayer: PropTypes.object.isRequired,
+	role: PropTypes.string.isRequired,
 	giver: PropTypes.object.isRequired,
 	watcher: PropTypes.object.isRequired,
-	startRound: PropTypes.func,
+	startRound: PropTypes.func.isRequired,
 }
+
 const displayGiverInstructions = (watcher, startRound) => {
 	const buttonInfo = [
 		{

@@ -70,7 +70,7 @@ class PlayGame extends React.Component {
 			//Style and add button to go to Join route so user can join properly
 			return <p>Player didn't join properly</p>
 		} else {
-			return <Round players={game.players} gameplay={game.gameplay} playerId={this.props.auth.uid}/>
+			return <Round gamecode={this.props.match.params.gamecode} players={game.players} gameplay={game.gameplay} playerId={this.props.auth.uid}/>
 		}
 	}
 }

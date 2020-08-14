@@ -52,7 +52,7 @@ export class CreateGame extends React.Component {
 					skipPenalty,
 					players: [],
 					gameplay: {
-						round: 0,
+						round: 1,
 						status: "preround",
 						half: "top",	
 						team1Turn: 0,

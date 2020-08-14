@@ -65,7 +65,7 @@ export class JoinGame extends React.Component {
 		]
 
 		return this.state.redirect ? (
-			<Redirect to={`/waiting/${this.props.gamecode}`} />
+			<Redirect to={`/waiting/${this.state.gamecode}`} />
 		) : (
 			<ButtonTabooCard tabooWord="Join Game" buttons={buttonInfo}>
 				<JoinGameForm initialValues={{ name, gamecode }} handleSubmit={this.handleSubmit} />
@@ -80,7 +80,6 @@ JoinGame.propTypes = {
 	history: PropTypes.object.isRequired,
 	error: PropTypes.object,
 	isPending: PropTypes.bool.isRequired,
-	gamecode: PropTypes.string.isRequired,
 	joinNewGame: PropTypes.func.isRequired,
 	clearGameErrors: PropTypes.func.isRequired,
 }
@@ -90,7 +89,6 @@ const mapStateToProps = (state) => {
 	return {
 		error: state.game.error ? state.game.error.errorMessage : state.game.error,
 		isPending: state.game.pending,
-		gamecode: state.game.gamecode,
 	}
 }
 

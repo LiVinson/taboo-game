@@ -41,6 +41,7 @@ export const verifyGameExists = (gamecode) => {
 		})
 }
 
+//Creates an anonymous user in firebase with a uid generated.
 export const createPlayer = (playerName) => {
 	console.log('creating player in firebase...')
 	return firebase
@@ -138,7 +139,7 @@ export const dbUpdateGameStatus = (gamecode, status) => {
 	console.log('updating game status')
 	console.log(status)
 	console.log(gamecode)
-	return new Promise((resolve, reject) => {
+	// return new Promise((resolve, reject) => {
 		return firebase
 			.firestore()
 			.collection('games')
@@ -148,11 +149,35 @@ export const dbUpdateGameStatus = (gamecode, status) => {
 			})
 			.then(() => {
 				console.log('game updated to ', status)
-				resolve()
+				return
 			})
 			.catch((error) => {
 				console.log('error updating game')
-				reject(error)
+				return error
 			})
-	})
+	// })
 }
+
+export const dbUpdateRoundStatus = (gamecode, status) => {
+	console.log('updating game status')
+	console.log(status)
+	console.log(gamecode)
+	// return new Promise((resolve, reject) => {
+		return firebase
+			.firestore()
+			.collection('games')
+			.doc(gamecode)
+			.update({
+				"gameplay.status": status,
+			})
+			.then(() => {
+				console.log('game updated to ', status)
+				return
+			})
+			.catch((error) => {
+				console.log('error updating game')
+				return error
+			})
+	// })
+}
+
