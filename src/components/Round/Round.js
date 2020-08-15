@@ -45,6 +45,7 @@ class Round extends React.Component {
 	}
 
 	startRound = () => {
+		console.log("Start round")
 		this.props.updateRoundStatus(this.props.gamecode, 'in progress')
 	}
 
@@ -65,7 +66,7 @@ class Round extends React.Component {
 			if (activeTeam === currentPlayer.team) {
 				role = currentPlayer.playerId === giver.playerId ? 'giver' : 'giverTeam'
 			} else {
-				role = currentPlayer.playerId === giver.playerId ? 'watcher' : 'watcherTeam'
+				role = currentPlayer.playerId === watcher.playerId ? 'watcher' : 'watcherTeam'
 			}
 			return (
 				<React.Fragment>
@@ -81,10 +82,8 @@ class Round extends React.Component {
 							role={role}
 						/>
 					)}
-					{status === 'inprogress' && (
-						<InRound
-							activeTeam={activeTeam}
-							startRound={this.startRound}
+					{status === 'in progress' && (
+						<InRound			
 							currentPlayer={currentPlayer}
 							giver={giver}
 							watcher={watcher}

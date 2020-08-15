@@ -3,7 +3,7 @@ import { errorReducer } from './errorReducer'
 const initState = {
 	pending: false,
 	error: null,
-	status: 'new',
+	status: 'preround',
 }
 
 export const roundReducer = (state = initState, action) => {

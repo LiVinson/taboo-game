@@ -163,12 +163,16 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 	console.log(status)
 	console.log(gamecode)
 	// return new Promise((resolve, reject) => {
+	let date = new Date() 
+	let endTime = date.setSeconds(date.getSeconds() + 61)
+	console.log(endTime)
 	return firebase
 		.firestore()
 		.collection('games')
 		.doc(gamecode)
 		.update({
 			'gameplay.status': status,
+			"gameplay.roundEndTime": endTime
 		})
 		.then(() => {
 			console.log('game updated to ', status)

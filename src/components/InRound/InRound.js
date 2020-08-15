@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from "prop-types"
 import TimeCard from 'components/TimeCard'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
-import ScoreCard from 'components/ScoreCard'
 
 /*
 Information needed:
@@ -20,6 +19,7 @@ Information needed:
 */
 const InRound = ({ giver, watcher, role = 'watcherTeam' }) => {
 	console.log(giver, watcher)
+	console.log(role)
 	return (
 		<React.Fragment>
 			<TimeCard timeRemaining={'2:00'} timeUp={() => console.log('time up')} />
@@ -33,8 +33,8 @@ const InRound = ({ giver, watcher, role = 'watcherTeam' }) => {
 }
 
 InRound.propTypes = {
-	giver: PropTypes.string.isRequired,
-	watcher: PropTypes.string.isRequired,
+	giver: PropTypes.object.isRequired,
+	watcher: PropTypes.object.isRequired,
 	role: PropTypes.string
 }
 export default InRound
