@@ -140,21 +140,21 @@ export const dbUpdateGameStatus = (gamecode, status) => {
 	console.log(status)
 	console.log(gamecode)
 	// return new Promise((resolve, reject) => {
-		return firebase
-			.firestore()
-			.collection('games')
-			.doc(gamecode)
-			.update({
-				status: status,
-			})
-			.then(() => {
-				console.log('game updated to ', status)
-				return
-			})
-			.catch((error) => {
-				console.log('error updating game')
-				return error
-			})
+	return firebase
+		.firestore()
+		.collection('games')
+		.doc(gamecode)
+		.update({
+			status: status,
+		})
+		.then(() => {
+			console.log('game updated to ', status)
+			return
+		})
+		.catch((error) => {
+			console.log('error updating game')
+			return error
+		})
 	// })
 }
 
@@ -163,21 +163,61 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 	console.log(status)
 	console.log(gamecode)
 	// return new Promise((resolve, reject) => {
-		return firebase
-			.firestore()
-			.collection('games')
-			.doc(gamecode)
-			.update({
-				"gameplay.status": status,
-			})
-			.then(() => {
-				console.log('game updated to ', status)
-				return
-			})
-			.catch((error) => {
-				console.log('error updating game')
-				return error
-			})
+	return firebase
+		.firestore()
+		.collection('games')
+		.doc(gamecode)
+		.update({
+			'gameplay.status': status,
+		})
+		.then(() => {
+			console.log('game updated to ', status)
+			return
+		})
+		.catch((error) => {
+			console.log('error updating game')
+			return error
+		})
 	// })
 }
 
+export const dbRequestGameDeck = () => {
+	const gamedeck = []
+	return firebase
+		.firestore()
+		.collection('cards')
+		.get()
+		.then((response) => {
+			response.forEach((document) => {
+				let card = {
+
+				}
+				console.log(document.id)
+				console.log(document.data())
+				card.word = document.id
+				card.tabooList = document.data().tabooList
+				gamedeck.push(card)
+			})
+			return gamedeck
+		})
+		.catch((error) => {
+			console.log(error)
+			return error
+		})
+}
+
+export const dbSaveGameDeck = (gamecode, deck) => {
+	console.log(deck)
+	
+	return firebase.firestore().collection('games').doc(gamecode).update({
+		'gameplay.deck': deck,
+		'gameplay.cardIndex': 0
+	}).then(res => {
+		console.log(res)
+		console.log("saved shuffled array")
+		return
+	}).catch(error => {
+		console.log(error)
+		return error
+	})
+}

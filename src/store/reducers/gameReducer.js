@@ -2,8 +2,8 @@ import { errorReducer } from './errorReducer'
 
 const initState = {
 	pending: false,
-	gamecode: "",
-	error: null
+	gamecode: '',
+	error: null,
 }
 
 export const gameReducer = (state = initState, action) => {
@@ -40,6 +40,15 @@ export const gameReducer = (state = initState, action) => {
 			return state
 		case 'REMOVE_GAME':
 			console.log('removing game status')
+			return state
+		case 'REQUEST_FETCH_GAME_DECK':
+			console.log('requesting game deck')
+			return state
+		case 'FETCH_GAME_DECK_SUCCESS':
+			console.log('request game deck success')
+			return state
+		case 'FETCH_GAME_DECK_FAILURE':
+			console.log('request game deck failure')
 			return state
 		case 'CLEAR_GAME_ERRORS':
 			return {

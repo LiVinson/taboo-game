@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import { fetchGameDeck } from 'store/actions/gameActions'
 import Round from 'components/Round'
 
 class PlayGame extends React.Component {
@@ -32,7 +33,7 @@ class PlayGame extends React.Component {
 		console.log('verifying game and player info')
 		const { gamecode } = this.props.match.params
 
-		const game = this.props.game[gamecode]
+		const game = this.props.game
 		//Checks if falsy. Add additional edge cases in case empty object is returned
 		if (!game || game.status !== 'in progress') {
 			console.log(game)
@@ -47,49 +48,82 @@ class PlayGame extends React.Component {
 			let playerVerified
 			const includedUserArr = players.filter((player) => player.playerId === playerId)
 			playerVerified = playerId && includedUserArr.length > 0 ? true : false
-			this.setState({
-				loading: false,
-				gameVerified: true,
-				playerVerified,
-			})
+			this.setState(
+				{
+					loading: false,
+					gameVerified: true,
+					playerVerified,
+
+				},
+				() => {
+					//If current player is the host, load the deck. Other players are in "pending" until deck is added 
+					//host is the first player to join that is still online
+					const host = this.props.game.players.find(player => player.online === true)
+					if(host.playerId === this.props.auth.uid && !this.props.game.gameplay.deck) {
+						console.log("Im the host")
+						this.loadGameDeck()
+					}
+					
+				}
+			)
 		}
 	}
 
-	
-
-	render() {	
+	loadGameDeck = () => {
+		console.log('Loadgamedeck')
 		const { gamecode } = this.props.match.params
-		const game = this.props?.game?.[gamecode]
+		this.props.fetchDeck(gamecode)
+	}
 
-		if (this.state.loading) {
+	render() {
+		const { gamecode } = this.props.match.params
+		const {game} = this.props
+		console.log(game.gameplay?.deck?.length)
+
+		if (this.state.loading || !game.gameplay?.deck?.length) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
-		} else if (game.status === 'new') {			
+		} else if (game.status === 'new') {
 			return <Redirect to={`/waiting/${gamecode}`} />
 		} else if (!this.state.playerVerified) {
 			//Style and add button to go to Join route so user can join properly
 			return <p>Player didn't join properly</p>
 		} else {
-			return <Round gamecode={this.props.match.params.gamecode} players={game.players} gameplay={game.gameplay} playerId={this.props.auth.uid}/>
+			return (
+				<Round
+					gamecode={this.props.match.params.gamecode}
+					players={game.players}
+					gameplay={game.gameplay}
+					playerId={this.props.auth.uid}
+				/>
+			)
 		}
 	}
 }
 
 const mapStateToProps = (state, prevProps) => {
-	const { games } = state.firestore.data
+	const game = state.firestore.data?.games?.[prevProps.match.params.gamecode]
+	console.log(game)
+	// console.log(state.firestore.data)
 	return {
 		gamecode: state.game.gamecode, //tbd if adding this
-		game: games, //from firestore
+		game: game ? game : {}, //from firestore
 		gameDataReceived: state.firestore.status.requested[`games/${prevProps.match.params.gamecode}`],
 		auth: state.firebase.auth,
+
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {}
+	return {
+		fetchDeck: (gamecode) => {
+			dispatch(fetchGameDeck(gamecode))
+		},
+	}
 }
 
 export default compose(
 	connect(mapStateToProps, mapDispatchToProps),
-	firestoreConnect((props) => [{ collection: 'games', doc: props.match.params.gamecode }])
-)(PlayGame)
+	firestoreConnect((props) => [
+		{ collection: 'games', doc: props.match.params.gamecode }],
+))(PlayGame)

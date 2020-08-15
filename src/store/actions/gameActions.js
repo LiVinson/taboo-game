@@ -1,4 +1,13 @@
-import { createGame, createPlayer, addPlayer, verifyGameExists, dbUpdateGameStatus } from 'utils/API'
+import {
+	 createGame,
+	 createPlayer, 
+	 addPlayer, 
+	 verifyGameExists, 
+	 dbUpdateGameStatus,
+	 dbRequestGameDeck,
+	 dbSaveGameDeck
+ } from 'utils/API'
+ import { shuffleArray } from "utils/helpers"
 import { errorActionCreator } from './errorActions'
 
 const requestCreateGame = () => {
@@ -42,6 +51,20 @@ const requestUpdateGameStatus = () => {
 const updateGameStatusSuccess = () => {
 	return {
 		type: 'UPDATE_GAME_STATUS_SUCCESS',
+	}
+}
+
+const requestFetchGameDeck = () => {
+	return {
+		type: "REQUEST_FETCH_GAME_DECK",
+		pending: true
+	}
+}
+
+const fetchGameDeckSuccess = () => {
+	return {
+		type: "FETCH_GAME_DECK_SUCCESS",
+		pending: false
 	}
 }
 
@@ -105,5 +128,26 @@ export const updateGameStatus = (gamecode, status) => {
 				dispatch(errorActionCreator('UPDATE_GAME_FAILURE', error))
 			})
 		// })
+	}
+}
+
+export const fetchGameDeck = (gamecode) => {
+	
+	return (dispatch) => {
+		dispatch(requestFetchGameDeck())
+
+		dbRequestGameDeck().then(response => {
+			console.log(response)
+			const shuffledDeck = shuffleArray(response)
+			dbSaveGameDeck(gamecode, shuffledDeck).then(res => {
+				console.log("back from saving shuffled array")
+			})
+			dispatch(fetchGameDeckSuccess())
+
+		}).catch(error => {
+			console.log('there was an error retreiving the deck')
+			console.log(error)
+			dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', error))
+		})
 	}
 }

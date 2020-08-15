@@ -17,12 +17,14 @@ class Round extends React.Component {
 			loading: true,
 			team1: [],
 			team2: [],
+			cardsPlayed: []
 		}
 	}
 
 	componentDidMount() {
 		//Get the initial giver and watcher
 		console.log('mounting...')
+		
 		this.setState({
 			loading: false,
 			team1: this.props.players.filter((player) => player.team === 'team 1'),
