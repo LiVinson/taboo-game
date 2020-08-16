@@ -17,14 +17,14 @@ class Round extends React.Component {
 			loading: true,
 			team1: [],
 			team2: [],
-			cardsPlayed: []
+			cardsPlayed: [],
 		}
 	}
 
 	componentDidMount() {
 		//Get the initial giver and watcher
 		console.log('mounting...')
-		
+
 		this.setState({
 			loading: false,
 			team1: this.props.players.filter((player) => player.team === 'team 1'),
@@ -45,7 +45,7 @@ class Round extends React.Component {
 	}
 
 	startRound = () => {
-		console.log("Start round")
+		console.log('Start round')
 		this.props.updateRoundStatus(this.props.gamecode, 'in progress')
 	}
 
@@ -56,8 +56,8 @@ class Round extends React.Component {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
 		} else {
-			console.log(this.props)
-			const { round, half, status } = this.props.gameplay
+			const { gamecode } = this.props
+			const { round, half, status, cardIndex } = this.props.gameplay
 			const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 			const giver = this.determineActivePlayer('giver')
 			const watcher = this.determineActivePlayer('watcher')
@@ -83,11 +83,14 @@ class Round extends React.Component {
 						/>
 					)}
 					{status === 'in progress' && (
-						<InRound			
+						<InRound
+							gamecode={gamecode}
 							currentPlayer={currentPlayer}
 							giver={giver}
 							watcher={watcher}
 							role={role}
+							round={round}
+							cardIndex={cardIndex}
 						/>
 					)}
 					{/*   {gameplay.status === 'postround' && <PostRound cardsPlayed={dummyPostRoundData} />}

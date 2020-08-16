@@ -28,3 +28,12 @@ export const updateRoundStatus = (gamecode, status) => {
         //Update as success or failure
     }
 }
+
+export const changeCardStatus = (gamecode, status, round, currentIndex ) => {
+    return (dispatch) => {
+        console.log(gamecode)
+        console.log(status)
+        console.log(currentIndex)
+        console.log(round)
+    }
+}

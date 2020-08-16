@@ -75,6 +75,8 @@ class PlayGame extends React.Component {
 		this.props.fetchDeck(gamecode)
 	}
 
+
+
 	render() {
 		const { gamecode } = this.props.match.params
 		const {game} = this.props
