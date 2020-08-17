@@ -7,7 +7,7 @@ import {
 	 dbRequestGameDeck,
 	 dbSaveGameDeck
  } from 'utils/API'
- import { shuffleArray } from "utils/helpers"
+ import { shuffleArray, convertArrayToObject } from "utils/helpers"
 import { errorActionCreator } from './errorActions'
 
 const requestCreateGame = () => {
@@ -139,7 +139,9 @@ export const fetchGameDeck = (gamecode) => {
 		dbRequestGameDeck().then(response => {
 			console.log(response)
 			const shuffledDeck = shuffleArray(response)
-			dbSaveGameDeck(gamecode, shuffledDeck).then(res => {
+			//convert from array of objects to object with keys = objects.
+			const deckObject = convertArrayToObject(shuffledDeck)
+			dbSaveGameDeck(gamecode, deckObject).then(res => {
 				console.log("back from saving shuffled array")
 			})
 			dispatch(fetchGameDeckSuccess())

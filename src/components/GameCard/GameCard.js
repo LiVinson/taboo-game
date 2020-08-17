@@ -17,7 +17,6 @@ export const GiverGameCard = ({ currentCard, changeCardStatus, isPending }) => {
 		{
 			text: 'Next!',
 			disabled: isPending,
-
 			onClick: () => {
 				console.log("next")
 				changeCardStatus('correct')
@@ -29,22 +28,19 @@ export const GiverGameCard = ({ currentCard, changeCardStatus, isPending }) => {
 	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} />
 }
 
-export const WatcherGameCard = () => {
+export const WatcherGameCard = ({currentCard, changeCardStatus, isPending}) => {
 	const buttonInfo = [
 		{
 			text: 'Buzzer!',
+			disabled: isPending,
 			onClick: () => {
-				console.log('Buzz')
-			},
+				console.log("discard")
+				changeCardStatus('discard')
+			}
 		},
 	]
 
-	const card = {
-		tabooWord: 'Simba',
-		words: ['Lion King', 'Disney', 'Mufasa', 'Pride Rock', 'Nala'],
-	}
-
-	return <ButtonTabooCard buttons={buttonInfo} tabooWord={card.tabooWord} list={card.words} />
+	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} />
 }
 
 export const TeamGameCard = ({ role, giver, watcher }) => {

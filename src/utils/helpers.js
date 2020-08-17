@@ -10,3 +10,16 @@ export const shuffleArray = (array) => {
 
   return array
 }
+
+export const convertArrayToObject = (array) => {
+  console.log("converting array")
+  const convertedObject = array.reduce((updatedObject, element, index) => {
+
+    return {
+      ...updatedObject,
+      [index]: element
+    }
+  }, {})
+  console.log(convertedObject)
+  return convertedObject
+}

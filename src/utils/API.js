@@ -194,9 +194,7 @@ export const dbRequestGameDeck = () => {
 		.then((response) => {
 			response.forEach((document) => {
 				let card = {}
-				console.log(document.id)
-				console.log(document.data())
-				card.word = document.id
+							card.word = document.id
 				card.tabooList = document.data().tabooList
 				gamedeck.push(card)
 			})
