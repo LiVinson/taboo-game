@@ -4,31 +4,29 @@ import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 import { InstructionsText, KeyWord } from './style'
 
 //current card object, skip and next callback.
-export const GiverGameCard = ({ changeCardStatus }) => {
+export const GiverGameCard = ({ currentCard, changeCardStatus, isPending }) => {
 	const buttonInfo = [
 		{
 			text: 'Skip!',
+			disabled: isPending,
 			onClick: () => {
 				console.log('skip card')
-				console.log("next")
-				changeCardStatus('Skip card')
+				changeCardStatus('skipped')
 			},
 		},
 		{
 			text: 'Next!',
+			disabled: isPending,
+
 			onClick: () => {
 				console.log("next")
-				changeCardStatus('Next card')
+				changeCardStatus('correct')
 			},
 		},
 	]
 
-	const card = {
-		tabooWord: 'Simba',
-		words: ['Lion King', 'Disney', 'Mufasa', 'Pride Rock', 'Nala'],
-	}
 
-	return <ButtonTabooCard buttons={buttonInfo} tabooWord={card.tabooWord} list={card.words} />
+	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} />
 }
 
 export const WatcherGameCard = () => {

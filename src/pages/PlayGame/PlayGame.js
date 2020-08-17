@@ -31,8 +31,6 @@ class PlayGame extends React.Component {
 	//toggle loading/verified so UI can render
 	verifyGameInfo = () => {
 		console.log('verifying game and player info')
-		const { gamecode } = this.props.match.params
-
 		const game = this.props.game
 		//Checks if falsy. Add additional edge cases in case empty object is returned
 		if (!game || game.status !== 'in progress') {
@@ -80,9 +78,9 @@ class PlayGame extends React.Component {
 	render() {
 		const { gamecode } = this.props.match.params
 		const {game} = this.props
-		console.log(game.gameplay?.deck?.length)
+		console.log(game.gameplay?.deck)
 
-		if (this.state.loading || !game.gameplay?.deck?.length) {
+		if (this.state.loading || !game.gameplay?.deck) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
 		} else if (game.status === 'new') {

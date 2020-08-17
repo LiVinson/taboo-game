@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase'
-import { compose } from 'redux'
 import TimeCard from 'components/TimeCard'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
 import { changeCardStatus } from 'store/actions/roundActions'
@@ -21,29 +19,14 @@ Information needed:
 - timeup callback
 
 */
-const InRound = ({ role, giver, watcher, changeCardStatus }) => {
-	//  ({ giver, watcher, role, changeCardStatus }) => {
-
-	// changeCardStatus = (status) => {
-	// 	//get current index
-	// 	//update status based on status and store round number
-	// 	//store in cardsPlayed array?
-	// 	//increment index
-	// 	console.log(status)
-	// 	console.log(props)
-
-	// 	// const {gamecode} = this.props.match.params
-	// 	// const { cardIndex, round } = this.props.gameplay
-
-	// 	// this.props.changeCardStatus(gamecode, status, round, cardIndex)
-	// }
-
-	
+const InRound = ({ deck, cardIndex, role, giver, watcher, isPending, changeCardStatus }) => {
+	const currentCard = deck[cardIndex]
+	console.log(currentCard)
 	return (
 		<React.Fragment>
 			<TimeCard timeRemaining={'2:00'} timeUp={() => console.log('time up')} />
-			{role === 'giver' && <GiverGameCard changeCardStatus={changeCardStatus} />}
-			{role === 'watcher' && <WatcherGameCard changeCardStatus={changeCardStatus} />}
+			{role === 'giver' && <GiverGameCard currentCard={currentCard} changeCardStatus={changeCardStatus} isPending={isPending} />}
+			{role === 'watcher' && <WatcherGameCard currentCard={currentCard} changeCardStatus={changeCardStatus} isPending={isPending} />}
 			{(role === 'giverTeam' || role === 'watcherTeam') && (
 				<TeamGameCard role={role} giver={giver} watcher={watcher} />
 			)}
@@ -56,20 +39,20 @@ InRound.propTypes = {
 	watcher: PropTypes.object.isRequired,
 	role: PropTypes.string,
 }
-/*
-const mapStateToProps = (state, prevProps) => {
-	const game = state.firestore.data?.games?.[prevProps.match.params.gamecode]
-	console.log(game)
+
+const mapStateToProps = (state) => {
+	console.log(state)
+	
 	// console.log(state.firestore.data)
 	return {
-		gamecode: state.game.gamecode, //tbd if adding this
-		game: game ? game : {}, //from firestore
-		gameDataReceived: state.firestore.status.requested[`games/${prevProps.match.params.gamecode}`],
+		isPending: state.round.pending,
+		error: state.round.error,
 	}
-}*/
+}
+
 
 const mapDispatchToProps = (dispatch, prevProps) => {
-	console.log(prevProps)
+	//The index of the currently displayed card, current round and gamecode
 	const { cardIndex, round, gamecode } = prevProps
 	return {
 		changeCardStatus: (status) => {
@@ -78,4 +61,4 @@ const mapDispatchToProps = (dispatch, prevProps) => {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(InRound)
+export default connect(mapStateToProps, mapDispatchToProps)(InRound)

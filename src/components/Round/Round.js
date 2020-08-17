@@ -57,7 +57,7 @@ class Round extends React.Component {
 			return <p>Loading Firestore/Firebase</p>
 		} else {
 			const { gamecode } = this.props
-			const { round, half, status, cardIndex } = this.props.gameplay
+			const { round, half, status, cardIndex, deck } = this.props.gameplay
 			const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 			const giver = this.determineActivePlayer('giver')
 			const watcher = this.determineActivePlayer('watcher')
@@ -90,6 +90,7 @@ class Round extends React.Component {
 							watcher={watcher}
 							role={role}
 							round={round}
+							deck={deck}
 							cardIndex={cardIndex}
 						/>
 					)}
