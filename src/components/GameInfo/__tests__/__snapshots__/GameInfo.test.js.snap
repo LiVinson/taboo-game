@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Game Info rendering and functionality renders correctly 1`] = `
 <div
   className="sc-fzqNJr jAYKSu"
   open={false}

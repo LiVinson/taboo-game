@@ -6,9 +6,9 @@ import RoundInstructionsCard from "../RoundInstructionsCard"
 
 test("RoundInstructionsCard renders correctly", ()=> {
 	const props = {
-		role: 'watcherTeam',
-		giver: { name: 'Danielle', playerId: 123 },
-		watcher: { name: 'Stephen', playerId: 345 },
+		role: 'watcherTeam', 
+        giver: { name: 'Sam', playerId: '12345', team: 'team 1' },
+		watcher: { name: 'Jo', playerId: '23456', team: 'team 2' },
 		startRound: jest.fn(),
 	}
 

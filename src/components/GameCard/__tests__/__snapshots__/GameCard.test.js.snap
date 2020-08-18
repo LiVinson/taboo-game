@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GiverGameCard renders correctly 1`] = `
+exports[`GameCard functionality and rendering GiverGameCard renders correctly 1`] = `
 <div
   className="sc-AxjAm fAwBWA"
 >
   <div
     className="sc-AxiKw dGnLMo"
   >
-    Simba
+    Will Smith
   </div>
   <div
     className="sc-AxhCb JZaCe"
@@ -18,27 +18,27 @@ exports[`GiverGameCard renders correctly 1`] = `
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Lion King
+        Fresh Prince
       </li>
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Disney
+        Philadelphia
       </li>
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Mufasa
+        Jazzy Jeff
       </li>
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Pride Rock
+        Independence Day
       </li>
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Nala
+        Jada Pinkett
       </li>
     </ul>
   </div>
@@ -47,12 +47,14 @@ exports[`GiverGameCard renders correctly 1`] = `
   >
     <button
       className="sc-AxheI bYfwqV"
+      disabled={false}
       onClick={[Function]}
     >
       Skip!
     </button>
     <button
       className="sc-AxheI sc-Axmtr jEDxKF"
+      disabled={false}
       onClick={[Function]}
     >
       Next!
@@ -61,7 +63,41 @@ exports[`GiverGameCard renders correctly 1`] = `
 </div>
 `;
 
-exports[`TeamGameCard renders correctly 1`] = `
+exports[`GameCard functionality and rendering TeamGameCard renders correctly for giverTeam 1`] = `
+<div
+  className="sc-AxjAm fAwBWA"
+>
+  <div
+    className="sc-AxiKw dGnLMo"
+  >
+    Guess!
+  </div>
+  <div
+    className="sc-AxhCb JZaCe"
+  >
+    <p
+      className="sc-fzpans ifLBye"
+    >
+      It's your teams turn to guess the word! 
+      <span
+        className="sc-fzplWN kxXpQP"
+      >
+        Joe
+      </span>
+       is giving the clues and
+       
+      <span
+        className="sc-fzplWN kxXpQP"
+      >
+        Sam
+      </span>
+       will be making sure they don't say anything Taboo!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`GameCard functionality and rendering TeamGameCard renders correctly for watcherTeam 1`] = `
 <div
   className="sc-AxjAm fAwBWA"
 >
@@ -88,21 +124,20 @@ exports[`TeamGameCard renders correctly 1`] = `
       >
         Joe
       </span>
-       
-      doesn’t say any Taboo words.
+       doesn’t say any Taboo words.
     </p>
   </div>
 </div>
 `;
 
-exports[`WatcherGameCard renders correctly 1`] = `
+exports[`GameCard functionality and rendering WatcherGameCard renders correctly 1`] = `
 <div
   className="sc-AxjAm fAwBWA"
 >
   <div
     className="sc-AxiKw dGnLMo"
   >
-    Simba
+    Will Smith
   </div>
   <div
     className="sc-AxhCb JZaCe"
@@ -113,27 +148,27 @@ exports[`WatcherGameCard renders correctly 1`] = `
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Lion King
+        Fresh Prince
       </li>
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Disney
+        Philadelphia
       </li>
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Mufasa
+        Jazzy Jeff
       </li>
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Pride Rock
+        Independence Day
       </li>
       <li
         className="sc-AxgMl cDzLXU"
       >
-        Nala
+        Jada Pinkett
       </li>
     </ul>
   </div>
@@ -142,6 +177,7 @@ exports[`WatcherGameCard renders correctly 1`] = `
   >
     <button
       className="sc-AxheI sc-AxmLO hTCvJk"
+      disabled={false}
       onClick={[Function]}
     >
       Buzzer!

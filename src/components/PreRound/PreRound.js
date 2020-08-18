@@ -14,7 +14,7 @@ const PreRound = (props) => {
 
 
 PreRound.propTypes = {
-  role:PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
   giver:PropTypes.object.isRequired,
   watcher:PropTypes.object.isRequired,
   startRound : PropTypes.func.isRequired

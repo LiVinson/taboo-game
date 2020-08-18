@@ -51,6 +51,15 @@ export class CreateGame extends React.Component {
 					endValue,
 					skipPenalty,
 					players: [],
+					gameplay: {
+						round: 1,
+						status: "preround",
+						half: "top",	
+						team1Turn: 0,
+						team2Turn: 0,
+						team1Rotations: 0,
+						team2Rotations: 0
+					}
 				}
 				console.log("setstate done")
 

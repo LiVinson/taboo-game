@@ -3,47 +3,55 @@ import PropType from 'prop-types'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 import { InstructionsText, KeyWord } from './style'
 
-//current card object, skip and next callback.
-export const GiverGameCard = () => {
+export const GiverGameCard = ({ currentCard, changeCardStatus, isPending }) => {
 	const buttonInfo = [
 		{
 			text: 'Skip!',
+			disabled: isPending,
 			onClick: () => {
 				console.log('skip card')
+				changeCardStatus('skipped')
 			},
 		},
 		{
 			text: 'Next!',
+			disabled: isPending,
 			onClick: () => {
-				console.log('Next card')
+				console.log("next")
+				changeCardStatus('correct')
 			},
 		},
 	]
 
-	const card = {
-		tabooWord: 'Simba',
-		words: ['Lion King', 'Disney', 'Mufasa', 'Pride Rock', 'Nala'],
-	}
 
-	return <ButtonTabooCard buttons={buttonInfo} tabooWord={card.tabooWord} list={card.words} />
+	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} />
 }
 
-export const WatcherGameCard = () => {
+GiverGameCard.propType = {
+	currentCard: PropType.object.isRequired,
+	changeCardStatus: PropType.func.isRequired,
+	isPending: PropType.bool.isRequired
+}
+
+export const WatcherGameCard = ({currentCard, changeCardStatus, isPending}) => {
 	const buttonInfo = [
 		{
 			text: 'Buzzer!',
+			disabled: isPending,
 			onClick: () => {
-				console.log('Buzz')
-			},
+				console.log("discard")
+				changeCardStatus('discard')
+			}
 		},
 	]
 
-	const card = {
-		tabooWord: 'Simba',
-		words: ['Lion King', 'Disney', 'Mufasa', 'Pride Rock', 'Nala'],
-	}
+	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} />
+}
 
-	return <ButtonTabooCard buttons={buttonInfo} tabooWord={card.tabooWord} list={card.words} />
+WatcherGameCard.propType = {
+	currentCard: PropType.object.isRequired,
+	changeCardStatus: PropType.func.isRequired,
+	isPending: PropType.bool.isRequired
 }
 
 export const TeamGameCard = ({ role, giver, watcher }) => {
@@ -59,8 +67,8 @@ export const TeamGameCard = ({ role, giver, watcher }) => {
 			) : (
 				<TabooCard tabooWord="Relax!">
 					<InstructionsText>
-						It’s the other team’s turn to give clues and guess!	<KeyWord>{watcher.name}</KeyWord> will be watching to make sure <KeyWord>{giver.name}</KeyWord>{' '}
-						doesn’t say any Taboo words.
+						It’s the other team’s turn to give clues and guess! <KeyWord>{watcher.name}</KeyWord> will be
+						watching to make sure <KeyWord>{giver.name}</KeyWord> doesn’t say any Taboo words.
 					</InstructionsText>
 				</TabooCard>
 			)}

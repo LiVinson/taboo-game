@@ -1,5 +1,13 @@
-import { addPlayerSuccess } from 'store/actions/playerActions'
-import { createGame, createPlayer, addPlayer, verifyGameExists, dbUpdateGameStatus } from 'utils/API'
+import {
+	 createGame,
+	 createPlayer, 
+	 addPlayer, 
+	 verifyGameExists, 
+	 dbUpdateGameStatus,
+	 dbRequestGameDeck,
+	 dbSaveGameDeck
+ } from 'utils/API'
+ import { shuffleArray, convertArrayToObject } from "utils/helpers"
 import { errorActionCreator } from './errorActions'
 
 const requestCreateGame = () => {
@@ -46,6 +54,20 @@ const updateGameStatusSuccess = () => {
 	}
 }
 
+const requestFetchGameDeck = () => {
+	return {
+		type: "REQUEST_FETCH_GAME_DECK",
+		pending: true
+	}
+}
+
+const fetchGameDeckSuccess = () => {
+	return {
+		type: "FETCH_GAME_DECK_SUCCESS",
+		pending: false
+	}
+}
+
 export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 	return (dispatch) => {
 		//reject not needed. Any error updated in store. Promise needed to allow for calling Formik function on completion of creation
@@ -54,7 +76,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 			createGame(gamecode, gameData)
 				.then(() => {
 					createPlayer(hostPlayerName).then((player) => {
-						const host = { ...player, team: null, host: true }
+						const host = { ...player, team: null, online:true, host: true }
 						//associates anonymous user with game instance in firestore
 						addPlayer(host, gamecode).then((player) => {
 							dispatch(createGameSuccess(gamecode))
@@ -106,5 +128,28 @@ export const updateGameStatus = (gamecode, status) => {
 				dispatch(errorActionCreator('UPDATE_GAME_FAILURE', error))
 			})
 		// })
+	}
+}
+
+export const fetchGameDeck = (gamecode) => {
+	
+	return (dispatch) => {
+		dispatch(requestFetchGameDeck())
+
+		dbRequestGameDeck().then(response => {
+			console.log(response)
+			const shuffledDeck = shuffleArray(response)
+			//convert from array of objects to object with keys = objects.
+			const deckObject = convertArrayToObject(shuffledDeck)
+			dbSaveGameDeck(gamecode, deckObject).then(res => {
+				console.log("back from saving shuffled array")
+			})
+			dispatch(fetchGameDeckSuccess())
+
+		}).catch(error => {
+			console.log('there was an error retreiving the deck')
+			console.log(error)
+			dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', error))
+		})
 	}
 }

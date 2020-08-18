@@ -1,74 +1,140 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import { mount } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from '../index'
 
-test('GiverGameCard renders correctly', () => {
-	const wrapper = renderer
-		.create(
-			<ThemeProvider theme={theme}>
-				<GiverGameCard />
-			</ThemeProvider>
-		)
-		.toJSON()
-
-	expect(wrapper).toMatchSnapshot()
-})
-
-test('WatcherGameCard renders correctly', () => {
-	const wrapper = renderer
-		.create(
-			<ThemeProvider theme={theme}>
-				<WatcherGameCard />
-			</ThemeProvider>
-		)
-		.toJSON()
-
-	expect(wrapper).toMatchSnapshot()
-})
-
-test('TeamGameCard renders correctly', () => {
-	const props = {
-		role: 'watcherTeam',
-		giver: {
-            name: 'Joe'
-        },
-		watcher: {
-            name: 'Sam'
-        },
+describe('GameCard functionality and rendering', () => {
+	const defaultProps = {
+		currentCard: {
+			word: 'Will Smith',
+			tabooList: ['Fresh Prince', 'Philadelphia', 'Jazzy Jeff', 'Independence Day', 'Jada Pinkett'],
+		},
+		changeCardStatus: jest.fn(),
+		isPending: false,
 	}
-	const wrapper = renderer
-		.create(
+
+	test('GiverGameCard renders correctly', () => {
+		const props = {
+			...defaultProps,
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<GiverGameCard {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
+
+		expect(wrapper).toMatchSnapshot()
+	})
+
+	test("Selecting 'Skip' calls props.changeCardStatus with correct status", () => {
+		const props = {
+			...defaultProps,
+		}
+
+		const wrapper = mount(
 			<ThemeProvider theme={theme}>
-				<TeamGameCard {...props} />
+				<GiverGameCard {...props} />
+			</ThemeProvider>
+		)	
+
+		 wrapper.find("button").at(0).simulate("click")
+		 expect(props.changeCardStatus).toHaveBeenCalledWith("skipped")    
+		
+	})
+
+	test("Selecting 'Next' calls props.changeCardStatus with correct status", () => {
+		const props = {
+			...defaultProps,
+		}
+
+		const wrapper = mount(
+			<ThemeProvider theme={theme}>
+				<GiverGameCard {...props} />
 			</ThemeProvider>
 		)
-		.toJSON()
 
-	expect(wrapper).toMatchSnapshot()
-})
+		 wrapper.find("button").at(1).simulate("click")
+		 expect(props.changeCardStatus).toHaveBeenCalledWith("correct")    
+		
+	})
 
-test('TeamGameCard renders correct instructions based on role prop', () => {
-	const props = {
-		role: 'watcherTeam',
-		giver: {
-            name: 'Joe'
-        },
-		watcher: {
-            name: 'Sam'
-        },
-	}
-	const wrapper = mount(
-		<ThemeProvider theme={theme}>
-			<TeamGameCard {...props} />
-		</ThemeProvider>
-	)
+	test('WatcherGameCard renders correctly', () => {
+		const props = {
+			...defaultProps,
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<WatcherGameCard {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
 
-	const div = wrapper.find('div').at(0)
+		expect(wrapper).toMatchSnapshot()
+	})
 
-	expect(div.text()).toEqual(
-		`Relax!It’s the other team’s turn to give clues and guess! ${props.watcher.name} will be watching to make sure ${props.giver.name} doesn’t say any Taboo words.`
-	)
+	test("Selecting 'Buzzer' calls props.changeCardStatus with correct status", () => {
+		const props = {
+			...defaultProps,
+		}
+
+		const wrapper = mount(
+			<ThemeProvider theme={theme}>
+				<WatcherGameCard {...props} />
+			</ThemeProvider>
+		)
+
+		 wrapper.find("button").at(0).simulate("click")
+		 expect(props.changeCardStatus).toHaveBeenCalledWith("discard")    
+		
+	})
+
+
+
+	test('TeamGameCard renders correctly for watcherTeam', () => {
+		const props = {
+			role: 'watcherTeam',
+			giver: {
+				name: 'Joe',
+			},
+			watcher: {
+				name: 'Sam',
+			},
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<TeamGameCard {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
+
+		expect(wrapper).toMatchSnapshot()
+	})
+
+	
+	test('TeamGameCard renders correctly for giverTeam', () => {
+		const props = {
+			role: 'giverTeam',
+			giver: {
+				name: 'Joe',
+			},
+			watcher: {
+				name: 'Sam',
+			},
+		}
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<TeamGameCard {...props} />
+				</ThemeProvider>
+			)
+			.toJSON()
+
+		expect(wrapper).toMatchSnapshot()
+	})
 })
