@@ -19,14 +19,18 @@ Information needed:
 - timeup callback
 
 */
-const InRound = ({ deck, cardIndex, role, giver, watcher, isPending, changeCardStatus }) => {
+export const InRound = ({ deck, cardIndex, role, giver, watcher, isPending, changeCardStatus }) => {
 	const currentCard = deck[cardIndex]
 	console.log(currentCard)
 	return (
 		<React.Fragment>
 			<TimeCard timeRemaining={'2:00'} timeUp={() => console.log('time up')} />
-			{role === 'giver' && <GiverGameCard currentCard={currentCard} changeCardStatus={changeCardStatus} isPending={isPending} />}
-			{role === 'watcher' && <WatcherGameCard currentCard={currentCard} changeCardStatus={changeCardStatus} isPending={isPending} />}
+			{role === 'giver' && (
+				<GiverGameCard currentCard={currentCard} changeCardStatus={changeCardStatus} isPending={isPending} />
+			)}
+			{role === 'watcher' && (
+				<WatcherGameCard currentCard={currentCard} changeCardStatus={changeCardStatus} isPending={isPending} />
+			)}
 			{(role === 'giverTeam' || role === 'watcherTeam') && (
 				<TeamGameCard role={role} giver={giver} watcher={watcher} />
 			)}
@@ -37,19 +41,22 @@ const InRound = ({ deck, cardIndex, role, giver, watcher, isPending, changeCardS
 InRound.propTypes = {
 	giver: PropTypes.object.isRequired,
 	watcher: PropTypes.object.isRequired,
-	role: PropTypes.string,
+	role: PropTypes.string.isRequired,
+	deck: PropTypes.object.isRequired,
+	cardIndex: PropTypes.number.isRequired,
+	isPending: PropTypes.bool.isRequired,
+	changeCardStatus: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
 	console.log(state)
-	
+
 	// console.log(state.firestore.data)
 	return {
 		isPending: state.round.pending,
 		error: state.round.error,
 	}
 }
-
 
 const mapDispatchToProps = (dispatch, prevProps) => {
 	//The index of the currently displayed card, current round and gamecode
