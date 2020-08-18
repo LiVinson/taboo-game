@@ -19,14 +19,14 @@ exports[`RoundInstructionsCard renders correctly 1`] = `
       <span
         className="sc-fzplWN kxXpQP"
       >
-        Danielle
+        Sam
       </span>
+       will be giving the clues, and
        
-      will be giving the clues, and 
       <span
         className="sc-fzplWN kxXpQP"
       >
-        Stephen
+        Jo
       </span>
        will be checking for any illegal clues.
     </p>
