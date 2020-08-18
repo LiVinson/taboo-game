@@ -4,7 +4,6 @@ import RoundInstructionsCard from "components/RoundInstructionsCard"
 import ScoreCard from "components/ScoreCard"
 
 const PreRound = (props) => {
-  console.log(props)
   return (
     <React.Fragment>
       <ScoreCard teamScores={[2, 3]} />
@@ -15,8 +14,7 @@ const PreRound = (props) => {
 
 
 PreRound.propTypes = {
-  activeTeam:PropTypes.string.isRequired,
-  currentPlayer: PropTypes.object.isRequired,
+  role: PropTypes.string.isRequired,
   giver:PropTypes.object.isRequired,
   watcher:PropTypes.object.isRequired,
   startRound : PropTypes.func.isRequired
