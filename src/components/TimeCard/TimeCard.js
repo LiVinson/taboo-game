@@ -1,19 +1,46 @@
-import React from "react"
-import { ProgressBar, Bar } from "./style"
+import React from 'react'
+import moment from 'moment'
+import { ProgressBar, Bar } from './style'
 
-const TimeCard = ({endTime, totalTime}) => {
+class TimeCard extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			loading: true,
+            timeRemaining: 60,
+            
+		}
+	}
 
-    //pass in ending Time based on when giver clicked Start (stored in firebase)
-    //Use moment to get difference between now and endTime
-    //pass in (endTime-now)/totalTime converted to perentage for the width.
-    //add additional styling for when time is < 50% and less than 10%
-    //look into adding svg timer inside bar
+	componentDidMount() {
+		const { roundEndTime } = this.props
+		let timeRemaining = moment(roundEndTime).diff(moment(), 'second')
+		this.intervalId = setInterval(() => {
+            console.log('time left', timeRemaining)
+            if (timeRemaining >= 0) {
+                this.setState(
+                    {
+                        timeRemaining: timeRemaining,
+                    },
+                    () => {
+                        timeRemaining--
+                    }
+                )
+            } else {
+                console.log("time up")
+                clearInterval(this.intervalId)
+            }
+			
+		}, 1000)
 
-    return (
-        <ProgressBar>
-            <Bar width="80%"></Bar>
-        </ProgressBar>
-    )
+	}
+	render() {
+        const width = (this.state.timeRemaining / 60) * 100
+		return (
+			<ProgressBar>
+				<Bar width={`${width}%`}></Bar>
+			</ProgressBar>
+		)
+	}
 }
-
 export default TimeCard

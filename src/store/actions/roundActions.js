@@ -1,4 +1,4 @@
-import { dbUpdateRoundStatus, dbUpdateCardStatus } from 'utils/API'
+import { dbUpdateRoundStatus, dbUpdateCardStatus, dbSetroundEndTime } from 'utils/API'
 import { errorActionCreator } from './errorActions'
 
 const requestRoundStatus = () => {
@@ -33,10 +33,16 @@ export const updateRoundStatus = (gamecode, status) => {
 		console.log(status)
 		dbUpdateRoundStatus(gamecode, status)
 			.then((res) => {
-				dispatch(roundStatusSuccess(status))
+				// dbSetroundEndTime(gamecode)
+				// .then(() => {
+					console.log('dispatching success')
+					dispatch(roundStatusSuccess(status))
+					return
+				// })
 			})
 			.catch((error) => {
 				dispatch(errorActionCreator('ROUND_STATUS_UPDATE_FAILURE', error))
+				return
 			})
 		//Update status in firebase
 		//Update as success or failure

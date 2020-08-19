@@ -52,12 +52,12 @@ class Round extends React.Component {
 	render() {
 		console.log(this.props)
 
-		if (this.state.loading) {
+		if (this.state.loading || this.props.pending) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
 		} else {
 			const { gamecode } = this.props
-			const { round, half, status, cardIndex, deck } = this.props.gameplay
+			const { round, half, status, cardIndex, deck, roundEndTime } = this.props.gameplay
 			const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 			const giver = this.determineActivePlayer('giver')
 			const watcher = this.determineActivePlayer('watcher')
@@ -90,6 +90,7 @@ class Round extends React.Component {
 							watcher={watcher}
 							role={role}
 							round={round}
+							roundEndTime={roundEndTime}
 							deck={deck}
 							cardIndex={cardIndex}
 						/>

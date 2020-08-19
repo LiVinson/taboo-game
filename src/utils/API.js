@@ -1,4 +1,5 @@
 import firebase from './fbConfig'
+import moment from "moment"
 
 export const createGame = (gamecode, gameDetails) => {
 	console.log('creating game in firestore')
@@ -161,11 +162,10 @@ export const dbUpdateGameStatus = (gamecode, status) => {
 export const dbUpdateRoundStatus = (gamecode, status) => {
 	console.log('updating game status')
 	console.log(status)
-	console.log(gamecode)
-	// return new Promise((resolve, reject) => {
-	let date = new Date()
-	let endTime = date.setSeconds(date.getSeconds() + 61)
-	console.log(endTime)
+	
+	const currentTime = new Date()
+	const minuteFromNow = currentTime.setTime(currentTime.getTime() + (60500))
+	let endTime =  status === "in progress" ? minuteFromNow : null
 	return firebase
 		.firestore()
 		.collection('games')
@@ -184,6 +184,7 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 		})
 	// })
 }
+
 
 export const dbRequestGameDeck = () => {
 	const gamedeck = []
