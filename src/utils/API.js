@@ -1,5 +1,5 @@
 import firebase from './fbConfig'
-import moment from "moment"
+
 
 export const createGame = (gamecode, gameDetails) => {
 	console.log('creating game in firestore')

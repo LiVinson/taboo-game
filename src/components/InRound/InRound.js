@@ -7,7 +7,7 @@ import { changeCardStatus } from 'store/actions/roundActions'
 
 export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, isPending, changeCardStatus, endRound }) => {
 	const currentCard = deck[cardIndex]
-	console.log(currentCard)
+	// console.log(currentCard)
 	return (
 		<React.Fragment>
 			<TimeCard roundEndTime={roundEndTime}  endRound={endRound} role={role}/>
@@ -26,7 +26,6 @@ export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, i
 
 InRound.propTypes = {
 	gamecode: PropTypes.string.isRequired,
-	currentPlayer: PropTypes.object.isRequired,
 	giver: PropTypes.object.isRequired,
 	watcher: PropTypes.object.isRequired,
 	role: PropTypes.string.isRequired,

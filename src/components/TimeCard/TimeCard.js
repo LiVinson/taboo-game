@@ -7,8 +7,7 @@ class TimeCard extends React.Component {
 		super(props)
 		this.state = {
 			loading: true,
-            timeRemaining: 60,
-            
+			timeRemaining: 60,
 		}
 	}
 
@@ -16,35 +15,30 @@ class TimeCard extends React.Component {
 		const { roundEndTime } = this.props
 		let timeRemaining = moment(roundEndTime).diff(moment(), 'second')
 		this.intervalId = setInterval(() => {
-            console.log('time left', timeRemaining)
-            if (timeRemaining >= 0) {
-                this.setState(
-                    {
-                        timeRemaining: timeRemaining,
-                    },
-                    () => {
-                        timeRemaining--
-                    }
-                )
-            } else {
-                console.log("time up")
-                clearInterval(this.intervalId)
-                if (this.props.role === "giver") {
-                    this.props.endRound()
-                }
-                
-            }
-			
+			console.log('time left', timeRemaining)
+			if (timeRemaining >= 0) {
+				timeRemaining--
+				this.setState({
+					timeRemaining,
+				})
+			} else {
+				console.log('time up')
+				clearInterval(this.intervalId)
+				if (this.props.role === 'giver') {
+					this.props.endRound()
+				}
+			}
 		}, 1000)
-
 	}
 	render() {
-        const width = Math.round((this.state.timeRemaining / 60) * 100)
-        console.log(width)
+		const width = Math.round((this.state.timeRemaining / 60) * 100)
+		console.log(width)
 		return (
 			<ProgressBar>
-                <Bar width={width}></Bar>
-                <TimeText width={width}>{this.state.timeRemaining > 0 ? this.state.timeRemaining : "Time's Up!"}</TimeText>
+				<Bar width={width}></Bar>
+				<TimeText width={width}>
+					{this.state.timeRemaining > 0 ? this.state.timeRemaining : "Time's Up!"}
+				</TimeText>
 			</ProgressBar>
 		)
 	}

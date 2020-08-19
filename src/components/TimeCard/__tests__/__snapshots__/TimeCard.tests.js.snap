@@ -1,12 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TimeCard renders correctly 1`] = `
+exports[`TimeCard rendering and functionality TimeCard renders correctly 1`] = `
 <div
-  className="sc-AxjAm ldGgOs"
+  className="sc-AxjAm gtWhgV"
 >
   <div
-    className="sc-AxirZ ljZGdt"
-    width="80%"
+    className="sc-AxirZ hQvBzJ"
+    width={100}
   />
+  <div
+    className="sc-AxiKw hqcVBg"
+    width={100}
+  >
+    60
+  </div>
 </div>
 `;

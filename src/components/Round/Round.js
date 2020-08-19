@@ -91,7 +91,6 @@ class Round extends React.Component {
 					{status === 'in progress' && (
 						<InRound
 							gamecode={gamecode}
-							currentPlayer={currentPlayer}
 							giver={giver}
 							watcher={watcher}
 							role={role}
