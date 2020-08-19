@@ -1,6 +1,5 @@
 import firebase from './fbConfig'
 
-
 export const createGame = (gamecode, gameDetails) => {
 	console.log('creating game in firestore')
 	const newGame = {
@@ -162,15 +161,14 @@ export const dbUpdateGameStatus = (gamecode, status) => {
 export const dbUpdateRoundStatus = (gamecode, status) => {
 	console.log('updating game status')
 	console.log(status)
-	
+
 	let currentTime
 	let endTime = null
-	 
 
 	//When round is starting, determine endTime for synchronized countdown timer
-	if (status === "in progress") {
+	if (status === 'in progress') {
 		currentTime = new Date()
-		endTime = currentTime.setTime(currentTime.getTime() + (60500))
+		endTime = currentTime.setTime(currentTime.getTime() + 60500)
 	}
 
 	return firebase
@@ -192,7 +190,6 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 	// })
 }
 
-
 export const dbRequestGameDeck = () => {
 	const gamedeck = []
 	return firebase
@@ -202,7 +199,7 @@ export const dbRequestGameDeck = () => {
 		.then((response) => {
 			response.forEach((document) => {
 				let card = {}
-							card.word = document.id
+				card.word = document.id
 				card.tabooList = document.data().tabooList
 				gamedeck.push(card)
 			})
@@ -225,8 +222,7 @@ export const dbSaveGameDeck = (gamecode, deck) => {
 			'gameplay.deck': deck,
 			'gameplay.cardIndex': 0,
 		})
-		.then((res) => {
-			console.log(res)
+		.then(() => {			
 			console.log('saved shuffled array')
 			return
 		})
@@ -248,27 +244,41 @@ export const dbUpdateCardStatus = (gamecode, status, currentIndex) => {
 					throw new Error("game doesn't exist...")
 				}
 
-				const { cardIndex, deck, round, half } = game.data().gameplay
+				const { cardIndex, deck, round, half, status: roundStatus } = game.data().gameplay
 
-				//If the index provided no longer matches, giver and watcher may have selected a button at nearly the same time. This allows only one update to occur and discard
-				if (cardIndex !== currentIndex) {
-					console.log("card index was already changed. Don't proceed")
-					throw new Error("card index was already changed. Don't proceed")
+				let updatedCard
+
+				console.log(deck[currentIndex])
+				//Card status changed based on giver/watcher updating within the round
+				if (roundStatus === 'in progress') {
+					//If the index provided no longer matches, giver and watcher may have selected a button at nearly the same time. This allows only one update to occur and discard
+					console.log(cardIndex)
+					console.log(currentIndex)
+					if (cardIndex !== currentIndex) {
+						console.log("card index was already changed. Don't proceed")
+						throw new Error("card index was already changed. Don't proceed")
+					}
+
+					updatedCard = {
+						...deck[currentIndex],
+						status: status,
+						//Will be used to filter cards that were played in the current round
+						roundPlayed: `${round}-${half}`,
+					}
+				}
+				//Card status changed by watcher updating card statuses as needed
+				else if (roundStatus === 'postround') {
+					updatedCard = {
+						...deck[currentIndex],
+						status: status,
+					}
 				}
 
 			
-				const updatedCard = {
-					...deck[cardIndex],
-					status: status,
-					//Will be used to filter cards that were played in the current round
-					roundPlayed: `${round}-${half}`,
-				}
-
-				console.log(updatedCard)
 				const cardPath = `gameplay.deck.${currentIndex}`
-				console.log(cardPath)
 				transaction.update(gamePath, {
-					'gameplay.cardIndex': currentIndex + 1,
+					//Only change the cardIndex for in round card changes. Stays the same for postround status changes
+					'gameplay.cardIndex': roundStatus === 'in progress' ? currentIndex + 1 : currentIndex,
 					[cardPath]: updatedCard,
 				})
 			})

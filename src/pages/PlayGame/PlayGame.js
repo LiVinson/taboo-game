@@ -42,6 +42,7 @@ class PlayGame extends React.Component {
 			//game info is valid, need to verify current user is a player in the game
 			const playerId = this.props.auth.uid
 			const players = game.players
+			console.log(playerId)
 			//Verify current user has valid uid and is in players array in firestore
 			let playerVerified
 			const includedUserArr = players.filter((player) => player.playerId === playerId)
@@ -78,8 +79,7 @@ class PlayGame extends React.Component {
 	render() {
 		const { gamecode } = this.props.match.params
 		const {game} = this.props
-		console.log(game.gameplay?.deck)
-
+		
 		if (this.state.loading || !game.gameplay?.deck) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>

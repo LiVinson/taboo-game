@@ -49,10 +49,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, prevProps) => {
 	//The index of the currently displayed card, current round and gamecode
-	const { cardIndex, round, gamecode } = prevProps
+	const { cardIndex, gamecode } = prevProps
 	return {
 		changeCardStatus: (status) => {
-			dispatch(changeCardStatus(gamecode, status, round, cardIndex))
+			dispatch(changeCardStatus(gamecode, status, cardIndex))
 		},
 	}
 }

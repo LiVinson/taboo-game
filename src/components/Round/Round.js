@@ -8,7 +8,7 @@ import RoundInfo from 'components/RoundInfo'
 import Pending from 'components/shared/Pending'
 import ErrorMessage from 'components/shared/ErrorMessage'
 import { updateRoundStatus } from 'store/actions/roundActions'
-
+// import { convertOBjectToArray } from "utils/helpers"
 class Round extends React.Component {
 	constructor(props) {
 		super(props)
@@ -40,7 +40,7 @@ class Round extends React.Component {
 		} else {
 			activePlayer = half === 'top' ? this.state.team2[team2Turn] : this.state.team1[team1Turn]
 		}
-		console.log(activePlayer)
+		
 		return activePlayer
 	}
 
@@ -50,15 +50,18 @@ class Round extends React.Component {
 	}
 
 	endRound = () => {
-		console.log("ending round")
-		this.props.updateRoundStatus(this.props.gamecode, "postround")
+		console.log('ending round')
+		this.props.updateRoundStatus(this.props.gamecode, 'postround')
+	}
+
+	confirmRoundEnd = () => {
+		console.log('confirming round scores')
 	}
 
 	render() {
-		console.log(this.props)
+	
 		if (this.state.loading) {
-
-		// if (this.state.loading || this.props.pending) {
+			// if (this.state.loading || this.props.pending) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
 		} else {
@@ -78,7 +81,6 @@ class Round extends React.Component {
 				<React.Fragment>
 					<GameInfo players={this.props.players} currentPlayer={currentPlayer} />
 					<RoundInfo round={round} watcher={watcher} giver={giver} />
-
 					{status === 'preround' && (
 						<PreRound
 							startRound={this.startRound}
@@ -101,8 +103,13 @@ class Round extends React.Component {
 							endRound={this.endRound}
 						/>
 					)}
-					{/*   {gameplay.status === 'postround' && <PostRound cardsPlayed={dummyPostRoundData} />}
-					 */}
+					{status === 'postround' && (
+						<PostRound
+							gamecode={gamecode}
+							role={role}
+							cardsPlayed={Object.values(deck).filter((card) => card.roundPlayed === `${round}-${half}`)}
+						/>
+					)}
 				</React.Fragment>
 			)
 		}
