@@ -3,66 +3,72 @@
 exports[`Inround rendering and functionality renders correctly 1`] = `
 Array [
   <div
-    className="sc-AxjAm ldGgOs"
+    className="sc-AxjAm gtWhgV"
   >
     <div
-      className="sc-AxirZ ljZGdt"
-      width="80%"
+      className="sc-AxirZ hQvBzJ"
+      width={100}
     />
+    <div
+      className="sc-AxiKw hqcVBg"
+      width={100}
+    >
+      60
+    </div>
   </div>,
   <div
-    className="sc-AxiKw cnMqsX"
+    className="sc-AxhCb iDAIBP"
   >
     <div
-      className="sc-AxhUy flvuPt"
+      className="sc-AxgMl fZxUmv"
     >
       apple
     </div>
     <div
-      className="sc-AxgMl fmQkUd"
+      className="sc-AxheI gIsRbv"
     >
       <ul
-        className="sc-AxheI dpNzUY"
+        className="sc-Axmtr kQysrH"
       >
         <li
-          className="sc-Axmtr eKdZYh"
+          className="sc-AxmLO kKZJiQ"
         >
           red
         </li>
         <li
-          className="sc-Axmtr eKdZYh"
+          className="sc-AxmLO kKZJiQ"
         >
           shiny
         </li>
         <li
-          className="sc-Axmtr eKdZYh"
+          className="sc-AxmLO kKZJiQ"
         >
           round
         </li>
         <li
-          className="sc-Axmtr eKdZYh"
+          className="sc-AxmLO kKZJiQ"
         >
           fruit
         </li>
         <li
-          className="sc-Axmtr eKdZYh"
+          className="sc-AxmLO kKZJiQ"
         >
           Eve
         </li>
       </ul>
     </div>
     <div
-      className="sc-fzplWN buDbqD"
+      className="sc-fznyAO bTqnAz"
     >
       <button
-        className="sc-AxmLO cmqLOv"
+        className="sc-fzozJi eYkRRm"
         disabled={false}
         onClick={[Function]}
       >
         Skip!
       </button>
       <button
-        className="sc-AxmLO sc-fzozJi ZeZOx"
+        className="sc-fzozJi sc-fzoLsD claqWL"
         disabled={false}
         onClick={[Function]}
       >

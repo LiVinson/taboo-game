@@ -1,5 +1,6 @@
 import firebase from './fbConfig'
 
+
 export const createGame = (gamecode, gameDetails) => {
 	console.log('creating game in firestore')
 	const newGame = {
@@ -161,11 +162,17 @@ export const dbUpdateGameStatus = (gamecode, status) => {
 export const dbUpdateRoundStatus = (gamecode, status) => {
 	console.log('updating game status')
 	console.log(status)
-	console.log(gamecode)
-	// return new Promise((resolve, reject) => {
-	let date = new Date()
-	let endTime = date.setSeconds(date.getSeconds() + 61)
-	console.log(endTime)
+	
+	let currentTime
+	let endTime = null
+	 
+
+	//When round is starting, determine endTime for synchronized countdown timer
+	if (status === "in progress") {
+		currentTime = new Date()
+		endTime = currentTime.setTime(currentTime.getTime() + (60500))
+	}
+
 	return firebase
 		.firestore()
 		.collection('games')
@@ -184,6 +191,7 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 		})
 	// })
 }
+
 
 export const dbRequestGameDeck = () => {
 	const gamedeck = []

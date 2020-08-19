@@ -5,26 +5,12 @@ import TimeCard from 'components/TimeCard'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
 import { changeCardStatus } from 'store/actions/roundActions'
 
-/*
-Information needed:
-- Who is current player
-- Who is the giver
-- WHo is the watcher
-- Who is giverTeam
-- Who is watcherTeam
-- Time remaining
-- Skip handler
-- Next handler
-- Buzzer Handler
-- timeup callback
-
-*/
-export const InRound = ({ deck, cardIndex, role, giver, watcher, isPending, changeCardStatus }) => {
+export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, isPending, changeCardStatus, endRound }) => {
 	const currentCard = deck[cardIndex]
-	console.log(currentCard)
+	// console.log(currentCard)
 	return (
 		<React.Fragment>
-			<TimeCard timeRemaining={'2:00'} timeUp={() => console.log('time up')} />
+			<TimeCard roundEndTime={roundEndTime}  endRound={endRound} role={role}/>
 			{role === 'giver' && (
 				<GiverGameCard currentCard={currentCard} changeCardStatus={changeCardStatus} isPending={isPending} />
 			)}
@@ -39,9 +25,12 @@ export const InRound = ({ deck, cardIndex, role, giver, watcher, isPending, chan
 }
 
 InRound.propTypes = {
+	gamecode: PropTypes.string.isRequired,
 	giver: PropTypes.object.isRequired,
 	watcher: PropTypes.object.isRequired,
 	role: PropTypes.string.isRequired,
+	round: PropTypes.number.isRequired,
+	// roundEndTime: PropTypes.
 	deck: PropTypes.object.isRequired,
 	cardIndex: PropTypes.number.isRequired,
 	isPending: PropTypes.bool.isRequired,

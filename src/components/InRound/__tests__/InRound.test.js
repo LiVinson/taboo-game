@@ -9,9 +9,12 @@ import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCar
 
 describe('Inround rendering and functionality', () => {
 	const defaultProps = {
+		gamecode:"90210",
 		giver: { name: 'Sam', playerId: '12345', team: 'team 1' },
 		watcher: { name: 'Jo', playerId: '23456', team: 'team 2' },
 		role: 'giver',
+		round:1,
+		roundEndTime: Date.now(),
 		deck: {
 			0: {
 				word: 'apple',
