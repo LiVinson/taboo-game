@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import { ProgressBar, Bar } from './style'
+import { ProgressBar, Bar, TimeText } from './style'
 
 class TimeCard extends React.Component {
 	constructor(props) {
@@ -35,10 +35,12 @@ class TimeCard extends React.Component {
 
 	}
 	render() {
-        const width = (this.state.timeRemaining / 60) * 100
+        const width = Math.round((this.state.timeRemaining / 60) * 100)
+        console.log(width)
 		return (
 			<ProgressBar>
-				<Bar width={`${width}%`}></Bar>
+                <Bar width={width}></Bar>
+                <TimeText width={width}>{this.state.timeRemaining > 0 ? this.state.timeRemaining : "Time's Up!"}</TimeText>
 			</ProgressBar>
 		)
 	}
