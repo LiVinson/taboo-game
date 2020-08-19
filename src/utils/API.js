@@ -163,9 +163,16 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 	console.log('updating game status')
 	console.log(status)
 	
-	const currentTime = new Date()
-	const minuteFromNow = currentTime.setTime(currentTime.getTime() + (60500))
-	let endTime =  status === "in progress" ? minuteFromNow : null
+	let currentTime
+	let endTime = null
+	 
+
+	//When round is starting, determine endTime for synchronized countdown timer
+	if (status === "in progress") {
+		currentTime = new Date()
+		endTime = currentTime.setTime(currentTime.getTime() + (60500))
+	}
+
 	return firebase
 		.firestore()
 		.collection('games')

@@ -49,10 +49,16 @@ class Round extends React.Component {
 		this.props.updateRoundStatus(this.props.gamecode, 'in progress')
 	}
 
+	endRound = () => {
+		console.log("ending round")
+		this.props.updateRoundStatus(this.props.gamecode, "postround")
+	}
+
 	render() {
 		console.log(this.props)
+		if (this.state.loading) {
 
-		if (this.state.loading || this.props.pending) {
+		// if (this.state.loading || this.props.pending) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
 		} else {
@@ -93,6 +99,7 @@ class Round extends React.Component {
 							roundEndTime={roundEndTime}
 							deck={deck}
 							cardIndex={cardIndex}
+							endRound={this.endRound}
 						/>
 					)}
 					{/*   {gameplay.status === 'postround' && <PostRound cardsPlayed={dummyPostRoundData} />}

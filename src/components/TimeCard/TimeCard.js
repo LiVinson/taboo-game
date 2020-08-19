@@ -29,6 +29,10 @@ class TimeCard extends React.Component {
             } else {
                 console.log("time up")
                 clearInterval(this.intervalId)
+                if (this.props.role === "giver") {
+                    this.props.endRound()
+                }
+                
             }
 			
 		}, 1000)

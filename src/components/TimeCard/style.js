@@ -28,7 +28,8 @@ export const Bar = styled.div`
 export const TimeText = styled.div`
 	/* positions numbers to the far right */
 	position: absolute;
-	right: ${(props) => (parseInt(props.width) > 0 ? 0 : '50%')};
+    right: ${(props) => (parseInt(props.width) > 0 ? 0 : '50%')};
+    /* when time = 0, centers time up message */
 	transform: ${(props) => {
 		if (parseInt(props.width) > 0) {
 			return 'translateX(0)'
