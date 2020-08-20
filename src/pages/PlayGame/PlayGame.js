@@ -18,7 +18,7 @@ class PlayGame extends React.Component {
 	}
 
 	//Used to verify when props received from firebase and firestore are available
-	componentDidUpdate(prevProps) {
+	componentDidUpdate() {
 		//While game is loading, check if game data from firestore and auth data from firebase have been received
 		//before verifying  gamecode and player
 		if (this.state.loading && this.props.gameDataReceived && this.props.auth.isLoaded) {
@@ -26,7 +26,7 @@ class PlayGame extends React.Component {
 		}
 	}
 
-	//verify that game exists
+	//verify that game object from firestore exists
 	//verify that current user is a player in game
 	//toggle loading/verified so UI can render
 	verifyGameInfo = () => {
@@ -39,7 +39,7 @@ class PlayGame extends React.Component {
 				loading: false, //gameVerified false by default
 			})
 		} else {
-			//game info is valid, need to verify current user is a player in the game
+			//game exists and is in correct status. Need to verify current user is a player in the game
 			const playerId = this.props.auth.uid
 			const players = game.players
 			console.log(playerId)
@@ -52,17 +52,15 @@ class PlayGame extends React.Component {
 					loading: false,
 					gameVerified: true,
 					playerVerified,
-
 				},
 				() => {
-					//If current player is the host, load the deck. Other players are in "pending" until deck is added 
+					//If current player is the host, load the deck. Other players are in "pending" until deck is added
 					//host is the first player to join that is still online
-					const host = this.props.game.players.find(player => player.online === true)
-					if(host.playerId === this.props.auth.uid && !this.props.game.gameplay.deck) {
-						console.log("Im the host")
+					const host = this.props.game.players.find((player) => player.online === true)
+					if (host.playerId === this.props.auth.uid && !this.props.game.gameplay.deck) {
+						console.log('Im the host')
 						this.loadGameDeck()
 					}
-					
 				}
 			)
 		}
@@ -74,28 +72,30 @@ class PlayGame extends React.Component {
 		this.props.fetchDeck(gamecode)
 	}
 
-
-
 	render() {
 		const { gamecode } = this.props.match.params
-		const {game} = this.props
-		
-		if (this.state.loading || !game.gameplay?.deck) {
+		const { game } = this.props
+
+		if (this.state.loading) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
-		} else if (game.status === 'new') {
-			return <Redirect to={`/waiting/${gamecode}`} />
+		} else if (!this.state.gameVerified) {
+			//Update with actual loading component
+			return <p>That game doesn't exist, hasn't started yet, or is already complete.</p>
 		} else if (!this.state.playerVerified) {
 			//Style and add button to go to Join route so user can join properly
 			return <p>Player didn't join properly</p>
+			//Check if the deck object exists and if has any keys (cards) yet
+		} else if (!game.gameplay?.deck || Object.keys(game.gameplay?.deck).length === 0) {
+			//Update with actual loading component
+			return <p>Creating deck...</p>
 		} else {
 			return (
 				<Round
-					gamecode={this.props.match.params.gamecode}
+					gamecode={gamecode}
 					players={game.players}
 					gameplay={game.gameplay}
 					playerId={this.props.auth.uid}
-					pending={this.props.pending}
 					error={this.props.error}
 				/>
 			)
@@ -104,16 +104,14 @@ class PlayGame extends React.Component {
 }
 
 const mapStateToProps = (state, prevProps) => {
-
 	const game = state.firestore.data?.games?.[prevProps.match.params.gamecode]
 	return {
+		//determine if gamePending property needed...
 		gamecode: state.game.gamecode, //tbd if adding this
 		game: game ? game : {}, //from firestore
 		gameDataReceived: state.firestore.status.requested[`games/${prevProps.match.params.gamecode}`],
 		auth: state.firebase.auth,
-		pending: state.round.pending,
-		error: state.round.error
-
+		error: state.round.error,
 	}
 }
 
@@ -127,6 +125,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
 	connect(mapStateToProps, mapDispatchToProps),
-	firestoreConnect((props) => [
-		{ collection: 'games', doc: props.match.params.gamecode }],
-))(PlayGame)
+	firestoreConnect((props) => [{ collection: 'games', doc: props.match.params.gamecode }])
+)(PlayGame)

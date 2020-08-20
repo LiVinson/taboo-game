@@ -26,26 +26,28 @@ const updateCardStatusSuccess = () => {
 	}
 }
 
-export const updateRoundStatus = (gamecode, status) => {
-	return (dispatch) => {
+export const updateRoundStatus = (gamecode, roundStatus, currentIndex) => {
+	return async (dispatch) => {
 		dispatch(requestRoundStatus())
 		console.log(gamecode)
-		console.log(status)
-		dbUpdateRoundStatus(gamecode, status)
-			.then((res) => {
-				// dbSetroundEndTime(gamecode)
-				// .then(() => {
-					console.log('dispatching success')
-					dispatch(roundStatusSuccess(status))
-					return
+		console.log(roundStatus)
+
+		//If round has ended, change the status of the last card displayed so it does not display next round
+		if (roundStatus === 'postround') {
+			console.log('round is ending, but need to update card# ', currentIndex)
+			await dbUpdateCardStatus(gamecode, 'discard', currentIndex)
+		}
+		dbUpdateRoundStatus(gamecode, roundStatus)
+			.then(() => {
+				console.log('dispatching success')
+				dispatch(roundStatusSuccess(roundStatus))
+				return
 				// })
 			})
 			.catch((error) => {
 				dispatch(errorActionCreator('ROUND_STATUS_UPDATE_FAILURE', error))
 				return
 			})
-		//Update status in firebase
-		//Update as success or failure
 	}
 }
 

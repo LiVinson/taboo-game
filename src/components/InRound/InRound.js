@@ -1,24 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import TimeCard from 'components/TimeCard'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
 import { changeCardStatus } from 'store/actions/roundActions'
 
-export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, isPending, changeCardStatus, endRound }) => {
-	const currentCard = deck[cardIndex]
+const GameCard = (props) => {
+	console.log(props)
+	const currentCard = props.deck[props.cardIndex]
+	switch (props.role) {
+		case 'giver':
+			return <GiverGameCard {...props} currentCard={currentCard} />
+		case 'watcher':
+			return <WatcherGameCard {...props} currentCard={currentCard} />
+		case 'giverTeam':
+		case 'watcherTeam':
+			return <TeamGameCard {...props} />
+		default:
+			return null
+	}
+}
+
+export const InRound = ({ roundEndTime, endRound, role, cardsPending, ...props }) => {
+	// export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, cardsPending, changeCardStatus, endRound }) => {
+
 	// console.log(currentCard)
 	return (
 		<React.Fragment>
-			<TimeCard roundEndTime={roundEndTime}  endRound={endRound} role={role}/>
-			{role === 'giver' && (
-				<GiverGameCard currentCard={currentCard} changeCardStatus={changeCardStatus} isPending={isPending} />
-			)}
-			{role === 'watcher' && (
-				<WatcherGameCard currentCard={currentCard} changeCardStatus={changeCardStatus} isPending={isPending} />
-			)}
-			{(role === 'giverTeam' || role === 'watcherTeam') && (
-				<TeamGameCard role={role} giver={giver} watcher={watcher} />
+			<TimeCard roundEndTime={roundEndTime} endRound={endRound} role={role} />
+
+			{moment().isBefore(roundEndTime, 'second') ? (
+				<GameCard role={role} {...props} />
+			) : (
+				<p>Preparing to change rounds</p>
 			)}
 		</React.Fragment>
 	)
@@ -42,7 +57,7 @@ const mapStateToProps = (state) => {
 
 	// console.log(state.firestore.data)
 	return {
-		isPending: state.round.pending,
+		isPending: state.cards.pending,
 		error: state.round.error,
 	}
 }

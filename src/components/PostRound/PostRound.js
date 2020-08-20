@@ -217,7 +217,7 @@ const mapDispatchToProps = (dispatch, prevProps) => {
 	const { gamecode } = prevProps
 	return {
 		updateRoundStatus: () => dispatch(updateRoundStatus(gamecode)),
-		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex)),
+		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex))
 	}
 }
 
