@@ -6,7 +6,8 @@ import { StyledPostRound, PlayedCardList, TabooRadio, TabooLabel, TabooWord, NoC
 import { LargeButton } from 'components/shared/Button'
 import { changeCardStatus, updateRoundStatus } from 'store/actions/roundActions'
 
-//Takes in taboo word, it's status and a cb function that is called when user selects a different word in the lit
+//Takes in taboo word, it's index, status, and a cb function that is called when user selects a different word in the list
+//Returns a list item with a hidden radio button and label.
 const TabooSelection = ({ word, index, status, onChange }) => {
 	return (
 		<TabooWord>
@@ -23,15 +24,6 @@ const TabooSelection = ({ word, index, status, onChange }) => {
 		</TabooWord>
 	)
 }
-/*
-    ✔ For each card that was played, sort it into correct, skip, discard based on status
-    ✔  For each status, return a Taboo card with status title
-    ✔ In taboo body, loop over cards and display card.word as a radio button and label with radio hidden
-    ✔ On selection of a radio button, style the label
-    ✔ On click button, call function to > change the status(log for now)
-    Word displays on new card list.
-    On submit, call function to check if game is over
-*/
 
 class PostRound extends React.Component {
 	constructor(props) {
@@ -47,10 +39,14 @@ class PostRound extends React.Component {
 
 	//Called onchance of radio button value. Set in state so that on click to change the status, can determine which word is selected
 	handleCardSelection = (cardIndex, status) => {
-		
+		const statuses = ['correct', 'skipped', 'discard']
+		const notSelectedStatuses = statuses.filter((cardStatus) => cardStatus !== status)
 		const property = status + 'Selection'
+		//Set the card index value for the status currently selected and clear the 2 statuses not currently selected
 		this.setState({
 			[property]: cardIndex,
+			[notSelectedStatuses[0] + 'Selection']: '',
+			[notSelectedStatuses[1] + 'Selection']: '',
 		})
 	}
 
@@ -63,143 +59,24 @@ class PostRound extends React.Component {
 		this.props.changeCardStatus(newStatus, indexToChange)
 	}
 	render() {
-		//Additional properties added based on which card button is appearing in.
-		const correctButton = { text: 'Correct', className: 'button' }
-		const skipButton = { text: 'Skip', className: 'button' }
-		const discardButton = { text: 'Discard', className: 'button' }
-
-		//Used to disable correct, skip, discard buttons if no taboo word is selected to update the status
-		const correctSelected = this.state.correctSelection.length < 1
-		const skipSelected = this.state.skippedSelection.length < 1
-		const discardSelected = this.state.discardSelection.length < 1
-
-		//Adds the index which matches the property name in firestore deck map.
-		// Then separates cards played in round based on card status
-		const correct = this.props.cardsPlayed
-			.map((card, index) => ({ ...card, index }))
-			.filter((card) => card.status === 'correct')
-		const skip = this.props.cardsPlayed
-			.map((card, index) => ({ ...card, index }))
-			.filter((card) => card.status === 'skipped')
-		const discard = this.props.cardsPlayed
-			.map((card, index) => ({ ...card, index }))
-			.filter((card) => card.status === 'discard')
-
+		const selections = Object.values(this.state)
+		console.log(selections)
 		return (
 			//update - only watcher gets the buttonTabooCard buttons
 			<StyledPostRound>
-				{/* Additional props passed to buttons: if button should be disabled, and onClick containing current card status based on Taboo container it appears in, and new card status based on which button it is*/}
-				<ButtonTabooCard
-					tabooWord="Correct!"
-					buttons={[
-						{
-							...skipButton,
-							disabled: correctSelected,
-							onClick: () => {
-								this.updateSelectedCard('correct', 'skipped')
-							},
-						},
-						{
-							...discardButton,
-							onClick: () => {
-								this.updateSelectedCard('correct', 'discard')
-							},
-							disabled: correctSelected,
-						},
-					]}
-				>
-					<PlayedCardList>
-						{correct.length ? (
-							correct.map((card) => (
-								// Taboo selection returns a list item with the word as a label and a hidden radio button. Selecting the label selects the radio button, and calls the onChange call back function to keep track of which word is selected and the list it belongs to
-								<TabooSelection
-									key={card.index} //index in deck in firestore which is unchanging
-									word={card.word}
-									index={card.index}
-									onChange={this.handleCardSelection}
-									status="correct"
-								/>
-							))
-						) : (
-							<NoCardMessage>No cards correct this round</NoCardMessage>
-						)}
-					</PlayedCardList>
-				</ButtonTabooCard>
-
-				<ButtonTabooCard
-					tabooWord="Skip!"
-					buttons={[
-						{
-							...correctButton,
-							disabled: skipSelected,
-							onClick: () => {
-								this.updateSelectedCard('skipped', 'correct')
-							},
-						},
-						{
-							...discardButton,
-							disabled: skipSelected,
-							onClick: () => {
-								this.updateSelectedCard('skipped', 'discard')
-							},
-						},
-					]}
-				>
-					<PlayedCardList>
-						{skip.length ? (
-							skip.map((card, index) => (
-								<TabooSelection
-									key={card.index} //index in deck in firestore which is unchanging
-									word={card.word}
-									index={card.index}
-									onChange={this.handleCardSelection}
-									status="skipped"
-								/>
-							))
-						) : (
-							<NoCardMessage>No cards skipped this round</NoCardMessage>
-						)}
-					</PlayedCardList>
-				</ButtonTabooCard>
-
-				<ButtonTabooCard
-					tabooWord="Discard!"
-					buttons={[
-						{
-							...correctButton,
-							disabled: discardSelected,
-							onClick: () => {
-								this.updateSelectedCard('discard', 'correct')
-							},
-						},
-						{
-							...skipButton,
-							disabled: discardSelected,
-							onClick: () => {
-								this.updateSelectedCard('discard', 'skipped')
-							},
-						},
-					]}
-				>
-					<PlayedCardList>
-						{discard.length ? (
-							discard.map((card, index) => (
-								<TabooSelection
-									key={card.index} //index in deck in firestore which is unchanging
-									word={card.word}
-									index={card.index}
-									onChange={this.handleCardSelection}
-									status="discard"
-								/>
-							))
-						) : (
-							<NoCardMessage>No cards discarded this round</NoCardMessage>
-						)}
-					</PlayedCardList>
-				</ButtonTabooCard>
-
-				{this.props.role === 'watcher' && (
-					<LargeButton text="Confirm!" onClick={this.props.updateRoundStatus} />
+				{this.props.role === 'watcher' ? (
+					<WatcherPostRound
+						cardStatuses={['correct', 'skipped', 'discard']}
+						cardsPlayed={this.props.cardsPlayed}
+						handleCardSelection={this.handleCardSelection}
+						updateSelectedCard={this.updateSelectedCard}
+						selectedCards={selections}
+					/>
+				) : (
+					<NonWatcherPostRound
+						cardStatuses={['correct', 'skipped', 'discard']}
+						cardsPlayed={this.props.cardsPlayed}
+					/>
 				)}
 			</StyledPostRound>
 		)
@@ -217,8 +94,78 @@ const mapDispatchToProps = (dispatch, prevProps) => {
 	const { gamecode } = prevProps
 	return {
 		updateRoundStatus: () => dispatch(updateRoundStatus(gamecode)),
-		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex))
+		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex)),
 	}
 }
 
 export default connect(null, mapDispatchToProps)(PostRound)
+
+const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb) => {
+	console.log(statusSelected)
+	const buttonInfo = statusArray
+		.filter((cardType) => cardType !== status)
+		.map((cardType) => {
+			const button = { className: 'button' }
+			button.text = cardType
+			button.disabled = statusSelected.length > 0 ? false : true
+			button.onClick = () => cb(status, cardType)
+			return button
+		})
+	console.log(buttonInfo)
+	return buttonInfo
+}
+
+const WatcherPostRound = ({ cardStatuses, cardsPlayed, handleCardSelection, selectedCards, updateSelectedCard }) => {
+	//Loops over each card status, and returns a Taboo card with 2 buttons.
+	//Filters cards played based on the status. Information needed to generate buttons,
+	//select a card in the list, and change button status passed in
+	// Then separates cards played in round based on current card status
+	console.log(selectedCards)
+	return (
+		<React.Fragment>
+			{cardStatuses.map((status, index) => (
+				<CardsPlayed
+					key={status}
+					status={cardStatuses[index]}
+					cardList={cardsPlayed.filter((card) => card.status === status)}
+					handleChange={handleCardSelection}
+					buttonInfo={generateCardsPlayedButtonInfo(
+						cardStatuses,
+						status,
+						selectedCards[index],
+						updateSelectedCard
+					)}
+				/>
+			))}
+
+			<LargeButton text="Confirm!" onClick={() => console.log('confirm!')} />
+		</React.Fragment>
+	)
+}
+
+//Returns a Taboo card with buttons to change card status to other two options or a card stating there are no cards in this status
+const CardsPlayed = ({ status, cardList, handleChange, buttonInfo }) => {
+	return (
+		<ButtonTabooCard tabooWord={status} buttons={buttonInfo}>
+			<PlayedCardList>
+				{cardList.length > 0 ? (
+					cardList.map((card) => (
+						<TabooSelection
+							key={card.index} //index in deck in firestore which is unchanging
+							word={card.word}
+							index={card.index}
+							onChange={handleChange}
+							status={status}
+						/>
+					))
+				) : (
+					<NoCardMessage>No {status} cards this round</NoCardMessage>
+				)}
+			</PlayedCardList>
+		</ButtonTabooCard>
+	)
+}
+
+const NonWatcherPostRound = ({ cardStatuses, cardsPlayed }) => {
+	return <p>I'm a non watcher</p>
+}

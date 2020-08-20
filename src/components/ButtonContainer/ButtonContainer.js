@@ -5,9 +5,6 @@ import { StyledButtonContainer } from "./style"
 
 //Appears at bottom of Taboo Card when a buttons prop is passed to taboo.
 // Receives array of objects with button text and click handler
-
-
-
 const ButtonContainer = ({ buttons }) => {
   return (
     <StyledButtonContainer>

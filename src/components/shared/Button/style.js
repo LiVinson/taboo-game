@@ -11,7 +11,7 @@ import styled from 'styled-components'
 */
 
 export const StyledButton = styled.button`
-	border:  ${(props) => props.border ? `2px solid ${props.theme.color.primary}` : "none"}; 
+	border: ${(props) => (props.border ? `2px solid ${props.theme.color.primary}` : 'none')};
 	color: ${(props) => props.theme.color.primary};
 	background-color: ${(props) => props.theme.color.offWhite};
 	width: 47%;
@@ -20,6 +20,10 @@ export const StyledButton = styled.button`
 	font-size: 2.3rem;
 	font-family: ${(props) => props.theme.text.display};
 	text-transform: uppercase;
+
+	&:hover {
+		/* TBD */
+	}
 
 	&:active {
 		outline: none;
@@ -30,6 +34,11 @@ export const StyledButton = styled.button`
 	&:focus {
 		border: none;
 		outline: solid 2px ${(props) => props.theme.color.accent1};
+	}
+
+	&:disabled {
+		/* To add: additional styling */
+		filter: brightness(0.4);
 	}
 `
 export const StyledPrimaryButton = styled(StyledButton)`
@@ -45,6 +54,8 @@ export const StyledPrimaryButton = styled(StyledButton)`
 	&:focus {
 		outline: solid 2px ${(props) => props.theme.color.offWhite};
 	}
+
+	
 `
 export const StyledLargeButton = styled(StyledButton)`
 	width: 100%;

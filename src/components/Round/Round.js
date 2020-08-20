@@ -94,7 +94,8 @@ class Round extends React.Component {
 						<PostRound
 							gamecode={gamecode}
 							role={role}
-							cardsPlayed={Object.values(deck).filter((card) => card.roundPlayed === `${round}-${half}`)}
+							//Convert deck object into array of objects. Add index to each card to track it's firestore deck.propertyName. Filters only for cards played this round
+							cardsPlayed={Object.values(deck).map((card, index) => ({...card, index})).filter((card) => card.roundPlayed === `${round}-${half}`)}
 						/>
 					)}
 				</React.Fragment>
