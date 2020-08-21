@@ -1,29 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { ButtonTabooCard } from 'components/shared/TabooCard'
-import { StyledPostRound, PlayedCardList, TabooRadio, TabooLabel, TabooWord, NoCardMessage } from './style'
-import { LargeButton } from 'components/shared/Button'
+import PostRoundNonWatcher from "components/PostRoundNonWatcher"
+import PostRoundWatcher from "components/PostRoundWatcher"
+import { StyledPostRound } from './style'
 import { changeCardStatus, updateRoundStatus } from 'store/actions/roundActions'
 
-//Takes in taboo word, it's index, status, and a cb function that is called when user selects a different word in the list
-//Returns a list item with a hidden radio button and label.
-const TabooSelection = ({ word, index, status, onChange }) => {
-	return (
-		<TabooWord>
-			<TabooRadio
-				type="radio"
-				name="tabooWord"
-				value={index}
-				id={word}
-				onChange={(e) => {
-					onChange(e.target.value, status)
-				}}
-			/>
-			<TabooLabel htmlFor={word}>{word}</TabooLabel>
-		</TabooWord>
-	)
-}
+
 
 class PostRound extends React.Component {
 	constructor(props) {
@@ -58,14 +41,16 @@ class PostRound extends React.Component {
 		//called prop method to trigger dispatch
 		this.props.changeCardStatus(newStatus, indexToChange)
 	}
+
 	render() {
+		//Creates array of the selected cards for each status.
 		const selections = Object.values(this.state)
-		console.log(selections)
+
 		return (
 			//update - only watcher gets the buttonTabooCard buttons
 			<StyledPostRound>
 				{this.props.role === 'watcher' ? (
-					<WatcherPostRound
+					<PostRoundWatcher
 						cardStatuses={['correct', 'skipped', 'discard']}
 						cardsPlayed={this.props.cardsPlayed}
 						handleCardSelection={this.handleCardSelection}
@@ -73,7 +58,7 @@ class PostRound extends React.Component {
 						selectedCards={selections}
 					/>
 				) : (
-					<NonWatcherPostRound
+					<PostRoundNonWatcher
 						cardStatuses={['correct', 'skipped', 'discard']}
 						cardsPlayed={this.props.cardsPlayed}
 					/>
@@ -100,72 +85,8 @@ const mapDispatchToProps = (dispatch, prevProps) => {
 
 export default connect(null, mapDispatchToProps)(PostRound)
 
-const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb) => {
-	console.log(statusSelected)
-	const buttonInfo = statusArray
-		.filter((cardType) => cardType !== status)
-		.map((cardType) => {
-			const button = { className: 'button' }
-			button.text = cardType
-			button.disabled = statusSelected.length > 0 ? false : true
-			button.onClick = () => cb(status, cardType)
-			return button
-		})
-	console.log(buttonInfo)
-	return buttonInfo
-}
 
-const WatcherPostRound = ({ cardStatuses, cardsPlayed, handleCardSelection, selectedCards, updateSelectedCard }) => {
-	//Loops over each card status, and returns a Taboo card with 2 buttons.
-	//Filters cards played based on the status. Information needed to generate buttons,
-	//select a card in the list, and change button status passed in
-	// Then separates cards played in round based on current card status
-	console.log(selectedCards)
-	return (
-		<React.Fragment>
-			{cardStatuses.map((status, index) => (
-				<CardsPlayed
-					key={status}
-					status={cardStatuses[index]}
-					cardList={cardsPlayed.filter((card) => card.status === status)}
-					handleChange={handleCardSelection}
-					buttonInfo={generateCardsPlayedButtonInfo(
-						cardStatuses,
-						status,
-						selectedCards[index],
-						updateSelectedCard
-					)}
-				/>
-			))}
 
-			<LargeButton text="Confirm!" onClick={() => console.log('confirm!')} />
-		</React.Fragment>
-	)
-}
 
-//Returns a Taboo card with buttons to change card status to other two options or a card stating there are no cards in this status
-const CardsPlayed = ({ status, cardList, handleChange, buttonInfo }) => {
-	return (
-		<ButtonTabooCard tabooWord={status} buttons={buttonInfo}>
-			<PlayedCardList>
-				{cardList.length > 0 ? (
-					cardList.map((card) => (
-						<TabooSelection
-							key={card.index} //index in deck in firestore which is unchanging
-							word={card.word}
-							index={card.index}
-							onChange={handleChange}
-							status={status}
-						/>
-					))
-				) : (
-					<NoCardMessage>No {status} cards this round</NoCardMessage>
-				)}
-			</PlayedCardList>
-		</ButtonTabooCard>
-	)
-}
 
-const NonWatcherPostRound = ({ cardStatuses, cardsPlayed }) => {
-	return <p>I'm a non watcher</p>
-}
+

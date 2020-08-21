@@ -1,18 +1,19 @@
 import React from 'react'
 import PropTypes from "prop-types"
-import { Scores, ScoreTitle, ScoreList, Score } from './style'
+import { Scores, ScoreTitle, Score } from './style'
+import  List  from 'components/shared/List'
 
 const ScoreCard = ({ teamScores }) => {
 	return (
 		<Scores>
 			<ScoreTitle>Scores</ScoreTitle>
-			<ScoreList>
+			<List>
 				{teamScores.map((score, index) => (
 					<Score key={index}>
 						Team {index + 1}: <span>{score}</span>
 					</Score>
 				))}
-			</ScoreList>
+			</List>
 		</Scores>
 
 	)

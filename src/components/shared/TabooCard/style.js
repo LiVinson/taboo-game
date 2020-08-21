@@ -104,10 +104,6 @@ export const TabooBody = styled.div`
 `
 TabooBody.displayName = 'TabooBody'
 
-export const StyledTabooList = styled.ul`
-	list-style-type: none;
-`
-StyledTabooList.displayName = 'StyledTabooList'
 
 export const StyledListItem = styled.li`
 	font-family: ${(props) => props.theme.text.display};

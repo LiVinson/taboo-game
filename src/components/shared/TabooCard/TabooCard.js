@@ -5,9 +5,9 @@ import {
 	StyledLayeredTabooCard,
 	TabooWordContainer,
 	TabooBody,
-	StyledTabooList,
 	StyledListItem,
 } from './style'
+import List from "components/shared/List"
 import ButtonContainer from 'components/ButtonContainer'
 
 //Primary TabooCard component used for main menu and game
@@ -64,11 +64,11 @@ LayeredTabooCard.propTypes = {
 
 const TabooList = ({ list }) => {
 	return (
-		<StyledTabooList>
+		<List>
 			{list.map((listItem, index) => (
 				<TabooListItem listItem={listItem} key={index} />
 			))}
-		</StyledTabooList>
+		</List>
 	)
 }
 
