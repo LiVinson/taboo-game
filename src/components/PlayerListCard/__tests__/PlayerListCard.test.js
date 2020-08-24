@@ -1,96 +1,67 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
 import PlayerListCard from '../PlayerListCard'
-import TeamList from 'components/TeamList'
+import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 
-test('renders correctly', () => {
-	const props = {
-		players: [
+describe('PlayerLIstCard render and functionality is correct', () => {
+	const defaultProps = {
+		buttonInfo: [
 			{
-				host: true,
-				name: 'player1',
-				playerId: '90210',
+				text: 'Team 1',
+				value: 'team 1',
+				onClick: jest.fn(),
 			},
 			{
-				host: false,
-				name: 'player2',
-				playerId: '12345',
-			},
-			{
-				host: false,
-				name: 'player3',
-				playerId: '12345',
-			},
-			{
-				host: false,
-				name: 'player4',
-				playerId: '12345',
+				text: 'Team 2',
+				value: 'team 2',
+				onClick: jest.fn(),
 			},
 		],
-		currentPlayer: {
-			host: true,
-			name: 'player1',
-			playerId: '90210',
-		},
 		tabooWord: 'Players',
 	}
 
-	const wrapper = renderer
-		.create(
-			<ThemeProvider theme={theme}>
-				<PlayerListCard {...props} />
-			</ThemeProvider>
-		)
-		.toJSON()
-
-	expect(wrapper).toMatchSnapshot()
-})
-
-test('renders TeamList for team1, team2, and unassigned platersplayers', () => {
-	const props = {
-		players: [
-			{
-				host: true,
-				name: 'player1',
-				playerId: '90210',
-				team: 'team 1',
-			},
-			{
-				host: false,
-				name: 'player2',
-				playerId: '12345',
-				team: 'team 1',
-			},
-			{
-				host: false,
-				name: 'player3',
-				playerId: '12345',
-				team: 'team 2',
-			},
-			{
-				host: false,
-				name: 'player4',
-				playerId: '12345',
-				team: null,
-			},
-		],
-		currentPlayer: {
-			host: true,
-			name: 'player1',
-			playerId: '90210',
-			team: 'team 1',
-		},
-		tabooWord: 'Players',
-	}
-
-	const wrapper = mount(
-		<ThemeProvider theme={theme}>
-			<PlayerListCard {...props} />
-		</ThemeProvider>
+	const value = (
+		<ul>
+			<li>Child 1</li>
+			<li>Child 2</li>
+		</ul>
 	)
 
-	expect(wrapper.find(TeamList)).toHaveLength(3)
+	test('renders correctly', () => {
+		const props = {
+			...defaultProps,
+		}
+
+		const wrapper = renderer
+			.create(
+				<ThemeProvider theme={theme}>
+					<PlayerListCard {...props}>{value}</PlayerListCard>
+				</ThemeProvider>
+			)
+			.toJSON()
+
+		expect(wrapper).toMatchSnapshot()
+	})
+
+	test('renders ButtonTabooCard when buttons prop provided', () => {
+		const props = {
+			...defaultProps,
+		}
+		const component = shallow(<PlayerListCard {...props}>{value}</PlayerListCard>)
+		expect(component.find(ButtonTabooCard)).toHaveLength(1)
+		expect(component.find(TabooCard)).toHaveLength(0)
+	})
+
+	test('renders TabooCard when buttons prop not provided', () => {
+		const props = {
+			tabooWord: 'Players'
+		}
+
+		const component = shallow(<PlayerListCard {...props}>{value}</PlayerListCard>)
+		expect(component.find(ButtonTabooCard)).toHaveLength(0)
+		expect(component.find(TabooCard)).toHaveLength(1)
+	})
 })
