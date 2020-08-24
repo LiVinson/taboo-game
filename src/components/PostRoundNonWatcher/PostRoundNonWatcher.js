@@ -1,12 +1,13 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
+import { TabooCard } from 'components/shared/TabooCard'
 
-const PostRoundNonWatcher = ({ cardStatuses, cardsPlayed }) => {
-	return <p>I'm a non watcher</p>
+const PostRoundNonWatcher = ({ children }) => {
+	return <TabooCard tabooWord={'Cards Played'}>{children}</TabooCard>
 }
 
 PostRoundNonWatcher.propTypes = {
-
+	children: PropTypes.node.isRequired
 }
 
 export default PostRoundNonWatcher

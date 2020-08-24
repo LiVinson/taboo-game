@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import PostRoundNonWatcher from "components/PostRoundNonWatcher"
-import PostRoundWatcher from "components/PostRoundWatcher"
+import PostRoundNonWatcher from 'components/PostRoundNonWatcher'
+import PostRoundWatcher from 'components/PostRoundWatcher'
+import { FilteredTabooList } from 'components/shared/TabooCard'
 import { StyledPostRound } from './style'
 import { changeCardStatus, updateRoundStatus } from 'store/actions/roundActions'
-
-
 
 class PostRound extends React.Component {
 	constructor(props) {
@@ -45,23 +44,33 @@ class PostRound extends React.Component {
 	render() {
 		//Creates array of the selected cards for each status.
 		const selections = Object.values(this.state)
+		const cardStatuses = ['correct', 'skipped', 'discard']
 
 		return (
 			//update - only watcher gets the buttonTabooCard buttons
 			<StyledPostRound>
 				{this.props.role === 'watcher' ? (
 					<PostRoundWatcher
-						cardStatuses={['correct', 'skipped', 'discard']}
+						cardStatuses={cardStatuses}
 						cardsPlayed={this.props.cardsPlayed}
 						handleCardSelection={this.handleCardSelection}
 						updateSelectedCard={this.updateSelectedCard}
 						selectedCards={selections}
 					/>
 				) : (
-					<PostRoundNonWatcher
-						cardStatuses={['correct', 'skipped', 'discard']}
-						cardsPlayed={this.props.cardsPlayed}
-					/>
+					<PostRoundNonWatcher>
+						{cardStatuses.map((status) => (
+							<FilteredTabooList
+								key={status}
+								unfilteredList={this.props.cardsPlayed}
+								filterKey="status"
+								filterValue={status}
+								displayProperty="word"
+								listTitle={status}
+								noneMessage={`No ${status} cards this round`}
+							/>
+						))}
+					</PostRoundNonWatcher>
 				)}
 			</StyledPostRound>
 		)
@@ -84,9 +93,3 @@ const mapDispatchToProps = (dispatch, prevProps) => {
 }
 
 export default connect(null, mapDispatchToProps)(PostRound)
-
-
-
-
-
-
