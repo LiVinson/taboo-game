@@ -1,207 +1,230 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PostRound renders correctly 1`] = `
+exports[`PostRound renders and functions correctly PostRound renders correctly when role is not watcher 1`] = `
 <div
-  className="sc-fzpans htoqaa"
+  className="sc-fzqNJr cDIQQJ"
 >
   <div
-    className="sc-AxjAm fAwBWA"
+    className="sc-AxjAm hDlFTS"
   >
     <div
       className="sc-AxiKw dGnLMo"
     >
-      Correct!
+      Cards Played
+    </div>
+    <div
+      className="sc-AxhCb JZaCe"
+    >
+      <p
+        className="sc-AxheI fpDqsA"
+      >
+        correct
+      </p>
+      <ul
+        className="sc-Axmtr dHjpTi"
+      >
+        <li
+          className="sc-AxgMl fFkiZt"
+        >
+          Kendrick Lamar
+        </li>
+      </ul>
+      <p
+        className="sc-AxheI fpDqsA"
+      >
+        skipped
+      </p>
+      <ul
+        className="sc-Axmtr dHjpTi"
+      >
+        <li
+          className="sc-AxgMl fFkiZt"
+        >
+          Simba
+        </li>
+      </ul>
+      <p
+        className="sc-AxheI fpDqsA"
+      >
+        discard
+      </p>
+      <ul
+        className="sc-Axmtr dHjpTi"
+      >
+        <li
+          className="sc-AxgMl fFkiZt"
+        >
+          Will Smith
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PostRound renders and functions correctly PostRound renders correctly when role is watcher 1`] = `
+<div
+  className="sc-fzqNJr cDIQQJ"
+>
+  <div
+    className="sc-AxjAm hDlFTS"
+  >
+    <div
+      className="sc-AxiKw dGnLMo"
+    >
+      correct
     </div>
     <div
       className="sc-AxhCb JZaCe"
     >
       <ul
-        className="sc-fzplWN escGkp"
+        className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fznyAO dYMzeO"
+          className="sc-fznKkj gYxyrb"
         >
           <input
-            className="sc-fznKkj GCeSL"
-            id="Simba"
-            name="tabooWord"
+            className="sc-fznZeY cefyvv"
+            id="Kendrick Lamar"
+            name="does this matter?"
             onChange={[Function]}
             type="radio"
-            value="Simba"
           />
           <label
-            className="sc-fznZeY kYoYJP"
+            className="sc-fzokOt fHcrGO"
+            htmlFor="Kendrick Lamar"
+          >
+            Kendrick Lamar
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="sc-fzplWN buDbqD"
+    >
+      <button
+        className="sc-AxmLO gkkjrF button"
+        disabled={true}
+        onClick={[Function]}
+      >
+        skipped
+      </button>
+      <button
+        className="sc-AxmLO sc-fzozJi cxRJga button"
+        disabled={true}
+        onClick={[Function]}
+      >
+        discard
+      </button>
+    </div>
+  </div>
+  <div
+    className="sc-AxjAm hDlFTS"
+  >
+    <div
+      className="sc-AxiKw dGnLMo"
+    >
+      skipped
+    </div>
+    <div
+      className="sc-AxhCb JZaCe"
+    >
+      <ul
+        className="sc-Axmtr dHjpTi"
+      >
+        <li
+          className="sc-fznKkj gYxyrb"
+        >
+          <input
+            className="sc-fznZeY cefyvv"
+            id="Simba"
+            name="does this matter?"
+            onChange={[Function]}
+            type="radio"
+          />
+          <label
+            className="sc-fzokOt fHcrGO"
             htmlFor="Simba"
           >
             Simba
           </label>
         </li>
-        <li
-          className="sc-fznyAO dYMzeO"
-        >
-          <input
-            className="sc-fznKkj GCeSL"
-            id="Mufasa"
-            name="tabooWord"
-            onChange={[Function]}
-            type="radio"
-            value="Mufasa"
-          />
-          <label
-            className="sc-fznZeY kYoYJP"
-            htmlFor="Mufasa"
-          >
-            Mufasa
-          </label>
-        </li>
-        <li
-          className="sc-fznyAO dYMzeO"
-        >
-          <input
-            className="sc-fznKkj GCeSL"
-            id="Scar"
-            name="tabooWord"
-            onChange={[Function]}
-            type="radio"
-            value="Scar"
-          />
-          <label
-            className="sc-fznZeY kYoYJP"
-            htmlFor="Scar"
-          >
-            Scar
-          </label>
-        </li>
       </ul>
     </div>
     <div
-      className="sc-fzoLsD bLdJIe"
+      className="sc-fzplWN buDbqD"
     >
       <button
-        className="sc-AxheI bYfwqV button"
+        className="sc-AxmLO gkkjrF button"
         disabled={true}
         onClick={[Function]}
       >
-        Skip
+        correct
       </button>
       <button
-        className="sc-AxheI sc-Axmtr jEDxKF button"
+        className="sc-AxmLO sc-fzozJi cxRJga button"
         disabled={true}
         onClick={[Function]}
       >
-        Discard
+        discard
       </button>
     </div>
   </div>
   <div
-    className="sc-AxjAm fAwBWA"
+    className="sc-AxjAm hDlFTS"
   >
     <div
       className="sc-AxiKw dGnLMo"
     >
-      Skip!
+      discard
     </div>
     <div
       className="sc-AxhCb JZaCe"
     >
       <ul
-        className="sc-fzplWN escGkp"
+        className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fznyAO dYMzeO"
+          className="sc-fznKkj gYxyrb"
         >
           <input
-            className="sc-fznKkj GCeSL"
-            id="Voldemort"
-            name="tabooWord"
+            className="sc-fznZeY cefyvv"
+            id="Will Smith"
+            name="does this matter?"
             onChange={[Function]}
             type="radio"
-            value="Voldemort"
           />
           <label
-            className="sc-fznZeY kYoYJP"
-            htmlFor="Voldemort"
+            className="sc-fzokOt fHcrGO"
+            htmlFor="Will Smith"
           >
-            Voldemort
+            Will Smith
           </label>
         </li>
       </ul>
     </div>
     <div
-      className="sc-fzoLsD bLdJIe"
+      className="sc-fzplWN buDbqD"
     >
       <button
-        className="sc-AxheI bYfwqV button"
+        className="sc-AxmLO gkkjrF button"
         disabled={true}
         onClick={[Function]}
       >
-        Correct
+        correct
       </button>
       <button
-        className="sc-AxheI sc-Axmtr jEDxKF button"
+        className="sc-AxmLO sc-fzozJi cxRJga button"
         disabled={true}
         onClick={[Function]}
       >
-        Discard
-      </button>
-    </div>
-  </div>
-  <div
-    className="sc-AxjAm fAwBWA"
-  >
-    <div
-      className="sc-AxiKw dGnLMo"
-    >
-      Discard!
-    </div>
-    <div
-      className="sc-AxhCb JZaCe"
-    >
-      <ul
-        className="sc-fzplWN escGkp"
-      >
-        <li
-          className="sc-fznyAO dYMzeO"
-        >
-          <input
-            className="sc-fznKkj GCeSL"
-            id="American Revolution"
-            name="tabooWord"
-            onChange={[Function]}
-            type="radio"
-            value="American Revolution"
-          />
-          <label
-            className="sc-fznZeY kYoYJP"
-            htmlFor="American Revolution"
-          >
-            American Revolution
-          </label>
-        </li>
-      </ul>
-    </div>
-    <div
-      className="sc-fzoLsD bLdJIe"
-    >
-      <button
-        className="sc-AxheI bYfwqV button"
-        disabled={true}
-        onClick={[Function]}
-      >
-        Correct
-      </button>
-      <button
-        className="sc-AxheI sc-Axmtr jEDxKF button"
-        disabled={true}
-        onClick={[Function]}
-      >
-        Skip
+        skipped
       </button>
     </div>
   </div>
   <button
-    className="sc-AxheI sc-AxmLO hTCvJk"
-    onClick={[MockFunction]}
+    className="sc-AxmLO sc-fzoLsD eJHZEh"
+    onClick={[Function]}
   >
     Confirm!
   </button>

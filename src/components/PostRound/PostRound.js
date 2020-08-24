@@ -7,7 +7,7 @@ import { FilteredTabooList } from 'components/shared/TabooCard'
 import { StyledPostRound } from './style'
 import { changeCardStatus, updateRoundStatus } from 'store/actions/roundActions'
 
-class PostRound extends React.Component {
+export class PostRound extends React.Component {
 	constructor(props) {
 		super(props)
 
@@ -19,7 +19,7 @@ class PostRound extends React.Component {
 		}
 	}
 
-	//Called onchance of radio button value. Set in state so that on click to change the status, can determine which word is selected
+	//Called onchange of radio button value. Set in state so that on click to change the status, can determine which word is selected
 	handleCardSelection = (cardIndex, status) => {
 		const statuses = ['correct', 'skipped', 'discard']
 		const notSelectedStatuses = statuses.filter((cardStatus) => cardStatus !== status)
