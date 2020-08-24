@@ -21,6 +21,7 @@ export const PlayerTitle = styled.p`
     background-color: ${(props) => props.theme.color.lightGray2};
     margin: 0.8rem auto 0.6rem auto;
   }
+
 `
 
 export const PlayerList = styled.ul`

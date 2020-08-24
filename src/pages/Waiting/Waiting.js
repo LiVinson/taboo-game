@@ -1,10 +1,12 @@
 import React from 'react'
-import { Redirect } from "react-router-dom"
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
+import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
+import { FilteredTabooList } from 'components/shared/TabooCard'
 import { Instructions } from './style'
 import { updateTeam } from 'store/actions/playerActions'
 import { updateGameStatus } from 'store/actions/gameActions'
@@ -93,10 +95,9 @@ export class Waiting extends React.Component {
 		if (this.state.loading) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
-		} else if (this.props.game[gamecode].status === "in progress") {
+		} else if (this.props.game[gamecode].status === 'in progress') {
 			console.log(gamecode)
 			return <Redirect to={`/play/${gamecode}`} />
-
 		} else if (!this.state.gameVerified) {
 			//Style and add button to go back home
 			return <p>Game doesn't exist, or is already in progress</p>
@@ -107,6 +108,7 @@ export class Waiting extends React.Component {
 			const players = this.props.game[gamecode].players
 			const playerId = this.props.auth.uid
 			const currentPlayer = players.find((player) => player.playerId === playerId)
+			const teams = ['unassigned', 'team 1', 'team 2']
 			const buttonInfo = [
 				{
 					text: 'Team 1',
@@ -138,7 +140,21 @@ export class Waiting extends React.Component {
 						PLAY to start!
 					</Instructions>
 					<TabooCardTop margin={true} tabooWord={gamecode} />
-					<PlayerListCard players={players} currentPlayer={currentPlayer} buttonInfo={buttonInfo} />
+					<PlayerListCard players={players} buttonInfo={buttonInfo}>
+						{teams.map((team) => (
+							<FilteredTabooList
+								key={team}
+								unfilteredList={players}
+								filterKey="team"
+								filterValue={team}
+								displayProperty="name"
+								listTitle={team}
+								specialKey="playerId"
+								specialValue={currentPlayer.playerId}
+								noneMessage={`No ${team} players`}
+							/>
+						))}
+					</PlayerListCard>
 				</React.Fragment>
 			)
 		}

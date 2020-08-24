@@ -76,7 +76,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 			createGame(gamecode, gameData)
 				.then(() => {
 					createPlayer(hostPlayerName).then((player) => {
-						const host = { ...player, team: null, online:true, host: true }
+						const host = { ...player, team: "unassigned", online:true, host: true }
 						//associates anonymous user with game instance in firestore
 						addPlayer(host, gamecode).then((player) => {
 							dispatch(createGameSuccess(gamecode))
@@ -100,7 +100,7 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 			verifyGameExists(gamecode)
 				.then(() => {
 					createPlayer(playerName).then((playerData) => {
-						const player = { ...playerData, host: false, team: null }
+						const player = { ...playerData, host: false, team: "unassigned" }
 						addPlayer(player, gamecode).then(() => {
 							dispatch(joinGameSuccess(gamecode))
 							resolve()
