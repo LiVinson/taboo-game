@@ -84,7 +84,7 @@ export class CreateGame extends React.Component {
 	}
 	render() {
 		const buttonInfo = [
-			{ text: 'Back', className: 'button', onClick: this.handleBackClick },
+			{ text: 'Back', onClick: this.handleBackClick },
 			{
 				form: 'createGameForm',
 				text: 'Submit',

@@ -42,18 +42,18 @@ test("Primary button renders correctly", () => {
   })
 
 /*
-    receives a text prop and a handleClick property
+    receives a text prop and a onClick property
 */
 test("Button displays text received as prop", () => {
   const props = {
     text: "A button",
-    handleClick: jest.fn(),
+    onClick: jest.fn(),
   }
   const wrapper = mount(<Button {...props} theme={theme} />)
   expect(wrapper.find("button").text()).toEqual("A button")
 })
 
-test("Button calls handleClick prop when clicked", () => {
+test("Button calls onClick prop when clicked", () => {
   const props = {
     text: "A button",
     onClick: jest.fn(),

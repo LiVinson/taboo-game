@@ -58,8 +58,8 @@ test('ButtonTabooCard renders ButtonContainer', () => {
 		tabooWord: 'taboo',
 		list: ['word1', 'word2', 'word3'],
 		buttons: [
-			{ text: 'Back', handleClick: jest.fn() },
-			{ text: 'Next', handleClick: jest.fn() },
+			{ text: 'Back', onClick: jest.fn() },
+			{ text: 'Next', onClick: jest.fn() },
 		],
 	}
 	const wrapper = shallow(<ButtonTabooCard {...props} />)
@@ -71,8 +71,8 @@ test('ButtonTabooCard renders correctly when list is provided', () => {
 		tabooWord: 'taboo',
 		list: ['word1', 'word2', 'word3'],
 		buttons: [
-			{ text: 'Back', handleClick: jest.fn() },
-			{ text: 'Next', handleClick: jest.fn() },
+			{ text: 'Back', onClick: jest.fn() },
+			{ text: 'Next', onClick: jest.fn() },
 		],
 	}
 	const wrapper = renderer
@@ -92,8 +92,8 @@ test('ButtonTabooCard renders children prop if provided', () => {
 		tabooWord: 'taboo',
 		children: h1,
 		buttons: [
-			{ text: 'Back', handleClick: jest.fn() },
-			{ text: 'Next', handleClick: jest.fn() },
+			{ text: 'Back', onClick: jest.fn() },
+			{ text: 'Next', onClick: jest.fn() },
 		],
 	}
 	const wrapper = renderer

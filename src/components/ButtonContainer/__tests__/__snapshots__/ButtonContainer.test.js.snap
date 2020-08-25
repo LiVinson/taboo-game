@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button Container renders correctly 1`] = `
+exports[`Button Container renders and functions correctly Button Container renders correctly 1`] = `
 .c1 {
   width: 47%;
   padding: 0.6rem 0rem;

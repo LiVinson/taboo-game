@@ -19,14 +19,14 @@ ButtonContainer.propTypes = {
   buttons: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
-      handleClick: PropTypes.func.IsRequired,
+      onClick: PropTypes.func.IsRequired,
       type: PropTypes.string,
     })
   ),
 }
 
 /*3 possible buttons: regular, primary, and large regular
-  When there are 2 or more buttons, first is always button and second is primary button.
+  When there are 2 or more buttons, first is always button (white) and second is primary button (color).
   If there are less than 2 buttons or more than 2 (e.g. 1 or 3 buttons) then that button is large button
   Margin is only added to large button when there are multiple buttons to separate it from buttons above
 */
