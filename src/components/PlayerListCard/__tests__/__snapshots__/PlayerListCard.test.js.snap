@@ -25,14 +25,14 @@ exports[`PlayerLIstCard render and functionality is correct renders correctly 1`
     className="sc-fzplWN buDbqD"
   >
     <button
-      className="sc-AxmLO gkkjrF"
+      className="sc-AxmLO fxmuza"
       onClick={[MockFunction]}
       value="team 1"
     >
       Team 1
     </button>
     <button
-      className="sc-AxmLO sc-fzozJi cxRJga"
+      className="sc-AxmLO sc-fzozJi ffjLNG"
       onClick={[MockFunction]}
       value="team 2"
     >

@@ -2,7 +2,7 @@
 
 exports[`Main menu renders correctly 1`] = `
 <div
-  className="sc-AxjAm fAwBWA"
+  className="sc-AxjAm hDlFTS"
 >
   <div
     className="sc-AxiKw dGnLMo"
@@ -13,13 +13,13 @@ exports[`Main menu renders correctly 1`] = `
     className="sc-AxhCb JZaCe"
   >
     <ul
-      className="sc-AxhUy jJntqQ"
+      className="sc-Axmtr dHjpTi"
     >
       <li
-        className="sc-AxgMl cDzLXU"
+        className="sc-AxhUy kWmTzm"
       >
         <a
-          className="sc-fzpans kbOtnQ"
+          className="sc-fznKkj kHanHY"
           href="/home/create"
           onClick={[Function]}
           text="Create New Game"
@@ -28,10 +28,10 @@ exports[`Main menu renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="sc-AxgMl cDzLXU"
+        className="sc-AxhUy kWmTzm"
       >
         <a
-          className="sc-fzpans kbOtnQ"
+          className="sc-fznKkj kHanHY"
           href="/home/join"
           onClick={[Function]}
           text="Join Game"
@@ -40,10 +40,10 @@ exports[`Main menu renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="sc-AxgMl cDzLXU"
+        className="sc-AxhUy kWmTzm"
       >
         <a
-          className="sc-fzpans kbOtnQ"
+          className="sc-fznKkj kHanHY"
           href="/home/rules"
           onClick={[Function]}
           text="How to Play"
@@ -52,10 +52,10 @@ exports[`Main menu renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="sc-AxgMl cDzLXU"
+        className="sc-AxhUy kWmTzm"
       >
         <a
-          className="sc-fzpans kbOtnQ"
+          className="sc-fznKkj kHanHY"
           href="/submit"
           onClick={[Function]}
           text="Submit a Card"

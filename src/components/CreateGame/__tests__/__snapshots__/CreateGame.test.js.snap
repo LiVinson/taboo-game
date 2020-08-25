@@ -14,14 +14,14 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 .c0:before {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 1.2rem;
-  left: .5rem;
+  left: 0.5rem;
   width: 50%;
   top: 80%;
   max-width: 300px;
   background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
@@ -49,19 +49,24 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 }
 
 .c14 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
+}
+
+.c14:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c14:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -74,23 +79,33 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   outline: solid 2px #8AC926;
 }
 
+.c14:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
+}
+
 .c15 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
   color: #f7f9f9;
   background-color: #8AC926;
-  width: 47%;
+}
+
+.c15:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c15:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -103,9 +118,10 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   outline: solid 2px #8AC926;
 }
 
-.c15:active {
-  -webkit-filter: brightness(1.2);
-  filter: brightness(1.2);
+.c15:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
 }
 
 .c15:focus {
@@ -500,14 +516,14 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 .c0:before {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 1.2rem;
-  left: .5rem;
+  left: 0.5rem;
   width: 50%;
   top: 80%;
   max-width: 300px;
   background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
@@ -535,19 +551,24 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 }
 
 .c15 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
+}
+
+.c15:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c15:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -560,23 +581,33 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   outline: solid 2px #8AC926;
 }
 
+.c15:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
+}
+
 .c16 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
   color: #f7f9f9;
   background-color: #8AC926;
-  width: 47%;
+}
+
+.c16:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c16:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -589,9 +620,10 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   outline: solid 2px #8AC926;
 }
 
-.c16:active {
-  -webkit-filter: brightness(1.2);
-  filter: brightness(1.2);
+.c16:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
 }
 
 .c16:focus {
@@ -997,14 +1029,14 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 .c0:before {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 1.2rem;
-  left: .5rem;
+  left: 0.5rem;
   width: 50%;
   top: 80%;
   max-width: 300px;
   background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
@@ -1032,19 +1064,24 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 }
 
 .c15 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
+}
+
+.c15:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c15:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -1057,23 +1094,33 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   outline: solid 2px #8AC926;
 }
 
+.c15:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
+}
+
 .c16 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
   color: #f7f9f9;
   background-color: #8AC926;
-  width: 47%;
+}
+
+.c16:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c16:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -1086,9 +1133,10 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   outline: solid 2px #8AC926;
 }
 
-.c16:active {
-  -webkit-filter: brightness(1.2);
-  filter: brightness(1.2);
+.c16:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
 }
 
 .c16:focus {

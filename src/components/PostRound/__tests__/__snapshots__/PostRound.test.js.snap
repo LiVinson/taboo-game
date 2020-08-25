@@ -103,14 +103,14 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
       className="sc-fzplWN buDbqD"
     >
       <button
-        className="sc-AxmLO gkkjrF button"
+        className="sc-AxmLO fxmuza button"
         disabled={true}
         onClick={[Function]}
       >
         skipped
       </button>
       <button
-        className="sc-AxmLO sc-fzozJi cxRJga button"
+        className="sc-AxmLO sc-fzozJi ffjLNG button"
         disabled={true}
         onClick={[Function]}
       >
@@ -155,14 +155,14 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
       className="sc-fzplWN buDbqD"
     >
       <button
-        className="sc-AxmLO gkkjrF button"
+        className="sc-AxmLO fxmuza button"
         disabled={true}
         onClick={[Function]}
       >
         correct
       </button>
       <button
-        className="sc-AxmLO sc-fzozJi cxRJga button"
+        className="sc-AxmLO sc-fzozJi ffjLNG button"
         disabled={true}
         onClick={[Function]}
       >
@@ -207,14 +207,14 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
       className="sc-fzplWN buDbqD"
     >
       <button
-        className="sc-AxmLO gkkjrF button"
+        className="sc-AxmLO fxmuza button"
         disabled={true}
         onClick={[Function]}
       >
         correct
       </button>
       <button
-        className="sc-AxmLO sc-fzozJi cxRJga button"
+        className="sc-AxmLO sc-fzozJi ffjLNG button"
         disabled={true}
         onClick={[Function]}
       >
@@ -223,7 +223,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
     </div>
   </div>
   <button
-    className="sc-AxmLO sc-fzoLsD eJHZEh"
+    className="sc-AxmLO sc-fzoLsD gwAkai"
     onClick={[Function]}
   >
     Confirm!

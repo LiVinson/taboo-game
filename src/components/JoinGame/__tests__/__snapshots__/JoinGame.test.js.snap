@@ -14,14 +14,14 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
 .c0:before {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 1.2rem;
-  left: .5rem;
+  left: 0.5rem;
   width: 50%;
   top: 80%;
   max-width: 300px;
   background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
@@ -49,19 +49,24 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
 }
 
 .c8 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
+}
+
+.c8:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c8:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -74,23 +79,33 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
   outline: solid 2px #8AC926;
 }
 
+.c8:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
+}
+
 .c9 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
   color: #f7f9f9;
   background-color: #8AC926;
-  width: 47%;
+}
+
+.c9:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c9:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -103,9 +118,10 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
   outline: solid 2px #8AC926;
 }
 
-.c9:active {
-  -webkit-filter: brightness(1.2);
-  filter: brightness(1.2);
+.c9:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
 }
 
 .c9:focus {
@@ -208,7 +224,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
         className="c4"
       >
         <label
-          className="sc-fzqNJr c5"
+          className="sc-fzoXzr c5"
           htmlFor="name"
         >
           Enter Your Name
@@ -229,7 +245,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
         className="c4"
       >
         <label
-          className="sc-fzqNJr c5"
+          className="sc-fzoXzr c5"
           htmlFor="gamecode"
         >
           Enter a Game Code
@@ -283,14 +299,14 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
 .c0:before {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 1.2rem;
-  left: .5rem;
+  left: 0.5rem;
   width: 50%;
   top: 80%;
   max-width: 300px;
   background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
@@ -318,19 +334,24 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
 }
 
 .c9 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
+}
+
+.c9:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c9:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -343,23 +364,33 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
   outline: solid 2px #8AC926;
 }
 
+.c9:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
+}
+
 .c10 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
   color: #f7f9f9;
   background-color: #8AC926;
-  width: 47%;
+}
+
+.c10:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c10:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -372,9 +403,10 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
   outline: solid 2px #8AC926;
 }
 
-.c10:active {
-  -webkit-filter: brightness(1.2);
-  filter: brightness(1.2);
+.c10:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
 }
 
 .c10:focus {
@@ -483,7 +515,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
         className="c4"
       >
         <label
-          className="sc-fzqNJr c5"
+          className="sc-fzoXzr c5"
           htmlFor="name"
         >
           Enter Your Name
@@ -504,7 +536,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
         className="c4"
       >
         <label
-          className="sc-fzqNJr c5"
+          className="sc-fzoXzr c5"
           htmlFor="gamecode"
         >
           Enter a Game Code
@@ -563,14 +595,14 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
 .c0:before {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 1.2rem;
-  left: .5rem;
+  left: 0.5rem;
   width: 50%;
   top: 80%;
   max-width: 300px;
   background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
@@ -598,19 +630,24 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
 }
 
 .c9 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
+}
+
+.c9:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c9:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -623,23 +660,33 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
   outline: solid 2px #8AC926;
 }
 
+.c9:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
+}
+
 .c10 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
   color: #f7f9f9;
   background-color: #8AC926;
-  width: 47%;
+}
+
+.c10:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c10:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -652,9 +699,10 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
   outline: solid 2px #8AC926;
 }
 
-.c10:active {
-  -webkit-filter: brightness(1.2);
-  filter: brightness(1.2);
+.c10:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
 }
 
 .c10:focus {
@@ -763,7 +811,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
         className="c4"
       >
         <label
-          className="sc-fzqNJr c5"
+          className="sc-fzoXzr c5"
           htmlFor="name"
         >
           Enter Your Name
@@ -784,7 +832,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
         className="c4"
       >
         <label
-          className="sc-fzqNJr c5"
+          className="sc-fzoXzr c5"
           htmlFor="gamecode"
         >
           Enter a Game Code

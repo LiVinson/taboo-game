@@ -24,14 +24,14 @@ Array [
 .c0:before {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 1.2rem;
-  left: .5rem;
+  left: 0.5rem;
   width: 50%;
   top: 80%;
   max-width: 300px;
   background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
@@ -74,15 +74,15 @@ Array [
   margin-top: 1.5rem;
 }
 
-.c3 {
-  list-style-type: none;
-}
-
 .c4 {
   font-family: 'Oswald',sans-serif;
   font-size: 2.7rem;
   position: relative;
   padding-bottom: 1.5rem;
+}
+
+.c3 {
+  list-style-type: none;
 }
 
 <div
@@ -144,14 +144,14 @@ Array [
 .c0:before {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 1.2rem;
-  left: .5rem;
+  left: 0.5rem;
   width: 50%;
   top: 80%;
   max-width: 300px;
   background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
@@ -194,15 +194,15 @@ Array [
   margin-top: 1.5rem;
 }
 
-.c3 {
-  list-style-type: none;
-}
-
 .c4 {
   font-family: 'Oswald',sans-serif;
   font-size: 2.7rem;
   position: relative;
   padding-bottom: 1.5rem;
+}
+
+.c3 {
+  list-style-type: none;
 }
 
 <div
@@ -264,14 +264,14 @@ Array [
 .c0:before {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 1.2rem;
-  left: .5rem;
+  left: 0.5rem;
   width: 50%;
   top: 80%;
   max-width: 300px;
   background: #777;
-  box-shadow: 0 1.5rem 1rem rgba(0,0,0,.4);
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
@@ -314,15 +314,15 @@ Array [
   margin-top: 1.5rem;
 }
 
-.c3 {
-  list-style-type: none;
-}
-
 .c4 {
   font-family: 'Oswald',sans-serif;
   font-size: 2.7rem;
   position: relative;
   padding-bottom: 1.5rem;
+}
+
+.c3 {
+  list-style-type: none;
 }
 
 <div

@@ -21,8 +21,6 @@ test("Button renders correctly", () => {
     .toJSON()
   expect(wrapper).toMatchSnapshot()
   expect(wrapper).toHaveStyleRule("background-color", theme.color.offWhite)
-
-
 })
 
 test("Primary button renders correctly", () => {
