@@ -8,39 +8,21 @@ import RoundInfo from 'components/RoundInfo'
 import Pending from 'components/shared/Pending'
 import ErrorMessage from 'components/shared/ErrorMessage'
 import { updateRoundStatus } from 'store/actions/roundActions'
-
+// import { convertOBjectToArray } from "utils/helpers"
 class Round extends React.Component {
-	constructor(props) {
-		super(props)
 
-		this.state = {
-			loading: true,
-			team1: [],
-			team2: [],
-			cardsPlayed: [],
-		}
-	}
-
-	componentDidMount() {
-		//Get the initial giver and watcher
-		console.log('mounting...')
-
-		this.setState({
-			loading: false,
-			team1: this.props.players.filter((player) => player.team === 'team 1'),
-			team2: this.props.players.filter((player) => player.team === 'team 2'),
-		})
-	}
 
 	determineActivePlayer = (role) => {
 		let activePlayer
 		const { half, team1Turn, team2Turn } = this.props.gameplay
+		const team1 = this.props.players.filter((player) => player.team === 'team 1')
+		const team2 = this.props.players.filter((player) => player.team === 'team 2')
 		if (role === 'giver') {
-			activePlayer = half === 'top' ? this.state.team1[team1Turn] : this.state.team2[team2Turn]
+			activePlayer = half === 'top' ? team1[team1Turn] : team2[team2Turn]
 		} else {
-			activePlayer = half === 'top' ? this.state.team2[team2Turn] : this.state.team1[team1Turn]
+			activePlayer = half === 'top' ? team2[team2Turn] : team1[team1Turn]
 		}
-		console.log(activePlayer)
+		
 		return activePlayer
 	}
 
@@ -50,24 +32,31 @@ class Round extends React.Component {
 	}
 
 	endRound = () => {
-		console.log("ending round")
-		this.props.updateRoundStatus(this.props.gamecode, "postround")
+		console.log('ending round')
+		this.props.updateRoundStatus(this.props.gamecode, 'postround')
+	}
+
+	confirmRoundEnd = () => {
+		console.log('confirming round scores')
 	}
 
 	render() {
-		console.log(this.props)
-		if (this.state.loading) {
+		console.log("Round rendering")
+		if (this.props.roundPending) {
 
-		// if (this.state.loading || this.props.pending) {
+		// if (this.state.loading || this.props.roundPending) {
+			// if (this.state.loading || this.props.pending) {
 			//Update with actual loading component
-			return <p>Loading Firestore/Firebase</p>
+			return <p>Loading Firestore/Firebase or Round stuff</p>
 		} else {
-			const { gamecode } = this.props
+			console.log(this.props)
+			const { gamecode, cardsPending } = this.props
 			const { round, half, status, cardIndex, deck, roundEndTime } = this.props.gameplay
 			const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 			const giver = this.determineActivePlayer('giver')
 			const watcher = this.determineActivePlayer('watcher')
 			const currentPlayer = this.props.players.find((player) => player.playerId === this.props.playerId)
+			console.log(currentPlayer)
 			let role
 			if (activeTeam === currentPlayer.team) {
 				role = currentPlayer.playerId === giver.playerId ? 'giver' : 'giverTeam'
@@ -78,7 +67,6 @@ class Round extends React.Component {
 				<React.Fragment>
 					<GameInfo players={this.props.players} currentPlayer={currentPlayer} />
 					<RoundInfo round={round} watcher={watcher} giver={giver} />
-
 					{status === 'preround' && (
 						<PreRound
 							startRound={this.startRound}
@@ -99,21 +87,37 @@ class Round extends React.Component {
 							deck={deck}
 							cardIndex={cardIndex}
 							endRound={this.endRound}
+							cardPending={cardsPending}
 						/>
 					)}
-					{/*   {gameplay.status === 'postround' && <PostRound cardsPlayed={dummyPostRoundData} />}
-					 */}
+					{status === 'postround' && (
+						<PostRound
+							gamecode={gamecode}
+							role={role}
+							//Convert deck object into array of objects. Add index to each card to track it's firestore deck.propertyName. Filters only for cards played this round
+							cardsPlayed={Object.values(deck).map((card, index) => ({...card, index})).filter((card) => card.roundPlayed === `${round}-${half}`)}
+						/>
+					)}
 				</React.Fragment>
 			)
 		}
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
+	console.log(state.cards)
+	console.log(state.round)
 	return {
-		updateRoundStatus: (gamecode, newStatus) => {
-			dispatch(updateRoundStatus(gamecode, newStatus))
-		},
+		roundPending: state.round.pending,
+		cardsPending: state.cards.pending
 	}
 }
-export default connect(null, mapDispatchToProps)(Round)
+const mapDispatchToProps = (dispatch, prevProps) => {
+	const { gameplay } = prevProps
+	return {
+		updateRoundStatus: (gamecode, newStatus) => {
+			dispatch(updateRoundStatus(gamecode, newStatus, gameplay.cardIndex))
+		}		
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Round)

@@ -10,10 +10,10 @@ exports[`ScoreCard renders correctly 1`] = `
     Scores
   </p>
   <ul
-    className="sc-AxiKw eLvRRs"
+    className="sc-AxhCb iSuNyo"
   >
     <li
-      className="sc-AxhCb qAVjJ"
+      className="sc-AxiKw gPyhNF"
     >
       Team 
       1
@@ -23,7 +23,7 @@ exports[`ScoreCard renders correctly 1`] = `
       </span>
     </li>
     <li
-      className="sc-AxhCb qAVjJ"
+      className="sc-AxiKw gPyhNF"
     >
       Team 
       2

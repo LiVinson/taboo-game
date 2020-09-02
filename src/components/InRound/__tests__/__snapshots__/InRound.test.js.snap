@@ -17,7 +17,7 @@ Array [
     </div>
   </div>,
   <div
-    className="sc-AxhCb iDAIBP"
+    className="sc-AxhCb gXuWDR"
   >
     <div
       className="sc-AxgMl fZxUmv"
@@ -28,47 +28,47 @@ Array [
       className="sc-AxheI gIsRbv"
     >
       <ul
-        className="sc-Axmtr kQysrH"
+        className="sc-fzoLsD jOQREE"
       >
         <li
-          className="sc-AxmLO kKZJiQ"
-        >
-          red
-        </li>
-        <li
-          className="sc-AxmLO kKZJiQ"
-        >
-          shiny
-        </li>
-        <li
-          className="sc-AxmLO kKZJiQ"
-        >
-          round
-        </li>
-        <li
-          className="sc-AxmLO kKZJiQ"
+          className="sc-Axmtr eKdZYh"
         >
           fruit
         </li>
         <li
-          className="sc-AxmLO kKZJiQ"
+          className="sc-Axmtr eKdZYh"
+        >
+          red
+        </li>
+        <li
+          className="sc-Axmtr eKdZYh"
+        >
+          shiny
+        </li>
+        <li
+          className="sc-Axmtr eKdZYh"
+        >
+          round
+        </li>
+        <li
+          className="sc-Axmtr eKdZYh"
         >
           Eve
         </li>
       </ul>
     </div>
     <div
-      className="sc-fznyAO bTqnAz"
+      className="sc-fznZeY heqlvS"
     >
       <button
-        className="sc-fzozJi eYkRRm"
+        className="sc-fzpans hUphdh"
         disabled={false}
         onClick={[Function]}
       >
         Skip!
       </button>
       <button
-        className="sc-fzozJi sc-fzoLsD claqWL"
+        className="sc-fzpans sc-fzplWN DRZuV"
         disabled={false}
         onClick={[Function]}
       >

@@ -4,21 +4,28 @@ import { shallow } from 'enzyme'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
 import { InRound } from '../InRound'
+import { GameCard } from '../InRound'
 import TimeCard from 'components/TimeCard'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
 
+jest.mock('moment', () => {
+	return () => jest.requireActual('moment')('2020-09-01T00:00:00.000Z')
+})
+//Note: moment().isBefore() is mocked in __mocks__
 describe('Inround rendering and functionality', () => {
+	const date = new Date()
+	const endTime = date.setSeconds(date.getSeconds() + 30)
 	const defaultProps = {
-		gamecode:"90210",
+		gamecode: '90210',
 		giver: { name: 'Sam', playerId: '12345', team: 'team 1' },
 		watcher: { name: 'Jo', playerId: '23456', team: 'team 2' },
+		round: 1,
 		role: 'giver',
-		round:1,
-		roundEndTime: Date.now(),
+		roundEndTime: endTime,
 		deck: {
 			0: {
 				word: 'apple',
-				tabooList: ['red', 'shiny', 'round', 'fruit', 'Eve'],
+				tabooList: ['fruit', 'red', 'shiny', 'round', 'Eve'],
 			},
 			1: {
 				word: 'banana',
@@ -35,6 +42,7 @@ describe('Inround rendering and functionality', () => {
 	}
 
 	test('renders correctly', () => {
+		console.log(defaultProps.roundEndTime)
 		const props = {
 			...defaultProps,
 		}
@@ -57,9 +65,10 @@ describe('Inround rendering and functionality', () => {
 		const wrapper = shallow(<InRound {...props} />)
 
 		expect(wrapper.find(TimeCard)).toHaveLength(1)
-		expect(wrapper.find(GiverGameCard)).toHaveLength(1)
-		expect(wrapper.find(WatcherGameCard)).toHaveLength(0)
-		expect(wrapper.find(TeamGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard)).toHaveLength(1)
+		expect(wrapper.find(GameCard).shallow().find(GiverGameCard)).toHaveLength(1)
+		expect(wrapper.find(GameCard).shallow().find(WatcherGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).shallow().find(TeamGameCard)).toHaveLength(0)
 	})
 
 	test('renders TimeCard and WatcherGameCard when role is watcher', () => {
@@ -71,9 +80,10 @@ describe('Inround rendering and functionality', () => {
 		const wrapper = shallow(<InRound {...props} />)
 
 		expect(wrapper.find(TimeCard)).toHaveLength(1)
-		expect(wrapper.find(WatcherGameCard)).toHaveLength(1)
-		expect(wrapper.find(GiverGameCard)).toHaveLength(0)
-		expect(wrapper.find(TeamGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard)).toHaveLength(1)
+		expect(wrapper.find(GameCard).shallow().find(GiverGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).shallow().find(WatcherGameCard)).toHaveLength(1)
+		expect(wrapper.find(GameCard).shallow().find(TeamGameCard)).toHaveLength(0)
 	})
 
 	test('renders TimeCard and TeamGameCard when role is giverTeam', () => {
@@ -82,29 +92,27 @@ describe('Inround rendering and functionality', () => {
 			role: 'giverTeam',
 		}
 
-		const wrapper = shallow(
-				<InRound {...props} />
-		)
+		const wrapper = shallow(<InRound {...props} />)
 
 		expect(wrapper.find(TimeCard)).toHaveLength(1)
-		expect(wrapper.find(TeamGameCard)).toHaveLength(1)
-		expect(wrapper.find(WatcherGameCard)).toHaveLength(0)
-		expect(wrapper.find(GiverGameCard)).toHaveLength(0)
-    })
-    
-    test('renders TimeCard and TeamGameCard when role is watcherTeam', () => {
+		expect(wrapper.find(GameCard)).toHaveLength(1)
+		expect(wrapper.find(GameCard).shallow().find(GiverGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).shallow().find(WatcherGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).shallow().find(TeamGameCard)).toHaveLength(1)
+	})
+
+	test('renders TimeCard and TeamGameCard when role is watcherTeam', () => {
 		const props = {
 			...defaultProps,
 			role: 'watcherTeam',
 		}
 
-		const wrapper = shallow(
-				<InRound {...props} />
-		)
+		const wrapper = shallow(<InRound {...props} />)
 
 		expect(wrapper.find(TimeCard)).toHaveLength(1)
-		expect(wrapper.find(TeamGameCard)).toHaveLength(1)
-		expect(wrapper.find(WatcherGameCard)).toHaveLength(0)
-		expect(wrapper.find(GiverGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard)).toHaveLength(1)
+		expect(wrapper.find(GameCard).shallow().find(GiverGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).shallow().find(WatcherGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).shallow().find(TeamGameCard)).toHaveLength(1)
 	})
 })

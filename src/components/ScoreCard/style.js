@@ -25,11 +25,6 @@ export const ScoreTitle = styled.p`
 		background-color: ${(props) => props.theme.color.lightGray2};
 	}
 `
-
-export const ScoreList = styled.ul`
-	list-style: none;
-`
-
 export const Score = styled.li`	
 		margin: 0.8rem auto 1rem auto;
 	}

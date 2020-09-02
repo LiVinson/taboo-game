@@ -2,7 +2,7 @@
 
 exports[`RoundInstructionsCard renders correctly 1`] = `
 <div
-  className="sc-AxjAm fAwBWA"
+  className="sc-AxjAm hDlFTS"
 >
   <div
     className="sc-AxiKw dGnLMo"
@@ -13,18 +13,18 @@ exports[`RoundInstructionsCard renders correctly 1`] = `
     className="sc-AxhCb JZaCe"
   >
     <p
-      className="sc-fzpans ifLBye"
+      className="sc-fznKkj gFTDO"
     >
       It's the other team's turn to guess! 
       <span
-        className="sc-fzplWN kxXpQP"
+        className="sc-fznZeY gnGNXO"
       >
         Sam
       </span>
        will be giving the clues, and
        
       <span
-        className="sc-fzplWN kxXpQP"
+        className="sc-fznZeY gnGNXO"
       >
         Jo
       </span>

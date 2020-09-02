@@ -1,20 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button Container renders correctly 1`] = `
+exports[`Button Container renders and functions correctly Button Container renders correctly 1`] = `
 .c1 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
+}
+
+.c1:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c1:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -27,23 +32,33 @@ exports[`Button Container renders correctly 1`] = `
   outline: solid 2px #8AC926;
 }
 
+.c1:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
+}
+
 .c2 {
-  border: none;
-  color: #1982C4;
-  background-color: #f7f9f9;
   width: 47%;
   padding: 0.6rem 0rem;
+  border: none;
   border-radius: 2px;
+  background-color: #f7f9f9;
   font-size: 2.3rem;
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
+  color: #1982C4;
   color: #f7f9f9;
   background-color: #8AC926;
-  width: 47%;
+}
+
+.c2:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .c2:active {
-  outline: none;
   -webkit-filter: brightness(0.8);
   filter: brightness(0.8);
   -webkit-transform: translateY(2px);
@@ -56,9 +71,10 @@ exports[`Button Container renders correctly 1`] = `
   outline: solid 2px #8AC926;
 }
 
-.c2:active {
-  -webkit-filter: brightness(1.2);
-  filter: brightness(1.2);
+.c2:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: wait;
 }
 
 .c2:focus {
