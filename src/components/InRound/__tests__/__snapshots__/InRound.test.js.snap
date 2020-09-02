@@ -16,8 +16,65 @@ Array [
       60
     </div>
   </div>,
-  <p>
-    Preparing to change rounds
-  </p>,
+  <div
+    className="sc-AxhCb gXuWDR"
+  >
+    <div
+      className="sc-AxgMl fZxUmv"
+    >
+      apple
+    </div>
+    <div
+      className="sc-AxheI gIsRbv"
+    >
+      <ul
+        className="sc-fzoLsD jOQREE"
+      >
+        <li
+          className="sc-Axmtr eKdZYh"
+        >
+          fruit
+        </li>
+        <li
+          className="sc-Axmtr eKdZYh"
+        >
+          red
+        </li>
+        <li
+          className="sc-Axmtr eKdZYh"
+        >
+          shiny
+        </li>
+        <li
+          className="sc-Axmtr eKdZYh"
+        >
+          round
+        </li>
+        <li
+          className="sc-Axmtr eKdZYh"
+        >
+          Eve
+        </li>
+      </ul>
+    </div>
+    <div
+      className="sc-fznZeY heqlvS"
+    >
+      <button
+        className="sc-fzpans hUphdh"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Skip!
+      </button>
+      <button
+        className="sc-fzpans sc-fzplWN DRZuV"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Next!
+      </button>
+    </div>
+  </div>,
 ]
 `;

@@ -6,8 +6,7 @@ import TimeCard from 'components/TimeCard'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
 import { changeCardStatus } from 'store/actions/roundActions'
 
-const GameCard = (props) => {
-	console.log(props)
+export const GameCard = (props) => {
 	const currentCard = props.deck[props.cardIndex]
 	switch (props.role) {
 		case 'giver':
@@ -26,6 +25,7 @@ export const InRound = ({ roundEndTime, endRound, role, cardsPending, ...props }
 	// export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, cardsPending, changeCardStatus, endRound }) => {
 
 	// console.log(currentCard)
+	// console.log(moment().isBefore(roundEndTime, 'second'))
 	return (
 		<React.Fragment>
 			<TimeCard roundEndTime={roundEndTime} endRound={endRound} role={role} />
