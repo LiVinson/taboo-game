@@ -1,4 +1,4 @@
-import { dbUpdateRoundStatus, dbUpdateCardStatus } from 'utils/API'
+import { dbUpdateRoundStatus, dbUpdateCardStatus, dbUpdateGameScore } from 'utils/API'
 import { errorActionCreator } from './errorActions'
 
 const requestRoundStatus = () => {
@@ -26,6 +26,20 @@ const updateCardStatusSuccess = () => {
 	}
 }
 
+const requestUpdateScore = () => {
+	console.log("dispatching score update")
+	return {
+		type: "REQUEST_UPDATE_SCORE"
+	}
+}
+
+
+const updateScoreSuccess = () => {
+	console.log("dispatching score update success")
+	return {
+		type: "REQUEST_UPDATE_SCORE"
+	}
+}
 export const updateRoundStatus = (gamecode, roundStatus, currentIndex) => {
 	return async (dispatch) => {
 		dispatch(requestRoundStatus())
@@ -65,4 +79,26 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 				dispatch(errorActionCreator('UPDATE_CARD_STATUS_FAILURE', error))
 			})
 	}
+}
+
+export const updateRoundScore = (gamecode) => {
+	return(dispatch, ) => {
+		dispatch(requestUpdateScore()) 
+		dbUpdateGameScore(gamecode).then(()=> {
+			console.log("score updated")
+		}).then(()=> {
+			dispatch(updateScoreSuccess())
+		})
+		.catch(err => {
+			dispatch(errorActionCreator('UPDATE_SCORE_FAILURE', error))
+
+		})
+		 
+	}
+	//dispatch: updating score (make button confirm button disabled)
+	//get the deck
+	//filter cards for this round into correct and skipped
+	//determine if skip penalty
+	//calculate score
+	//save score in firebase
 }

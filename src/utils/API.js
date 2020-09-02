@@ -222,7 +222,7 @@ export const dbSaveGameDeck = (gamecode, deck) => {
 			'gameplay.deck': deck,
 			'gameplay.cardIndex': 0,
 		})
-		.then(() => {			
+		.then(() => {
 			console.log('saved shuffled array')
 			return
 		})
@@ -274,7 +274,6 @@ export const dbUpdateCardStatus = (gamecode, status, currentIndex) => {
 					}
 				}
 
-			
 				const cardPath = `gameplay.deck.${currentIndex}`
 				transaction.update(gamePath, {
 					//Only change the cardIndex for in round card changes. Stays the same for postround status changes
@@ -289,5 +288,64 @@ export const dbUpdateCardStatus = (gamecode, status, currentIndex) => {
 			.catch((error) => {
 				console.log(error)
 			})
+	})
+}
+
+export const dbUpdateGameScore = (gamecode) => {
+	console.log('Updating score in firestore...')
+
+	const gamePath = firebase.firestore().collection('games').doc(`${gamecode}`)
+	return firebase.firestore().runTransaction((transaction) => {
+		return transaction.get(gamePath).then((game) => {
+			if (!game.exists) {
+				console.log('game does not exist')
+				throw new Error("game doesn't exist...")
+			}
+
+			console.log(game.data())
+
+			const data = game.data()
+			const { skipPenalty } = data
+			const { deck, round, half } = data.gameplay
+			const skipScore = skipPenalty === 'full' ? 1 : skipPenalty === 'half' ? 0.5 : 0
+			const deckArr = Object.values(deck)
+			const givingTeam = half === 'top' ? 'team 1' : 'team2'
+			console.log(deckArr)
+			//giving score: number of cards player this round, this half, and with status of correct get 1 point
+			const roundScore = deckArr.reduce(
+				(score, card) => {
+					console.log(score)
+					if (card.roundPlayed === `${round}-${half}` && card.status !== 'discard') {
+						if (card.status === 'correct') {
+							return {
+								...score,
+								giving: score.giving + 1,
+							}
+						} else if (card.status === 'skipped') {
+							return {
+								...score,
+								watching: score.watching + 1 * skipScore,
+							}
+						}
+					}
+					return score
+				},
+				{ giving: 0, watching: 0 }
+			)
+
+			//watching score: number of cards skipped * skippingPenalty
+			console.log(roundScore)
+			const givingTeamIncrement = firebase.firestore.FieldValue.increment(roundScore.giving)
+			const watchingTeamIncrement = firebase.firestore.FieldValue.increment(roundScore.watching)
+
+			transaction
+				.update(gamePath, {
+					'gameplay.score.team1': givingTeam === 'team 1' ? givingTeamIncrement : watchingTeamIncrement,
+					'gameplay.score.team2': givingTeam === 'team 2' ? givingTeamIncrement : watchingTeamIncrement,
+				})
+			
+		}).then(() => {
+			console.log('transaction complete')
+		})
 	})
 }

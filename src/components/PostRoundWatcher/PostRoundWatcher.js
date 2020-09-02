@@ -18,7 +18,7 @@ const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb) 
 }
 
 
-const PostRoundWatcher = ({ cardStatuses, cardsPlayed, handleCardSelection, selectedCards, updateSelectedCard }) => {
+const PostRoundWatcher = ({ cardStatuses, cardsPlayed, handleCardSelection, selectedCards, updateSelectedCard, confirmRoundEnd }) => {
 	//Loops over each card status, and returns a Taboo card with 2 buttons.
 	//Filters cards played based on the status. Information needed to generate buttons,
 	//select a card in the list, and change button status passed in
@@ -39,7 +39,7 @@ const PostRoundWatcher = ({ cardStatuses, cardsPlayed, handleCardSelection, sele
 					)}
 				/>
 			))}
-			<LargeButton text="Confirm!" onClick={() => console.log('confirm!')} />
+			<LargeButton text="Confirm!" onClick={confirmRoundEnd} />
 		</React.Fragment>
 	)
 }

@@ -5,7 +5,7 @@ import PostRoundNonWatcher from 'components/PostRoundNonWatcher'
 import PostRoundWatcher from 'components/PostRoundWatcher'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import { StyledPostRound } from './style'
-import { changeCardStatus, updateRoundStatus } from 'store/actions/roundActions'
+import { changeCardStatus, updateRoundStatus, updateRoundScore } from 'store/actions/roundActions'
 
 export class PostRound extends React.Component {
 	constructor(props) {
@@ -41,6 +41,11 @@ export class PostRound extends React.Component {
 		this.props.changeCardStatus(newStatus, indexToChange)
 	}
 
+	confirmRoundEnd = () => {
+		console.log("ending the round")
+		this.props.updateRoundScore()
+	}
+
 	render() {
 		//Creates array of the selected cards for each status.
 		const selections = Object.values(this.state)
@@ -56,6 +61,7 @@ export class PostRound extends React.Component {
 						handleCardSelection={this.handleCardSelection}
 						updateSelectedCard={this.updateSelectedCard}
 						selectedCards={selections}
+						confirmRoundEnd={this.confirmRoundEnd}
 					/>
 				) : (
 					<PostRoundNonWatcher>
@@ -89,6 +95,7 @@ const mapDispatchToProps = (dispatch, prevProps) => {
 	return {
 		updateRoundStatus: () => dispatch(updateRoundStatus(gamecode)),
 		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex)),
+		updateRoundScore: () => dispatch(updateRoundScore(gamecode))
 	}
 }
 
