@@ -485,7 +485,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
     className="c13"
   >
     <button
-      className="c14 button"
+      className="c14"
       onClick={[Function]}
     >
       Back
@@ -998,7 +998,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
     className="c14"
   >
     <button
-      className="c15 button"
+      className="c15"
       onClick={[Function]}
     >
       Back
@@ -1511,7 +1511,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
     className="c14"
   >
     <button
-      className="c15 button"
+      className="c15"
       onClick={[Function]}
     >
       Back
