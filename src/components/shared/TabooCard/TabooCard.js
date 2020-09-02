@@ -65,6 +65,7 @@ LayeredTabooCard.propTypes = {
 	layer: PropTypes.string.isRequired,
 }
 
+//Used in TabooCard, ButtonTabooCard and FilteredListTabooCard
 const TabooList = ({ list, property, specialValue, specialKey, secondary }) => {
 	return (
 		<List>
@@ -87,9 +88,15 @@ const TabooList = ({ list, property, specialValue, specialKey, secondary }) => {
 
 TabooList.propTypes = {
 	list: PropTypes.array.isRequired,
+	property: PropTypes.string,
+	specialValue: PropTypes.string, 
+	specialKey: PropTypes.string,
+	secondary: PropTypes.bool
 }
 
-const TabooListItem = ({ listItem, includeStar, secondary }) => {
+//exported for use in tests
+export const TabooListItem = ({ listItem, includeStar, secondary }) => {
+	//secondary styling and option to include Star
 	return secondary ? (
 		<StyledListItemSecondary>
 			{listItem}
@@ -102,7 +109,10 @@ const TabooListItem = ({ listItem, includeStar, secondary }) => {
 
 TabooListItem.propTypes = {
 	listItem: PropTypes.any,
+	includeStar: PropTypes.bool,
+	secondary: PropTypes.bool
 }
+
 
 export const TabooCardTop = ({ tabooWord, margin = false }) => {
 	return (
@@ -116,6 +126,8 @@ TabooCardTop.propTypes = {
 	tabooWord: PropTypes.string.isRequired,
 	margin: PropTypes.bool,
 }
+
+
 //ex: playerList array of player objects need to be filtered by team: playerList, team, team1, name, Players, [{}]
 export const FilteredTabooList = ({
 	unfilteredList,
@@ -127,12 +139,12 @@ export const FilteredTabooList = ({
 	specialValue,
 	noneMessage
 }) => {
-	console.log(unfilteredList)
-	console.log(filterKey)
-	console.log(filterValue)
-	console.log(displayProperty)
-	console.log(specialKey)
-	console.log(specialValue)
+	// console.log(unfilteredList)
+	// console.log(filterKey)
+	// console.log(filterValue)
+	// console.log(displayProperty)
+	// console.log(specialKey)
+	// console.log(specialValue)
 
 	//filters array based on match of item or item[filterKey] equal to filterValue
 	const filteredList = unfilteredList.filter((item) => {
@@ -140,11 +152,6 @@ export const FilteredTabooList = ({
 		if (typeof item === 'object' && item !== null) return item[filterKey] === filterValue
 		return item === filterValue
 	})
-	console.log(filteredList)
-
-	/*
-		Determine how to account for 'special' values in list getting a star (e.g. if player in list = current player)
-	*/
 
 	//Displays List of filtered values based on the displayProperty
 	return (

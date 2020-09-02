@@ -11,7 +11,9 @@ import {
 	TabooCardTop,
 	TabooWordContainer,
 	TabooList,
+	TabooListItem,
 	TabooBody,
+	FilteredTabooList,
 } from '../TabooCard'
 import ButtonContainer from 'components/ButtonContainer'
 
@@ -177,15 +179,6 @@ describe('Layered TabooCard renders correctly', () => {
 		expect(wrapper).toHaveStyleRule('color', theme.color.accent3)
 	})
 })
-// ------------------- TabooList --------------------
-test('TabooList renders correctly', () => {
-
-})
-
-// ------------------- TabooListItem --------------------
-test('TabooListItem renders correctly', () => {
-	
-})
 
 // ------------------- Taboo Card Top --------------------
 
@@ -203,8 +196,56 @@ test('TabooCardTop renders correctly', () => {
 	expect(wrapper).toMatchSnapshot()
 })
 
-
 // ------------------- FilteredTabooList --------------------
-test('FilteredTabooList renders correctly', () => {
-	
+describe('FilteredTabooList renders correctly', () => {
+	const unfilteredList = [
+		{ name: 'Player 1', team: 'team 1', playerId: '12345' },
+		{ name: 'Player 2', team: 'team 1', playerId: '23456' },
+		{ name: 'Player 3', team: 'unassigned', playerId: '34567' },
+		{ name: 'Player 4', team: 'unassigned', playerId: '45678' },
+	]
+	let filterValue = 'team 1'
+	const noneMessage = `No ${filterValue} players`
+
+	const defaultProps = {
+		unfilteredList,
+		filterKey: 'team',
+		filterValue,
+		displayProperty: 'name',
+		listTitle: 'team 1',
+		noneMessage,
+	}
+
+	test('FilterTabooList only lists values based on filterKey and filterValue', () => {
+		const props = {
+			...defaultProps,
+		}
+
+		const wrapper = mount(
+			<ThemeProvider theme={theme}>
+				<FilteredTabooList {...props} />
+			</ThemeProvider>
+		)
+		
+		expect(wrapper.find(TabooListItem).length).toBe(2)
+		expect(wrapper.find(TabooListItem).at(0).text()).toEqual("Player 1")
+		expect(wrapper.find(TabooListItem).at(1).text()).toEqual("Player 2")
+
+	})
+
+	test('FilterTabooList displays none message if no values for filterKey and filterValue in list', () => {
+		const props = {
+			...defaultProps,
+			filterValue: "team 2"
+		}
+
+		const wrapper = mount(
+			<ThemeProvider theme={theme}>
+				<FilteredTabooList {...props} />
+			</ThemeProvider>
+		)
+		
+		expect(wrapper.find(TabooListItem).length).toBe(1)
+		expect(wrapper.find(TabooListItem).text()).toEqual(noneMessage)
+	})
 })
