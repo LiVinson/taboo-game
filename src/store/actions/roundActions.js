@@ -82,14 +82,15 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 }
 
 export const updateRoundScore = (gamecode) => {
-	return(dispatch, ) => {
+	return(dispatch) => {
 		dispatch(requestUpdateScore()) 
 		dbUpdateGameScore(gamecode).then(()=> {
 			console.log("score updated")
 		}).then(()=> {
 			dispatch(updateScoreSuccess())
+			return
 		})
-		.catch(err => {
+		.catch(error => {
 			dispatch(errorActionCreator('UPDATE_SCORE_FAILURE', error))
 
 		})
@@ -102,3 +103,11 @@ export const updateRoundScore = (gamecode) => {
 	//calculate score
 	//save score in firebase
 }
+
+export const completeRound = () => {
+	return (dispatch)=> {
+
+	}
+}
+
+

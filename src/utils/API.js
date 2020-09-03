@@ -344,8 +344,6 @@ export const dbUpdateGameScore = (gamecode) => {
 					'gameplay.score.team2': givingTeam === 'team 2' ? givingTeamIncrement : watchingTeamIncrement,
 				})
 			
-		}).then(() => {
-			console.log('transaction complete')
 		})
 	})
 }

@@ -5,7 +5,8 @@ import PostRoundNonWatcher from 'components/PostRoundNonWatcher'
 import PostRoundWatcher from 'components/PostRoundWatcher'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import { StyledPostRound } from './style'
-import { changeCardStatus, updateRoundStatus, updateRoundScore } from 'store/actions/roundActions'
+import { changeCardStatus, updateRoundStatus, updateRoundScore, completeRound} from 'store/actions/roundActions'
+import { endGame } from "store/actions/gameActions"
 
 export class PostRound extends React.Component {
 	constructor(props) {
@@ -43,7 +44,26 @@ export class PostRound extends React.Component {
 
 	confirmRoundEnd = () => {
 		console.log("ending the round")
-		this.props.updateRoundScore()
+		this.props.updateRoundScore().then(()=> {
+			/*if (determineEndGame()) {
+				this.props.endGame()	
+			} else {
+				this.props.completeRound()
+			}
+
+			*/
+		})
+
+		/*
+			- Update game: Add score {} 
+			Update dispatches for score 
+			Update Round MSTP to see that score has changed: set to pending while determining if next game should be played 
+		*/
+	}
+
+	determineEndGame = () => {
+		//update to check end game method and return true/false accordingly
+		return false
 	}
 
 	render() {
@@ -95,7 +115,9 @@ const mapDispatchToProps = (dispatch, prevProps) => {
 	return {
 		updateRoundStatus: () => dispatch(updateRoundStatus(gamecode)),
 		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex)),
-		updateRoundScore: () => dispatch(updateRoundScore(gamecode))
+		updateRoundScore: () => dispatch(updateRoundScore(gamecode)),
+		completeRound: () => dispatch(completeRound(gamecode)),
+		endGame: () => dispatch(endGame(gamecode))
 	}
 }
 

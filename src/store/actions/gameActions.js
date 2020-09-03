@@ -153,3 +153,9 @@ export const fetchGameDeck = (gamecode) => {
 		})
 	}
 }
+
+export const endGame = () => {
+	return (dispatch)=> {
+
+	}
+}
