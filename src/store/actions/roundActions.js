@@ -1,4 +1,4 @@
-import { dbUpdateRoundStatus, dbUpdateCardStatus, dbUpdateGameScore } from 'utils/API'
+import { dbUpdateRoundStatus, dbUpdateCardStatus, dbUpdateGameScore, dbUpdateRoundHalf } from 'utils/API'
 import { errorActionCreator } from './errorActions'
 
 const requestRoundStatus = () => {
@@ -27,34 +27,48 @@ const updateCardStatusSuccess = () => {
 }
 
 const requestUpdateScore = () => {
-	console.log("dispatching score update")
+	console.log('dispatching score update')
 	return {
-		type: "REQUEST_UPDATE_SCORE"
+		type: 'REQUEST_UPDATE_SCORE',
 	}
 }
-
 
 const updateScoreSuccess = () => {
-	console.log("dispatching score update success")
+	console.log('dispatching score update success')
 	return {
-		type: "REQUEST_UPDATE_SCORE"
+		type: 'REQUEST_UPDATE_SCORE',
 	}
 }
-export const updateRoundStatus = (gamecode, roundStatus, currentIndex) => {
+
+const requestUpdateRoundHalf = () => {
+	console.log('dispatching round half request')
+	return {
+		type: 'REQUEST_UPDATE_ROUND_HALF',
+	}
+}
+
+const updateRoundHalfSuccess = () => {
+	console.log('dispatching round half success')
+	return {
+		type: 'UPDATE_ROUND_HALF_SUCCESS',
+	}
+}
+
+export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex) => {
 	return async (dispatch) => {
 		dispatch(requestRoundStatus())
 		console.log(gamecode)
-		console.log(roundStatus)
+		console.log(newRoundStatus)
 
 		//If round has ended, change the status of the last card displayed so it does not display next round
-		if (roundStatus === 'postround') {
+		if (newRoundStatus === 'postround') {
 			console.log('round is ending, but need to update card# ', currentIndex)
 			await dbUpdateCardStatus(gamecode, 'discard', currentIndex)
 		}
-		dbUpdateRoundStatus(gamecode, roundStatus)
+		dbUpdateRoundStatus(gamecode, newRoundStatus)
 			.then(() => {
 				console.log('dispatching success')
-				dispatch(roundStatusSuccess(roundStatus))
+				dispatch(roundStatusSuccess(newRoundStatus))
 				return
 				// })
 			})
@@ -82,32 +96,38 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 }
 
 export const updateRoundScore = (gamecode) => {
-	return(dispatch) => {
-		dispatch(requestUpdateScore()) 
-		dbUpdateGameScore(gamecode).then(()=> {
-			console.log("score updated")
-		}).then(()=> {
-			dispatch(updateScoreSuccess())
-			return
+	return (dispatch) => {
+
+		return new Promise((resolve) => {
+			dispatch(requestUpdateScore())
+			dbUpdateGameScore(gamecode)
+				.then(() => {
+					console.log('score updated')
+				})
+				.then(() => {
+					dispatch(updateScoreSuccess())
+					resolve(true)
+				})
+				.catch((error) => {
+					dispatch(errorActionCreator('UPDATE_SCORE_FAILURE', error))
+				})
 		})
-		.catch(error => {
-			dispatch(errorActionCreator('UPDATE_SCORE_FAILURE', error))
-
-		})
-		 
-	}
-	//dispatch: updating score (make button confirm button disabled)
-	//get the deck
-	//filter cards for this round into correct and skipped
-	//determine if skip penalty
-	//calculate score
-	//save score in firebase
-}
-
-export const completeRound = () => {
-	return (dispatch)=> {
-
 	}
 }
 
-
+export const completeRound = (gamecode) => {
+	return (dispatch) => {
+		dispatch(requestUpdateRoundHalf())
+		dbUpdateRoundHalf(gamecode).then(() => {
+			console.log('team half updated')
+			dbUpdateRoundStatus(gamecode, 'preround')
+				.then(() => {
+					
+					dispatch(updateRoundHalfSuccess())
+				})
+				.catch((error) => {
+					dispatch(errorActionCreator('UPDATE_ROUND_HALF_FAILURE', error))
+				})
+		})
+	}
+}

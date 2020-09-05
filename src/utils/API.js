@@ -1,5 +1,6 @@
 import firebase from './fbConfig'
 
+//--------------------- GAME UPDATES ---------------------------//
 export const createGame = (gamecode, gameDetails) => {
 	console.log('creating game in firestore')
 	const newGame = {
@@ -41,6 +42,30 @@ export const verifyGameExists = (gamecode) => {
 		})
 }
 
+export const dbUpdateGameStatus = (gamecode, status) => {
+	console.log('updating game status')
+	console.log(status)
+	console.log(gamecode)
+	// return new Promise((resolve, reject) => {
+	return firebase
+		.firestore()
+		.collection('games')
+		.doc(gamecode)
+		.update({
+			status: status,
+		})
+		.then(() => {
+			console.log('game updated to ', status)
+			return
+		})
+		.catch((error) => {
+			console.log('error updating game')
+			return error
+		})
+	// })
+}
+
+//---------------------PLAYER & TEAM UPDATES --------------------------------
 //Creates an anonymous user in firebase with a uid generated.
 export const createPlayer = (playerName) => {
 	console.log('creating player in firebase...')
@@ -99,6 +124,7 @@ export const addPlayer = (player, gamecode) => {
 export const dbUpdateTeam = (gamecode, playerId, team) => {
 	console.log('updating team in firestore')
 	console.log(team)
+	//probably don't need this promise, need to test.
 	return new Promise((resolve, reject) => {
 		const gamePath = firebase.firestore().collection('games').doc(gamecode)
 		return firebase.firestore().runTransaction((transaction) => {
@@ -135,29 +161,6 @@ export const dbUpdateTeam = (gamecode, playerId, team) => {
 	})
 }
 
-export const dbUpdateGameStatus = (gamecode, status) => {
-	console.log('updating game status')
-	console.log(status)
-	console.log(gamecode)
-	// return new Promise((resolve, reject) => {
-	return firebase
-		.firestore()
-		.collection('games')
-		.doc(gamecode)
-		.update({
-			status: status,
-		})
-		.then(() => {
-			console.log('game updated to ', status)
-			return
-		})
-		.catch((error) => {
-			console.log('error updating game')
-			return error
-		})
-	// })
-}
-
 export const dbUpdateRoundStatus = (gamecode, status) => {
 	console.log('updating game status')
 	console.log(status)
@@ -190,6 +193,7 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 	// })
 }
 
+//----------------------------- CARD / DECK UPDATES ---------------------------
 export const dbRequestGameDeck = () => {
 	const gamedeck = []
 	return firebase
@@ -338,12 +342,76 @@ export const dbUpdateGameScore = (gamecode) => {
 			const givingTeamIncrement = firebase.firestore.FieldValue.increment(roundScore.giving)
 			const watchingTeamIncrement = firebase.firestore.FieldValue.increment(roundScore.watching)
 
-			transaction
-				.update(gamePath, {
-					'gameplay.score.team1': givingTeam === 'team 1' ? givingTeamIncrement : watchingTeamIncrement,
-					'gameplay.score.team2': givingTeam === 'team 2' ? givingTeamIncrement : watchingTeamIncrement,
-				})
-			
+			transaction.update(gamePath, {
+				'gameplay.score.team1': givingTeam === 'team 1' ? givingTeamIncrement : watchingTeamIncrement,
+				'gameplay.score.team2': givingTeam === 'team 2' ? givingTeamIncrement : watchingTeamIncrement,
+			})
+		})
+	})
+}
+
+export const dbUpdateRoundHalf = (gamecode) => {
+	//transaction: read current round, half. write: team rotations/turn
+	console.log('updating round half in firestore...')
+
+	const gamePath = firebase.firestore().collection('games').doc(`${gamecode}`)
+	return firebase.firestore().runTransaction((transaction) => {
+		return transaction.get(gamePath).then((game) => {
+			if (!game.exists) {
+				console.log('game does not exist...')
+				throw new Error("game doesn't exist...")
+			}
+
+			const data = game.data()
+			const { round, half, team1Turn, team2Turn, team1Rotations, team2Rotations } = data.gameplay
+			const { players } = data
+			console.log(round, half, team1Turn, team2Turn, team1Rotations, team2Rotations)
+			const team1Count = players.filter((player) => player.team === 'team 1').length
+			const team2Count = players.filter((player) => player.team === 'team 2').length
+			let newHalf, newTeam1Turn, newTeam2Turn, newTeam1Rotations, newTeam2Rotations
+
+			//top: Team 1 player has completed turn as giver. Time to increment turns/rotaions for Team 2
+			if (half === 'top') {
+				newHalf = 'bottom'
+				newTeam1Turn = team1Turn //stays the same until time for team 1 player again
+				newTeam1Rotations = team1Rotations
+				
+				//For first round, team2Turn is 0 by default (first player) and doesn't need to be incremented
+				//If this is the first round set at 0 for first player, or increment it so next player can go
+				newTeam2Turn = round === 1 ? 0 : team2Turn + 1
+				newTeam2Rotations = team2Rotations
+				//Each player on team 2 has had a turn. Start turn over back at first player, increment rotations to show all team members have completed a turn
+				if (newTeam2Turn >= team2Count) {
+					newTeam2Turn = 0
+					newTeam2Rotations = team2Rotations + 1
+				}
+				//half === bottom: Team 2 has completed turn as giver. Time to increment turns/rotaions for Team 1
+			} else {
+				newHalf = 'top'
+				newTeam2Turn = team2Turn //stays the same until time for team 2 player as giver again
+				newTeam2Rotations = team2Rotations
+				newTeam1Turn = team1Turn + 1
+				newTeam1Rotations = team1Rotations
+				//Each player on team 1 has had a turn. Start turn over back at first player, increment rotations to show all team members have completed a turn
+				if (newTeam1Turn >= team1Count) {
+					newTeam1Turn = 0
+					newTeam1Rotations = team1Rotations + 1
+				}
+			}
+
+			console.log(newHalf)
+			console.log(newTeam1Rotations)
+			console.log(newTeam1Turn)
+			console.log(newTeam2Rotations)
+			console.log(newTeam2Turn)
+
+			transaction.update(gamePath, {
+				'gameplay.half': newHalf,
+				'gameplay.team1Rotations': newTeam1Rotations,
+				'gameplay.team1Turn': newTeam1Turn,
+				'gameplay.team2Rotations': newTeam2Rotations,
+				'gameplay.team2Turn': newTeam2Turn,
+			})
 		})
 	})
 }
