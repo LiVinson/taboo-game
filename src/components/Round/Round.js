@@ -105,8 +105,8 @@ class Round extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state.cards)
-	console.log(state.round)
+	// console.log(state.cards)
+	// console.log(state.round)
 	return {
 		roundPending: state.round.pending,
 		cardsPending: state.cards.pending

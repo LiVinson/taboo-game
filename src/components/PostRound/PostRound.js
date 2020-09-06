@@ -5,7 +5,12 @@ import PostRoundNonWatcher from 'components/PostRoundNonWatcher'
 import PostRoundWatcher from 'components/PostRoundWatcher'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import { StyledPostRound } from './style'
-import { changeCardStatus, updateRoundStatus, updateRoundScore, completeRound } from 'store/actions/roundActions'
+import {
+	changeCardStatus,
+	updateRoundStatus,
+	updateRoundScore,
+	completeRound,
+} from 'store/actions/roundActions'
 import { endGame } from 'store/actions/gameActions'
 
 export class PostRound extends React.Component {
@@ -45,26 +50,10 @@ export class PostRound extends React.Component {
 	confirmRoundEnd = () => {
 		console.log('ending the round')
 		//add means to make 'Confirm' button disabled so it can't be clicked again
-		this.props.updateRoundScore()
-			.then(() => {
-				console.log("score was pdated. Time to complete round")
-			// if (this.determineEndGame()) {
-			// 	this.props.endGame()
-			// } else {
-			this.props.completeRound()
-			// }
+		this.props.updateRoundScore().then(() => {
+			console.log('score was updated. Time to complete round')
+			 this.props.completeRound()			
 		})
-
-		/*
-			- Update game: Add score {} 
-			Update dispatches for score 
-			Update Round MSTP to see that score has changed: set to pending while determining if next game should be played 
-		*/
-	}
-
-	determineEndGame = () => {
-		//update to check end game method and return true/false accordingly
-		return false
 	}
 
 	render() {
@@ -111,14 +100,32 @@ PostRound.propTypes = {
 	role: PropTypes.string.isRequired,
 }
 
+// const mapStateToProps = (state, ownProps) => {
+// 	console.log(ownProps)
+// 	const game = state.firestore.data?.games?.[ownProps.gamecode]
+// 	let endGameMethod, endValue, half
+// 	//Only need to pass additional props when the half has changed
+// 	if (game && game.gameplay.half !== ownProps.half) {
+// 		endGameMethod = game.endGameMethod
+// 		endValue = game.endValue
+// 		half = game.gameplay.half
+// 	}
+
+// 	return {
+// 		endGameMethod,
+// 		endValue,
+// 		half,
+// 	}
+// }
+
 const mapDispatchToProps = (dispatch, prevProps) => {
 	const { gamecode } = prevProps
 	return {
-		updateRoundStatus: () => dispatch(updateRoundStatus(gamecode)),
+		updateRoundStatus: (newRoundStatus) => dispatch(updateRoundStatus(gamecode), newRoundStatus),
 		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex)),
 		updateRoundScore: () => dispatch(updateRoundScore(gamecode)),
 		completeRound: () => dispatch(completeRound(gamecode)),
-		endGame: () => dispatch(endGame(gamecode)),
+
 	}
 }
 

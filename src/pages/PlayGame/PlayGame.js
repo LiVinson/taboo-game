@@ -103,13 +103,13 @@ class PlayGame extends React.Component {
 	}
 }
 
-const mapStateToProps = (state, prevProps) => {
-	const game = state.firestore.data?.games?.[prevProps.match.params.gamecode]
+const mapStateToProps = (state, ownProps) => {
+	const game = state.firestore.data?.games?.[ownProps.match.params.gamecode]
 	return {
 		//determine if gamePending property needed...
 		gamecode: state.game.gamecode, //tbd if adding this
 		game: game ? game : {}, //from firestore
-		gameDataReceived: state.firestore.status.requested[`games/${prevProps.match.params.gamecode}`],
+		gameDataReceived: state.firestore.status.requested[`games/${ownProps.match.params.gamecode}`],
 		auth: state.firebase.auth,
 		error: state.round.error,
 	}

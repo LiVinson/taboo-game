@@ -355,63 +355,88 @@ export const dbUpdateRoundHalf = (gamecode) => {
 	console.log('updating round half in firestore...')
 
 	const gamePath = firebase.firestore().collection('games').doc(`${gamecode}`)
+	let newHalf
 	return firebase.firestore().runTransaction((transaction) => {
-		return transaction.get(gamePath).then((game) => {
-			if (!game.exists) {
-				console.log('game does not exist...')
-				throw new Error("game doesn't exist...")
-			}
-
-			const data = game.data()
-			const { round, half, team1Turn, team2Turn, team1Rotations, team2Rotations } = data.gameplay
-			const { players } = data
-			console.log(round, half, team1Turn, team2Turn, team1Rotations, team2Rotations)
-			const team1Count = players.filter((player) => player.team === 'team 1').length
-			const team2Count = players.filter((player) => player.team === 'team 2').length
-			let newHalf, newTeam1Turn, newTeam2Turn, newTeam1Rotations, newTeam2Rotations
-
-			//top: Team 1 player has completed turn as giver. Time to increment turns/rotaions for Team 2
-			if (half === 'top') {
-				newHalf = 'bottom'
-				newTeam1Turn = team1Turn //stays the same until time for team 1 player again
-				newTeam1Rotations = team1Rotations
-				
-				//For first round, team2Turn is 0 by default (first player) and doesn't need to be incremented
-				//If this is the first round set at 0 for first player, or increment it so next player can go
-				newTeam2Turn = round === 1 ? 0 : team2Turn + 1
-				newTeam2Rotations = team2Rotations
-				//Each player on team 2 has had a turn. Start turn over back at first player, increment rotations to show all team members have completed a turn
-				if (newTeam2Turn >= team2Count) {
-					newTeam2Turn = 0
-					newTeam2Rotations = team2Rotations + 1
+		return transaction
+			.get(gamePath)
+			.then((game) => {
+				if (!game.exists) {
+					console.log('game does not exist...')
+					throw new Error("game doesn't exist...")
 				}
-				//half === bottom: Team 2 has completed turn as giver. Time to increment turns/rotaions for Team 1
-			} else {
-				newHalf = 'top'
-				newTeam2Turn = team2Turn //stays the same until time for team 2 player as giver again
-				newTeam2Rotations = team2Rotations
-				newTeam1Turn = team1Turn + 1
-				newTeam1Rotations = team1Rotations
-				//Each player on team 1 has had a turn. Start turn over back at first player, increment rotations to show all team members have completed a turn
-				if (newTeam1Turn >= team1Count) {
-					newTeam1Turn = 0
-					newTeam1Rotations = team1Rotations + 1
+
+				const data = game.data()
+				const { round, half, team1Turn, team2Turn, team1Rotations, team2Rotations } = data.gameplay
+				const { players } = data
+				console.log(round, half, team1Turn, team2Turn, team1Rotations, team2Rotations)
+				const team1Count = players.filter((player) => player.team === 'team 1').length
+				const team2Count = players.filter((player) => player.team === 'team 2').length
+				let newTeam1Turn, newTeam2Turn, newTeam1Rotations, newTeam2Rotations
+
+				//top: Team 1 player has completed turn as giver. Time to increment turns/rotaions for Team 2
+				if (half === 'top') {
+					newHalf = 'bottom'
+					newTeam1Turn = team1Turn //stays the same until time for team 1 player again
+					newTeam1Rotations = team1Rotations
+
+					//For first round, team2Turn is 0 by default (first player) and doesn't need to be incremented
+					//If this is the first round set at 0 for first player, or increment it so next player can go
+					newTeam2Turn = round === 1 ? 0 : team2Turn + 1
+					newTeam2Rotations = team2Rotations
+					//Each player on team 2 has had a turn. Start turn over back at first player, increment rotations to show all team members have completed a turn
+					if (newTeam2Turn >= team2Count) {
+						newTeam2Turn = 0
+						newTeam2Rotations = team2Rotations + 1
+					}
+					//half === bottom: Team 2 has completed turn as giver. Time to increment turns/rotaions for Team 1
+				} else {
+					newHalf = 'top'
+					newTeam2Turn = team2Turn //stays the same until time for team 2 player as giver again
+					newTeam2Rotations = team2Rotations
+					newTeam1Turn = team1Turn + 1
+					newTeam1Rotations = team1Rotations
+					//Each player on team 1 has had a turn. Start turn over back at first player, increment rotations to show all team members have completed a turn
+					if (newTeam1Turn >= team1Count) {
+						newTeam1Turn = 0
+						newTeam1Rotations = team1Rotations + 1
+					}
 				}
-			}
 
-			console.log(newHalf)
-			console.log(newTeam1Rotations)
-			console.log(newTeam1Turn)
-			console.log(newTeam2Rotations)
-			console.log(newTeam2Turn)
+				console.log(newHalf)
+				console.log(newTeam1Rotations)
+				console.log(newTeam1Turn)
+				console.log(newTeam2Rotations)
+				console.log(newTeam2Turn)
 
-			transaction.update(gamePath, {
-				'gameplay.half': newHalf,
-				'gameplay.team1Rotations': newTeam1Rotations,
-				'gameplay.team1Turn': newTeam1Turn,
-				'gameplay.team2Rotations': newTeam2Rotations,
-				'gameplay.team2Turn': newTeam2Turn,
+				transaction.update(gamePath, {
+					'gameplay.half': newHalf,
+					'gameplay.team1Rotations': newTeam1Rotations,
+					'gameplay.team1Turn': newTeam1Turn,
+					'gameplay.team2Rotations': newTeam2Rotations,
+					'gameplay.team2Turn': newTeam2Turn,
+				})
 			})
-		})
+			.then((res) => {
+				console.log(res)
+				return newHalf
+			})
+			.catch((error) => {
+				console.log('there was an error with transaction')
+				throw new Error(error)
+			})
 	})
+}
+
+export const dbUpdateRoundNumber = (gamecode) => {
+	console.log('Updating round number in firestore...')
+	//Will read and write to database in one operation
+	const increment = firebase.firestore.FieldValue.increment(1)
+	return firebase
+	.firestore()
+		.collection('games')
+		.doc(gamecode)
+		.update({
+			"gameplay.round": increment,
+			"gameplay.status": "preround"
+		})
 }
