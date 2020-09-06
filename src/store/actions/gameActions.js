@@ -1,13 +1,13 @@
 import {
-	 createGame,
-	 createPlayer, 
-	 addPlayer, 
-	 verifyGameExists, 
-	 dbUpdateGameStatus,
-	 dbRequestGameDeck,
-	 dbSaveGameDeck
- } from 'utils/API'
- import { shuffleArray, convertArrayToObject } from "utils/helpers"
+	createGame,
+	createPlayer,
+	addPlayer,
+	verifyGameExists,
+	dbUpdateGameStatus,
+	dbRequestGameDeck,
+	dbSaveGameDeck,
+} from 'utils/API'
+import { shuffleArray, convertArrayToObject } from 'utils/helpers'
 import { errorActionCreator } from './errorActions'
 
 const requestCreateGame = () => {
@@ -56,15 +56,15 @@ const updateGameStatusSuccess = () => {
 
 const requestFetchGameDeck = () => {
 	return {
-		type: "REQUEST_FETCH_GAME_DECK",
-		pending: true
+		type: 'REQUEST_FETCH_GAME_DECK',
+		pending: true,
 	}
 }
 
 const fetchGameDeckSuccess = () => {
 	return {
-		type: "FETCH_GAME_DECK_SUCCESS",
-		pending: false
+		type: 'FETCH_GAME_DECK_SUCCESS',
+		pending: false,
 	}
 }
 
@@ -76,7 +76,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 			createGame(gamecode, gameData)
 				.then(() => {
 					createPlayer(hostPlayerName).then((player) => {
-						const host = { ...player, team: "unassigned", online:true, host: true }
+						const host = { ...player, team: 'unassigned', online: true, host: true }
 						//associates anonymous user with game instance in firestore
 						addPlayer(host, gamecode).then((player) => {
 							dispatch(createGameSuccess(gamecode))
@@ -100,7 +100,7 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 			verifyGameExists(gamecode)
 				.then(() => {
 					createPlayer(playerName).then((playerData) => {
-						const player = { ...playerData, host: false, team: "unassigned" }
+						const player = { ...playerData, host: false, team: 'unassigned' }
 						addPlayer(player, gamecode).then(() => {
 							dispatch(joinGameSuccess(gamecode))
 							resolve()
@@ -132,30 +132,28 @@ export const updateGameStatus = (gamecode, status) => {
 }
 
 export const fetchGameDeck = (gamecode) => {
-	
 	return (dispatch) => {
 		dispatch(requestFetchGameDeck())
 
-		dbRequestGameDeck().then(response => {
-			console.log(response)
-			const shuffledDeck = shuffleArray(response)
-			//convert from array of objects to object with keys = objects.
-			const deckObject = convertArrayToObject(shuffledDeck)
-			dbSaveGameDeck(gamecode, deckObject).then(res => {
-				console.log("back from saving shuffled array")
+		dbRequestGameDeck()
+			.then((response) => {
+				console.log(response)
+				const shuffledDeck = shuffleArray(response)
+				//convert from array of objects to object with keys = objects.
+				const deckObject = convertArrayToObject(shuffledDeck)
+				dbSaveGameDeck(gamecode, deckObject).then((res) => {
+					console.log('back from saving shuffled array')
+				})
+				dispatch(fetchGameDeckSuccess())
 			})
-			dispatch(fetchGameDeckSuccess())
-
-		}).catch(error => {
-			console.log('there was an error retreiving the deck')
-			console.log(error)
-			dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', error))
-		})
+			.catch((error) => {
+				console.log('there was an error retreiving the deck')
+				console.log(error)
+				dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', error))
+			})
 	}
 }
 
 export const endGame = () => {
-	return (dispatch)=> {
-
-	}
+	return (dispatch) => {}
 }

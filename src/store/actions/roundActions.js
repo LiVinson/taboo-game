@@ -43,7 +43,7 @@ const requestUpdateScore = () => {
 const updateScoreSuccess = () => {
 	console.log('dispatching score update success')
 	return {
-		type: 'REQUEST_UPDATE_SCORE',
+		type: 'UPDATE_SCORE_SUCCESS',
 	}
 }
 
