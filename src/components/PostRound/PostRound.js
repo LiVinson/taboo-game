@@ -5,11 +5,7 @@ import PostRoundNonWatcher from 'components/PostRoundNonWatcher'
 import PostRoundWatcher from 'components/PostRoundWatcher'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import { StyledPostRound } from './style'
-import {
-	changeCardStatus,
-	updateRoundScore,
-	completeRound,
-} from 'store/actions/roundActions'
+import { changeCardStatus, completeRound } from 'store/actions/roundActions'
 
 export class PostRound extends React.Component {
 	constructor(props) {
@@ -37,7 +33,7 @@ export class PostRound extends React.Component {
 		})
 	}
 
-	//Called on click of the correct, skip, or discard buttons inside of taboocard. 
+	//Called on click of the correct, skip, or discard buttons inside of taboocard.
 	updateSelectedCard = (previousStatus, newStatus) => {
 		const property = previousStatus + 'Selection'
 		const indexToChange = this.state[property]
@@ -49,12 +45,8 @@ export class PostRound extends React.Component {
 	//Called when Watcher selects 'Confirm' button
 	confirmRoundEnd = () => {
 		console.log('ending the round')
-		//add means to make 'Confirm' button disabled so it can't be clicked again
 		//Updates score in firestore based on status of cards and game rules. Once done, updates round half and updates turn as needed.
-		this.props.updateRoundScore().then(() => {
-			console.log('score was updated. Time to complete round')
-			this.props.completeRound()			
-		})
+		this.props.completeRound()
 	}
 
 	render() {
@@ -73,6 +65,8 @@ export class PostRound extends React.Component {
 						updateSelectedCard={this.updateSelectedCard}
 						selectedCards={selections}
 						confirmRoundEnd={this.confirmRoundEnd}
+						isPending={this.props.isPending}
+						pendingMsg={this.props.pendingMsg}
 					/>
 				) : (
 					<PostRoundNonWatcher>
@@ -99,15 +93,23 @@ PostRound.propTypes = {
 	role: PropTypes.string.isRequired,
 	changeCardStatus: PropTypes.func.isRequired,
 	completeRound: PropTypes.func.isRequired,
+	isPending: PropTypes.bool,
+	pendingMsg: PropTypes.string,
 }
 
+const mapStateToProps = (state) => {
+	console.log(state.round)
+	return {
+		isPending: state.round.pending,
+		pendingMsg: state.round.pendingMsg
+	}
+}
 const mapDispatchToProps = (dispatch, prevProps) => {
 	const { gamecode } = prevProps
 	return {
 		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex)),
-		updateRoundScore: () => dispatch(updateRoundScore(gamecode)),
 		completeRound: () => dispatch(completeRound(gamecode)),
 	}
 }
 
-export default connect(null, mapDispatchToProps)(PostRound)
+export default connect(mapStateToProps, mapDispatchToProps)(PostRound)

@@ -405,10 +405,8 @@ export const dbUpdateRoundHalf = (gamecode) => {
 						newTeam2Rotations = team2Rotations + 1
 					}
 				}
-
 				console.log(newHalf)
 				console.log(newTeam1Turn, newTeam2Turn, newTeam1Rotations, newTeam2Rotations)
-
 				transaction.update(gamePath, {
 					'gameplay.half': newHalf,
 					'gameplay.team1Rotations': newTeam1Rotations,
@@ -417,8 +415,7 @@ export const dbUpdateRoundHalf = (gamecode) => {
 					'gameplay.team2Turn': newTeam2Turn,
 				})
 			})
-			.then((res) => {
-				console.log(res)
+			.then(() => {
 				return newHalf
 			})
 			.catch((error) => {

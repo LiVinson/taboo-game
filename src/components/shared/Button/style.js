@@ -66,6 +66,7 @@ export const StyledLargeButton = styled(StyledButton)`
 		outline: none;
 		border: solid 3px ${(props) => props.theme.color.grayDark1};
 	}
+
 `
 
 //Not currently used. TBD if needed

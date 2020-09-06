@@ -33,45 +33,20 @@ const updateCardStatusSuccess = () => {
 	}
 }
 
-const requestUpdateScore = () => {
-	console.log('dispatching score update')
+const requestCompleteRound = (message) => {
+	console.log("dispatching: ", message)
 	return {
-		type: 'REQUEST_UPDATE_SCORE',
+		type: 'REQUEST_COMPLETE_ROUND',
+		payload: {
+			pendingMsg: message,
+		},
 	}
 }
 
-const updateScoreSuccess = () => {
-	console.log('dispatching score update success')
+const completeRoundSuccess = () => {
+	console.log('dispatching complete round success')
 	return {
-		type: 'UPDATE_SCORE_SUCCESS',
-	}
-}
-
-const requestUpdateRoundHalf = () => {
-	console.log('dispatching round half request')
-	return {
-		type: 'REQUEST_UPDATE_ROUND_HALF',
-	}
-}
-
-const updateRoundHalfSuccess = () => {
-	console.log('dispatching round half success')
-	return {
-		type: 'UPDATE_ROUND_HALF_SUCCESS',
-	}
-}
-
-const requestUpdateRoundNumber = () => {
-	console.log('dispatching update round number request')
-	return {
-		type: 'REQUEST_UPDATE_ROUND_NUMBER',
-	}
-}
-
-const updateRoundNumberSuccess = () => {
-	console.log('dispatching update round number succeess')
-	return {
-		type: 'UPDATE_ROUND_NUMBER_SUCCESS',
+		type: 'COMPLETE_ROUND_SUCCESS',
 	}
 }
 
@@ -115,28 +90,6 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 	}
 }
 
-/*
-	Called when watcher selects 'Confirm'. Returns a promise so next function can be called 
-	May combine into completeRound so all end of round actions are done in one action creator.
-*/
-export const updateRoundScore = (gamecode) => {
-	return (dispatch) => {
-		return new Promise((resolve) => {
-			dispatch(requestUpdateScore())
-			dbUpdateGameScore(gamecode)
-				.then(() => {
-					console.log('score updated')
-				})
-				.then(() => {
-					dispatch(updateScoreSuccess())
-					resolve(true)
-				})
-				.catch((error) => {
-					dispatch(errorActionCreator('UPDATE_SCORE_FAILURE', error))
-				})
-		})
-	}
-}
 
 /*Called at end of round when watcher selects 'Confirm' button and after scores have been updates in firestore.
 	Toggles half from top/bottom which determines which team the giver is from. When half is changed to top (round just completed),
@@ -144,30 +97,37 @@ export const updateRoundScore = (gamecode) => {
 */
 export const completeRound = (gamecode) => {
 	return (dispatch) => {
-		dispatch(requestUpdateRoundHalf())
-		dbUpdateRoundHalf(gamecode).then((half) => {
-			console.log('team half updated')
-			dispatch(updateRoundHalfSuccess())
-			console.log('updated half: ', half)
-			if (half === 'top') {
-				console.log('need to determine end of game')
-				if (false) {
-					// function to check for end of game to be added
-					console.log('end of game')
+		dispatch(requestCompleteRound('Updating scores'))
+		dbUpdateGameScore(gamecode)
+			.then(() => {
+				dispatch(requestCompleteRound('Updating round information'))
+				return dbUpdateRoundHalf(gamecode)
+			})
+			.then((half) => {
+				// dispatch(updateRoundHalfSuccess())
+				console.log('updated half: ', half)
+				if (half === 'top') {
+					console.log('need to determine end of game')
+					if (false) {
+						// function to check for end of game to be added
+						console.log('end of game')
+					} else {
+						dispatch(requestCompleteRound('Preparing to start next round'))
+						return dbUpdateRoundNumber(gamecode)
+
+					}
 				} else {
-					dispatch(requestUpdateRoundNumber())
-					dbUpdateRoundNumber(gamecode)
-						.then((res) => {
-							dispatch(updateRoundNumberSuccess())
-						})
-						.catch((error) => {
-							dispatch(errorActionCreator('UPDATE_ROUND_NUMBER_FAILURE', error))
-						})
+					dispatch(requestCompleteRound('Changing round status'))
+					console.log('half is bottom. Just need to change round status to preround')
+					return updateRoundStatus(gamecode, 'preround')(dispatch)
 				}
-			} else {
-				console.log('half is bottom. Just need to change round status to preround')
-				updateRoundStatus(gamecode, 'preround')(dispatch)
-			}
-		})
+			})
+			.then(() => {
+				dispatch(completeRoundSuccess())
+			})
+			.catch((error) => {
+				dispatch(errorActionCreator('UPDATE_ROUND_NUMBER_FAILURE', error))
+			})
 	}
 }
+
