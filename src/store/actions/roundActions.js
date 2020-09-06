@@ -1,4 +1,10 @@
-import { dbUpdateRoundStatus, dbUpdateCardStatus, dbUpdateGameScore, dbUpdateRoundHalf, dbUpdateRoundNumber } from 'utils/API'
+import {
+	dbUpdateRoundStatus,
+	dbUpdateCardStatus,
+	dbUpdateGameScore,
+	dbUpdateRoundHalf,
+	dbUpdateRoundNumber,
+} from 'utils/API'
 import { errorActionCreator } from './errorActions'
 // import { getFirestore } from 'redux-firestore'
 
@@ -62,11 +68,10 @@ const requestUpdateRoundNumber = () => {
 	}
 }
 
-
 const updateRoundNumberSuccess = () => {
-	console.log("dispatching update round number succeess")
+	console.log('dispatching update round number succeess')
 	return {
-		type: "UPDATE_ROUND_NUMBER_SUCCESS"
+		type: 'UPDATE_ROUND_NUMBER_SUCCESS',
 	}
 }
 
@@ -110,6 +115,10 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 	}
 }
 
+/*
+	Called when watcher selects 'Confirm'. Returns a promise so next function can be called 
+	May combine into completeRound so all end of round actions are done in one action creator.
+*/
 export const updateRoundScore = (gamecode) => {
 	return (dispatch) => {
 		return new Promise((resolve) => {
@@ -129,30 +138,35 @@ export const updateRoundScore = (gamecode) => {
 	}
 }
 
+/*Called at end of round when watcher selects 'Confirm' button and after scores have been updates in firestore.
+	Toggles half from top/bottom which determines which team the giver is from. When half is changed to top (round just completed),
+	checks for end of game. If not, updates the round number and round status. If changed to bottom, just update round status. 
+*/
 export const completeRound = (gamecode) => {
 	return (dispatch) => {
 		dispatch(requestUpdateRoundHalf())
 		dbUpdateRoundHalf(gamecode).then((half) => {
 			console.log('team half updated')
 			dispatch(updateRoundHalfSuccess())
-			console.log("updated half: ", half)
-			if (half === "top") {
-				console.log("need to determine end of game")
-				if (false) { // function to check for end of game to be added
-					console.log("end of game")
+			console.log('updated half: ', half)
+			if (half === 'top') {
+				console.log('need to determine end of game')
+				if (false) {
+					// function to check for end of game to be added
+					console.log('end of game')
 				} else {
 					dispatch(requestUpdateRoundNumber())
-					dbUpdateRoundNumber(gamecode).then(res => {
-						dispatch(updateRoundNumberSuccess())
-					})
-					.catch(error => {
-						dispatch(errorActionCreator('UPDATE_ROUND_NUMBER_FAILURE', error))
-					})
+					dbUpdateRoundNumber(gamecode)
+						.then((res) => {
+							dispatch(updateRoundNumberSuccess())
+						})
+						.catch((error) => {
+							dispatch(errorActionCreator('UPDATE_ROUND_NUMBER_FAILURE', error))
+						})
 				}
 			} else {
-				console.log("half is bottom. Just need to change round status to preround")
-				updateRoundStatus(gamecode, "preround")(dispatch)
-
+				console.log('half is bottom. Just need to change round status to preround')
+				updateRoundStatus(gamecode, 'preround')(dispatch)
 			}
 		})
 	}
