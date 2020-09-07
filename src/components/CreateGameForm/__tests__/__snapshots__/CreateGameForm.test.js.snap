@@ -176,16 +176,16 @@ exports[`CreateGameForm renders correctly 1`] = `
       <input
         checked={false}
         className="sc-AxgMl kjdsxc"
-        id="halfPoint"
+        id="half"
         name="skipPenalty"
         onBlur={[Function]}
         onChange={[Function]}
         type="radio"
-        value="halfPoint"
+        value="half"
       />
       <label
         className="sc-Axmtr fJjLoh"
-        htmlFor="halfPoint"
+        htmlFor="half"
       >
         1/2 a Point
       </label>
@@ -196,16 +196,16 @@ exports[`CreateGameForm renders correctly 1`] = `
       <input
         checked={false}
         className="sc-AxgMl kjdsxc"
-        id="point"
+        id="full"
         name="skipPenalty"
         onBlur={[Function]}
         onChange={[Function]}
         type="radio"
-        value="point"
+        value="full"
       />
       <label
         className="sc-Axmtr fJjLoh"
-        htmlFor="point"
+        htmlFor="full"
       >
         1 Point
       </label>
