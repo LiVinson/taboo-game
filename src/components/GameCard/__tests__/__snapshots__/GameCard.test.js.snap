@@ -176,7 +176,7 @@ exports[`GameCard functionality and rendering WatcherGameCard renders correctly 
     className="sc-fzplWN buDbqD"
   >
     <button
-      className="sc-AxmLO sc-fzoLsD gwAkai"
+      className="sc-AxmLO sc-fzoLsD kmdkWs"
       disabled={false}
       onClick={[Function]}
     >
