@@ -45,7 +45,7 @@ class Round extends React.Component {
 		// } else {
 		// console.log(this.props)
 		const { gamecode, cardsPending } = this.props
-		const { round, half, status, cardIndex, deck, roundEndTime } = this.props.gameplay
+		const { round, half, status, cardIndex, deck, roundEndTime, score } = this.props.gameplay
 		const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 		const giver = this.determineActivePlayer('giver')
 		const watcher = this.determineActivePlayer('watcher')
@@ -63,11 +63,12 @@ class Round extends React.Component {
 				<RoundInfo round={round} watcher={watcher} giver={giver} />
 				{status === 'preround' && (
 					<PreRound
-						startRound={this.startRound}
+						teamScores={score}						
 						currentPlayer={currentPlayer}
-						giver={giver}
-						watcher={watcher}
 						role={role}
+						giver={giver}
+						watcher={watcher}						
+						startRound={this.startRound}
 					/>
 				)}
 				{status === 'in progress' && (

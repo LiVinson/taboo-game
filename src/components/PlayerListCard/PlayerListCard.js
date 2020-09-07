@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 
-const PlayerListCard = ({ buttonInfo, tabooWord = 'Players', children }) => {
+const PlayerListCard = ({ buttonInfo, tabooWord, children }) => {
 	return buttonInfo ? (
 		<ButtonTabooCard tabooWord={tabooWord} buttons={buttonInfo}>
 			{children}
@@ -10,6 +10,10 @@ const PlayerListCard = ({ buttonInfo, tabooWord = 'Players', children }) => {
 	) : (
 		<TabooCard tabooWord={tabooWord}> {children}</TabooCard>
 	)
+}
+
+PlayerListCard.defaultProps = {
+	tabooWord: "Players"
 }
 
 PlayerListCard.propTypes = {

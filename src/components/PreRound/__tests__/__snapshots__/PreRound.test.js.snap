@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PreRound renders correctly 1`] = `
+exports[`PreRound renders and functions correctly PreRound renders correctly 1`] = `
 Array [
   <div
     className="sc-fzokOt gglOOr"
@@ -20,7 +20,7 @@ Array [
         1
         : 
         <span>
-          2
+          3
         </span>
       </li>
       <li
@@ -30,7 +30,7 @@ Array [
         2
         : 
         <span>
-          3
+          5
         </span>
       </li>
     </ul>

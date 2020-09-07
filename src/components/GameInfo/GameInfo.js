@@ -1,6 +1,7 @@
 import React from 'react'
 import Rules from 'components/Rules'
 import PlayerListCard from 'components/PlayerListCard'
+import { FilteredTabooList } from 'components/shared/TabooCard'
 import { Button } from 'components/shared/Button'
 import { StyledGameInfo } from './style'
 
@@ -23,6 +24,8 @@ class GameInfo extends React.Component {
 	}
 
 	render() {
+		const teams = ['team 1', 'team 2']
+
 		const buttonInfo = [
 			{
 				text: this.state.showRules ? 'Hide Rules' : 'Show Rules',
@@ -40,7 +43,6 @@ class GameInfo extends React.Component {
 			},
 		]
 
-
 		const { showRules, showTeams } = this.state
 
 		return (
@@ -48,7 +50,22 @@ class GameInfo extends React.Component {
 				{<Button {...buttonInfo[0]} />}
 				{<Button {...buttonInfo[1]} />}
 				{showRules && <Rules toggleGameInfo={this.toggleGameInfo} />}
-				{showTeams && <PlayerListCard players={this.props.players} currentPlayer={this.props.currentPlayer} />}
+				{showTeams && (
+					<PlayerListCard>
+						{teams.map((team) => (
+							<FilteredTabooList
+								key={team}
+								unfilteredList={this.props.players}
+								filterKey="team"
+								filterValue={team}
+								displayProperty="name"
+								listTitle={team}
+								specialKey="playerId"
+								specialValue={this.props.currentPlayer.playerId}
+							/>
+						))}
+					</PlayerListCard>
+				)}
 			</StyledGameInfo>
 		)
 	}

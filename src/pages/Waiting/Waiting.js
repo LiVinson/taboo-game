@@ -139,7 +139,7 @@ export class Waiting extends React.Component {
 						PLAY to start!
 					</Instructions>
 					<TabooCardTop margin={true} tabooWord={gamecode} />
-					<PlayerListCard players={players} buttonInfo={buttonInfo}>
+					<PlayerListCard buttonInfo={buttonInfo}>
 						{teams.map((team) => (
 							<FilteredTabooList
 								key={team}
