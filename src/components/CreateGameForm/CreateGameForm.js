@@ -141,21 +141,21 @@ const CreateGameForm = (props) => {
               <Field
                 as={RadioButton}
                 type="radio"
-                id="halfPoint"
+                id="half"
                 name="skipPenalty"
-                value="halfPoint"         
+                value="half"         
               />
-              <Label htmlFor="halfPoint">1/2 a Point</Label>
+              <Label htmlFor="half">1/2 a Point</Label>
             </InputGroup>
             <InputGroup>
               <Field
                 as={RadioButton}
                 type="radio"
-                id="point"
+                id="full"
                 name="skipPenalty"
-                value="point"             
+                value="full"             
               />
-              <Label htmlFor="point">1 Point</Label>
+              <Label htmlFor="full">1 Point</Label>
             </InputGroup>
           </FormSection>
           {/* Submit Button is passed down to Taboo Card for UI consistency reasons*/}

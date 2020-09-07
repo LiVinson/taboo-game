@@ -58,7 +58,11 @@ export class CreateGame extends React.Component {
 						team1Turn: 0,
 						team2Turn: 0,
 						team1Rotations: 0,
-						team2Rotations: 0
+						team2Rotations: 0,
+						score: {
+							team1: 0,
+							team2: 0
+						}
 					}
 				}
 				console.log("setstate done")

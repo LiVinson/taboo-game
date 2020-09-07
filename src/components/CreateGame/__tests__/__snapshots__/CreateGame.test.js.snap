@@ -444,16 +444,16 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
           <input
             checked={false}
             className="c10"
-            id="halfPoint"
+            id="half"
             name="skipPenalty"
             onBlur={[Function]}
             onChange={[Function]}
             type="radio"
-            value="halfPoint"
+            value="half"
           />
           <label
             className="c11"
-            htmlFor="halfPoint"
+            htmlFor="half"
           >
             1/2 a Point
           </label>
@@ -464,16 +464,16 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
           <input
             checked={false}
             className="c10"
-            id="point"
+            id="full"
             name="skipPenalty"
             onBlur={[Function]}
             onChange={[Function]}
             type="radio"
-            value="point"
+            value="full"
           />
           <label
             className="c11"
-            htmlFor="point"
+            htmlFor="full"
           >
             1 Point
           </label>
@@ -952,16 +952,16 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
           <input
             checked={false}
             className="c10"
-            id="halfPoint"
+            id="half"
             name="skipPenalty"
             onBlur={[Function]}
             onChange={[Function]}
             type="radio"
-            value="halfPoint"
+            value="half"
           />
           <label
             className="c11"
-            htmlFor="halfPoint"
+            htmlFor="half"
           >
             1/2 a Point
           </label>
@@ -972,16 +972,16 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
           <input
             checked={false}
             className="c10"
-            id="point"
+            id="full"
             name="skipPenalty"
             onBlur={[Function]}
             onChange={[Function]}
             type="radio"
-            value="point"
+            value="full"
           />
           <label
             className="c11"
-            htmlFor="point"
+            htmlFor="full"
           >
             1 Point
           </label>
@@ -1465,16 +1465,16 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
           <input
             checked={false}
             className="c10"
-            id="halfPoint"
+            id="half"
             name="skipPenalty"
             onBlur={[Function]}
             onChange={[Function]}
             type="radio"
-            value="halfPoint"
+            value="half"
           />
           <label
             className="c11"
-            htmlFor="halfPoint"
+            htmlFor="half"
           >
             1/2 a Point
           </label>
@@ -1485,16 +1485,16 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
           <input
             checked={false}
             className="c10"
-            id="point"
+            id="full"
             name="skipPenalty"
             onBlur={[Function]}
             onChange={[Function]}
             type="radio"
-            value="point"
+            value="full"
           />
           <label
             className="c11"
-            htmlFor="point"
+            htmlFor="full"
           >
             1 Point
           </label>

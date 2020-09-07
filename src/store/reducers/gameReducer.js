@@ -35,12 +35,13 @@ export const gameReducer = (state = initState, action) => {
 				gamecode: action.payload.gamecode,
 				pending: false,
 			}
-		case 'UPDATE_GAME_STATUS':
+		case 'REQUEST_UPDATE_GAME_STATUS':
 			console.log('updating game status')
 			return state
-		case 'REMOVE_GAME':
-			console.log('removing game status')
+		case 'UPDATE_GAME_STATUS_SUCCESS':
+			console.log('game status update success')
 			return state
+
 		case 'REQUEST_FETCH_GAME_DECK':
 			console.log('requesting game deck')
 			return state
@@ -55,6 +56,7 @@ export const gameReducer = (state = initState, action) => {
 				...errorReducer(state, action),
 				pending: false,
 			}
+
 		default:
 			return state
 	}

@@ -1,7 +1,8 @@
-import React from "react"
-import PropTypes from "prop-types"
-import CardsPlayed from "components/CardsPlayed"
+import React from 'react'
+import PropTypes from 'prop-types'
+import CardsPlayed from 'components/CardsPlayed'
 import { LargeButton } from 'components/shared/Button'
+import Pending from 'components/shared/Pending'
 
 const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb) => {
 	const buttonInfo = statusArray
@@ -13,12 +14,21 @@ const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb) 
 			button.onClick = () => cb(status, cardType)
 			return button
 		})
-	
+
 	return buttonInfo
 }
 
-
-const PostRoundWatcher = ({ cardStatuses, cardsPlayed, handleCardSelection, selectedCards, updateSelectedCard }) => {
+const PostRoundWatcher = ({
+	cardStatuses,
+	cardsPlayed,
+	handleCardSelection,
+	selectedCards,
+	updateSelectedCard,
+	confirmRoundEnd,
+	isPending,
+	pendingMsg
+}) => {
+	console.log(isPending)
 	//Loops over each card status, and returns a Taboo card with 2 buttons.
 	//Filters cards played based on the status. Information needed to generate buttons,
 	//select a card in the list, and change button status passed in
@@ -39,7 +49,8 @@ const PostRoundWatcher = ({ cardStatuses, cardsPlayed, handleCardSelection, sele
 					)}
 				/>
 			))}
-			<LargeButton text="Confirm!" onClick={() => console.log('confirm!')} />
+			<LargeButton text="Confirm!" disabled={isPending} onClick={confirmRoundEnd} />
+			{pendingMsg ? <Pending speed={300} message={pendingMsg} /> : null}
 		</React.Fragment>
 	)
 }
@@ -49,7 +60,7 @@ PostRoundWatcher.propTypes = {
 	cardsPlayed: PropTypes.array.isRequired,
 	handleCardSelection: PropTypes.func.isRequired,
 	selectedCards: PropTypes.array.isRequired,
-	updateSelectedCard: PropTypes.func.isRequired
+	updateSelectedCard: PropTypes.func.isRequired,
 }
 
 export default PostRoundWatcher

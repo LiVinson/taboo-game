@@ -5,13 +5,13 @@ import PostRoundNonWatcher from 'components/PostRoundNonWatcher'
 import PostRoundWatcher from 'components/PostRoundWatcher'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import { StyledPostRound } from './style'
-import { changeCardStatus, updateRoundStatus } from 'store/actions/roundActions'
+import { changeCardStatus, completeRound } from 'store/actions/roundActions'
 
 export class PostRound extends React.Component {
 	constructor(props) {
 		super(props)
 
-		//stores the firestore deck property value of the selected card.
+		//stores the index of selected card: corresponds to the firestore deck object property of the card.
 		this.state = {
 			correctSelection: '',
 			skippedSelection: '',
@@ -19,9 +19,10 @@ export class PostRound extends React.Component {
 		}
 	}
 
-	//Called onchange of radio button value. Set in state so that on click to change the status, can determine which word is selected
+	//Called onchange of radio button value to select  card. Set in state so that on click to change the status, can determine which word is selected
 	handleCardSelection = (cardIndex, status) => {
 		const statuses = ['correct', 'skipped', 'discard']
+		//array of the statuses that are not selected. Used to set them to empty string so only one word is selected at a time
 		const notSelectedStatuses = statuses.filter((cardStatus) => cardStatus !== status)
 		const property = status + 'Selection'
 		//Set the card index value for the status currently selected and clear the 2 statuses not currently selected
@@ -32,17 +33,24 @@ export class PostRound extends React.Component {
 		})
 	}
 
-	//Called on click of the correct, skip, or discard buttons
+	//Called on click of the correct, skip, or discard buttons inside of taboocard.
 	updateSelectedCard = (previousStatus, newStatus) => {
 		const property = previousStatus + 'Selection'
 		const indexToChange = this.state[property]
 		console.log(`card changing: ${this.state[property]} to ${newStatus}`)
-		//called prop method to trigger dispatch
+		//called prop method to trigger dispatch. Changes card status in firestore
 		this.props.changeCardStatus(newStatus, indexToChange)
 	}
 
+	//Called when Watcher selects 'Confirm' button
+	confirmRoundEnd = () => {
+		console.log('ending the round')
+		//Updates score in firestore based on status of cards and game rules. Once done, updates round half and updates turn as needed.
+		this.props.completeRound()
+	}
+
 	render() {
-		//Creates array of the selected cards for each status.
+		//Creates array of the selected cards string for each status.
 		const selections = Object.values(this.state)
 		const cardStatuses = ['correct', 'skipped', 'discard']
 
@@ -56,6 +64,9 @@ export class PostRound extends React.Component {
 						handleCardSelection={this.handleCardSelection}
 						updateSelectedCard={this.updateSelectedCard}
 						selectedCards={selections}
+						confirmRoundEnd={this.confirmRoundEnd}
+						isPending={this.props.isPending}
+						pendingMsg={this.props.pendingMsg}
 					/>
 				) : (
 					<PostRoundNonWatcher>
@@ -79,17 +90,26 @@ export class PostRound extends React.Component {
 
 PostRound.propTypes = {
 	cardsPlayed: PropTypes.array.isRequired,
-	updateRoundStatus: PropTypes.func.isRequired,
-	changeCardStatus: PropTypes.func.isRequired,
 	role: PropTypes.string.isRequired,
+	changeCardStatus: PropTypes.func.isRequired,
+	completeRound: PropTypes.func.isRequired,
+	isPending: PropTypes.bool,
+	pendingMsg: PropTypes.string,
 }
 
+const mapStateToProps = (state) => {
+	console.log(state.round)
+	return {
+		isPending: state.round.pending,
+		pendingMsg: state.round.pendingMsg
+	}
+}
 const mapDispatchToProps = (dispatch, prevProps) => {
 	const { gamecode } = prevProps
 	return {
-		updateRoundStatus: () => dispatch(updateRoundStatus(gamecode)),
 		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex)),
+		completeRound: () => dispatch(completeRound(gamecode)),
 	}
 }
 
-export default connect(null, mapDispatchToProps)(PostRound)
+export default connect(mapStateToProps, mapDispatchToProps)(PostRound)

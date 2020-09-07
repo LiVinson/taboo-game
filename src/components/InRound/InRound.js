@@ -23,9 +23,6 @@ export const GameCard = (props) => {
 
 export const InRound = ({ roundEndTime, endRound, role, cardsPending, ...props }) => {
 	// export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, cardsPending, changeCardStatus, endRound }) => {
-
-	// console.log(currentCard)
-	// console.log(moment().isBefore(roundEndTime, 'second'))
 	return (
 		<React.Fragment>
 			<TimeCard roundEndTime={roundEndTime} endRound={endRound} role={role} />

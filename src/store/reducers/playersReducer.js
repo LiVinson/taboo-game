@@ -9,17 +9,17 @@ export const playersReducer = (state = initialState, action) => {
 		case 'ADD_PLAYER_SUCCESS':
 			console.log('adding player to state')
 			return [...state, action.payload]
-		case 'ADD_PLAYER_ERROR':
+		case 'ADD_PLAYER_FAILURE':
 			console.log("error adding player")
 			console.log(action.error)
 			return state
-		case 'TEAM_UPDATE_REQUEST':
+		case "REQUEST_UPDATE_TEAM":
 			console.log('requesting team change...')
 			return state
-		case 'TEAM_UPDATE_SUCCESS':
+		case "UPDATE_TEAM_SUCCESS":
 			console.log('team change succesful...')
 			return state
-		case 'TEAM_UPDATE_FAILURE':
+		case 'UPDATE_TEAM_FAILURE':
 			console.log('team change failed...')
 			console.log(action.error)
 			return state

@@ -53,7 +53,7 @@ export const StyledPrimaryButton = styled(StyledButton)`
 
 
 export const StyledLargeButton = styled(StyledButton)`
-	flex: 1 0 100%;
+	width: 100%;
 	padding: 1rem 0;
 	border: solid 3px ${(props) => props.theme.color.accent1};
 	margin-top: ${(props) => props.margin && '1.2rem'};
@@ -66,6 +66,7 @@ export const StyledLargeButton = styled(StyledButton)`
 		outline: none;
 		border: solid 3px ${(props) => props.theme.color.grayDark1};
 	}
+
 `
 
 //Not currently used. TBD if needed

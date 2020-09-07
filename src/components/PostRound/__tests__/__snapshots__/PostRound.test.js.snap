@@ -2,7 +2,7 @@
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is not watcher 1`] = `
 <div
-  className="sc-fzqNJr cDIQQJ"
+  className="sc-fzoyAV cCXevP"
 >
   <div
     className="sc-AxjAm hDlFTS"
@@ -64,7 +64,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is watcher 1`] = `
 <div
-  className="sc-fzqNJr cDIQQJ"
+  className="sc-fzoyAV cCXevP"
 >
   <div
     className="sc-AxjAm hDlFTS"
@@ -223,7 +223,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
     </div>
   </div>
   <button
-    className="sc-AxmLO sc-fzoLsD gwAkai"
+    className="sc-AxmLO sc-fzoLsD kmdkWs"
     onClick={[Function]}
   >
     Confirm!
