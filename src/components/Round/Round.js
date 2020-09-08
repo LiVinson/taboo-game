@@ -39,11 +39,6 @@ class Round extends React.Component {
 	}
 
 	render() {
-		// console.log('Round rendering')
-		// if (this.props.roundPending) {
-		// 	return <p>Loading Firestore/Firebase or Round stuff</p>
-		// } else {
-		// console.log(this.props)
 		const { gamecode, cardsPending } = this.props
 		const { round, half, status, cardIndex, deck, roundEndTime, score } = this.props.gameplay
 		const activeTeam = half === 'top' ? 'team 1' : 'team 2'

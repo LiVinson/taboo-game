@@ -92,9 +92,12 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 	}
 }
 
-/*Called at end of round when watcher selects 'Confirm' button and after scores have been updates in firestore.
-	Toggles half from top/bottom which determines which team the giver is from. When half is changed to top (round just completed),
-	checks for end of game. If not, updates the round number and round status. If changed to bottom, just update round status. 
+/*Called at end of round when watcher selects 'Confirm' button. End round tasks:
+ 	* Updates the scores in firestore based on card status.
+	* Toggles round half from top/bottom which determines which team the giver is from.
+	*  When half is changed to top (round just completed), checks for end of game. 
+	* If ending, updates game status which triggers redirect 
+	* If not ending, updates the round number (if required) and round status. 
 */
 export const completeRound = (gamecode) => {
 	return (dispatch) => {

@@ -23,7 +23,7 @@ class App extends React.Component {
 						<Route path="/home" component={Home} />
 						<Route path="/waiting/:gamecode" component={Waiting} />
 						<Route path="/play/:gamecode" component={PlayGame} />
-						<Route path="/end/:gamecode/:playerId" component={EndGame} />
+						<Route path="/end/:gamecode" component={EndGame} />
 					</Switch>
 					<LayeredCards />
 				</Container>

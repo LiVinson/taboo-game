@@ -9,28 +9,36 @@ import PostRoundWatcher from 'components/PostRoundWatcher'
 
 describe('PostRound renders and functions correctly', () => {
 	const defaultProps = {
+		gamecode:"12345",
 		role: 'watcher',
 		cardsPlayed: [
 			{
+				index: 0,
 				status: 'correct',
 				tabooList: ['rapper', 'West Coast', 'Compton', 'Humble', 'Good Kid'],
 				word: 'Kendrick Lamar',
 				roundPlayed: '1-top',
 			},
 			{
+				index: 1,
 				status: 'skipped',
 				tabooList: ['Lion King', 'Disney', 'Mufasa', 'Pride Rock', 'Nala'],
 				word: 'Simba',
 				roundPlayed: '1-top',
 			},
 			{
+				index: 2,
 				status: 'discard',
 				tabooList: ['Fresh Prince', 'Philadelphia', 'Jazzy Jeff', 'Independence Day', 'Jada Pinkett'],
 				word: 'Will Smith',
 				roundPlayed: '1-top',
 			},
 		],
+		
+		isPending: false,
+	  pendingMsg: null,
 		changeCardStatus: jest.fn(),
+		completeRound: jest.fn(),
 	}
 
 	test('PostRound renders correctly when role is watcher', () => {
