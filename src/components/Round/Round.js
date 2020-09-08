@@ -50,7 +50,7 @@ class Round extends React.Component {
 		const giver = this.determineActivePlayer('giver')
 		const watcher = this.determineActivePlayer('watcher')
 		const currentPlayer = this.props.players.find((player) => player.playerId === this.props.playerId)
-		console.log(currentPlayer)
+		// console.log(currentPlayer)
 		let role
 		if (activeTeam === currentPlayer.team) {
 			role = currentPlayer.playerId === giver.playerId ? 'giver' : 'giverTeam'
@@ -111,6 +111,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, prevProps) => {
 	const { gameplay } = prevProps
+	// console.log("Index to be updated:") 
+	// console.log(gameplay.cardIndex)
 	return {
 		updateRoundStatus: (gamecode, newStatus) => {
 			dispatch(updateRoundStatus(gamecode, newStatus, gameplay.cardIndex))
