@@ -39,18 +39,13 @@ class Round extends React.Component {
 	}
 
 	render() {
-		// console.log('Round rendering')
-		// if (this.props.roundPending) {
-		// 	return <p>Loading Firestore/Firebase or Round stuff</p>
-		// } else {
-		// console.log(this.props)
 		const { gamecode, cardsPending } = this.props
 		const { round, half, status, cardIndex, deck, roundEndTime, score } = this.props.gameplay
 		const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 		const giver = this.determineActivePlayer('giver')
 		const watcher = this.determineActivePlayer('watcher')
 		const currentPlayer = this.props.players.find((player) => player.playerId === this.props.playerId)
-		console.log(currentPlayer)
+		// console.log(currentPlayer)
 		let role
 		if (activeTeam === currentPlayer.team) {
 			role = currentPlayer.playerId === giver.playerId ? 'giver' : 'giverTeam'
@@ -111,6 +106,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, prevProps) => {
 	const { gameplay } = prevProps
+	// console.log("Index to be updated:") 
+	// console.log(gameplay.cardIndex)
 	return {
 		updateRoundStatus: (gamecode, newStatus) => {
 			dispatch(updateRoundStatus(gamecode, newStatus, gameplay.cardIndex))

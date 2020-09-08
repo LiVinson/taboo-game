@@ -22,9 +22,9 @@ export const updateTeam = (gamecode, team) => {
 		console.log(state)
 		const playerId = state.firebase.auth.uid
 		dbUpdateTeam(gamecode, playerId, team)
-		.then((response) => {
+		.then(() => {
 			console.log('team update successful')
-			console.log(response)
+
 			dispatch(teamUpdateSuccess())
 		})
 		.catch((error) => {

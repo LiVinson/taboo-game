@@ -98,7 +98,7 @@ PostRound.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state.round)
+	// console.log(state.round)
 	return {
 		isPending: state.round.pending,
 		pendingMsg: state.round.pendingMsg

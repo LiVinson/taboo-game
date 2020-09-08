@@ -89,6 +89,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
             name="does this matter?"
             onChange={[Function]}
             type="radio"
+            value={0}
           />
           <label
             className="sc-fzokOt fHcrGO"
@@ -141,6 +142,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
             name="does this matter?"
             onChange={[Function]}
             type="radio"
+            value={1}
           />
           <label
             className="sc-fzokOt fHcrGO"
@@ -193,6 +195,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
             name="does this matter?"
             onChange={[Function]}
             type="radio"
+            value={2}
           />
           <label
             className="sc-fzokOt fHcrGO"
@@ -224,6 +227,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
   </div>
   <button
     className="sc-AxmLO sc-fzoLsD kmdkWs"
+    disabled={false}
     onClick={[Function]}
   >
     Confirm!

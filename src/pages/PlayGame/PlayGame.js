@@ -13,7 +13,7 @@ class PlayGame extends React.Component {
 		this.state = {
 			loading: true,
 			gameVerified: false,
-			playerVerified: false,
+			playerVerified: false
 		}
 	}
 
@@ -76,7 +76,9 @@ class PlayGame extends React.Component {
 		const { gamecode } = this.props.match.params
 		const { game } = this.props
 
-		if (this.state.loading) {
+		if (game.status === 'completed') {
+			return <Redirect to={`/end/${gamecode}`} />
+		} else if (this.state.loading) {
 			//Update with actual loading component
 			return <p>Loading Firestore/Firebase</p>
 		} else if (!this.state.gameVerified) {
