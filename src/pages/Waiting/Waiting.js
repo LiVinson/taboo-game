@@ -87,6 +87,37 @@ export class Waiting extends React.Component {
 		}
 		this.props.updateGameStatus(gamecode)
 	}
+	verifyTeamStatus(players) {
+		console.log('verifying team status')
+		let actionRequired = true
+
+		if (!this.checkPlayersUnassigned(players) && !this.checkUnvenTeams(players)) {
+			actionRequired = false
+		}
+
+		return actionRequired
+	}
+
+	//returns true if any players are unassigned.
+	checkPlayersUnassigned(players) {
+		console.log('verify all players assigned')
+		const unassignedPlayers = players.filter((player) => player.team === 'unassigned')
+		console.log('any unassigned: ', unassignedPlayers.length > 0)
+		return unassignedPlayers.length > 0
+	}
+
+	//Returns true if if difference between number of players on each team is greater than 1
+	checkUnvenTeams(players) {
+		console.log('verify teams are even')
+
+		const team1Count = players.filter((player) => player.team === 'team 1').length
+		console.log('team 1 count: ', team1Count)
+
+		const team2Count = players.filter((player) => player.team === 'team 2').length
+		console.log('team 2 count: ', team2Count)
+		console.log('difference: ', Math.abs(team1Count - team2Count))
+		return Math.abs(team1Count - team2Count) > 1
+	}
 
 	render() {
 		const { gamecode } = this.props.match.params
@@ -108,6 +139,7 @@ export class Waiting extends React.Component {
 			const playerId = this.props.auth.uid
 			const currentPlayer = players.find((player) => player.playerId === playerId)
 			const teams = ['unassigned', 'team 1', 'team 2']
+			const teamActionRequired = players.length < 4 || this.verifyTeamStatus(players)
 			const buttonInfo = [
 				{
 					text: 'Team 1',
@@ -129,13 +161,13 @@ export class Waiting extends React.Component {
 						this.handlePlayGame()
 					},
 					hidden: currentPlayer.host ? false : true, //only host player can see play button
-					disabled: false,
+					disabled: teamActionRequired,
 				},
 			]
 			return (
 				<React.Fragment>
 					<Instructions>
-						Share the game code below with friends! Once all players have joined and picked a team, select
+						Share the game code below with friends! Once at least four players have joined and picked a team, select
 						PLAY to start!
 					</Instructions>
 					<TabooCardTop margin={true} tabooWord={gamecode} />
