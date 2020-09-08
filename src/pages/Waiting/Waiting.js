@@ -167,7 +167,7 @@ export class Waiting extends React.Component {
 			return (
 				<React.Fragment>
 					<Instructions>
-						Share the game code below with friends! Once all players have joined and picked a team, select
+						Share the game code below with friends! Once at least four players have joined and picked a team, select
 						PLAY to start!
 					</Instructions>
 					<TabooCardTop margin={true} tabooWord={gamecode} />
