@@ -61,6 +61,11 @@ class EndGame extends React.Component {
 		const { gamecode } = this.props.match.params
 		const { game } = this.props
 
+    const buttonInfo = [{
+      text: "Home",
+      type: "button",
+      onClick: ()=> {this.props.history.push("/home")}
+    }]
 		if (game.status === 'in progress') {
 			return <Redirect to={`/play/${gamecode}`} />
 		} else if (this.state.loading) {
@@ -93,7 +98,7 @@ class EndGame extends React.Component {
 			return (
 				<React.Fragment>
 					<ScoreCard teamScores={[team1Score, team2Score]} />
-					<PlayerListCard tabooWord={winMessage}>
+					<PlayerListCard tabooWord={winMessage} buttonInfo={buttonInfo}>
 						{teams.map((team) => (
 							<FilteredTabooList
 								key={team}

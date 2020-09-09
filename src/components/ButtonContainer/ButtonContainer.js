@@ -31,6 +31,7 @@ ButtonContainer.propTypes = {
   Margin is only added to large button when there are multiple buttons to separate it from buttons above
 */
 const determineButtonType = (buttonInfo, index, length) => {
+
   if (index === 0 && length >= 2) {
     return <Button key={index} {...buttonInfo} />
   } else if (index === 1 && length >= 2) {
