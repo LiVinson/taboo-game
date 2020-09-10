@@ -191,7 +191,7 @@ export const dbUpdateTeam = (gamecode, playerId, team) => {
 					return updatedPlayer
 				})
 				console.log(updatedPlayers)
-				transaction.update(gamePath, { players: updatedPlayers })
+				return transaction.update(gamePath, { players: updatedPlayers })
 			})
 		})
 		.then(() => {
@@ -334,7 +334,7 @@ export const dbUpdateCardStatus = (gamecode, status, currentIndex) => {
 
 				//Only change the cardIndex for in round card changes. Stays the same for postround status changes
 
-				transaction.update(gamePath, updateValue)
+				return transaction.update(gamePath, updateValue)
 			})
 		})
 		.then(() => {
@@ -401,7 +401,7 @@ export const dbUpdateGameScore = (gamecode) => {
 				const givingTeamIncrement = firebase.firestore.FieldValue.increment(roundScore.giving)
 				const watchingTeamIncrement = firebase.firestore.FieldValue.increment(roundScore.watching)
 
-				transaction.update(gamePath, {
+				return transaction.update(gamePath, {
 					'gameplay.score.team1': givingTeam === 1 ? givingTeamIncrement : watchingTeamIncrement,
 					'gameplay.score.team2': givingTeam === 2 ? givingTeamIncrement : watchingTeamIncrement,
 				})
@@ -473,7 +473,7 @@ export const dbUpdateRoundHalf = (gamecode) => {
 				}
 				console.log(newHalf)
 				console.log(newTeam1Turn, newTeam2Turn, newTeam1Rotations, newTeam2Rotations)
-				transaction.update(gamePath, {
+				return transaction.update(gamePath, {
 					'gameplay.half': newHalf,
 					'gameplay.team1Rotations': newTeam1Rotations,
 					'gameplay.team1Turn': newTeam1Turn,

@@ -6,6 +6,7 @@ import { compose } from 'redux'
 import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
 import { FilteredTabooList } from 'components/shared/TabooCard'
+import LoadingCard from 'components/shared/LoadingCard'
 import { Instructions } from './style'
 import { updateTeam } from 'store/actions/playerActions'
 import { updateGameStatus } from 'store/actions/gameActions'
@@ -124,7 +125,7 @@ export class Waiting extends React.Component {
 
 		if (this.state.loading) {
 			//Update with actual loading component
-			return <p>Loading Firestore/Firebase</p>
+			return <LoadingCard title="Loading" message="Creating waiting room" />
 		} else if (this.props.game[gamecode].status === 'in progress') {
 			console.log(gamecode)
 			return <Redirect to={`/play/${gamecode}`} />
@@ -167,10 +168,10 @@ export class Waiting extends React.Component {
 			return (
 				<React.Fragment>
 					<Instructions>
-						Share the game code below with friends! Once at least four players have joined and picked a team, select
-						PLAY to start!
+						Share the game code below with friends! Once at least four players have joined and picked a
+						team, select PLAY to start!
 					</Instructions>
-					<TabooCardTop margin={true} tabooWord={gamecode} />
+					<TabooCardTop margin={true}>{gamecode}</TabooCardTop>
 					<PlayerListCard buttonInfo={buttonInfo}>
 						{teams.map((team) => (
 							<FilteredTabooList

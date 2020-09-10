@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledPending } from "./style"
+import { StyledPending, StyledLargePending } from './style'
 
 export class Pending extends React.Component {
 	constructor(props) {
@@ -19,11 +19,22 @@ export class Pending extends React.Component {
 		}, speed)
 	}
 
-	componentWillUnmount(){
+	componentWillUnmount() {
 		window.clearInterval(this.interval)
 	}
 
 	render() {
-		return <StyledPending>{this.state.message}</StyledPending>
+		const { large } = this.props
+		const pending = large ? (
+			<StyledLargePending>{this.state.message}</StyledLargePending>
+		) : (
+			<StyledPending>{this.state.message}</StyledPending>
+		)
+		return pending 
 	}
+}
+
+Pending.defaultProps = {
+	speed: 300,
+	large: false,
 }

@@ -117,16 +117,16 @@ TabooListItem.propTypes = {
 }
 
 
-export const TabooCardTop = ({ tabooWord, margin = false }) => {
+export const TabooCardTop = ({ children, margin = false }) => {
 	return (
 		<StyledTabooCard margin={margin}>
-			<TabooWordContainer>{tabooWord}</TabooWordContainer>
+			<TabooWordContainer>{children}</TabooWordContainer>
 		</StyledTabooCard>
 	)
 }
 
 TabooCardTop.propTypes = {
-	tabooWord: PropTypes.string.isRequired,
+	// children: PropTypes.string.isRequired,
 	margin: PropTypes.bool,
 }
 
