@@ -6,6 +6,7 @@ import { compose } from 'redux'
 import PlayerListCard from 'components/PlayerListCard'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import ScoreCard from 'components/ScoreCard'
+import LoadingCard from 'components/shared/LoadingCard'
 
 // const EndGame = ({ players, currentPlayer, team1Score, team2Score }) => {
 class EndGame extends React.Component {
@@ -70,7 +71,7 @@ class EndGame extends React.Component {
 			return <Redirect to={`/play/${gamecode}`} />
 		} else if (this.state.loading) {
 			//Update with actual loading component
-			return <p>Loading Firestore/Firebase</p>
+			return <LoadingCard message="Calculating final scores" />
 		} else if (!this.state.gameVerified) {
 			//Update with actual loading component
 			return <p>That game doesn't exist or hasn't started yet</p>

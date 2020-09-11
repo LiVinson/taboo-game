@@ -125,7 +125,7 @@ export class Waiting extends React.Component {
 
 		if (this.state.loading) {
 			//Update with actual loading component
-			return <LoadingCard title="Loading" message="Creating waiting room" />
+			return <LoadingCard message="Joining waiting room" />
 		} else if (this.props.game[gamecode].status === 'in progress') {
 			console.log(gamecode)
 			return <Redirect to={`/play/${gamecode}`} />

@@ -2,7 +2,7 @@
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is not watcher 1`] = `
 <div
-  className="sc-fzoyAV cCXevP"
+  className="sc-fzoLag fGcfuP"
 >
   <div
     className="sc-AxjAm hDlFTS"
@@ -64,7 +64,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is watcher 1`] = `
 <div
-  className="sc-fzoyAV cCXevP"
+  className="sc-fzoLag fGcfuP"
 >
   <div
     className="sc-AxjAm hDlFTS"

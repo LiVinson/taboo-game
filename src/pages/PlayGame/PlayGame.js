@@ -5,6 +5,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { fetchGameDeck } from 'store/actions/gameActions'
 import Round from 'components/Round'
+import LoadingCard from 'components/shared/LoadingCard'
 
 class PlayGame extends React.Component {
 	constructor(props) {
@@ -78,9 +79,9 @@ class PlayGame extends React.Component {
 
 		if (game.status === 'completed') {
 			return <Redirect to={`/end/${gamecode}`} />
-		} else if (this.state.loading) {
+		} else if (this.state.loading || !game.gameplay?.deck || Object.keys(game.gameplay?.deck).length === 0) {
 			//Update with actual loading component
-			return <p>Loading Firestore/Firebase</p>
+			return <LoadingCard message="Setting up game" />
 		} else if (!this.state.gameVerified) {
 			//Update with actual loading component
 			return <p>That game doesn't exist, hasn't started yet, or is already complete.</p>
@@ -88,9 +89,9 @@ class PlayGame extends React.Component {
 			//Style and add button to go to Join route so user can join properly
 			return <p>Player didn't join properly</p>
 			//Check if the deck object exists and if has any keys (cards) yet
-		} else if (!game.gameplay?.deck || Object.keys(game.gameplay?.deck).length === 0) {
-			//Update with actual loading component
-			return <p>Creating deck...</p>
+		// } else if (!game.gameplay?.deck || Object.keys(game.gameplay?.deck).length === 0) {
+		// 	//Update with actual loading component
+		// 	return <p>Creating deck...</p>
 		} else {
 			return (
 				<Round
