@@ -902,8 +902,6 @@ exports[`TabooCardTop renders correctly 1`] = `
 >
   <div
     className="c1"
-  >
-    Taboo!
-  </div>
+  />
 </div>
 `;

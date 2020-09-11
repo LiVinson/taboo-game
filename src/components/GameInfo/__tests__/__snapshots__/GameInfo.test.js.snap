@@ -2,7 +2,7 @@
 
 exports[`Game Info rendering and functionality renders correctly 1`] = `
 <div
-  className="sc-fzokOt iIWvQe"
+  className="sc-fzokOt chJVoT"
   open={false}
 >
   <button

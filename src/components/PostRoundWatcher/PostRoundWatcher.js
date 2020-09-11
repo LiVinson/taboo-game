@@ -5,6 +5,8 @@ import { LargeButton } from 'components/shared/Button'
 import Pending from 'components/shared/Pending'
 
 const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb) => {
+	console.log(status)
+	console.log(statusSelected)
 	const buttonInfo = statusArray
 		.filter((cardType) => cardType !== status)
 		.map((cardType) => {

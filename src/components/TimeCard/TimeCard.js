@@ -6,7 +6,6 @@ class TimeCard extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			loading: true,
 			timeRemaining: 60,
 		}
 	}
