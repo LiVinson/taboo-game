@@ -1,7 +1,7 @@
 import firebase from './fbConfig'
 
 //--------------------- GAME UPDATES ---------------------------//
-export const createGame = (gamecode, gameDetails) => {
+export const dbCreateGame = (gamecode, gameDetails) => {
 	console.log('creating game in firestore')
 	const newGame = {
 		gamecode,
@@ -11,7 +11,7 @@ export const createGame = (gamecode, gameDetails) => {
 
 	return firebase
 		.firestore()
-		.collection('games')
+		.collection('game')
 		.doc(gamecode)
 		.set(newGame)
 		.then(() => {
@@ -19,7 +19,8 @@ export const createGame = (gamecode, gameDetails) => {
 			return
 		})
 		.catch((error) => {
-			throw error
+			console.log(error)
+			throw new Error(error)
 		})
 }
 
@@ -111,7 +112,7 @@ export const dbVerifyEndGame = (gamecode) => {
 
 //---------------------PLAYER & TEAM UPDATES --------------------------------
 //Creates an anonymous user in firebase with a uid generated.
-export const createPlayer = (playerName) => {
+export const dbCreatePlayer = (playerName) => {
 	console.log('creating player in firebase...')
 	return firebase
 		.auth()
@@ -160,9 +161,10 @@ export const addPlayer = (player, gamecode) => {
 			console.log('player added to game')
 			return player
 		})
-		.catch((error) => {
-			throw error
-		})
+		// .catch((error) => {
+		// 	console.log(error)
+		// 	return Promise.reject(error)
+		// })
 }
 
 export const dbUpdateTeam = (gamecode, playerId, team) => {
@@ -200,7 +202,7 @@ export const dbUpdateTeam = (gamecode, playerId, team) => {
 		})
 		.catch((error) => {
 			console.log('transaction failed: ', error)
-			throw new Error(error)
+			throw error
 		})
 }
 

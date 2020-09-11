@@ -102,7 +102,7 @@ export class CreateGame extends React.Component {
 			<ButtonTabooCard tabooWord="New Game" buttons={buttonInfo}>
 				<CreateGameForm initialValues={this.state} handleSubmit={this.handleSubmit} />
 				{this.props.isPending ? <Pending speed={300} message="Creating new game" /> : null}
-				{this.props.error ? <ErrorMessage error={this.props.error.message} /> : null}
+				{this.props.error ? <ErrorMessage error="There was a problem creating the game. Please try again." /> : null}
 			</ButtonTabooCard>
 		)
 	}

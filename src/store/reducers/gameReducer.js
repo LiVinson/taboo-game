@@ -7,9 +7,10 @@ const initState = {
 }
 
 export const gameReducer = (state = initState, action) => {
-	// console.log(state)
-	// console.log(action.payload)
+	console.log(state)
+	console.log(action.type)
 	switch (action.type) {
+		
 		case 'REQUEST_CREATE_GAME':
 			return {
 				...errorReducer(state, action),
@@ -56,7 +57,6 @@ export const gameReducer = (state = initState, action) => {
 				...errorReducer(state, action),
 				pending: false,
 			}
-
 		default:
 			return state
 	}
