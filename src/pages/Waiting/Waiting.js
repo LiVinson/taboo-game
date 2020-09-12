@@ -7,6 +7,8 @@ import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import LoadingCard from 'components/shared/LoadingCard'
+import ErrorCard from 'components/shared/ErrorCard'
+
 import ErrorMessage from 'components/shared/ErrorMessage'
 import { Instructions } from './style'
 import { updateTeam } from 'store/actions/playerActions'
@@ -132,18 +134,19 @@ export class Waiting extends React.Component {
 			console.log(gamecode)
 			return <Redirect to={`/play/${gamecode}`} />
 		} else if (!this.state.gameVerified) {
+			const error = "That game doesn't exist, or is already in progress and can't be joined."
 			//Style and add button to go back home
-			return <p>Game doesn't exist, or is already in progress</p>
+			return <ErrorCard error={error}/>
 		} else if (!this.state.playerVerified) {
-			//Style and add button to go to Join route so user can join properly
-			return <p>Player didn't join properly</p>
+			const error = "Something went wrong when joining. Please try again."
+			//Style and add button to go back home
+			return <ErrorCard error={error}/>
 		} else {
 			const players = this.props.game[gamecode].players
 			const playerId = this.props.auth.uid
 			const currentPlayer = players.find((player) => player.playerId === playerId)
 			const teams = ['unassigned', 'team 1', 'team 2']
 			const teamActionRequired = players.length < 4 || this.verifyTeamStatus(players)
-			console.log(this.props.isPending)
 			const buttonInfo = [
 				{
 					text: 'Team 1',
