@@ -1,28 +1,36 @@
-//contains list of player objects
-const initialState = []
+import { errorReducer } from './errorReducer'
 
-export const playersReducer = (state = initialState, action) => {
+const initState = {
+	pending: false,
+	players: [], //tbd how this will be used
+	error: null,
+}
+
+export const playersReducer = (state = initState, action) => {
 	switch (action.type) {
 		case 'REQUEST_ADD_PLAYER':
-			console.log('requesting that player be added')
-			return [...state, action.payload]
+			return {
+				...errorReducer(state, action),
+				pending: true,
+			}
 		case 'ADD_PLAYER_SUCCESS':
-			console.log('adding player to state')
-			return [...state, action.payload]
 		case 'ADD_PLAYER_FAILURE':
-			console.log("error adding player")
-			console.log(action.error)
-			return state
+			return {
+				...errorReducer(state, action),
+				pending: false,
+			}
 		case "REQUEST_UPDATE_TEAM":
-			console.log('requesting team change...')
-			return state
+			console.log("requesting update")
+			return {
+				...errorReducer(state, action),
+				pending: true,
+			}
 		case "UPDATE_TEAM_SUCCESS":
-			console.log('team change succesful...')
-			return state
 		case 'UPDATE_TEAM_FAILURE':
-			console.log('team change failed...')
-			console.log(action.error)
-			return state
+			return {
+				...errorReducer(state, action),
+				pending: false,
+			}
 		default:
 			return state
 	}

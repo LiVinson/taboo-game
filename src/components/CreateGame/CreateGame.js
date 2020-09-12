@@ -112,7 +112,7 @@ CreateGame.propTypes = {
 	history: PropTypes.object.isRequired,
 	error: PropTypes.object,
 	isPending: PropTypes.bool.isRequired,
-	gamecode: PropTypes.string.isRequired,
+	gamecode: PropTypes.string,
 	createNewGame: PropTypes.func.isRequired,
 	clearGameErrors: PropTypes.func.isRequired,
 }

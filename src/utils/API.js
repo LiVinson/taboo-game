@@ -11,7 +11,7 @@ export const dbCreateGame = (gamecode, gameDetails) => {
 
 	return firebase
 		.firestore()
-		.collection('game')
+		.collection('games')
 		.doc(gamecode)
 		.set(newGame)
 		.then(() => {

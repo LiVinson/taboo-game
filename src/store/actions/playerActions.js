@@ -16,7 +16,7 @@ export const teamUpdateSuccess = () => {
 export const updateTeam = (gamecode, team) => {
 	return (dispatch, getState) => {
 		//dispatch that player team is changing
-		dispatch(requestTeamUpdate)
+		dispatch(requestTeamUpdate())
 		const state = getState()
 		console.log(team)
 		console.log(state)
@@ -24,7 +24,6 @@ export const updateTeam = (gamecode, team) => {
 		dbUpdateTeam(gamecode, playerId, team)
 		.then(() => {
 			console.log('team update successful')
-
 			dispatch(teamUpdateSuccess())
 		})
 		.catch((error) => {

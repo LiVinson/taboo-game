@@ -7,9 +7,11 @@ import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import LoadingCard from 'components/shared/LoadingCard'
+import ErrorMessage from 'components/shared/ErrorMessage'
 import { Instructions } from './style'
 import { updateTeam } from 'store/actions/playerActions'
 import { updateGameStatus } from 'store/actions/gameActions'
+
 
 export class Waiting extends React.Component {
 	constructor(props) {
@@ -48,8 +50,8 @@ export class Waiting extends React.Component {
 			//game info is valid, need to verify current user is a player in the game
 			const playerId = this.props.auth.uid
 			const players = game.players
-			console.log(playerId)
-			console.log(players)
+			// console.log(playerId)
+			// console.log(players)
 			//Verify current user has valid uid and is in players array in firestore
 			let playerVerified
 			const includedUserArr = players.filter((player) => player.playerId === playerId)
@@ -141,6 +143,7 @@ export class Waiting extends React.Component {
 			const currentPlayer = players.find((player) => player.playerId === playerId)
 			const teams = ['unassigned', 'team 1', 'team 2']
 			const teamActionRequired = players.length < 4 || this.verifyTeamStatus(players)
+			console.log(this.props.isPending)
 			const buttonInfo = [
 				{
 					text: 'Team 1',
@@ -148,6 +151,7 @@ export class Waiting extends React.Component {
 					onClick: (e) => {
 						this.handleTeamClick(e)
 					},
+					disabled:this.props.isPending.players
 				},
 				{
 					text: 'Team 2',
@@ -155,6 +159,7 @@ export class Waiting extends React.Component {
 					onClick: (e) => {
 						this.handleTeamClick(e)
 					},
+					disabled: this.props.isPending.players
 				},
 				{
 					text: 'Play!',
@@ -162,7 +167,7 @@ export class Waiting extends React.Component {
 						this.handlePlayGame()
 					},
 					hidden: currentPlayer.host ? false : true, //only host player can see play button
-					disabled: teamActionRequired,
+					disabled: teamActionRequired || this.props.isPending.game ,
 				},
 			]
 			return (
@@ -172,7 +177,7 @@ export class Waiting extends React.Component {
 						team, select PLAY to start!
 					</Instructions>
 					<TabooCardTop margin={true}>{gamecode}</TabooCardTop>
-					<PlayerListCard buttonInfo={buttonInfo}>
+					<PlayerListCard buttonInfo={buttonInfo} >
 						{teams.map((team) => (
 							<FilteredTabooList
 								key={team}
@@ -186,6 +191,8 @@ export class Waiting extends React.Component {
 								noneMessage={`No ${team} players`}
 							/>
 						))}
+						{this.props.error.gameError ? <ErrorMessage error={this.props.error.gameError.message} /> : null}
+						{this.props.error.playersError ? <ErrorMessage error={this.props.error.playersError.message} /> : null}
 					</PlayerListCard>
 				</React.Fragment>
 			)
@@ -202,6 +209,14 @@ const mapStateToProps = (state, prevProps) => {
 		game: games, //from firestore
 		gameDataReceived: state.firestore.status.requested[`games/${prevProps.match.params.gamecode}`],
 		auth: state.firebase.auth,
+		error: {
+			gameError: state.game.error ? state.game.error.errorMessage : state.game.error,
+			playersError: state.players.error ? state.players.errorMessage : state.players.error
+		},
+		isPending: {
+			players: state.players.pending,
+			game: state.game.pending
+		}
 	}
 }
 
