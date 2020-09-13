@@ -10,7 +10,7 @@ import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCar
 import { changeCardStatus } from 'store/actions/cardActions'
 
 export const GameCard = (props) => {
-	console.log(props)
+	// console.log(props)
 	const currentCard = props.deck[props.cardIndex]
 	switch (props.role) {
 		case 'giver':

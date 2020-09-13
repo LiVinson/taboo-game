@@ -39,6 +39,10 @@ describe('Inround rendering and functionality', () => {
 		cardIndex: 0,
 		isPending: false,
 		changeCardStatus: jest.fn(),
+		error: {
+			cardError: null,
+			roundError: null
+		}
 	}
 
 	test('renders correctly', () => {
