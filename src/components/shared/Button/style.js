@@ -38,7 +38,7 @@ export const StyledButton = styled.button`
 
 	&:disabled {	
 		filter: brightness(0.6);
-		cursor: wait;
+		cursor: not-allowed;
 	}
 `
 //Same as Button, with different font color and background and different focus outline color

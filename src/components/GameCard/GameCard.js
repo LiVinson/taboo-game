@@ -3,7 +3,7 @@ import PropType from 'prop-types'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 import { InstructionsText, KeyWord } from './style'
 
-export const GiverGameCard = ({ currentCard, changeCardStatus, isPending }) => {
+export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
 	const buttonInfo = [
 		{
 			text: 'Skip!',
@@ -24,7 +24,7 @@ export const GiverGameCard = ({ currentCard, changeCardStatus, isPending }) => {
 	]
 
 
-	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} />
+	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
 }
 
 GiverGameCard.propType = {
@@ -33,7 +33,7 @@ GiverGameCard.propType = {
 	isPending: PropType.bool.isRequired
 }
 
-export const WatcherGameCard = ({currentCard, changeCardStatus, isPending}) => {
+export const WatcherGameCard = ({currentCard, changeCardStatus, isPending, error}) => {
 	const buttonInfo = [
 		{
 			text: 'Buzzer!',
@@ -45,7 +45,7 @@ export const WatcherGameCard = ({currentCard, changeCardStatus, isPending}) => {
 		},
 	]
 
-	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} />
+	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
 }
 
 WatcherGameCard.propType = {

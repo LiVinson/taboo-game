@@ -82,7 +82,7 @@ exports[`Rules render correctly 1`] = `
 .c6:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c7 {
@@ -121,7 +121,7 @@ exports[`Rules render correctly 1`] = `
 .c7:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c7:focus {

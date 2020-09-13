@@ -12,6 +12,7 @@ import {
 import List from 'components/shared/List'
 import ButtonContainer from 'components/ButtonContainer'
 import Star from 'components/shared/Star'
+import ErrorMessage from 'components/shared/ErrorMessage'
 
 //Primary TabooCard component used for main menu and game
 export const TabooCard = ({ tabooWord, list, children }) => {
@@ -30,11 +31,14 @@ TabooCard.propTypes = {
 }
 
 //Same as TabooCard, but includes 2 -3 buttons
-export const ButtonTabooCard = ({ tabooWord, list, buttons, children }) => {
+export const ButtonTabooCard = ({ tabooWord, list, buttons, children, error }) => {
 	return (
 		<StyledTabooCard>
 			<TabooWordContainer>{tabooWord}</TabooWordContainer>
-			<TabooBody>{children ? children : <TabooList list={list} />}</TabooBody>
+			<TabooBody>
+				{children ? children : <TabooList list={list} />}
+				{error && <ErrorMessage error={error} />}
+			</TabooBody>
 			<ButtonContainer buttons={buttons} />
 		</StyledTabooCard>
 	)
@@ -83,7 +87,9 @@ const TabooList = ({ list, property, specialValue, specialKey, secondary }) => {
 				} else {
 					displayText = listItem
 				}
-				return <TabooListItem listItem={displayText} key={index} includeStar={includeStar} secondary={secondary}  />
+				return (
+					<TabooListItem listItem={displayText} key={index} includeStar={includeStar} secondary={secondary} />
+				)
 			})}
 		</List>
 	)
@@ -92,9 +98,9 @@ const TabooList = ({ list, property, specialValue, specialKey, secondary }) => {
 TabooList.propTypes = {
 	list: PropTypes.array.isRequired,
 	property: PropTypes.string,
-	specialValue: PropTypes.string, 
+	specialValue: PropTypes.string,
 	specialKey: PropTypes.string,
-	secondary: PropTypes.bool
+	secondary: PropTypes.bool,
 }
 
 //exported for use in tests
@@ -113,9 +119,8 @@ export const TabooListItem = ({ listItem, includeStar, secondary }) => {
 TabooListItem.propTypes = {
 	listItem: PropTypes.any,
 	includeStar: PropTypes.bool,
-	secondary: PropTypes.bool
+	secondary: PropTypes.bool,
 }
-
 
 export const TabooCardTop = ({ children, margin = false }) => {
 	return (
@@ -130,7 +135,6 @@ TabooCardTop.propTypes = {
 	margin: PropTypes.bool,
 }
 
-
 //ex: playerList array of player objects need to be filtered by team: playerList, team, team1, name, Players, [{}]
 export const FilteredTabooList = ({
 	unfilteredList,
@@ -140,7 +144,7 @@ export const FilteredTabooList = ({
 	displayProperty,
 	specialKey,
 	specialValue,
-	noneMessage
+	noneMessage,
 }) => {
 	// console.log(unfilteredList)
 	// console.log(filterKey)
@@ -160,16 +164,17 @@ export const FilteredTabooList = ({
 	return (
 		<>
 			<StyledListTitle>{listTitle}</StyledListTitle>
-			{filteredList.length > 0 
-				
-				? 
-			<TabooList
-				list={filteredList}
-				property={displayProperty}
-				specialKey={specialKey}
-				specialValue={specialValue}
-				secondary={true}
-			/> : <TabooList list={[noneMessage]} secondary={true}/>}
+			{filteredList.length > 0 ? (
+				<TabooList
+					list={filteredList}
+					property={displayProperty}
+					specialKey={specialKey}
+					specialValue={specialValue}
+					secondary={true}
+				/>
+			) : (
+				<TabooList list={[noneMessage]} secondary={true} />
+			)}
 		</>
 	)
 }

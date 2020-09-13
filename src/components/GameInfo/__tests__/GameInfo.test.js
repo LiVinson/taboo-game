@@ -18,7 +18,8 @@ describe('Game Info rendering and functionality', () => {
 		],
 		currentPlayer: { name: 'Player 1', playerId: '12345', team: 'team 1' },
     }
-    
+	
+	//Used to similate the event created from button click
     const mockEvent = {
         target: {
             name: ""

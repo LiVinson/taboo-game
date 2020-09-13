@@ -2,7 +2,7 @@
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is not watcher 1`] = `
 <div
-  className="sc-fzoLag fGcfuP"
+  className="sc-fzoXzr eNeJoR"
 >
   <div
     className="sc-AxjAm hDlFTS"
@@ -64,7 +64,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is watcher 1`] = `
 <div
-  className="sc-fzoLag fGcfuP"
+  className="sc-fzoXzr eNeJoR"
 >
   <div
     className="sc-AxjAm hDlFTS"
@@ -81,10 +81,10 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
         className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fznKkj gYxyrb"
+          className="sc-fznZeY eJfiSP"
         >
           <input
-            className="sc-fznZeY cefyvv"
+            className="sc-fzokOt fgEyXA"
             id="Kendrick Lamar"
             name="does this matter?"
             onChange={[Function]}
@@ -92,7 +92,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
             value={0}
           />
           <label
-            className="sc-fzokOt fHcrGO"
+            className="sc-fzqBZW iLfJjv"
             htmlFor="Kendrick Lamar"
           >
             Kendrick Lamar
@@ -104,15 +104,15 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
       className="sc-fzplWN buDbqD"
     >
       <button
-        className="sc-AxmLO fxmuza button"
-        disabled={true}
+        className="sc-AxmLO gmmVt button"
+        disabled={false}
         onClick={[Function]}
       >
         skipped
       </button>
       <button
-        className="sc-AxmLO sc-fzozJi ffjLNG button"
-        disabled={true}
+        className="sc-AxmLO sc-fzozJi jlLOkV button"
+        disabled={false}
         onClick={[Function]}
       >
         discard
@@ -134,10 +134,10 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
         className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fznKkj gYxyrb"
+          className="sc-fznZeY eJfiSP"
         >
           <input
-            className="sc-fznZeY cefyvv"
+            className="sc-fzokOt fgEyXA"
             id="Simba"
             name="does this matter?"
             onChange={[Function]}
@@ -145,7 +145,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
             value={1}
           />
           <label
-            className="sc-fzokOt fHcrGO"
+            className="sc-fzqBZW iLfJjv"
             htmlFor="Simba"
           >
             Simba
@@ -157,15 +157,15 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
       className="sc-fzplWN buDbqD"
     >
       <button
-        className="sc-AxmLO fxmuza button"
-        disabled={true}
+        className="sc-AxmLO gmmVt button"
+        disabled={false}
         onClick={[Function]}
       >
         correct
       </button>
       <button
-        className="sc-AxmLO sc-fzozJi ffjLNG button"
-        disabled={true}
+        className="sc-AxmLO sc-fzozJi jlLOkV button"
+        disabled={false}
         onClick={[Function]}
       >
         discard
@@ -187,10 +187,10 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
         className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fznKkj gYxyrb"
+          className="sc-fznZeY eJfiSP"
         >
           <input
-            className="sc-fznZeY cefyvv"
+            className="sc-fzokOt fgEyXA"
             id="Will Smith"
             name="does this matter?"
             onChange={[Function]}
@@ -198,7 +198,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
             value={2}
           />
           <label
-            className="sc-fzokOt fHcrGO"
+            className="sc-fzqBZW iLfJjv"
             htmlFor="Will Smith"
           >
             Will Smith
@@ -210,15 +210,15 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
       className="sc-fzplWN buDbqD"
     >
       <button
-        className="sc-AxmLO fxmuza button"
-        disabled={true}
+        className="sc-AxmLO gmmVt button"
+        disabled={false}
         onClick={[Function]}
       >
         correct
       </button>
       <button
-        className="sc-AxmLO sc-fzozJi ffjLNG button"
-        disabled={true}
+        className="sc-AxmLO sc-fzozJi jlLOkV button"
+        disabled={false}
         onClick={[Function]}
       >
         skipped
@@ -226,7 +226,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
     </div>
   </div>
   <button
-    className="sc-AxmLO sc-fzoLsD kmdkWs"
+    className="sc-AxmLO sc-fzoLsD cyAtQH"
     disabled={false}
     onClick={[Function]}
   >

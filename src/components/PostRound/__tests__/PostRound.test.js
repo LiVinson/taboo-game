@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
 import { PostRound } from '../PostRound'
@@ -9,7 +9,7 @@ import PostRoundWatcher from 'components/PostRoundWatcher'
 
 describe('PostRound renders and functions correctly', () => {
 	const defaultProps = {
-		gamecode:"12345",
+		gamecode: '12345',
 		role: 'watcher',
 		cardsPlayed: [
 			{
@@ -34,9 +34,14 @@ describe('PostRound renders and functions correctly', () => {
 				roundPlayed: '1-top',
 			},
 		],
-		
-		isPending: false,
-	  pendingMsg: null,
+		isPending: {
+			round: false,
+			cards: false
+		},
+		error: {
+			round: null,
+			cards: null
+		},
 		changeCardStatus: jest.fn(),
 		completeRound: jest.fn(),
 	}
@@ -121,6 +126,5 @@ describe('PostRound renders and functions correctly', () => {
 
 		wrapper.instance().updateSelectedCard()
 		expect(props.changeCardStatus).toHaveBeenCalled()
-
 	})
 })

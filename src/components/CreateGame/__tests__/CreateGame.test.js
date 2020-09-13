@@ -75,7 +75,7 @@ describe('CreateGame functionality and rendering', () => {
 	test('CreateGame renders correctly with error props true', () => {
 		const props = {
 			...defaultProps,
-			error: new Error('There was an error creating game.'),
+			error: 'There was an error creating game.',
 		}
 		const wrapper = renderer
 			.create(
@@ -171,7 +171,7 @@ describe('CreateGame functionality and rendering', () => {
 	test('renders ErrorMessage component when props.isPending is true', () => {
 		const props = {
 			...defaultProps,
-			error: new Error('There was an error creating game.'),
+			error: 'There was an error creating game.',
 		}
 		const wrapper = shallow(<CreateGame {...props} />)
 		expect(wrapper.find(ErrorMessage)).toHaveLength(1)
@@ -180,7 +180,7 @@ describe('CreateGame functionality and rendering', () => {
 	test('CreateGame calls props.clearGameErrors on unmount', () => {
 		const props = {
 			...defaultProps,
-			error: new Error('There was an error creating game.'),
+			error: 'There was an error creating game.',
 		}
 		const wrapper = mount(
 			<ThemeProvider theme={theme}>

@@ -46,14 +46,14 @@ exports[`GameCard functionality and rendering GiverGameCard renders correctly 1`
     className="sc-fzplWN buDbqD"
   >
     <button
-      className="sc-AxmLO fxmuza"
+      className="sc-AxmLO gmmVt"
       disabled={false}
       onClick={[Function]}
     >
       Skip!
     </button>
     <button
-      className="sc-AxmLO sc-fzozJi ffjLNG"
+      className="sc-AxmLO sc-fzozJi jlLOkV"
       disabled={false}
       onClick={[Function]}
     >
@@ -76,18 +76,18 @@ exports[`GameCard functionality and rendering TeamGameCard renders correctly for
     className="sc-AxhCb JZaCe"
   >
     <p
-      className="sc-fznKkj gFTDO"
+      className="sc-fznZeY dEjDoi"
     >
       It's your teams turn to guess the word! 
       <span
-        className="sc-fznZeY gnGNXO"
+        className="sc-fzokOt gzbudF"
       >
         Joe
       </span>
        is giving the clues and
        
       <span
-        className="sc-fznZeY gnGNXO"
+        className="sc-fzokOt gzbudF"
       >
         Sam
       </span>
@@ -110,17 +110,17 @@ exports[`GameCard functionality and rendering TeamGameCard renders correctly for
     className="sc-AxhCb JZaCe"
   >
     <p
-      className="sc-fznKkj gFTDO"
+      className="sc-fznZeY dEjDoi"
     >
       It’s the other team’s turn to give clues and guess! 
       <span
-        className="sc-fznZeY gnGNXO"
+        className="sc-fzokOt gzbudF"
       >
         Sam
       </span>
        will be watching to make sure 
       <span
-        className="sc-fznZeY gnGNXO"
+        className="sc-fzokOt gzbudF"
       >
         Joe
       </span>
@@ -176,7 +176,7 @@ exports[`GameCard functionality and rendering WatcherGameCard renders correctly 
     className="sc-fzplWN buDbqD"
   >
     <button
-      className="sc-AxmLO sc-fzoLsD kmdkWs"
+      className="sc-AxmLO sc-fzoLsD cyAtQH"
       disabled={false}
       onClick={[Function]}
     >

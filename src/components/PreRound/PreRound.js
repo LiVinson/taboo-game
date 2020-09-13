@@ -8,6 +8,7 @@ const PreRound = ({ teamScores, ...rest }) => {
 		<React.Fragment>
 			<ScoreCard teamScores={Object.values(teamScores)} />
 			<RoundInstructionsCard {...rest} />
+			{/* {error ? <ErrorMessage error={error} /> : null}*/}
 		</React.Fragment>
 	)
 }

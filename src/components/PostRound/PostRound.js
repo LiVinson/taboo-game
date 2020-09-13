@@ -5,7 +5,8 @@ import PostRoundNonWatcher from 'components/PostRoundNonWatcher'
 import PostRoundWatcher from 'components/PostRoundWatcher'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import { StyledPostRound } from './style'
-import { changeCardStatus, completeRound } from 'store/actions/roundActions'
+import { completeRound } from 'store/actions/roundActions'
+import { changeCardStatus } from 'store/actions/cardActions'
 
 export class PostRound extends React.Component {
 	constructor(props) {
@@ -66,7 +67,7 @@ export class PostRound extends React.Component {
 						selectedCards={selections}
 						confirmRoundEnd={this.confirmRoundEnd}
 						isPending={this.props.isPending}
-						pendingMsg={this.props.pendingMsg}
+						error={this.props.error}
 					/>
 				) : (
 					<PostRoundNonWatcher>
@@ -94,14 +95,20 @@ PostRound.propTypes = {
 	changeCardStatus: PropTypes.func.isRequired,
 	completeRound: PropTypes.func.isRequired,
 	isPending: PropTypes.bool,
-	pendingMsg: PropTypes.string,
 }
 
 const mapStateToProps = (state) => {
 	// console.log(state.round)
 	return {
-		isPending: state.round.pending,
-		pendingMsg: state.round.pendingMsg
+		// isPending: state.round.pending,
+		isPending: {
+			round: state.round.pending,
+			cards: state.cards.pending,
+		},
+		error: {
+			round: state.round.error && state.round.error.errorMessage,
+			cards: state.cards.error && state.cards.error.errorMessage,
+		},
 	}
 }
 const mapDispatchToProps = (dispatch, prevProps) => {

@@ -1,6 +1,6 @@
 import {
-	createGame,
-	createPlayer,
+	dbCreateGame,
+	dbCreatePlayer,
 	addPlayer,
 	verifyGameExists,
 	dbUpdateGameStatus,
@@ -57,14 +57,12 @@ const updateGameStatusSuccess = () => {
 const requestFetchGameDeck = () => {
 	return {
 		type: 'REQUEST_FETCH_GAME_DECK',
-		pending: true,
 	}
 }
 
 const fetchGameDeckSuccess = () => {
 	return {
 		type: 'FETCH_GAME_DECK_SUCCESS',
-		pending: false,
 	}
 }
 
@@ -73,18 +71,19 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 		//reject not needed. Any error updated in store. Promise needed to allow for calling Formik function on completion of creation
 		return new Promise((resolve) => {
 			dispatch(requestCreateGame())
-			createGame(gamecode, gameData)
+			return dbCreateGame(gamecode, gameData)
 				.then(() => {
-					createPlayer(hostPlayerName).then((player) => {
+					return dbCreatePlayer(hostPlayerName).then((player) => {
 						const host = { ...player, team: 'unassigned', online: true, host: true }
 						//associates anonymous user with game instance in firestore
-						addPlayer(host, gamecode).then((player) => {
+						return addPlayer(host, gamecode).then((player) => {
 							dispatch(createGameSuccess(gamecode))
 							resolve()
 						})
 					})
 				})
 				.catch((error) => {
+					console.log(error.message)
 					dispatch(errorActionCreator('CREATE_GAME_FAILURE', error))
 				})
 		})
@@ -97,11 +96,12 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 
 		return new Promise((resolve) => {
 			dispatch(requestJoinGame())
-			verifyGameExists(gamecode)
+			return verifyGameExists(gamecode)
 				.then(() => {
-					createPlayer(playerName).then((playerData) => {
+					return dbCreatePlayer(playerName).then((playerData) => {
 						const player = { ...playerData, host: false, team: 'unassigned' }
-						addPlayer(player, gamecode).then(() => {
+						return addPlayer(player, gamecode).then(() => {
+							console.log('succesfully created game and added player')
 							dispatch(joinGameSuccess(gamecode))
 							resolve()
 						})
@@ -125,7 +125,10 @@ export const updateGameStatus = (gamecode, status) => {
 				dispatch(updateGameStatusSuccess(status))
 			})
 			.catch((error) => {
-				dispatch(errorActionCreator('UPDATE_GAME_FAILURE', error))
+				console.log(error)
+				const errorMsg =
+					'There was an error updating the game status. Try again, and refresh the page if it persists.'
+				dispatch(errorActionCreator('UPDATE_GAME_STATUS_FAILURE', errorMsg))
 			})
 		// })
 	}
@@ -141,15 +144,15 @@ export const fetchGameDeck = (gamecode) => {
 				const shuffledDeck = shuffleArray(response)
 				//convert from array of objects to object with keys = objects.
 				const deckObject = convertArrayToObject(shuffledDeck)
-				dbSaveGameDeck(gamecode, deckObject).then((res) => {
+				return dbSaveGameDeck(gamecode, deckObject).then((res) => {
 					console.log('back from saving shuffled array')
+					dispatch(fetchGameDeckSuccess())
 				})
-				dispatch(fetchGameDeckSuccess())
 			})
 			.catch((error) => {
 				console.log('there was an error retreiving the deck')
-				console.log(error)
-				dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', error))
+				console.log(error.message)
+				dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', "There was a problem fetching the deck. Please refresh the page to try again."))
 			})
 	}
 }

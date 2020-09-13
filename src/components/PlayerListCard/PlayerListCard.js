@@ -8,7 +8,7 @@ const PlayerListCard = ({ buttonInfo, tabooWord, children }) => {
 			{children}
 		</ButtonTabooCard>
 	) : (
-		<TabooCard tabooWord={tabooWord}> {children}</TabooCard>
+		<TabooCard tabooWord={tabooWord}>{children}</TabooCard>
 	)
 }
 

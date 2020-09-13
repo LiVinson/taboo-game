@@ -5,10 +5,8 @@ import PreRound from 'components/PreRound'
 import InRound from 'components/InRound'
 import PostRound from 'components/PostRound'
 import RoundInfo from 'components/RoundInfo'
-import Pending from 'components/shared/Pending'
-import ErrorMessage from 'components/shared/ErrorMessage'
 import { updateRoundStatus } from 'store/actions/roundActions'
-// import { convertOBjectToArray } from "utils/helpers"
+
 class Round extends React.Component {
 	determineActivePlayer = (role) => {
 		let activePlayer
@@ -34,12 +32,9 @@ class Round extends React.Component {
 		this.props.updateRoundStatus(this.props.gamecode, 'postround')
 	}
 
-	confirmRoundEnd = () => {
-		console.log('confirming round scores')
-	}
 
 	render() {
-		const { gamecode, cardsPending } = this.props
+		const { gamecode, isPending } = this.props
 		const { round, half, status, cardIndex, deck, roundEndTime, score } = this.props.gameplay
 		const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 		const giver = this.determineActivePlayer('giver')
@@ -64,6 +59,7 @@ class Round extends React.Component {
 						giver={giver}
 						watcher={watcher}						
 						startRound={this.startRound}
+						error={this.props.error}
 					/>
 				)}
 				{status === 'in progress' && (
@@ -77,13 +73,14 @@ class Round extends React.Component {
 						deck={deck}
 						cardIndex={cardIndex}
 						endRound={this.endRound}
-						cardPending={cardsPending}
+						isPending={isPending}
 					/>
 				)}
 				{status === 'postround' && (
 					<PostRound
 						gamecode={gamecode}
 						role={role}
+						isPending={isPending}
 						//Convert deck object into array of objects. Add index to each card to track it's firestore deck.propertyName. Filters only for cards played this round
 						cardsPlayed={Object.values(deck)
 							.map((card, index) => ({ ...card, index }))
@@ -96,11 +93,12 @@ class Round extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	// console.log(state.cards)
-	// console.log(state.round)
+	console.log(state.cards)
+	console.log(state.round)
 	return {
-		// roundPending: state.round.pending,
-		cardsPending: state.cards.pending,
+		//errors caused by changing rounds
+		error: state.round.error ? state.round.error.errorMessage : state.round.error,
+		isPending: state.cards.pending,
 	}
 }
 

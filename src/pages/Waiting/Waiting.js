@@ -7,9 +7,13 @@ import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import LoadingCard from 'components/shared/LoadingCard'
+import {ButtonErrorCard} from 'components/shared/ErrorCard'
+
+import ErrorMessage from 'components/shared/ErrorMessage'
 import { Instructions } from './style'
 import { updateTeam } from 'store/actions/playerActions'
 import { updateGameStatus } from 'store/actions/gameActions'
+
 
 export class Waiting extends React.Component {
 	constructor(props) {
@@ -38,6 +42,7 @@ export class Waiting extends React.Component {
 		const { gamecode } = this.props.match.params
 
 		const game = this.props.game[gamecode]
+		
 		//Checks if falsy. Add additional edge cases in case empty object is returned
 		if (!game || game.status !== 'new') {
 			console.log(game)
@@ -48,8 +53,8 @@ export class Waiting extends React.Component {
 			//game info is valid, need to verify current user is a player in the game
 			const playerId = this.props.auth.uid
 			const players = game.players
-			console.log(playerId)
-			console.log(players)
+			// console.log(playerId)
+			// console.log(players)
 			//Verify current user has valid uid and is in players array in firestore
 			let playerVerified
 			const includedUserArr = players.filter((player) => player.playerId === playerId)
@@ -69,23 +74,17 @@ export class Waiting extends React.Component {
 		const newTeam = event.target.value
 		const playerId = this.props.auth.uid
 		const { gamecode } = this.props.match.params
-		const players = this.props.game[gamecode].players
-		const currentPlayer = players.find((player) => player.playerId === playerId)
-		if (currentPlayer.team === newTeam) {
-			console.log('player is already on team ', newTeam)
-			return
-		}
-		this.props.updateTeam(gamecode, newTeam)
+		// const players = this.props.game[gamecode].players
+		// const currentPlayer = players.find((player) => player.playerId === playerId)
+		// if (currentPlayer.team === newTeam) {
+		// 	console.log('player is already on team ', newTeam)
+		// 	return
+		// }
+		this.props.updateTeam(gamecode, playerId, newTeam)
 	}
 
 	handlePlayGame() {
 		const { gamecode } = this.props.match.params
-		const players = this.props.game[gamecode].players
-		const unassignedPlayers = players.filter((player) => !player.team)
-		if (unassignedPlayers.length > 0) {
-			console.log("can't start game, there are unassigned players")
-			return
-		}
 		this.props.updateGameStatus(gamecode)
 	}
 	verifyTeamStatus(players) {
@@ -122,7 +121,7 @@ export class Waiting extends React.Component {
 
 	render() {
 		const { gamecode } = this.props.match.params
-
+		console.log(this.props)
 		if (this.state.loading) {
 			//Update with actual loading component
 			return <LoadingCard message="Joining waiting room" />
@@ -130,11 +129,11 @@ export class Waiting extends React.Component {
 			console.log(gamecode)
 			return <Redirect to={`/play/${gamecode}`} />
 		} else if (!this.state.gameVerified) {
-			//Style and add button to go back home
-			return <p>Game doesn't exist, or is already in progress</p>
+			const error = "That game doesn't exist, is already in progress, or is complete and can't be joined."
+			return <ButtonErrorCard error={error}/>
 		} else if (!this.state.playerVerified) {
-			//Style and add button to go to Join route so user can join properly
-			return <p>Player didn't join properly</p>
+			const error = "Something went wrong when joining. Please try again."
+			return <ButtonErrorCard error={error}/>
 		} else {
 			const players = this.props.game[gamecode].players
 			const playerId = this.props.auth.uid
@@ -148,6 +147,7 @@ export class Waiting extends React.Component {
 					onClick: (e) => {
 						this.handleTeamClick(e)
 					},
+					disabled:this.props.isPending.players || currentPlayer.team === "team 1"
 				},
 				{
 					text: 'Team 2',
@@ -155,6 +155,7 @@ export class Waiting extends React.Component {
 					onClick: (e) => {
 						this.handleTeamClick(e)
 					},
+					disabled: this.props.isPending.players || currentPlayer.team === "team 2"
 				},
 				{
 					text: 'Play!',
@@ -162,7 +163,7 @@ export class Waiting extends React.Component {
 						this.handlePlayGame()
 					},
 					hidden: currentPlayer.host ? false : true, //only host player can see play button
-					disabled: teamActionRequired,
+					disabled: teamActionRequired || this.props.isPending.game
 				},
 			]
 			return (
@@ -172,7 +173,7 @@ export class Waiting extends React.Component {
 						team, select PLAY to start!
 					</Instructions>
 					<TabooCardTop margin={true}>{gamecode}</TabooCardTop>
-					<PlayerListCard buttonInfo={buttonInfo}>
+					<PlayerListCard buttonInfo={buttonInfo} >
 						{teams.map((team) => (
 							<FilteredTabooList
 								key={team}
@@ -186,6 +187,9 @@ export class Waiting extends React.Component {
 								noneMessage={`No ${team} players`}
 							/>
 						))}
+						
+						{this.props.error.gameError ? <ErrorMessage error={this.props.error.gameError} /> : null}
+						{this.props.error.playersError ? <ErrorMessage error={this.props.error.playersError} /> : null}
 					</PlayerListCard>
 				</React.Fragment>
 			)
@@ -202,12 +206,20 @@ const mapStateToProps = (state, prevProps) => {
 		game: games, //from firestore
 		gameDataReceived: state.firestore.status.requested[`games/${prevProps.match.params.gamecode}`],
 		auth: state.firebase.auth,
+		error: {
+			gameError: state.game.error ? state.game.error.errorMessage : state.game.error,
+			playersError: state.players.error ? state.players.error.errorMessage : state.players.error
+		},
+		isPending: {
+			players: state.players.pending,
+			game: state.game.pending
+		}
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateTeam: (gamecode, team) => dispatch(updateTeam(gamecode, team)),
+		updateTeam: (gamecode, playerId, team) => dispatch(updateTeam(gamecode, playerId, team)),
 		updateGameStatus: (gamecode) => dispatch(updateGameStatus(gamecode, 'in progress')),
 	}
 }

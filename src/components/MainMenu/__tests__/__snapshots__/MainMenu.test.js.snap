@@ -19,7 +19,7 @@ exports[`Main menu renders correctly 1`] = `
         className="sc-AxhUy kWmTzm"
       >
         <a
-          className="sc-fznKkj kHanHY"
+          className="sc-fznZeY PVRvM"
           href="/home/create"
           onClick={[Function]}
           text="Create New Game"
@@ -31,7 +31,7 @@ exports[`Main menu renders correctly 1`] = `
         className="sc-AxhUy kWmTzm"
       >
         <a
-          className="sc-fznKkj kHanHY"
+          className="sc-fznZeY PVRvM"
           href="/home/join"
           onClick={[Function]}
           text="Join Game"
@@ -43,7 +43,7 @@ exports[`Main menu renders correctly 1`] = `
         className="sc-AxhUy kWmTzm"
       >
         <a
-          className="sc-fznKkj kHanHY"
+          className="sc-fznZeY PVRvM"
           href="/home/rules"
           onClick={[Function]}
           text="How to Play"
@@ -55,7 +55,7 @@ exports[`Main menu renders correctly 1`] = `
         className="sc-AxhUy kWmTzm"
       >
         <a
-          className="sc-fznKkj kHanHY"
+          className="sc-fznZeY PVRvM"
           href="/submit"
           onClick={[Function]}
           text="Submit a Card"
