@@ -82,7 +82,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 .c14:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c15 {
@@ -121,7 +121,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 .c15:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c15:focus {
@@ -584,7 +584,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 .c15:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c16 {
@@ -623,7 +623,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 .c16:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c16:focus {
@@ -643,6 +643,12 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+
+.c13 {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: red;
 }
 
 .c3 {
@@ -758,12 +764,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   margin-bottom: 0.8rem;
   text-align: center;
   font-weight: 500;
-}
-
-.c13 {
-  font-size: 1.5rem;
-  font-style: italic;
-  color: red;
 }
 
 <div
@@ -991,7 +991,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
     <p
       className="c13"
     >
-      There was an error creating game.
+      There was a problem creating the game. Please try again.
     </p>
   </div>
   <div
@@ -1097,7 +1097,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 .c15:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c16 {
@@ -1136,7 +1136,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
 .c16:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c16:focus {
