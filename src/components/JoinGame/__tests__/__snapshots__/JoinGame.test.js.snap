@@ -82,7 +82,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
 .c8:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c9 {
@@ -121,7 +121,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
 .c9:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c9:focus {
@@ -224,7 +224,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
         className="c4"
       >
         <label
-          className="sc-fzoXzr c5"
+          className="sc-fzpjYC c5"
           htmlFor="name"
         >
           Enter Your Name
@@ -245,7 +245,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
         className="c4"
       >
         <label
-          className="sc-fzoXzr c5"
+          className="sc-fzpjYC c5"
           htmlFor="gamecode"
         >
           Enter a Game Code
@@ -367,7 +367,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
 .c9:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c10 {
@@ -406,7 +406,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
 .c10:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c10:focus {
@@ -426,6 +426,12 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+
+.c7 {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: red;
 }
 
 .c3 {
@@ -487,12 +493,6 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
   font-weight: 500;
 }
 
-.c7 {
-  font-size: 1.5rem;
-  font-style: italic;
-  color: red;
-}
-
 <div
   className="c0"
 >
@@ -515,7 +515,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
         className="c4"
       >
         <label
-          className="sc-fzoXzr c5"
+          className="sc-fzpjYC c5"
           htmlFor="name"
         >
           Enter Your Name
@@ -536,7 +536,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
         className="c4"
       >
         <label
-          className="sc-fzoXzr c5"
+          className="sc-fzpjYC c5"
           htmlFor="gamecode"
         >
           Enter a Game Code
@@ -663,7 +663,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
 .c9:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c10 {
@@ -702,7 +702,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
 .c10:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c10:focus {
@@ -811,7 +811,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
         className="c4"
       >
         <label
-          className="sc-fzoXzr c5"
+          className="sc-fzpjYC c5"
           htmlFor="name"
         >
           Enter Your Name
@@ -832,7 +832,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
         className="c4"
       >
         <label
-          className="sc-fzoXzr c5"
+          className="sc-fzpjYC c5"
           htmlFor="gamecode"
         >
           Enter a Game Code
