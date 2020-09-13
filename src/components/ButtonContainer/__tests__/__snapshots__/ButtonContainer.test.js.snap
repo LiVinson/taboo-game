@@ -35,7 +35,7 @@ exports[`Button Container renders and functions correctly Button Container rende
 .c1:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c2 {
@@ -74,7 +74,7 @@ exports[`Button Container renders and functions correctly Button Container rende
 .c2:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c2:focus {
