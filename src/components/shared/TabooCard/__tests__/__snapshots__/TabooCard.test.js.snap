@@ -82,7 +82,7 @@ exports[`ButtonTabooCard renders correctly ButtonTabooCard renders children prop
 .c4:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c5 {
@@ -121,7 +121,7 @@ exports[`ButtonTabooCard renders correctly ButtonTabooCard renders children prop
 .c5:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c5:focus {
@@ -270,7 +270,7 @@ exports[`ButtonTabooCard renders correctly ButtonTabooCard renders correctly whe
 .c6:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c7 {
@@ -309,7 +309,7 @@ exports[`ButtonTabooCard renders correctly ButtonTabooCard renders correctly whe
 .c7:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c7:focus {
