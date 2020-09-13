@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import RoundInstructionsCard from 'components/RoundInstructionsCard'
 import ScoreCard from 'components/ScoreCard'
-import ErrorMessage from 'components/shared/ErrorMessage'
 
 const PreRound = ({ teamScores, ...rest }) => {
 	return (

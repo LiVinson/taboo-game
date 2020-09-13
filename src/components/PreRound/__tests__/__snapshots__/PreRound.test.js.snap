@@ -3,10 +3,10 @@
 exports[`PreRound renders and functions correctly PreRound renders correctly 1`] = `
 Array [
   <div
-    className="sc-fzokOt gglOOr"
+    className="sc-fzqBZW txfDC"
   >
     <p
-      className="sc-fzqBZW lfIlYf"
+      className="sc-fzqNJr cjRiJO"
     >
       Scores
     </p>
@@ -14,7 +14,7 @@ Array [
       className="sc-Axmtr dHjpTi"
     >
       <li
-        className="sc-fzqNJr jSAFji"
+        className="sc-fzoyAV jcYWJo"
       >
         Team 
         1
@@ -24,7 +24,7 @@ Array [
         </span>
       </li>
       <li
-        className="sc-fzqNJr jSAFji"
+        className="sc-fzoyAV jcYWJo"
       >
         Team 
         2
@@ -47,18 +47,18 @@ Array [
       className="sc-AxhCb JZaCe"
     >
       <p
-        className="sc-fznKkj gFTDO"
+        className="sc-fznZeY dEjDoi"
       >
         It's the other team's turn to guess! 
         <span
-          className="sc-fznZeY gnGNXO"
+          className="sc-fzokOt gzbudF"
         >
           Danielle
         </span>
          will be giving the clues, and
          
         <span
-          className="sc-fznZeY gnGNXO"
+          className="sc-fzokOt gzbudF"
         >
           Stephen
         </span>
