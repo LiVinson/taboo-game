@@ -35,7 +35,7 @@ exports[`Button renders correctly 1`] = `
 .c0:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 <button
@@ -83,7 +83,7 @@ exports[`Primary button renders correctly 1`] = `
 .c0:disabled {
   -webkit-filter: brightness(0.6);
   filter: brightness(0.6);
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .c0:focus {
