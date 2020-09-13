@@ -1,11 +1,24 @@
 import React from 'react'
 import { StyledErrorCard } from './style'
-import ButtonContainer from 'components/ButtonContainer'
 import ErrorMessage from 'components/shared/ErrorMessage'
-import { ButtonTabooCard } from 'components/shared/TabooCard'
+import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 import { withRouter } from 'react-router-dom'
 
-const ErrorCard = ({ error, history, url, title }) => {
+export const ErrorCard = ({error, title}) => {
+	return (
+		<StyledErrorCard>
+			<TabooCard tabooWord={title}>
+				<ErrorMessage error={error} large={true} />
+			</TabooCard>
+		</StyledErrorCard>
+	)
+}
+ErrorCard.defaultProps = {
+	
+	title: 'Uh Oh!',
+}
+
+const ButtonErrorCard = ({ error, history, url, title }) => {
 	const buttonInfo = [
 		{
 			text: 'Home',
@@ -13,8 +26,8 @@ const ErrorCard = ({ error, history, url, title }) => {
 				history.push(url)
 			},
 		},
-    ]
-    
+	]
+
 	return (
 		<StyledErrorCard>
 			<ButtonTabooCard tabooWord={title} buttons={buttonInfo}>
@@ -24,9 +37,9 @@ const ErrorCard = ({ error, history, url, title }) => {
 	)
 }
 
-ErrorCard.defaultProps = {
-    url: '/home',
-    title: "Uh Oh!"
+ButtonErrorCard.defaultProps = {
+	url: '/home',
+	title: 'Uh Oh!',
 }
 //Used to get access to history object
-export default withRouter(ErrorCard)
+export default withRouter(ButtonErrorCard)

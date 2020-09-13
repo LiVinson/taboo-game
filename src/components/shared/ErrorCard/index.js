@@ -1,3 +1,3 @@
-import ErrorCard from "./ErrorCard"
+import ButtonErrorCard, {ErrorCard} from "./ErrorCard"
 
-export default ErrorCard
+export {ErrorCard, ButtonErrorCard}

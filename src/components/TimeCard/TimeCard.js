@@ -23,6 +23,7 @@ class TimeCard extends React.Component {
 			} else {
 				console.log('time up')
 				clearInterval(this.intervalId)
+				//Only one player needs to update the round for everyone
 				if (this.props.role === 'giver') {
 					this.props.endRound()
 				}

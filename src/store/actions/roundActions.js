@@ -23,25 +23,12 @@ const roundStatusSuccess = (status) => {
 	}
 }
 
-const requestUpdateCardStatus = () => {
-	return {
-		type: 'REQUEST_UPDATE_CARD_STATUS',
-	}
-}
 
-const updateCardStatusSuccess = () => {
-	return {
-		type: 'UPDATE_CARD_STATUS_SUCCESS',
-	}
-}
 
 const requestCompleteRound = (message) => {
 	console.log('dispatching: ', message)
 	return {
 		type: 'REQUEST_COMPLETE_ROUND',
-		payload: {
-			pendingMsg: message,
-		},
 	}
 }
 
@@ -61,7 +48,16 @@ export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex) => {
 		//If round has ended, change the status of the last card displayed so it does not display next round
 		if (newRoundStatus === 'postround') {
 			console.log('round is ending, but need to update card# ', currentIndex)
-			await dbUpdateCardStatus(gamecode, 'discard', parseInt(currentIndex))
+			try {
+				await dbUpdateCardStatus(gamecode, 'discard', parseInt(currentIndex))
+				//need to determine handling error here
+			} catch(err) {
+				console.log('there was an error updating card status')
+				console.log(err.message)
+				const errorMessage = "There was a problem updating to the next round. Please refresh the page to try again"
+				dispatch(errorActionCreator('ROUND_STATUS_UPDATE_FAILURE', errorMessage))
+				return
+			}
 		}
 		dbUpdateRoundStatus(gamecode, newRoundStatus)
 			.then(() => {
@@ -70,41 +66,28 @@ export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex) => {
 				return
 			})
 			.catch((error) => {
-				dispatch(errorActionCreator('ROUND_STATUS_UPDATE_FAILURE', error))
+				console.log(error)
+				const errorMsg = "There was a problem starting the round. Please refresh the page to try again."
+				dispatch(errorActionCreator('ROUND_STATUS_UPDATE_FAILURE', errorMsg))
 				return
 			})
 	}
 }
 
-export const changeCardStatus = (gamecode, status, currentIndex) => {
-	return (dispatch) => {
-		//dispatch changing card in progress
-		//set the status of the current card in firebase, and update the index
-		//dispatch changing card complete
-		dispatch(requestUpdateCardStatus())
-		dbUpdateCardStatus(gamecode, status, currentIndex)
-			.then(() => {
-				dispatch(updateCardStatusSuccess())
-			})
-			.catch((error) => {
-				dispatch(errorActionCreator('UPDATE_CARD_STATUS_FAILURE', error))
-			})
-	}
-}
-
 /*Called at end of round when watcher selects 'Confirm' button. End round tasks:
- 	* Updates the scores in firestore based on card status.
-	* Toggles round half from top/bottom which determines which team the giver is from.
-	*  When half is changed to top (round just completed), checks for end of game. 
-	* If ending, updates game status which triggers redirect 
-	* If not ending, updates the round number (if required) and round status. 
-*/
+ * Updates the scores in firestore based on card status.
+ * Toggles round half from top/bottom which determines which team the giver is from.
+ *  When half is changed to top (round just completed), checks for end of game.
+ * If ending, updates game status which triggers redirect
+ * If not ending, updates the round number (if required) and round status.
+ */
 export const completeRound = (gamecode) => {
 	return (dispatch) => {
 		dispatch(requestCompleteRound('Updating scores'))
+		// need to combine updateGameScore & updateRoundHalf into one method to avoid updating document too often
 		dbUpdateGameScore(gamecode)
 			.then(() => {
-				dispatch(requestCompleteRound('Updating round information'))
+				// dispatch(requestCompleteRound('Updating round information'))
 				return dbUpdateRoundHalf(gamecode)
 			})
 			.then((half) => {
@@ -112,31 +95,29 @@ export const completeRound = (gamecode) => {
 				//check for endgame after a 'bottom' is complete so both teams have had a turn
 				if (half === 'top') {
 					console.log('need to determine end of game')
-					dbVerifyEndGame(gamecode)
-					.then(endGame => {
+					dbVerifyEndGame(gamecode).then((endGame) => {
 						if (endGame) {
 							console.log('game should end')
-							dbUpdateGameStatus(gamecode, "completed")
+							dbUpdateGameStatus(gamecode, 'completed')
 						} else {
 							console.log('game should continue. Start next round')
-							dispatch(requestCompleteRound('Preparing to start next round'))
+							// dispatch(requestCompleteRound('Preparing to start next round'))
 							return dbUpdateRoundNumber(gamecode).then(() => {
 								dispatch(completeRoundSuccess())
 							})
 						}
 					})
-
 				} else {
-					dispatch(requestCompleteRound('Changing round status'))
+					// dispatch(requestCompleteRound('Changing round status'))
 					console.log('half is bottom. Just need to change round status to preround')
-					return dbUpdateRoundStatus(gamecode, 'preround')
-					.then(() => {
+					return dbUpdateRoundStatus(gamecode, 'preround').then(() => {
 						dispatch(completeRoundSuccess())
 					})
 				}
 			})
 			.catch((error) => {
-				dispatch(errorActionCreator('UPDATE_ROUND_NUMBER_FAILURE', error))
+				//Need to create user friendly error
+				dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', error))
 			})
 	}
 }

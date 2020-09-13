@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { TabooCard, ButtonTabooCard } from 'components/shared/TabooCard'
 import { InstructionsText, KeyWord } from './style'
 
-const RoundInstructionsCard = ({ role, giver, watcher, startRound }) => {
+const RoundInstructionsCard = ({ role, giver, watcher, startRound, error }) => {
 	let instructions
 	//Determine the instructions based on current player's team and role
 	switch (role) {
 		case 'giver':
-			instructions = displayGiverInstructions(watcher, startRound)
+			instructions = displayGiverInstructions(watcher, startRound, error)
 			break
 		case 'watcher':
 			instructions = displayWatcherInstructions(giver)
@@ -33,7 +33,7 @@ RoundInstructionsCard.propTypes = {
 	startRound: PropTypes.func.isRequired,
 }
 
-const displayGiverInstructions = (watcher, startRound) => {
+const displayGiverInstructions = (watcher, startRound, error) => {
 	const buttonInfo = [
 		{
 			text: 'Start Round!',
@@ -41,7 +41,7 @@ const displayGiverInstructions = (watcher, startRound) => {
 		},
 	]
 	return (
-		<ButtonTabooCard tabooWord="Get Ready!" buttons={buttonInfo}>
+		<ButtonTabooCard tabooWord="Get Ready!" buttons={buttonInfo} error={error}>
 			<InstructionsText>
 				It’s your turn to give clues to your team! {<KeyWord>{watcher.name}</KeyWord>} will be making sure you
 				don’t say any taboo words.

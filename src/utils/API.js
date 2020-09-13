@@ -60,7 +60,7 @@ export const dbUpdateGameStatus = (gamecode, status) => {
 			return
 		})
 		.catch((error) => {
-			console.log('error updating game')
+			console.log('error updating game status')
 			return error
 		})
 	// })
@@ -161,10 +161,10 @@ export const addPlayer = (player, gamecode) => {
 			console.log('player added to game')
 			return player
 		})
-		// .catch((error) => {
-		// 	console.log(error)
-		// 	return Promise.reject(error)
-		// })
+	// .catch((error) => {
+	// 	console.log(error)
+	// 	return Promise.reject(error)
+	// })
 }
 
 export const dbUpdateTeam = (gamecode, playerId, team) => {
@@ -233,7 +233,7 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 		})
 		.catch((error) => {
 			console.log('error updating game')
-			return error
+			throw error
 		})
 	// })
 }
@@ -277,7 +277,7 @@ export const dbSaveGameDeck = (gamecode, deck) => {
 		})
 		.catch((error) => {
 			console.log(error)
-			return error
+			throw error
 		})
 }
 
@@ -335,7 +335,6 @@ export const dbUpdateCardStatus = (gamecode, status, currentIndex) => {
 				console.log(updateValue)
 
 				//Only change the cardIndex for in round card changes. Stays the same for postround status changes
-
 				return transaction.update(gamePath, updateValue)
 			})
 		})
@@ -345,8 +344,8 @@ export const dbUpdateCardStatus = (gamecode, status, currentIndex) => {
 		})
 		.catch((error) => {
 			console.log('transaction failed')
-			console.log(error)
-			throw new Error(error)
+			console.log(error.message)
+			throw error
 		})
 }
 
@@ -482,11 +481,12 @@ export const dbUpdateRoundHalf = (gamecode) => {
 					'gameplay.team2Rotations': newTeam2Rotations,
 					'gameplay.team2Turn': newTeam2Turn,
 				})
+				return newHalf
 			})
 		})
-		.then(() => {
+		.then((half) => {
 			console.log('transaction succesfully committed')
-			return newHalf
+			return half
 		})
 		.catch((error) => {
 			console.log('there was an error with transaction')

@@ -7,6 +7,7 @@ import PlayerListCard from 'components/PlayerListCard'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import ScoreCard from 'components/ScoreCard'
 import LoadingCard from 'components/shared/LoadingCard'
+import {ButtonErrorCard } from 'components/shared/ErrorCard'
 
 // const EndGame = ({ players, currentPlayer, team1Score, team2Score }) => {
 class EndGame extends React.Component {
@@ -73,11 +74,11 @@ class EndGame extends React.Component {
 			//Update with actual loading component
 			return <LoadingCard message="Calculating final scores" />
 		} else if (!this.state.gameVerified) {
-			//Update with actual loading component
-			return <p>That game doesn't exist or hasn't started yet</p>
+			const error = "That game doesn't exist, is still in progress, or the result can't be viewed."
+			return <ButtonErrorCard error={error} />
 		} else if (!this.state.playerVerified) {
-			//Style and add button to go to Join route so user can join properly
-			return <p>Player didn't join properly</p>
+			const error = 'Something went wrong when viewing the result.'
+			return <ButtonErrorCard error={error} />
 		} else {
 			console.log(game)
 			const teams = ['team 1', 'team 2']
@@ -129,7 +130,7 @@ const mapStateToProps = (state, ownProps) => {
 		game: game ? game : {}, //from firestore
 		gameDataReceived: state.firestore.status.requested[`games/${ownProps.match.params.gamecode}`],
 		auth: state.firebase.auth,
-		error: state.game.error,
+		error: state.game.error && state.game.error.errorMessage,
 	}
 }
 

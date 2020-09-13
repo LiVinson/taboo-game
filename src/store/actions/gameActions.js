@@ -57,14 +57,12 @@ const updateGameStatusSuccess = () => {
 const requestFetchGameDeck = () => {
 	return {
 		type: 'REQUEST_FETCH_GAME_DECK',
-		pending: true,
 	}
 }
 
 const fetchGameDeckSuccess = () => {
 	return {
 		type: 'FETCH_GAME_DECK_SUCCESS',
-		pending: false,
 	}
 }
 
@@ -100,15 +98,13 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 			dispatch(requestJoinGame())
 			return verifyGameExists(gamecode)
 				.then(() => {
-					return dbCreatePlayer(playerName)
-					.then((playerData) => {
+					return dbCreatePlayer(playerName).then((playerData) => {
 						const player = { ...playerData, host: false, team: 'unassigned' }
 						return addPlayer(player, gamecode).then(() => {
-							console.log("succesfully created game and added player")
+							console.log('succesfully created game and added player')
 							dispatch(joinGameSuccess(gamecode))
 							resolve()
 						})
-
 					})
 				})
 				.catch((error) => {
@@ -129,7 +125,10 @@ export const updateGameStatus = (gamecode, status) => {
 				dispatch(updateGameStatusSuccess(status))
 			})
 			.catch((error) => {
-				dispatch(errorActionCreator('UPDATE_GAME_FAILURE', error))
+				console.log(error)
+				const errorMsg =
+					'There was an error updating the game status. Try again, and refresh the page if it persists.'
+				dispatch(errorActionCreator('UPDATE_GAME_STATUS_FAILURE', errorMsg))
 			})
 		// })
 	}
@@ -145,15 +144,15 @@ export const fetchGameDeck = (gamecode) => {
 				const shuffledDeck = shuffleArray(response)
 				//convert from array of objects to object with keys = objects.
 				const deckObject = convertArrayToObject(shuffledDeck)
-				dbSaveGameDeck(gamecode, deckObject).then((res) => {
+				return dbSaveGameDeck(gamecode, deckObject).then((res) => {
 					console.log('back from saving shuffled array')
+					dispatch(fetchGameDeckSuccess())
 				})
-				dispatch(fetchGameDeckSuccess())
 			})
 			.catch((error) => {
 				console.log('there was an error retreiving the deck')
-				console.log(error)
-				dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', error))
+				console.log(error.message)
+				dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', "There was a problem fetching the deck. Please refresh the page to try again."))
 			})
 	}
 }

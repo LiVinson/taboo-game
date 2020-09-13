@@ -1,11 +1,12 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect } from "react-router-dom"
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { fetchGameDeck } from 'store/actions/gameActions'
 import Round from 'components/Round'
 import LoadingCard from 'components/shared/LoadingCard'
+import {ButtonErrorCard, ErrorCard} from 'components/shared/ErrorCard'
 
 class PlayGame extends React.Component {
 	constructor(props) {
@@ -14,7 +15,7 @@ class PlayGame extends React.Component {
 		this.state = {
 			loading: true,
 			gameVerified: false,
-			playerVerified: false
+			playerVerified: false,
 		}
 	}
 
@@ -58,6 +59,7 @@ class PlayGame extends React.Component {
 					//If current player is the host, load the deck. Other players are in "pending" until deck is added
 					//host is the first player to join that is still online
 					const host = this.props.game.players.find((player) => player.online === true)
+					//add to only fetch when game and player are verified to avoid unnecessary
 					if (host.playerId === this.props.auth.uid && !this.props.game.gameplay.deck) {
 						console.log('Im the host')
 						this.loadGameDeck()
@@ -76,22 +78,22 @@ class PlayGame extends React.Component {
 	render() {
 		const { gamecode } = this.props.match.params
 		const { game } = this.props
-
+		
 		if (game.status === 'completed') {
 			return <Redirect to={`/end/${gamecode}`} />
-		} else if (this.state.loading || !game.gameplay?.deck || Object.keys(game.gameplay?.deck).length === 0) {
-			//Update with actual loading component
+		} else
+		if (this.state.loading) {
+			//default state until game and player verified
 			return <LoadingCard message="Setting up game" />
 		} else if (!this.state.gameVerified) {
-			//Update with actual loading component
-			return <p>That game doesn't exist, hasn't started yet, or is already complete.</p>
+			const error = "That game doesn't exist, is already in progress, or is complete and can't be joined."
+			return <ButtonErrorCard error={error} />
 		} else if (!this.state.playerVerified) {
-			//Style and add button to go to Join route so user can join properly
-			return <p>Player didn't join properly</p>
-			//Check if the deck object exists and if has any keys (cards) yet
-		// } else if (!game.gameplay?.deck || Object.keys(game.gameplay?.deck).length === 0) {
-		// 	//Update with actual loading component
-		// 	return <p>Creating deck...</p>
+			const error = 'Something went wrong when joining. Please try again.'
+			return <ButtonErrorCard error={error} />
+			//If in the process of fetching deck or deck propety doesn't exist yet or exists but has no cards yet, show loading message or error
+		} else if (this.props.isPending || !game.gameplay?.deck || Object.keys(game.gameplay?.deck).length === 0) {
+			return this.props.error ? <ErrorCard error={this.props.error} /> : <LoadingCard message="Fetching deck" />
 		} else {
 			return (
 				<Round
@@ -108,13 +110,15 @@ class PlayGame extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
 	const game = state.firestore.data?.games?.[ownProps.match.params.gamecode]
+	console.log(state.game.error)
 	return {
 		//determine if gamePending property needed...
 		gamecode: state.game.gamecode, //tbd if adding this
 		game: game ? game : {}, //from firestore
 		gameDataReceived: state.firestore.status.requested[`games/${ownProps.match.params.gamecode}`],
 		auth: state.firebase.auth,
-		error: state.round.error,
+		error: state.game.error ? state.game.error.errorMessage : state.game.error, 
+		isPending: state.game.pending
 	}
 }
 
