@@ -2,11 +2,11 @@
 
 exports[`Game Info rendering and functionality renders correctly 1`] = `
 <div
-  className="sc-fzokOt chJVoT"
+  className="sc-fzqBZW ebRnSu"
   open={false}
 >
   <button
-    className="sc-AxmLO fa-dRNZ"
+    className="sc-AxmLO gqfOdi"
     name="showRules"
     onClick={[Function]}
     type="button"
@@ -14,7 +14,7 @@ exports[`Game Info rendering and functionality renders correctly 1`] = `
     Show Rules
   </button>
   <button
-    className="sc-AxmLO fa-dRNZ"
+    className="sc-AxmLO gqfOdi"
     name="showTeams"
     onClick={[Function]}
     type="button"
