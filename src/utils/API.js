@@ -551,8 +551,13 @@ export const dbCompleteRound = (gamecode) => {
 			console.log(roundTurnObject)
 
 			//Determing if game should end
-
-			
+			const endGame = verifyEndGame(
+				endGameMethod,
+				endValue,
+				roundTurnObject.team1Rotations,
+				roundTurnObject.team2Rotations
+			)
+			console.log(endGame)
 			/*
 			Properties to write
 
@@ -613,6 +618,7 @@ const calculateRoundTurns = (currentHalf, currentRound, t1Turn, t2Turn, t1Count,
 		roundObject.team2Turn = t2Turn >= t2Count ? 0 : t2Turn + 1
 		roundObject.team1Rotation = roundObject.team1Turn = 0 ? t1Rotation + 1 : t1Rotation
 		roundObject.team2Rotation = roundObject.team2Turn = 0 ? t2Rotation + 1 : t2Rotation
+		roundObject.round = currentRound + 1 //TBD if this should be updated here
 	} else {
 		roundObject.team1Turn = t1Turn
 		roundObject.team2Turn = t2Turn
@@ -620,4 +626,20 @@ const calculateRoundTurns = (currentHalf, currentRound, t1Turn, t2Turn, t1Count,
 		roundObject.team2Rotation = t2Rotation
 	}
 	return roundObject
+}
+
+const verifyEndGame = (endGameMethod, endGameValue, t1Rotations, t2Rotations) => {
+	let endGame
+	if (endGameMethod === 'turns') {
+		console.log('end after number of turns')
+		console.log(t1Rotations >= endGameValue)
+		console.log(t2Rotations >= endGameValue)
+		endGame = t1Rotations >= endGameValue && t2Rotations >= endGameValue
+		console.log('endGame?: ', endGame)
+		return endGame
+	} else {
+		//end based on amount of time elapsed. May need started at...
+		console.log('end after set amount of time')
+		return false
+	}
 }
