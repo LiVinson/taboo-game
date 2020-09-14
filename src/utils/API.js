@@ -503,3 +503,89 @@ export const dbUpdateRoundNumber = (gamecode) => {
 		'gameplay.status': 'preround',
 	})
 }
+
+export const dbCompleteRound = (gamecode) => {
+	const gamePath = firebase.firestore().collection('games').doc(`${gamecode}`)
+
+	return firebase.firestore().runTransaction((transaction) => {
+		return transaction.get(gamePath).then((game) => {
+			if (!game.exists) {
+				console.log('game does not exist...')
+				throw new Error("game doesn't exist...")
+			}
+
+			const { endGameMethod, endValue, gameplay, players, skipPenalty } = game.data()
+			console.log(endGameMethod, endValue, gameplay, players, skipPenalty)
+
+			const { deck, round, half, team1Turn, team2Turn, team1Rotations, team2Rotations } = gameplay
+			console.log(deck, half, team1Turn, team2Turn, team1Rotations, team2Rotations)
+			
+			const gameObject = {}
+
+			
+			//Calculate new score
+			//Update game/gameplay/score
+			const givingTeam = half === "top" ? "team1" : "team2"
+			const watchingTeam = givingTeam === "team1" ? "team2" : "team1"
+			const skipScore = skipPenalty === 'full' ? 1 : skipPenalty === 'half' ? 0.5 : 0
+			const cardsPlayed = deck.filter(card => card.roundPlated === `${round}-${half}`)
+			console.log(skipScore)
+			const scoreObject = calculateRoundScore(skipScore, cardsPlayed, givingTeam, watchingTeam  )
+			console.log(scoreObject)
+
+			//Determine new half
+			//Determine team1 and team 2 turn values
+			// Determine rotation values
+
+			
+
+
+
+			//Determing if game should end
+
+			/*
+			Properties to write
+
+			game: {
+				status:
+				gameplay: {
+					half:
+					round:
+					score: {
+						team1, 
+						team2
+					},
+					status: 
+					team1Turn:
+					team2Turn:
+					team1Rotations:,
+					team2Rotations: 
+				}
+			}
+			
+			*/
+		})
+	})
+}
+
+const calculateRoundScore = (skipScore, cardsPlayed, givingTeam, watchingTeam) => {
+	const scoreObject = cardsPlayed.reduce(
+		(score, card) => {
+			if (card.status === 'correct') {
+				return {
+					...score,
+					[givingTeam]: score[givingTeam] + 1,
+				}
+			} else if (card.status === 'skipped' && skipScore > 1) {
+				return {
+					...score,
+					[watchingTeam]: score[watchingTeam] + skipScore,
+				}
+			} else {
+				return score
+			}
+		},
+		{ [givingTeam]: 0, [watchingTeam]: 0 }
+	)
+	return scoreObject
+}
