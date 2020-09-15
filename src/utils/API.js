@@ -515,20 +515,23 @@ export const dbCompleteRound = (gamecode) => {
 			}
 
 			const { endGameMethod, endValue, gameplay, players, skipPenalty } = game.data()
-			console.log(endGameMethod, endValue, gameplay, players, skipPenalty)
+			// console.log(endGameMethod, endValue, gameplay, players, skipPenalty)
 
-			const { deck, round, half, team1Turn, team2Turn, team1Rotations, team2Rotations } = gameplay
-			console.log(deck, half, team1Turn, team2Turn, team1Rotations, team2Rotations)
-
-			const gameObject = {}
+			const { deck, round, half, team1Turn, team2Turn, team1Rotations, team2Rotations, score } = gameplay
+			// console.log(deck, half, team1Turn, team2Turn, team1Rotations, team2Rotations)
+			let endGame = false
 
 			//Calculate new score
 			//Update game/gameplay/score
 			const givingTeam = half === 'top' ? 'team1' : 'team2'
 			const watchingTeam = givingTeam === 'team1' ? 'team2' : 'team1'
 			const skipScore = skipPenalty === 'full' ? 1 : skipPenalty === 'half' ? 0.5 : 0
-			const cardsPlayed = deck.filter((card) => card.roundPlated === `${round}-${half}`)
-			console.log(skipScore)
+			
+			
+		
+			const cardsPlayed= Object.values(deck).filter((card) => card.roundPlayed === `${round}-${half}`)
+			
+			// console.log(skipScore)
 			const scoreObject = calculateRoundScore(skipScore, cardsPlayed, givingTeam, watchingTeam)
 			console.log(scoreObject)
 
@@ -551,13 +554,33 @@ export const dbCompleteRound = (gamecode) => {
 			console.log(roundTurnObject)
 
 			//Determing if game should end
-			const endGame = verifyEndGame(
-				endGameMethod,
-				endValue,
-				roundTurnObject.team1Rotations,
-				roundTurnObject.team2Rotations
-			)
+			if (half === "bottom") {
+				console.log("checking if game should end")
+				endGame = verifyEndGame(
+					endGameMethod,
+					endValue,
+					roundTurnObject.team1Rotations,
+					roundTurnObject.team2Rotations
+				)
+			}
 			console.log(endGame)
+
+			const updatedGamePlay = Object.assign(gameplay,  roundTurnObject)
+			//current score + score just calculated for this round
+			updatedGamePlay.score = {
+				team1: score.team1 + scoreObject.team1,
+				team2: score.team2 + scoreObject.team2
+			}
+			console.log(updatedGamePlay)
+			const updatedGameObject = Object.assign(game.data(), {gameplay:updatedGamePlay})
+			console.log(updatedGameObject)
+			if (endGame) {
+				updatedGameObject.status = "completed"
+			}
+
+			console.log(updatedGameObject)
+			return transaction.update(gamePath, updatedGameObject)
+
 			/*
 			Properties to write
 
@@ -580,10 +603,17 @@ export const dbCompleteRound = (gamecode) => {
 			
 			*/
 		})
+	}).then(() => {
+		// console.log(response)
+		return
+	}).catch(error => {
+		console.log(error)
+		throw error
 	})
 }
 
 const calculateRoundScore = (skipScore, cardsPlayed, givingTeam, watchingTeam) => {
+	console.log(cardsPlayed)
 	const scoreObject = cardsPlayed.reduce(
 		(score, card) => {
 			if (card.status === 'correct') {
@@ -591,7 +621,7 @@ const calculateRoundScore = (skipScore, cardsPlayed, givingTeam, watchingTeam) =
 					...score,
 					[givingTeam]: score[givingTeam] + 1,
 				}
-			} else if (card.status === 'skipped' && skipScore > 1) {
+			} else if (card.status === 'skipped' && skipScore > 0) {
 				return {
 					...score,
 					[watchingTeam]: score[watchingTeam] + skipScore,
@@ -602,28 +632,32 @@ const calculateRoundScore = (skipScore, cardsPlayed, givingTeam, watchingTeam) =
 		},
 		{ [givingTeam]: 0, [watchingTeam]: 0 }
 	)
+	// console.log(scoreObject)
 	return scoreObject
 }
 
 const calculateRoundTurns = (currentHalf, currentRound, t1Turn, t2Turn, t1Count, t2Count, t1Rotation, t2Rotation) => {
-	console.log(currentHalf, currentRound, t1Count, t2Count, t1Rotation, t2Rotation)
+	console.log(currentHalf, currentRound, t1Count, t2Count, t1Turn, t2Turn, t1Rotation, t2Rotation)
 	const roundObject = {}
 
 	roundObject.half = currentHalf === 'top' ? 'bottom' : 'top'
-
+	roundObject.status = "preround"
+	console.log( t1Turn >= t1Count - 1 ? 0 : t1Turn + 1)
 	//Once both t1 and t2 has completed a round, increment the turnCount.
 	//If all players on team have completed a turn, restart at 0 and increment rotationCount
 	if (currentHalf === 'bottom') {
-		roundObject.team1Turn = t1Turn >= t1Count ? 0 : t1Turn + 1
-		roundObject.team2Turn = t2Turn >= t2Count ? 0 : t2Turn + 1
-		roundObject.team1Rotation = roundObject.team1Turn = 0 ? t1Rotation + 1 : t1Rotation
-		roundObject.team2Rotation = roundObject.team2Turn = 0 ? t2Rotation + 1 : t2Rotation
+		//Check if the active players are the last ones on the team, and start at 0 if so
+		roundObject.team1Turn = t1Turn >= (t1Count - 1) ? 0 : (t1Turn + 1)
+		roundObject.team2Turn = t2Turn >= (t2Count - 1) ? 0 : (t2Turn + 1)
+		//If starting turns over with first player on the team,  increment the rotation
+		roundObject.team1Rotations = roundObject.team1Turn === 0 ? t1Rotation + 1 : t1Rotation
+		roundObject.team2Rotations = roundObject.team2Turn === 0 ? t2Rotation + 1 : t2Rotation
 		roundObject.round = currentRound + 1 //TBD if this should be updated here
 	} else {
 		roundObject.team1Turn = t1Turn
 		roundObject.team2Turn = t2Turn
-		roundObject.team1Rotation = t1Rotation
-		roundObject.team2Rotation = t2Rotation
+		roundObject.team1Rotations = t1Rotation
+		roundObject.team2Rotations = t2Rotation
 	}
 	return roundObject
 }

@@ -8,7 +8,8 @@ import { NoCardMessage } from "./style"
 
 //Returns a Taboo card with buttons to change card status to other two options or a card stating there are no cards in this status
 const CardsPlayed = ({ status, cardList, handleChange, buttonInfo, error }) => {
-	console.log(error)
+	// console.log(error)
+	// console.log(buttonInfo)
 	return (
 		<ButtonTabooCard tabooWord={status} buttons={buttonInfo} error={error}>
 			<List>
