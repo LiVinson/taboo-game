@@ -105,14 +105,14 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
     >
       <button
         className="sc-AxmLO gmmVt button"
-        disabled={false}
+        disabled={true}
         onClick={[Function]}
       >
         skipped
       </button>
       <button
         className="sc-AxmLO sc-fzozJi jlLOkV button"
-        disabled={false}
+        disabled={true}
         onClick={[Function]}
       >
         discard
@@ -158,14 +158,14 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
     >
       <button
         className="sc-AxmLO gmmVt button"
-        disabled={false}
+        disabled={true}
         onClick={[Function]}
       >
         correct
       </button>
       <button
         className="sc-AxmLO sc-fzozJi jlLOkV button"
-        disabled={false}
+        disabled={true}
         onClick={[Function]}
       >
         discard
@@ -211,14 +211,14 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
     >
       <button
         className="sc-AxmLO gmmVt button"
-        disabled={false}
+        disabled={true}
         onClick={[Function]}
       >
         correct
       </button>
       <button
         className="sc-AxmLO sc-fzozJi jlLOkV button"
-        disabled={false}
+        disabled={true}
         onClick={[Function]}
       >
         skipped

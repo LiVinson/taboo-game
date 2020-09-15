@@ -1,6 +1,8 @@
 import React from "react"
 
 export default function ScoreCard({ score1, score2 }) {
+  console.log(score1)
+  console.log(score2)
   return (
     <div>
       <p>

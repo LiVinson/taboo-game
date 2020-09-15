@@ -4,9 +4,11 @@ import RoundInstructionsCard from 'components/RoundInstructionsCard'
 import ScoreCard from 'components/ScoreCard'
 
 const PreRound = ({ teamScores, ...rest }) => {
+	console.log(teamScores)
+	const scoresArr = [teamScores.team1, teamScores.team2]
 	return (
 		<React.Fragment>
-			<ScoreCard teamScores={Object.values(teamScores)} />
+			<ScoreCard teamScores={scoresArr} />
 			<RoundInstructionsCard {...rest} />
 			{/* {error ? <ErrorMessage error={error} /> : null}*/}
 		</React.Fragment>

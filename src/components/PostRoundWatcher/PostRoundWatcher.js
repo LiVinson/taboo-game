@@ -6,16 +6,17 @@ import Pending from 'components/shared/Pending'
 import ErrorMessage from 'components/shared/ErrorMessage'
 
 const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb, isPending) => {
-	console.log(status)
-	console.log(statusSelected)
+	// console.log(status)
+	// console.log(statusSelected)
+	// console.log(statusSelected.length)
 	const buttonInfo = statusArray
 		.filter((cardType) => cardType !== status)
 		.map((cardType) => {
 			const button = { className: 'button' }
 			button.text = cardType
-			button.disabled = statusSelected.length > 0 ? false : true
+			button.disabled = statusSelected.length < 1 || isPending ? true : false
 			button.onClick = () => cb(status, cardType)
-			button.disabled = isPending
+						
 			return button
 		})
 
