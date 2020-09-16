@@ -30,7 +30,7 @@ export class CreateGame extends React.Component {
     On success, adds user to the game as as a player  
   */
 	handleSubmit = (values, setSubmitting) => {
-		console.log('submit')
+		// console.log('submit')
 		this.setState(
 			{
 				name: values.name.toUpperCase(),
@@ -83,9 +83,11 @@ export class CreateGame extends React.Component {
 		this.props.history.push('/home')
 	}
 
+	//Needed in case user gets game error and opens component that references same error property without clearing
 	componentWillUnmount() {
 		this.props.clearGameErrors()
 	}
+
 	render() {
 		const buttonInfo = [
 			{ text: 'Back', onClick: this.handleBackClick },
@@ -119,7 +121,7 @@ CreateGame.propTypes = {
 
 const mapStateToProps = (state) => {
 	return {
-		error: state.game.error ? state.game.error.errorMessage : state.game.error,
+		error: state.game.error ? state.game.error.errorMessage : null,
 		isPending: state.game.pending,
 		gamecode: state.game.gamecode,
 	}
