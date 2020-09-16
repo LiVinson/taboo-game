@@ -23,6 +23,7 @@ class App extends React.Component {
 						<Route path="/waiting/:gamecode" component={Waiting} />
 						<Route path="/play/:gamecode" component={PlayGame} />
 						<Route path="/end/:gamecode" component={EndGame} />
+						
 						<Route
 							render={(props) => {
 								const errorMsg =

@@ -7,13 +7,12 @@ import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import LoadingCard from 'components/shared/LoadingCard'
-import {ButtonErrorCard} from 'components/shared/ErrorCard'
+import { ButtonErrorCard } from 'components/shared/ErrorCard'
 
 import ErrorMessage from 'components/shared/ErrorMessage'
-import { Instructions } from './style'
+import InstructionsCard from 'components/InstructionsCard'
 import { updateTeam } from 'store/actions/playerActions'
 import { updateGameStatus } from 'store/actions/gameActions'
-
 
 export class Waiting extends React.Component {
 	constructor(props) {
@@ -42,7 +41,7 @@ export class Waiting extends React.Component {
 		const { gamecode } = this.props.match.params
 
 		const game = this.props.game[gamecode]
-		
+
 		//Checks if falsy. Add additional edge cases in case empty object is returned
 		if (!game || game.status !== 'new') {
 			console.log(game)
@@ -130,10 +129,10 @@ export class Waiting extends React.Component {
 			return <Redirect to={`/play/${gamecode}`} />
 		} else if (!this.state.gameVerified) {
 			const error = "That game doesn't exist, is already in progress, or is complete and can't be joined."
-			return <ButtonErrorCard error={error}/>
+			return <ButtonErrorCard error={error} />
 		} else if (!this.state.playerVerified) {
-			const error = "Something went wrong when joining. Please try again."
-			return <ButtonErrorCard error={error}/>
+			const error = 'Something went wrong when joining. Please try again.'
+			return <ButtonErrorCard error={error} />
 		} else {
 			const players = this.props.game[gamecode].players
 			const playerId = this.props.auth.uid
@@ -147,7 +146,7 @@ export class Waiting extends React.Component {
 					onClick: (e) => {
 						this.handleTeamClick(e)
 					},
-					disabled:this.props.isPending.players || currentPlayer.team === "team 1"
+					disabled: this.props.isPending.players || currentPlayer.team === 'team 1',
 				},
 				{
 					text: 'Team 2',
@@ -155,7 +154,7 @@ export class Waiting extends React.Component {
 					onClick: (e) => {
 						this.handleTeamClick(e)
 					},
-					disabled: this.props.isPending.players || currentPlayer.team === "team 2"
+					disabled: this.props.isPending.players || currentPlayer.team === 'team 2',
 				},
 				{
 					text: 'Play!',
@@ -163,17 +162,17 @@ export class Waiting extends React.Component {
 						this.handlePlayGame()
 					},
 					hidden: currentPlayer.host ? false : true, //only host player can see play button
-					disabled: teamActionRequired || this.props.isPending.game
+					disabled: teamActionRequired || this.props.isPending.game,
 				},
 			]
 			return (
 				<React.Fragment>
-					<Instructions>
+					<InstructionsCard>
 						Share the game code below with friends! Once at least four players have joined and picked a
 						team, select PLAY to start!
-					</Instructions>
+					</InstructionsCard>
 					<TabooCardTop margin={true}>{gamecode}</TabooCardTop>
-					<PlayerListCard buttonInfo={buttonInfo} >
+					<PlayerListCard buttonInfo={buttonInfo}>
 						{teams.map((team) => (
 							<FilteredTabooList
 								key={team}
@@ -187,7 +186,7 @@ export class Waiting extends React.Component {
 								noneMessage={`No ${team} players`}
 							/>
 						))}
-						
+
 						{this.props.error.gameError ? <ErrorMessage error={this.props.error.gameError} /> : null}
 						{this.props.error.playersError ? <ErrorMessage error={this.props.error.playersError} /> : null}
 					</PlayerListCard>
@@ -208,12 +207,12 @@ const mapStateToProps = (state, prevProps) => {
 		auth: state.firebase.auth,
 		error: {
 			gameError: state.game.error ? state.game.error.errorMessage : state.game.error,
-			playersError: state.players.error ? state.players.error.errorMessage : state.players.error
+			playersError: state.players.error ? state.players.error.errorMessage : state.players.error,
 		},
 		isPending: {
 			players: state.players.pending,
-			game: state.game.pending
-		}
+			game: state.game.pending,
+		},
 	}
 }
 
