@@ -21,10 +21,6 @@ export const StyledTextLink = styled(Link)`
   &:hover {
     filter: brightness(1.2);
   }
-
-  &:disabled {
-    filter: brightness(.5)
-  }
 `
 
 StyledTextLink.displayName="StyledTextLink";

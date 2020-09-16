@@ -17,7 +17,6 @@ export default function Home({ match }) {
 				<Route path={`${path}/join`} component={JoinGame} />
 				<Route path={`${path}/rules`} component={Rules} />
 				<Route path={`${path}/submit`} component={Submit} />
-
 			</Switch>
 	)
 }
