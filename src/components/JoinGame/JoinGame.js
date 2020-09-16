@@ -31,7 +31,7 @@ export class JoinGame extends React.Component {
 			() => {
 				const { gamecode, playerName } = this.state
 				this.props.joinNewGame({ gamecode, playerName }).then(() => {
-					console.log('promise done: player has joined game. Redirecting.')
+					// console.log('promise done: player has joined game. Redirecting.')
 					//Finishes Formik submission process
 					setSubmitting(false)
 					//redirect to Waiting
@@ -47,6 +47,7 @@ export class JoinGame extends React.Component {
 		this.props.history.push('/home')
 	}
 
+	//Needed in case user gets game error and opens component that references same error property without clearing
 	componentWillUnmount() {
 		this.props.clearGameErrors()
 	}
@@ -78,7 +79,7 @@ export class JoinGame extends React.Component {
 
 JoinGame.propTypes = {
 	history: PropTypes.object.isRequired,
-	error: PropTypes.object,
+	error: PropTypes.string,
 	isPending: PropTypes.bool.isRequired,
 	joinNewGame: PropTypes.func.isRequired,
 	clearGameErrors: PropTypes.func.isRequired,

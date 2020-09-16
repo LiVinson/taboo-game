@@ -70,7 +70,7 @@ const CreateGameForm = (props) => {
 						</FormSection>
           </HideContainer>
           
-          
+
 					{/* Radio button and drop down combination. Drop down for # of turns/amount of time is disabled if 
                 corresponding radio button for that option is not selected */}
 
@@ -98,7 +98,8 @@ const CreateGameForm = (props) => {
 							<option value={3}>3 Turns</option>
 							<option value={4}>4 Turns</option>
 							<option value={5}>5 Turns</option>
-						</Field>
+            </Field>
+            {/* LEAVING FOR FUTURE USE: */}
 						<HideContainer>
 							<InputGroup>
 								<Field
@@ -156,6 +157,8 @@ const CreateGameForm = (props) => {
 }
 
 CreateGameForm.propTypes = {
-	initialValues: PropTypes.object.isRequired,
+  initialValues: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
+
 export default CreateGameForm

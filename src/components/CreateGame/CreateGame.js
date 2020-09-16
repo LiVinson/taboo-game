@@ -65,8 +65,7 @@ export class CreateGame extends React.Component {
 						}
 					}
 				}
-				console.log("setstate done")
-
+				
 				this.props.createNewGame(gamecode, gameData, name).then(() => {
 					//finishes formik submission process
 					setSubmitting(false)
@@ -112,7 +111,7 @@ export class CreateGame extends React.Component {
 
 CreateGame.propTypes = {
 	history: PropTypes.object.isRequired,
-	error: PropTypes.object,
+	error: PropTypes.string,	
 	isPending: PropTypes.bool.isRequired,
 	gamecode: PropTypes.string,
 	createNewGame: PropTypes.func.isRequired,
@@ -121,7 +120,7 @@ CreateGame.propTypes = {
 
 const mapStateToProps = (state) => {
 	return {
-		error: state.game.error ? state.game.error.errorMessage : null,
+		error: state.game.error ? state.game.error.errorMessage : state.game.error,
 		isPending: state.game.pending,
 		gamecode: state.game.gamecode,
 	}
