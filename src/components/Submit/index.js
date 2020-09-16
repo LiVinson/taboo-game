@@ -1,3 +1,3 @@
-import { Submit } from "./Submit"
+import  Submit from "./Submit"
 
 export default Submit

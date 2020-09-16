@@ -1,5 +1,5 @@
 import { errorActionCreator } from './errorActions'
-import { dbUpdateCardStatus } from 'utils/API'
+import { dbUpdateCardStatus, dbSubmitCardIdea } from 'utils/API'
 
 const requestUpdateCardStatus = () => {
 	return {
@@ -13,6 +13,17 @@ const updateCardStatusSuccess = () => {
 	}
 }
 
+const requestSubmitCardIdea = () => {
+	return {
+		type: "REQUEST_SUBMIT_CARD_IDEA"
+	}
+}
+
+const submitCardIdeaSuccess = () => {
+	return {
+		type: "SUBMIT_CARD_IDEA_SUCCESS"
+	}
+}
 export const changeCardStatus = (gamecode, status, currentIndex) => {
 	return (dispatch) => {
 		//dispatch changing card in progress
@@ -28,5 +39,19 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 				const errorMessage = `There was a problem updating card ${currentIndex}. Please try again.`
 				dispatch(errorActionCreator('UPDATE_CARD_STATUS_FAILURE', errorMessage))
 			})
+	}
+}
+
+export const submitCardIdea = (cardIdea) => {
+	return (dispatch) => {
+		dispatch(requestSubmitCardIdea())
+		console.log(cardIdea)
+		dbSubmitCardIdea(cardIdea).then(response => {
+			dispatch(submitCardIdeaSuccess())
+		})
+
+
+
+		
 	}
 }

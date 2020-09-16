@@ -418,6 +418,33 @@ export const dbUpdateGameScore = (gamecode) => {
 		})
 }
 
+export const dbSubmitCardIdea = (cardIdea) => {
+	console.log("submitting card idea...", cardIdea)
+
+	const cardIdeaObj = {		
+		...cardIdea,
+		reviewed: false,
+		added: false,
+		createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+	}
+
+	return firebase
+		.firestore()
+		.collection('suggestions')
+		.doc()
+		.set(cardIdeaObj)
+		.then(() => {
+			console.log('card suggestion saved.')
+			return
+		})
+		.catch((error) => {
+			console.log(error)
+			throw error
+		})
+
+}
+//---------------------------- ROUND UPDATES -------------------------------------//
+
 /*Called to toggle half from top/bottom which determines which team the 'giver' is selected from.
 When toggling to top, this means a full round is completed, so team turns are incremented and rotations 
 if all players on a team have completed a turn. 
@@ -677,3 +704,5 @@ const verifyEndGame = (endGameMethod, endGameValue, t1Rotations, t2Rotations) =>
 		return false
 	}
 }
+
+
