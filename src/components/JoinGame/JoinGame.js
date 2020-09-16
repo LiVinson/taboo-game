@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import JoinGameForm from 'components/JoinGameForm'
 import Pending from 'components/shared/Pending'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 import { joinNewGame } from 'store/actions/gameActions'
 import { clearErrors } from 'store/actions/errorActions'
 

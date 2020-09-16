@@ -20,6 +20,17 @@ export const cardsReducer = (state = initState, action) => {
 				...errorReducer(state, action),
 				pending: false,
 			}
+		case 'REQUEST_SUBMIT_CARD_IDEA':
+			return {
+				...errorReducer(state, action),
+				pending: true,
+			}
+		case 'SUBMIT_CARD_IDEA_SUCCESS':
+		case 'SUBMIT_CARD_IDEA_FAILURE':
+			return {
+				...errorReducer(state, action),
+				pending: false,
+			}
 		default:
 			return state
 	}

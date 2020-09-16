@@ -6,7 +6,7 @@ import randomize from 'randomatic'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import CreateGameForm from 'components/CreateGameForm'
 import Pending from 'components/shared/Pending'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 import { createNewGame } from 'store/actions/gameActions'
 import { clearErrors } from 'store/actions/errorActions'
 

@@ -8,7 +8,7 @@ import {JoinGame} from '../JoinGame'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import JoinGameForm from 'components/JoinGameForm'
 import Pending from 'components/shared/Pending'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 
 describe('JoinGame functionality and rendering', () => {
 	const defaultProps = {

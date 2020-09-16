@@ -26,9 +26,10 @@ const SubmitCardForm = (props) => {
 	console.log(props)
 	return (
 		<Formik
+			enableReinitialize={true}
 			initialValues={props.initialValues}
 			validate={validate}
-			onSubmit={(values, { setSubmitting }) => props.handleSubmit(values, setSubmitting)}
+			onSubmit={(values, actions) => props.handleSubmit(values, actions)}
 		>
 			{(formik) => (
 				<Form id="submitCardForm">

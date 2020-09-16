@@ -8,7 +8,7 @@ import { CreateGame } from '../CreateGame'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import CreateGameForm from 'components/CreateGameForm'
 import Pending from 'components/shared/Pending'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 
 //*NOTE*: randomatic npm package is mocked to return CODE00 for gamecode
 

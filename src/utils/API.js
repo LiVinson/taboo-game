@@ -170,7 +170,6 @@ export const addPlayer = (player, gamecode) => {
 export const dbUpdateTeam = (gamecode, playerId, team) => {
 	console.log('updating team in firestore')
 	console.log(team)
-	//probably don't need this promise, need to test.
 
 	const gamePath = firebase.firestore().collection('games').doc(gamecode)
 	return firebase
@@ -435,7 +434,7 @@ export const dbSubmitCardIdea = (cardIdea) => {
 		.set(cardIdeaObj)
 		.then(() => {
 			console.log('card suggestion saved.')
-			return
+			return true
 		})
 		.catch((error) => {
 			console.log(error)

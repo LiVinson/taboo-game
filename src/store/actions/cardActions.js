@@ -15,13 +15,13 @@ const updateCardStatusSuccess = () => {
 
 const requestSubmitCardIdea = () => {
 	return {
-		type: "REQUEST_SUBMIT_CARD_IDEA"
+		type: 'REQUEST_SUBMIT_CARD_IDEA',
 	}
 }
 
 const submitCardIdeaSuccess = () => {
 	return {
-		type: "SUBMIT_CARD_IDEA_SUCCESS"
+		type: 'SUBMIT_CARD_IDEA_SUCCESS',
 	}
 }
 export const changeCardStatus = (gamecode, status, currentIndex) => {
@@ -44,14 +44,21 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 
 export const submitCardIdea = (cardIdea) => {
 	return (dispatch) => {
-		dispatch(requestSubmitCardIdea())
-		console.log(cardIdea)
-		dbSubmitCardIdea(cardIdea).then(response => {
-			dispatch(submitCardIdeaSuccess())
+
+		return new Promise((resolve, reject ) => {
+			dispatch(requestSubmitCardIdea())
+			console.log(cardIdea)
+
+			return dbSubmitCardIdea(cardIdea).then(() => {
+					console.log("success")
+					dispatch(submitCardIdeaSuccess())
+					resolve(true)
+				})
+				.catch((error) => {
+					const errorMessage = 'There was a problem submitting your idea. Please try again.'
+					dispatch(errorActionCreator('SUBMIT_CARD_IDEA_FAILURE', errorMessage))
+					reject(error)
+				})
 		})
-
-
-
-		
 	}
 }

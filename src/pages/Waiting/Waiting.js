@@ -9,7 +9,7 @@ import { FilteredTabooList } from 'components/shared/TabooCard'
 import LoadingCard from 'components/shared/LoadingCard'
 import { ButtonErrorCard } from 'components/shared/ErrorCard'
 
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 import InstructionsCard from 'components/InstructionsCard'
 import { updateTeam } from 'store/actions/playerActions'
 import { updateGameStatus } from 'store/actions/gameActions'
