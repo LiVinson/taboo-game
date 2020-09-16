@@ -1,3 +1,464 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Home component renders correctly on each subroute Home renders correctly on /home route 1`] = `null`;
+
+exports[`Home component renders correctly on each subroute Home renders correctly on /home/create route 1`] = `
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: '';
+  bottom: 1.2rem;
+  left: 0.5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c5 {
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+}
+
+.c5:link,
+.c5:visited {
+  color: currentColor;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.c5:focus {
+  text-shadow: 0px 0.2rem 0.3rem rgba(0,0,0,0.7);
+  -webkit-transform: translateY(-3px);
+  -ms-transform: translateY(-3px);
+  transform: translateY(-3px);
+}
+
+.c5:hover {
+  -webkit-filter: brightness(1.2);
+  filter: brightness(1.2);
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    Menu
+  </div>
+  <div
+    className="c2"
+  >
+    <ul
+      className="c3"
+    >
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="//create"
+          onClick={[Function]}
+          text="Create New Game"
+        >
+          Create New Game
+        </a>
+      </li>
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="//join"
+          onClick={[Function]}
+          text="Join Game"
+        >
+          Join Game
+        </a>
+      </li>
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="//rules"
+          onClick={[Function]}
+          text="How to Play"
+        >
+          How to Play
+        </a>
+      </li>
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="/submit"
+          onClick={[Function]}
+          text="Submit a Card"
+        >
+          Submit a Card
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`Home component renders correctly on each subroute Home renders correctly on /home/join route 1`] = `
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: '';
+  bottom: 1.2rem;
+  left: 0.5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c5 {
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+}
+
+.c5:link,
+.c5:visited {
+  color: currentColor;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.c5:focus {
+  text-shadow: 0px 0.2rem 0.3rem rgba(0,0,0,0.7);
+  -webkit-transform: translateY(-3px);
+  -ms-transform: translateY(-3px);
+  transform: translateY(-3px);
+}
+
+.c5:hover {
+  -webkit-filter: brightness(1.2);
+  filter: brightness(1.2);
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    Menu
+  </div>
+  <div
+    className="c2"
+  >
+    <ul
+      className="c3"
+    >
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="//create"
+          onClick={[Function]}
+          text="Create New Game"
+        >
+          Create New Game
+        </a>
+      </li>
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="//join"
+          onClick={[Function]}
+          text="Join Game"
+        >
+          Join Game
+        </a>
+      </li>
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="//rules"
+          onClick={[Function]}
+          text="How to Play"
+        >
+          How to Play
+        </a>
+      </li>
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="/submit"
+          onClick={[Function]}
+          text="Submit a Card"
+        >
+          Submit a Card
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`Home component renders correctly on each subroute Home renders correctly on /home/rules route 1`] = `
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: '';
+  bottom: 1.2rem;
+  left: 0.5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c4 {
+  font-family: 'Oswald',sans-serif;
+  font-size: 2.7rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.c3 {
+  list-style-type: none;
+}
+
+.c5 {
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+}
+
+.c5:link,
+.c5:visited {
+  color: currentColor;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.c5:focus {
+  text-shadow: 0px 0.2rem 0.3rem rgba(0,0,0,0.7);
+  -webkit-transform: translateY(-3px);
+  -ms-transform: translateY(-3px);
+  transform: translateY(-3px);
+}
+
+.c5:hover {
+  -webkit-filter: brightness(1.2);
+  filter: brightness(1.2);
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    Menu
+  </div>
+  <div
+    className="c2"
+  >
+    <ul
+      className="c3"
+    >
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="//create"
+          onClick={[Function]}
+          text="Create New Game"
+        >
+          Create New Game
+        </a>
+      </li>
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="//join"
+          onClick={[Function]}
+          text="Join Game"
+        >
+          Join Game
+        </a>
+      </li>
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="//rules"
+          onClick={[Function]}
+          text="How to Play"
+        >
+          How to Play
+        </a>
+      </li>
+      <li
+        className="c4"
+      >
+        <a
+          className="c5"
+          href="/submit"
+          onClick={[Function]}
+          text="Submit a Card"
+        >
+          Submit a Card
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
 exports[`Home renders correctly 1`] = `null`;

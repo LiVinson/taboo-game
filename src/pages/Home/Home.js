@@ -9,7 +9,6 @@ import Rules from 'components/Rules'
 export default function Home({ match }) {
 	const { path } = match
 	//return one of series of routes based on current home path
-
 	return (
 			<Switch>
 				<Route path={path} exact component={MainMenu} />
