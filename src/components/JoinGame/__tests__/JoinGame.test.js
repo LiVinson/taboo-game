@@ -70,7 +70,7 @@ describe('JoinGame functionality and rendering', () => {
 	test('JoinGame renders correctly with error props true', () => {
 		const props = {
 			...defaultProps,
-			error: new Error('There was an error creating game.'),
+			error: 'There was an error joining the game.',
 		}
 		const wrapper = renderer
 			.create(
@@ -164,7 +164,7 @@ describe('JoinGame functionality and rendering', () => {
 	test('renders ErrorMessage component when props.isPending is true', () => {
 		const props = {
 			...defaultProps,
-			error: new Error('There was an error creating game.'),
+			error: 'There was an error joining the game.',
 		}
 		const wrapper = shallow(<JoinGame {...props} />)
 		expect(wrapper.find(ErrorMessage)).toHaveLength(1)
@@ -173,8 +173,10 @@ describe('JoinGame functionality and rendering', () => {
 	test('JoinGame calls props.clearGameErrors on unmount', () => {
 		const props = {
 			...defaultProps,
-			error: new Error('There was an error creating game.'),
+			error: 'There was an error joining the game.',
 		}
+
+		//Requires mount for access to lifecycle methods
 		const wrapper = mount(
 			<ThemeProvider theme={theme}>
 				<JoinGame {...props} />

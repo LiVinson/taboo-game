@@ -78,8 +78,8 @@ const TabooList = ({ list, property, specialValue, specialKey, secondary }) => {
 				let includeStar = false
 				if (typeof listItem === 'object' && listItem !== null && listItem[property]) {
 					displayText = listItem[property]
-					console.log(listItem[specialKey])
-					console.log(specialValue)
+					// console.log(listItem[specialKey])
+					// console.log(specialValue)
 					if (listItem[specialKey] && listItem[specialKey] === specialValue) {
 						console.log(true)
 						includeStar = true

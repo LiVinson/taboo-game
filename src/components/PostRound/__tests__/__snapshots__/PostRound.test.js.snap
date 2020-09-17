@@ -2,7 +2,7 @@
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is not watcher 1`] = `
 <div
-  className="sc-fzoXzr eNeJoR"
+  className="sc-fzpjYC eQOcJW"
 >
   <div
     className="sc-AxjAm hDlFTS"
@@ -64,7 +64,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is watcher 1`] = `
 <div
-  className="sc-fzoXzr eNeJoR"
+  className="sc-fzpjYC eQOcJW"
 >
   <div
     className="sc-AxjAm hDlFTS"
@@ -81,18 +81,18 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
         className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fznZeY eJfiSP"
+          className="sc-fzokOt gWWQxI"
         >
           <input
-            className="sc-fzokOt fgEyXA"
+            className="sc-fzqBZW dVYnNZ"
             id="Kendrick Lamar"
-            name="does this matter?"
+            name="Kendrick Lamar"
             onChange={[Function]}
             type="radio"
             value={0}
           />
           <label
-            className="sc-fzqBZW iLfJjv"
+            className="sc-fzqNJr VlIuW"
             htmlFor="Kendrick Lamar"
           >
             Kendrick Lamar
@@ -134,18 +134,18 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
         className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fznZeY eJfiSP"
+          className="sc-fzokOt gWWQxI"
         >
           <input
-            className="sc-fzokOt fgEyXA"
+            className="sc-fzqBZW dVYnNZ"
             id="Simba"
-            name="does this matter?"
+            name="Simba"
             onChange={[Function]}
             type="radio"
             value={1}
           />
           <label
-            className="sc-fzqBZW iLfJjv"
+            className="sc-fzqNJr VlIuW"
             htmlFor="Simba"
           >
             Simba
@@ -187,18 +187,18 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
         className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fznZeY eJfiSP"
+          className="sc-fzokOt gWWQxI"
         >
           <input
-            className="sc-fzokOt fgEyXA"
+            className="sc-fzqBZW dVYnNZ"
             id="Will Smith"
-            name="does this matter?"
+            name="Will Smith"
             onChange={[Function]}
             type="radio"
             value={2}
           />
           <label
-            className="sc-fzqBZW iLfJjv"
+            className="sc-fzqNJr VlIuW"
             htmlFor="Will Smith"
           >
             Will Smith

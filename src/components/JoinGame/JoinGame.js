@@ -71,7 +71,7 @@ export class JoinGame extends React.Component {
 			<ButtonTabooCard tabooWord="Join Game" buttons={buttonInfo}>
 				<JoinGameForm initialValues={{ name, gamecode }} handleSubmit={this.handleSubmit} />
 				{this.props.isPending ? <Pending speed={300} message={`Joining game ${this.state.gamecode}`} /> : null}
-				{this.props.error ? <ErrorMessage error={this.props.error.message} /> : null}
+				{this.props.error ? <ErrorMessage error={this.props.error} /> : null}
 			</ButtonTabooCard>
 		)
 	}

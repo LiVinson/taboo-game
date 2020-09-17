@@ -557,7 +557,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
     <p
       className="c7"
     >
-      There was an error creating game.
+      There was an error joining the game.
     </p>
   </div>
   <div

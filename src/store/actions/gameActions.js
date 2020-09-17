@@ -110,7 +110,7 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 				.catch((error) => {
 					console.log('there was an error joining the game')
 					console.log(error)
-					dispatch(errorActionCreator('JOIN_GAME_FAILURE', error))
+					dispatch(errorActionCreator('JOIN_GAME_FAILURE', error.message))
 				})
 		})
 	}

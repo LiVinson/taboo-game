@@ -47,7 +47,7 @@ export const submitCardIdea = (cardIdea) => {
 
 		return new Promise((resolve, reject ) => {
 			dispatch(requestSubmitCardIdea())
-			console.log(cardIdea)
+			// console.log(cardIdea)
 
 			return dbSubmitCardIdea(cardIdea).then(() => {
 					console.log("success")
@@ -57,7 +57,6 @@ export const submitCardIdea = (cardIdea) => {
 				.catch((error) => {
 					const errorMessage = 'There was a problem submitting your idea. Please try again.'
 					dispatch(errorActionCreator('SUBMIT_CARD_IDEA_FAILURE', errorMessage))
-					reject(error)
 				})
 		})
 	}

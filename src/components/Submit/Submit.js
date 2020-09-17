@@ -1,13 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SubmitCardForm from 'components/SubmitCardForm'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import InstructionsCard from 'components/InstructionsCard'
 import Pending from 'components/shared/Pending'
-import {ErrorMessage, SuccessMessage} from 'components/shared/FeedbackMessage'
+import { ErrorMessage, SuccessMessage } from 'components/shared/FeedbackMessage'
 import { submitCardIdea } from 'store/actions/cardActions'
 
-class Submit extends React.Component {
+export class Submit extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -27,10 +28,9 @@ class Submit extends React.Component {
 		this.props.history.push('/home')
 	}
 
+	//actions passed from Formik
 	handleSubmit = (values, actions) => {
-		console.log('submitting')
-		console.log(values)
-		console.log(actions)
+		// console.log(values)
 		this.setState(
 			{
 				tabooWord: values.tabooWord,
@@ -41,30 +41,22 @@ class Submit extends React.Component {
 				word5: values.word5,
 			},
 			() => {
-				this.props
-					.submitCardIdea(this.state)
-					.then(() => {
-						console.log('promise complete')
-						console.log(actions)
-						actions.setSubmitting(false)
-						actions.resetForm({})
-						this.displaySuccess()
-					})
-					.catch((error) => {
-						console.log(error)
-					})
+				//Saves card idea in firestore
+				this.props.submitCardIdea(this.state).then(() => {
+					actions.setSubmitting(false)
+					this.displaySuccess()
+				})
 			}
 		)
 	}
 
 	componentWillUnmount() {
-		console.log('clearing')
 		clearTimeout(this.timeOut)
 	}
 
+	//Removes success message after 2 seconds and resets state, which clears form
 	clearSuccess = () => {
 		this.timeOut = setTimeout(() => {
-			console.log("clear")
 			this.setState({
 				tabooWord: '',
 				word1: '',
@@ -80,7 +72,7 @@ class Submit extends React.Component {
 	displaySuccess = () => {
 		this.setState(
 			{
-				successMsg: 'Success!',
+				successMsg: 'Card idea submitted!',
 			},
 			() => {
 				this.clearSuccess()
@@ -117,6 +109,13 @@ class Submit extends React.Component {
 			</React.Fragment>
 		)
 	}
+}
+
+Submit.propTypes = {
+	history: PropTypes.object.isRequired,
+	error: PropTypes.string,
+	isPending: PropTypes.bool.isRequired,
+	submitCardIdea: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {

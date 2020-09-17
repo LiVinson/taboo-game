@@ -2,31 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik, Field, ErrorMessage } from 'formik'
 import { Form, FormSection, FormSectionTitle, TextInput, TextLabel, ErrorText } from 'components/shared/FormElements'
+
 //Validation occurs onChange or onBlur of inputs and onSubmit of form
 const validate = (values) => {
 	const errors = {}
 	if (!values.tabooWord) {
 		errors.tabooWord = 'A taboo word is required'
 	}
-	// else if (values.word1.length > 35) {
-	// 	errors.name = 'Must be 35 characters or less'
-	// } else if (values.word2.length > 35) {
-	// 	errors.name = 'Must be 35 characters or less'
-	// } else if (values.word3.length > 35) {
-	// 	errors.name = 'Must be 35 characters or less'
-	// } else if (values.word4.length > 35) {
-	// 	errors.name = 'Must be 35 characters or less'
-	// } else if (values.word5.length > 35) {
-	// 	errors.name = 'Must be 35 characters or less'
-	// }
 	return errors
 }
 
 const SubmitCardForm = (props) => {
-	console.log(props)
 	return (
 		<Formik
-			enableReinitialize={true}
+			enableReinitialize={true} //allows form to reset if initial state values change
 			initialValues={props.initialValues}
 			validate={validate}
 			onSubmit={(values, actions) => props.handleSubmit(values, actions)}
@@ -113,5 +102,7 @@ const SubmitCardForm = (props) => {
 
 SubmitCardForm.propTypes = {
 	initialValues: PropTypes.object.isRequired,
+	handleSubmit: PropTypes.func.isRequired
 }
+
 export default SubmitCardForm
