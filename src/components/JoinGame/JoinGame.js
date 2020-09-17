@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import JoinGameForm from 'components/JoinGameForm'
 import Pending from 'components/shared/Pending'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 import { joinNewGame } from 'store/actions/gameActions'
 import { clearErrors } from 'store/actions/errorActions'
 
@@ -31,7 +31,7 @@ export class JoinGame extends React.Component {
 			() => {
 				const { gamecode, playerName } = this.state
 				this.props.joinNewGame({ gamecode, playerName }).then(() => {
-					console.log('promise done: player has joined game. Redirecting.')
+					// console.log('promise done: player has joined game. Redirecting.')
 					//Finishes Formik submission process
 					setSubmitting(false)
 					//redirect to Waiting
@@ -47,6 +47,7 @@ export class JoinGame extends React.Component {
 		this.props.history.push('/home')
 	}
 
+	//Needed in case user gets game error and opens component that references same error property without clearing
 	componentWillUnmount() {
 		this.props.clearGameErrors()
 	}
@@ -70,7 +71,7 @@ export class JoinGame extends React.Component {
 			<ButtonTabooCard tabooWord="Join Game" buttons={buttonInfo}>
 				<JoinGameForm initialValues={{ name, gamecode }} handleSubmit={this.handleSubmit} />
 				{this.props.isPending ? <Pending speed={300} message={`Joining game ${this.state.gamecode}`} /> : null}
-				{this.props.error ? <ErrorMessage error={this.props.error.message} /> : null}
+				{this.props.error ? <ErrorMessage error={this.props.error} /> : null}
 			</ButtonTabooCard>
 		)
 	}
@@ -78,7 +79,7 @@ export class JoinGame extends React.Component {
 
 JoinGame.propTypes = {
 	history: PropTypes.object.isRequired,
-	error: PropTypes.object,
+	error: PropTypes.string,
 	isPending: PropTypes.bool.isRequired,
 	joinNewGame: PropTypes.func.isRequired,
 	clearGameErrors: PropTypes.func.isRequired,

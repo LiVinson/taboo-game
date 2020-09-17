@@ -10,7 +10,7 @@ const RadioListItem = ({ word, index, status, onChange }) => {
 		<StyledRadioListItem>
 			<RadioInput
 				type="radio"
-				name="does this matter?"
+				name={word}
 				value={index}
 				id={word}
 				onChange={(e) => {

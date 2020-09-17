@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledErrorCard } from './style'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 import { withRouter } from 'react-router-dom'
 

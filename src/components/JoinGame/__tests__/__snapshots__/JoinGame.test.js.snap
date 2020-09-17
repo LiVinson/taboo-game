@@ -224,7 +224,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
         className="c4"
       >
         <label
-          className="sc-fzpjYC c5"
+          className="sc-fznxsB c5"
           htmlFor="name"
         >
           Enter Your Name
@@ -245,7 +245,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with de
         className="c4"
       >
         <label
-          className="sc-fzpjYC c5"
+          className="sc-fznxsB c5"
           htmlFor="gamecode"
         >
           Enter a Game Code
@@ -515,7 +515,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
         className="c4"
       >
         <label
-          className="sc-fzpjYC c5"
+          className="sc-fznxsB c5"
           htmlFor="name"
         >
           Enter Your Name
@@ -536,7 +536,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
         className="c4"
       >
         <label
-          className="sc-fzpjYC c5"
+          className="sc-fznxsB c5"
           htmlFor="gamecode"
         >
           Enter a Game Code
@@ -557,7 +557,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with er
     <p
       className="c7"
     >
-      There was an error creating game.
+      There was an error joining the game.
     </p>
   </div>
   <div
@@ -811,7 +811,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
         className="c4"
       >
         <label
-          className="sc-fzpjYC c5"
+          className="sc-fznxsB c5"
           htmlFor="name"
         >
           Enter Your Name
@@ -832,7 +832,7 @@ exports[`JoinGame functionality and rendering JoinGame renders correctly with is
         className="c4"
       >
         <label
-          className="sc-fzpjYC c5"
+          className="sc-fznxsB c5"
           htmlFor="gamecode"
         >
           Enter a Game Code

@@ -170,7 +170,6 @@ export const addPlayer = (player, gamecode) => {
 export const dbUpdateTeam = (gamecode, playerId, team) => {
 	console.log('updating team in firestore')
 	console.log(team)
-	//probably don't need this promise, need to test.
 
 	const gamePath = firebase.firestore().collection('games').doc(gamecode)
 	return firebase
@@ -417,6 +416,33 @@ export const dbUpdateGameScore = (gamecode) => {
 			throw new Error(error)
 		})
 }
+
+export const dbSubmitCardIdea = (cardIdea) => {
+	console.log("submitting card idea...", cardIdea)
+
+	const cardIdeaObj = {		
+		...cardIdea,
+		reviewed: false,
+		added: false,
+		createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+	}
+
+	return firebase
+		.firestore()
+		.collection('suggestions')
+		.doc()
+		.set(cardIdeaObj)
+		.then(() => {
+			console.log('card suggestion saved.')
+			return true
+		})
+		.catch((error) => {
+			console.log(error)
+			throw error
+		})
+
+}
+//---------------------------- ROUND UPDATES -------------------------------------//
 
 /*Called to toggle half from top/bottom which determines which team the 'giver' is selected from.
 When toggling to top, this means a full round is completed, so team turns are incremented and rotations 
@@ -677,3 +703,5 @@ const verifyEndGame = (endGameMethod, endGameValue, t1Rotations, t2Rotations) =>
 		return false
 	}
 }
+
+

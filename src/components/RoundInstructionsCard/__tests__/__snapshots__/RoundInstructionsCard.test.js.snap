@@ -13,18 +13,18 @@ exports[`RoundInstructionsCard renders correctly 1`] = `
     className="sc-AxhCb JZaCe"
   >
     <p
-      className="sc-fznZeY dEjDoi"
+      className="sc-fzokOt bZVoaN"
     >
       It's the other team's turn to guess! 
       <span
-        className="sc-fzokOt gzbudF"
+        className="sc-fzqBZW hgCjBU"
       >
         Sam
       </span>
        will be giving the clues, and
        
       <span
-        className="sc-fzokOt gzbudF"
+        className="sc-fzqBZW hgCjBU"
       >
         Jo
       </span>

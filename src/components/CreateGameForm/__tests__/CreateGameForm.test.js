@@ -25,10 +25,4 @@ test("CreateGameForm renders correctly", () => {
   expect(wrapper).toMatchSnapshot()
 })
 
-/*
-Integration testing with Create Game:
 
-- Test that name validation occurs after focusing on input and then leaving
-- Test that if turns per person is selected, the corresponding select is enabled and the other select is disabled
-
-*/

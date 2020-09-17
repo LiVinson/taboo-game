@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import CardsPlayed from 'components/CardsPlayed'
 import { LargeButton } from 'components/shared/Button'
 import Pending from 'components/shared/Pending'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 
 const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb, isPending) => {
 	// console.log(status)

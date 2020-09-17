@@ -8,7 +8,7 @@ import { CreateGame } from '../CreateGame'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import CreateGameForm from 'components/CreateGameForm'
 import Pending from 'components/shared/Pending'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 
 //*NOTE*: randomatic npm package is mocked to return CODE00 for gamecode
 
@@ -139,6 +139,7 @@ describe('CreateGame functionality and rendering', () => {
 				players: [],
 			}
 			expect(props.createNewGame).toHaveBeenCalled()
+			//gamecode comes from mocking randomatic module
 			expect(props.createNewGame).toHaveBeenCalledWith('CODE00', gameData, name)
 		}, 75)
 	})

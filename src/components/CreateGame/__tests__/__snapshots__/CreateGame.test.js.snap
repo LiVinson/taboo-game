@@ -48,43 +48,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   margin-top: 1.5rem;
 }
 
-.c14 {
-  width: 47%;
-  padding: 0.6rem 0rem;
-  border: none;
-  border-radius: 2px;
-  background-color: #f7f9f9;
-  font-size: 2.3rem;
-  font-family: 'Oswald',sans-serif;
-  text-transform: uppercase;
-  color: #1982C4;
-}
-
-.c14:hover {
-  -webkit-transform: translateY(-2px);
-  -ms-transform: translateY(-2px);
-  transform: translateY(-2px);
-}
-
-.c14:active {
-  -webkit-filter: brightness(0.8);
-  filter: brightness(0.8);
-  -webkit-transform: translateY(2px);
-  -ms-transform: translateY(2px);
-  transform: translateY(2px);
-}
-
-.c14:focus {
-  border: none;
-  outline: solid 2px #8AC926;
-}
-
-.c14:disabled {
-  -webkit-filter: brightness(0.6);
-  filter: brightness(0.6);
-  cursor: not-allowed;
-}
-
 .c15 {
   width: 47%;
   padding: 0.6rem 0rem;
@@ -95,8 +58,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
   color: #1982C4;
-  color: #f7f9f9;
-  background-color: #8AC926;
 }
 
 .c15:hover {
@@ -124,11 +85,50 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   cursor: not-allowed;
 }
 
-.c15:focus {
+.c16 {
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #f7f9f9;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #1982C4;
+  color: #f7f9f9;
+  background-color: #8AC926;
+}
+
+.c16:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.c16:active {
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c16:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c16:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}
+
+.c16:focus {
   outline: solid 2px #f7f9f9;
 }
 
-.c13 {
+.c14 {
   margin-top: 1.5rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -141,6 +141,10 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+
+.c7 {
+  display: none;
 }
 
 .c3 {
@@ -156,19 +160,19 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   padding-right: 0;
 }
 
-.c7 {
+.c8 {
   margin-bottom: 1.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-.c8 {
+.c9 {
   font-size: 2rem;
   font-weight: 500;
   text-align: center;
 }
 
-.c8::after {
+.c9::after {
   display: block;
   content: "";
   width: 80%;
@@ -177,7 +181,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   margin: 0.8rem auto 1rem auto;
 }
 
-.c9 {
+.c10 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -225,11 +229,11 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   border: solid 1px #1982C4;
 }
 
-.c10 {
+.c11 {
   margin-right: 1rem;
 }
 
-.c12 {
+.c13 {
   padding: 1rem;
   width: 100%;
   margin: .8rem 0rem 1rem 0;
@@ -238,12 +242,12 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   border: none;
 }
 
-.c12:focus {
+.c13:focus {
   outline: none;
   border: solid 1px #1982C4;
 }
 
-.c11 {
+.c12 {
   font-size: 1.6rem;
   display: inline-block;
 }
@@ -288,7 +292,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
         <input
           className="c6"
           id="name"
-          maxLength={20}
           name="name"
           onBlur={[Function]}
           onChange={[Function]}
@@ -298,20 +301,74 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
           value=""
         />
       </div>
-      <div
+      <span
         className="c7"
       >
-        <p
+        <div
           className="c8"
+        >
+          <p
+            className="c9"
+          >
+            Game Mode 
+          </p>
+          <div
+            className="c10"
+          >
+            <input
+              checked={false}
+              className="c11"
+              id="remote"
+              name="gameMode"
+              onBlur={[Function]}
+              onChange={[Function]}
+              tabIndex="2"
+              type="radio"
+              value="remote"
+            />
+            <label
+              className="c12"
+              htmlFor="remote"
+            >
+              Remote
+            </label>
+          </div>
+          <div
+            className="c10"
+          >
+            <input
+              checked={false}
+              className="c11"
+              id="inPerson"
+              name="gameMode"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="radio"
+              value="inPerson"
+            />
+            <label
+              className="c12"
+              htmlFor="inPerson"
+            >
+              In Person
+            </label>
+          </div>
+        </div>
+      </span>
+      <div
+        className="c8"
+      >
+        <p
+          className="c9"
         >
           End Game Method
         </p>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={true}
-            className="c10"
+            className="c11"
             id="turns"
             name="endGameMethod"
             onBlur={[Function]}
@@ -321,14 +378,14 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="turns"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="turns"
           >
             Turns per Person
           </label>
         </div>
         <select
-          className="c12"
+          className="c13"
           disabled={false}
           name="turnsValue"
           onBlur={[Function]}
@@ -362,67 +419,72 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             5 Turns
           </option>
         </select>
-        <div
-          className="c9"
+        <span
+          className="c7"
         >
-          <input
-            checked={false}
+          <div
             className="c10"
-            id="time"
-            name="endGameMethod"
+          >
+            <input
+              checked={false}
+              className="c11"
+              disabled={true}
+              id="time"
+              name="endGameMethod"
+              onBlur={[Function]}
+              onChange={[Function]}
+              tabIndex="5"
+              type="radio"
+              value="time"
+            />
+            <label
+              className="c12"
+              htmlFor="time"
+            >
+              Timer (Coming soon!)
+            </label>
+          </div>
+          <select
+            className="c13"
+            disabled={true}
+            name="timeValue"
             onBlur={[Function]}
             onChange={[Function]}
-            tabIndex="5"
-            type="radio"
-            value="time"
-          />
-          <label
-            className="c11"
-            htmlFor="time"
-          >
-            Timer
-          </label>
-        </div>
-        <select
-          className="c12"
-          disabled={true}
-          name="timeValue"
-          onBlur={[Function]}
-          onChange={[Function]}
-          tabIndex="6"
-          value={60}
-        >
-          <option
-            value={30}
-          >
-            30 minutes
-          </option>
-          <option
+            tabIndex="6"
             value={60}
           >
-            60 minutes
-          </option>
-          <option
-            value={90}
-          >
-            90 minutes
-          </option>
-        </select>
+            <option
+              value={30}
+            >
+              30 minutes
+            </option>
+            <option
+              value={60}
+            >
+              60 minutes
+            </option>
+            <option
+              value={90}
+            >
+              90 minutes
+            </option>
+          </select>
+        </span>
       </div>
       <div
-        className="c7"
+        className="c8"
       >
         <p
-          className="c8"
+          className="c9"
         >
           Skipping Penalty
         </p>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={true}
-            className="c10"
+            className="c11"
             id="none"
             name="skipPenalty"
             onBlur={[Function]}
@@ -432,18 +494,18 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="none"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="none"
           >
             None
           </label>
         </div>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={false}
-            className="c10"
+            className="c11"
             id="half"
             name="skipPenalty"
             onBlur={[Function]}
@@ -452,18 +514,18 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="half"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="half"
           >
             1/2 a Point
           </label>
         </div>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={false}
-            className="c10"
+            className="c11"
             id="full"
             name="skipPenalty"
             onBlur={[Function]}
@@ -472,7 +534,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="full"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="full"
           >
             1 Point
@@ -482,16 +544,16 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
     </form>
   </div>
   <div
-    className="c13"
+    className="c14"
   >
     <button
-      className="c14"
+      className="c15"
       onClick={[Function]}
     >
       Back
     </button>
     <button
-      className="c15"
+      className="c16"
       disabled={false}
       form="createGameForm"
       type="submit"
@@ -550,43 +612,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   margin-top: 1.5rem;
 }
 
-.c15 {
-  width: 47%;
-  padding: 0.6rem 0rem;
-  border: none;
-  border-radius: 2px;
-  background-color: #f7f9f9;
-  font-size: 2.3rem;
-  font-family: 'Oswald',sans-serif;
-  text-transform: uppercase;
-  color: #1982C4;
-}
-
-.c15:hover {
-  -webkit-transform: translateY(-2px);
-  -ms-transform: translateY(-2px);
-  transform: translateY(-2px);
-}
-
-.c15:active {
-  -webkit-filter: brightness(0.8);
-  filter: brightness(0.8);
-  -webkit-transform: translateY(2px);
-  -ms-transform: translateY(2px);
-  transform: translateY(2px);
-}
-
-.c15:focus {
-  border: none;
-  outline: solid 2px #8AC926;
-}
-
-.c15:disabled {
-  -webkit-filter: brightness(0.6);
-  filter: brightness(0.6);
-  cursor: not-allowed;
-}
-
 .c16 {
   width: 47%;
   padding: 0.6rem 0rem;
@@ -597,8 +622,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
   color: #1982C4;
-  color: #f7f9f9;
-  background-color: #8AC926;
 }
 
 .c16:hover {
@@ -626,11 +649,50 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   cursor: not-allowed;
 }
 
-.c16:focus {
+.c17 {
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #f7f9f9;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #1982C4;
+  color: #f7f9f9;
+  background-color: #8AC926;
+}
+
+.c17:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.c17:active {
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c17:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c17:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}
+
+.c17:focus {
   outline: solid 2px #f7f9f9;
 }
 
-.c14 {
+.c15 {
   margin-top: 1.5rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -645,10 +707,14 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   flex-wrap: wrap;
 }
 
-.c13 {
+.c14 {
   font-size: 1.5rem;
   font-style: italic;
   color: red;
+}
+
+.c7 {
+  display: none;
 }
 
 .c3 {
@@ -664,19 +730,19 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   padding-right: 0;
 }
 
-.c7 {
+.c8 {
   margin-bottom: 1.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-.c8 {
+.c9 {
   font-size: 2rem;
   font-weight: 500;
   text-align: center;
 }
 
-.c8::after {
+.c9::after {
   display: block;
   content: "";
   width: 80%;
@@ -685,7 +751,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   margin: 0.8rem auto 1rem auto;
 }
 
-.c9 {
+.c10 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -733,11 +799,11 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   border: solid 1px #1982C4;
 }
 
-.c10 {
+.c11 {
   margin-right: 1rem;
 }
 
-.c12 {
+.c13 {
   padding: 1rem;
   width: 100%;
   margin: .8rem 0rem 1rem 0;
@@ -746,12 +812,12 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   border: none;
 }
 
-.c12:focus {
+.c13:focus {
   outline: none;
   border: solid 1px #1982C4;
 }
 
-.c11 {
+.c12 {
   font-size: 1.6rem;
   display: inline-block;
 }
@@ -796,7 +862,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
         <input
           className="c6"
           id="name"
-          maxLength={20}
           name="name"
           onBlur={[Function]}
           onChange={[Function]}
@@ -806,20 +871,74 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
           value=""
         />
       </div>
-      <div
+      <span
         className="c7"
       >
-        <p
+        <div
           className="c8"
+        >
+          <p
+            className="c9"
+          >
+            Game Mode 
+          </p>
+          <div
+            className="c10"
+          >
+            <input
+              checked={false}
+              className="c11"
+              id="remote"
+              name="gameMode"
+              onBlur={[Function]}
+              onChange={[Function]}
+              tabIndex="2"
+              type="radio"
+              value="remote"
+            />
+            <label
+              className="c12"
+              htmlFor="remote"
+            >
+              Remote
+            </label>
+          </div>
+          <div
+            className="c10"
+          >
+            <input
+              checked={false}
+              className="c11"
+              id="inPerson"
+              name="gameMode"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="radio"
+              value="inPerson"
+            />
+            <label
+              className="c12"
+              htmlFor="inPerson"
+            >
+              In Person
+            </label>
+          </div>
+        </div>
+      </span>
+      <div
+        className="c8"
+      >
+        <p
+          className="c9"
         >
           End Game Method
         </p>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={true}
-            className="c10"
+            className="c11"
             id="turns"
             name="endGameMethod"
             onBlur={[Function]}
@@ -829,14 +948,14 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="turns"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="turns"
           >
             Turns per Person
           </label>
         </div>
         <select
-          className="c12"
+          className="c13"
           disabled={false}
           name="turnsValue"
           onBlur={[Function]}
@@ -870,67 +989,72 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             5 Turns
           </option>
         </select>
-        <div
-          className="c9"
+        <span
+          className="c7"
         >
-          <input
-            checked={false}
+          <div
             className="c10"
-            id="time"
-            name="endGameMethod"
+          >
+            <input
+              checked={false}
+              className="c11"
+              disabled={true}
+              id="time"
+              name="endGameMethod"
+              onBlur={[Function]}
+              onChange={[Function]}
+              tabIndex="5"
+              type="radio"
+              value="time"
+            />
+            <label
+              className="c12"
+              htmlFor="time"
+            >
+              Timer (Coming soon!)
+            </label>
+          </div>
+          <select
+            className="c13"
+            disabled={true}
+            name="timeValue"
             onBlur={[Function]}
             onChange={[Function]}
-            tabIndex="5"
-            type="radio"
-            value="time"
-          />
-          <label
-            className="c11"
-            htmlFor="time"
-          >
-            Timer
-          </label>
-        </div>
-        <select
-          className="c12"
-          disabled={true}
-          name="timeValue"
-          onBlur={[Function]}
-          onChange={[Function]}
-          tabIndex="6"
-          value={60}
-        >
-          <option
-            value={30}
-          >
-            30 minutes
-          </option>
-          <option
+            tabIndex="6"
             value={60}
           >
-            60 minutes
-          </option>
-          <option
-            value={90}
-          >
-            90 minutes
-          </option>
-        </select>
+            <option
+              value={30}
+            >
+              30 minutes
+            </option>
+            <option
+              value={60}
+            >
+              60 minutes
+            </option>
+            <option
+              value={90}
+            >
+              90 minutes
+            </option>
+          </select>
+        </span>
       </div>
       <div
-        className="c7"
+        className="c8"
       >
         <p
-          className="c8"
+          className="c9"
         >
           Skipping Penalty
         </p>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={true}
-            className="c10"
+            className="c11"
             id="none"
             name="skipPenalty"
             onBlur={[Function]}
@@ -940,18 +1064,18 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="none"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="none"
           >
             None
           </label>
         </div>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={false}
-            className="c10"
+            className="c11"
             id="half"
             name="skipPenalty"
             onBlur={[Function]}
@@ -960,18 +1084,18 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="half"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="half"
           >
             1/2 a Point
           </label>
         </div>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={false}
-            className="c10"
+            className="c11"
             id="full"
             name="skipPenalty"
             onBlur={[Function]}
@@ -980,7 +1104,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="full"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="full"
           >
             1 Point
@@ -989,22 +1113,22 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
       </div>
     </form>
     <p
-      className="c13"
+      className="c14"
     >
       There was a problem creating the game. Please try again.
     </p>
   </div>
   <div
-    className="c14"
+    className="c15"
   >
     <button
-      className="c15"
+      className="c16"
       onClick={[Function]}
     >
       Back
     </button>
     <button
-      className="c16"
+      className="c17"
       disabled={false}
       form="createGameForm"
       type="submit"
@@ -1063,43 +1187,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   margin-top: 1.5rem;
 }
 
-.c15 {
-  width: 47%;
-  padding: 0.6rem 0rem;
-  border: none;
-  border-radius: 2px;
-  background-color: #f7f9f9;
-  font-size: 2.3rem;
-  font-family: 'Oswald',sans-serif;
-  text-transform: uppercase;
-  color: #1982C4;
-}
-
-.c15:hover {
-  -webkit-transform: translateY(-2px);
-  -ms-transform: translateY(-2px);
-  transform: translateY(-2px);
-}
-
-.c15:active {
-  -webkit-filter: brightness(0.8);
-  filter: brightness(0.8);
-  -webkit-transform: translateY(2px);
-  -ms-transform: translateY(2px);
-  transform: translateY(2px);
-}
-
-.c15:focus {
-  border: none;
-  outline: solid 2px #8AC926;
-}
-
-.c15:disabled {
-  -webkit-filter: brightness(0.6);
-  filter: brightness(0.6);
-  cursor: not-allowed;
-}
-
 .c16 {
   width: 47%;
   padding: 0.6rem 0rem;
@@ -1110,8 +1197,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   font-family: 'Oswald',sans-serif;
   text-transform: uppercase;
   color: #1982C4;
-  color: #f7f9f9;
-  background-color: #8AC926;
 }
 
 .c16:hover {
@@ -1139,11 +1224,50 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   cursor: not-allowed;
 }
 
-.c16:focus {
+.c17 {
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #f7f9f9;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #1982C4;
+  color: #f7f9f9;
+  background-color: #8AC926;
+}
+
+.c17:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.c17:active {
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c17:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c17:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}
+
+.c17:focus {
   outline: solid 2px #f7f9f9;
 }
 
-.c14 {
+.c15 {
   margin-top: 1.5rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1156,6 +1280,10 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+
+.c7 {
+  display: none;
 }
 
 .c3 {
@@ -1171,19 +1299,19 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   padding-right: 0;
 }
 
-.c7 {
+.c8 {
   margin-bottom: 1.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-.c8 {
+.c9 {
   font-size: 2rem;
   font-weight: 500;
   text-align: center;
 }
 
-.c8::after {
+.c9::after {
   display: block;
   content: "";
   width: 80%;
@@ -1192,7 +1320,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   margin: 0.8rem auto 1rem auto;
 }
 
-.c9 {
+.c10 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1240,11 +1368,11 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   border: solid 1px #1982C4;
 }
 
-.c10 {
+.c11 {
   margin-right: 1rem;
 }
 
-.c12 {
+.c13 {
   padding: 1rem;
   width: 100%;
   margin: .8rem 0rem 1rem 0;
@@ -1253,12 +1381,12 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   border: none;
 }
 
-.c12:focus {
+.c13:focus {
   outline: none;
   border: solid 1px #1982C4;
 }
 
-.c11 {
+.c12 {
   font-size: 1.6rem;
   display: inline-block;
 }
@@ -1273,7 +1401,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
   font-weight: 500;
 }
 
-.c13 {
+.c14 {
   font-size: 1.5rem;
   font-style: italic;
   color: #1982C4;
@@ -1309,7 +1437,6 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
         <input
           className="c6"
           id="name"
-          maxLength={20}
           name="name"
           onBlur={[Function]}
           onChange={[Function]}
@@ -1319,20 +1446,74 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
           value=""
         />
       </div>
-      <div
+      <span
         className="c7"
       >
-        <p
+        <div
           className="c8"
+        >
+          <p
+            className="c9"
+          >
+            Game Mode 
+          </p>
+          <div
+            className="c10"
+          >
+            <input
+              checked={false}
+              className="c11"
+              id="remote"
+              name="gameMode"
+              onBlur={[Function]}
+              onChange={[Function]}
+              tabIndex="2"
+              type="radio"
+              value="remote"
+            />
+            <label
+              className="c12"
+              htmlFor="remote"
+            >
+              Remote
+            </label>
+          </div>
+          <div
+            className="c10"
+          >
+            <input
+              checked={false}
+              className="c11"
+              id="inPerson"
+              name="gameMode"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="radio"
+              value="inPerson"
+            />
+            <label
+              className="c12"
+              htmlFor="inPerson"
+            >
+              In Person
+            </label>
+          </div>
+        </div>
+      </span>
+      <div
+        className="c8"
+      >
+        <p
+          className="c9"
         >
           End Game Method
         </p>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={true}
-            className="c10"
+            className="c11"
             id="turns"
             name="endGameMethod"
             onBlur={[Function]}
@@ -1342,14 +1523,14 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="turns"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="turns"
           >
             Turns per Person
           </label>
         </div>
         <select
-          className="c12"
+          className="c13"
           disabled={false}
           name="turnsValue"
           onBlur={[Function]}
@@ -1383,67 +1564,72 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             5 Turns
           </option>
         </select>
-        <div
-          className="c9"
+        <span
+          className="c7"
         >
-          <input
-            checked={false}
+          <div
             className="c10"
-            id="time"
-            name="endGameMethod"
+          >
+            <input
+              checked={false}
+              className="c11"
+              disabled={true}
+              id="time"
+              name="endGameMethod"
+              onBlur={[Function]}
+              onChange={[Function]}
+              tabIndex="5"
+              type="radio"
+              value="time"
+            />
+            <label
+              className="c12"
+              htmlFor="time"
+            >
+              Timer (Coming soon!)
+            </label>
+          </div>
+          <select
+            className="c13"
+            disabled={true}
+            name="timeValue"
             onBlur={[Function]}
             onChange={[Function]}
-            tabIndex="5"
-            type="radio"
-            value="time"
-          />
-          <label
-            className="c11"
-            htmlFor="time"
-          >
-            Timer
-          </label>
-        </div>
-        <select
-          className="c12"
-          disabled={true}
-          name="timeValue"
-          onBlur={[Function]}
-          onChange={[Function]}
-          tabIndex="6"
-          value={60}
-        >
-          <option
-            value={30}
-          >
-            30 minutes
-          </option>
-          <option
+            tabIndex="6"
             value={60}
           >
-            60 minutes
-          </option>
-          <option
-            value={90}
-          >
-            90 minutes
-          </option>
-        </select>
+            <option
+              value={30}
+            >
+              30 minutes
+            </option>
+            <option
+              value={60}
+            >
+              60 minutes
+            </option>
+            <option
+              value={90}
+            >
+              90 minutes
+            </option>
+          </select>
+        </span>
       </div>
       <div
-        className="c7"
+        className="c8"
       >
         <p
-          className="c8"
+          className="c9"
         >
           Skipping Penalty
         </p>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={true}
-            className="c10"
+            className="c11"
             id="none"
             name="skipPenalty"
             onBlur={[Function]}
@@ -1453,18 +1639,18 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="none"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="none"
           >
             None
           </label>
         </div>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={false}
-            className="c10"
+            className="c11"
             id="half"
             name="skipPenalty"
             onBlur={[Function]}
@@ -1473,18 +1659,18 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="half"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="half"
           >
             1/2 a Point
           </label>
         </div>
         <div
-          className="c9"
+          className="c10"
         >
           <input
             checked={false}
-            className="c10"
+            className="c11"
             id="full"
             name="skipPenalty"
             onBlur={[Function]}
@@ -1493,7 +1679,7 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
             value="full"
           />
           <label
-            className="c11"
+            className="c12"
             htmlFor="full"
           >
             1 Point
@@ -1502,22 +1688,22 @@ exports[`CreateGame functionality and rendering CreateGame renders correctly wit
       </div>
     </form>
     <p
-      className="c13"
+      className="c14"
     >
       Creating new game
     </p>
   </div>
   <div
-    className="c14"
+    className="c15"
   >
     <button
-      className="c15"
+      className="c16"
       onClick={[Function]}
     >
       Back
     </button>
     <button
-      className="c16"
+      className="c17"
       disabled={true}
       form="createGameForm"
       type="submit"

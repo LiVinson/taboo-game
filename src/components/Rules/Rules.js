@@ -18,6 +18,8 @@ export default class Rules extends React.Component {
 		}
 	}
 
+	//When user clicks Back. If already showing first rule, either call toggleGameInfo (during game play)
+	//or return to home route. Otherwise set state to previous rule
 	displayPreviousRule = (event) => {
 		const { currentRule } = this.state
 		if (currentRule > 0) {
@@ -35,6 +37,8 @@ export default class Rules extends React.Component {
 		}
 	}
 
+	//When user clicks Next. If already showing last rule, either call toggleGameInfo (during game play)
+	//or return to home route. Otherwise set state to next rule
 	displayNextRule = (event) => {
 		const { currentRule } = this.state
 		if (currentRule < rules.length - 1) {
@@ -82,6 +86,7 @@ Rules.propTypes = {
 	toggleGameInfo: PropTypes.func,
 }
 
+//Loops over imported array of rules and displays title and paragraphs for rule displayed
 const DisplayRulesText = ({ topicId }) => {
 	const rulesInfo = rules[topicId]
 	if (rulesInfo) {
@@ -94,6 +99,7 @@ const DisplayRulesText = ({ topicId }) => {
 			</React.Fragment>
 		)
 	} else {
+		//Shouldn't be possible, but just in case.
 		return <Redirect to="/404" />
 	}
 }

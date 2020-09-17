@@ -1,0 +1,812 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Submit functionality and rendering Submit renders correctly with default props 1`] = `
+Array [
+  .c0 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+<p
+    className="c0"
+  >
+    Submit your taboo card idea and maybe you will see it the next time you play!
+  </p>,
+  .c3 {
+  text-align: left;
+  font-size: 2.2rem;
+  font-family: 'Oswald',sans-serif;
+  color: #333333;
+}
+
+.c4 {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.c7 {
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.c8 {
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.c8::after {
+  display: block;
+  content: "";
+  width: 80%;
+  height: 1.5px;
+  background-color: #ebebeb;
+  margin: 0.8rem auto 1rem auto;
+}
+
+.c6 {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  background-color: #ebebeb;
+  font-size: 2.2rem;
+  border-radius: 2%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.c6::-webkit-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:focus {
+  outline: none;
+  border: solid 1px #1982C4;
+}
+
+.c5 {
+  font-size: 1.6rem;
+  display: inline-block;
+  font-size: 1.8;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: '';
+  bottom: 1.2rem;
+  left: 0.5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c10 {
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #f7f9f9;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #1982C4;
+}
+
+.c10:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.c10:active {
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c10:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c10:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}
+
+.c11 {
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #f7f9f9;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #1982C4;
+  color: #f7f9f9;
+  background-color: #8AC926;
+}
+
+.c11:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.c11:active {
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c11:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c11:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}
+
+.c11:focus {
+  outline: solid 2px #f7f9f9;
+}
+
+.c9 {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+<div
+    className="c0"
+  >
+    <div
+      className="c1"
+    >
+      Have an Idea?
+    </div>
+    <div
+      className="c2"
+    >
+      <form
+        action="#"
+        className="c3"
+        id="submitCardForm"
+        onReset={[Function]}
+        onSubmit={[Function]}
+      >
+        <div
+          className="c4"
+        >
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="tabooWord"
+          >
+            Taboo Word
+          </label>
+          <input
+            className="c6"
+            id="tabooWord"
+            maxLength={35}
+            name="tabooWord"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="1"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="c7"
+        >
+          <p
+            className="c8"
+          >
+            Words You Can't Say (Optional)
+          </p>
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word1"
+          >
+            Word 1
+          </label>
+          <input
+            className="c6"
+            id="word1"
+            maxLength={35}
+            name="word1"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="2"
+            type="text"
+            value=""
+          />
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word2"
+          >
+            Word 2
+          </label>
+          <input
+            className="c6"
+            id="word2"
+            maxLength={35}
+            name="word2"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="2"
+            type="text"
+            value=""
+          />
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word3"
+          >
+            Word 3
+          </label>
+          <input
+            className="c6"
+            id="word3"
+            maxLength={35}
+            name="word3"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="3"
+            type="text"
+            value=""
+          />
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word4"
+          >
+            Word 4
+          </label>
+          <input
+            className="c6"
+            id="word4"
+            maxLength={35}
+            name="word4"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="4"
+            type="text"
+            value=""
+          />
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word5"
+          >
+            Word 5
+          </label>
+          <input
+            className="c6"
+            id="word5"
+            maxLength={35}
+            name="word5"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="5"
+            type="text"
+            value=""
+          />
+        </div>
+      </form>
+      
+    </div>
+    <div
+      className="c9"
+    >
+      <button
+        className="c10"
+        onClick={[Function]}
+      >
+        Back
+      </button>
+      <button
+        className="c11"
+        disabled={false}
+        form="submitCardForm"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Submit functionality and rendering Submit renders correctly with isPending props true 1`] = `
+Array [
+  .c0 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+<p
+    className="c0"
+  >
+    Submit your taboo card idea and maybe you will see it the next time you play!
+  </p>,
+  .c3 {
+  text-align: left;
+  font-size: 2.2rem;
+  font-family: 'Oswald',sans-serif;
+  color: #333333;
+}
+
+.c4 {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.c7 {
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.c8 {
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.c8::after {
+  display: block;
+  content: "";
+  width: 80%;
+  height: 1.5px;
+  background-color: #ebebeb;
+  margin: 0.8rem auto 1rem auto;
+}
+
+.c6 {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  background-color: #ebebeb;
+  font-size: 2.2rem;
+  border-radius: 2%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.c6::-webkit-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::-moz-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:-ms-input-placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6::placeholder {
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
+.c6:focus {
+  outline: none;
+  border: solid 1px #1982C4;
+}
+
+.c5 {
+  font-size: 1.6rem;
+  display: inline-block;
+  font-size: 1.8;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.c0 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+}
+
+.c0:before {
+  z-index: -1;
+  position: absolute;
+  content: '';
+  bottom: 1.2rem;
+  left: 0.5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c1 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c11 {
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #f7f9f9;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #1982C4;
+}
+
+.c11:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.c11:active {
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c11:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c11:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}
+
+.c12 {
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #f7f9f9;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #1982C4;
+  color: #f7f9f9;
+  background-color: #8AC926;
+}
+
+.c12:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.c12:active {
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c12:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c12:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}
+
+.c12:focus {
+  outline: solid 2px #f7f9f9;
+}
+
+.c10 {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c9 {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #1982C4;
+}
+
+<div
+    className="c0"
+  >
+    <div
+      className="c1"
+    >
+      Have an Idea?
+    </div>
+    <div
+      className="c2"
+    >
+      <form
+        action="#"
+        className="c3"
+        id="submitCardForm"
+        onReset={[Function]}
+        onSubmit={[Function]}
+      >
+        <div
+          className="c4"
+        >
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="tabooWord"
+          >
+            Taboo Word
+          </label>
+          <input
+            className="c6"
+            id="tabooWord"
+            maxLength={35}
+            name="tabooWord"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="1"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="c7"
+        >
+          <p
+            className="c8"
+          >
+            Words You Can't Say (Optional)
+          </p>
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word1"
+          >
+            Word 1
+          </label>
+          <input
+            className="c6"
+            id="word1"
+            maxLength={35}
+            name="word1"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="2"
+            type="text"
+            value=""
+          />
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word2"
+          >
+            Word 2
+          </label>
+          <input
+            className="c6"
+            id="word2"
+            maxLength={35}
+            name="word2"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="2"
+            type="text"
+            value=""
+          />
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word3"
+          >
+            Word 3
+          </label>
+          <input
+            className="c6"
+            id="word3"
+            maxLength={35}
+            name="word3"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="3"
+            type="text"
+            value=""
+          />
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word4"
+          >
+            Word 4
+          </label>
+          <input
+            className="c6"
+            id="word4"
+            maxLength={35}
+            name="word4"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="4"
+            type="text"
+            value=""
+          />
+          <label
+            className="sc-Axmtr c5"
+            htmlFor="word5"
+          >
+            Word 5
+          </label>
+          <input
+            className="c6"
+            id="word5"
+            maxLength={35}
+            name="word5"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            tabIndex="5"
+            type="text"
+            value=""
+          />
+        </div>
+      </form>
+      <p
+        className="c9"
+      >
+        Submitting card idea.
+      </p>
+      
+    </div>
+    <div
+      className="c10"
+    >
+      <button
+        className="c11"
+        onClick={[Function]}
+      >
+        Back
+      </button>
+      <button
+        className="c12"
+        disabled={true}
+        form="submitCardForm"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </div>,
+]
+`;

@@ -1,26 +1,30 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { Formik, Field, ErrorMessage } from "formik"
-import { 
-  Form,
-  FormSection,
-  FormSectionTitle,
-  InputGroup,
-  TextInput,
-  RadioButton,
-  DropDown,Label,TextLabel,ErrorText
-
-} from "components/shared/FormElements"
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Formik, Field, ErrorMessage } from 'formik'
+import { ErrorMessage as CustomErrorText } from 'components/shared/FeedbackMessage'
+import HideContainer from 'components/shared/HideContainer'
+import {
+	Form,
+	FormSection,
+	FormSectionTitle,
+	InputGroup,
+	TextInput,
+	RadioButton,
+	DropDown,
+	Label,
+	TextLabel,
+	ErrorText,
+} from 'components/shared/FormElements'
 
 //Validation occurs onChange or onBlur of inputs and onSubmit of form
 const validate = (values) => {
-  const errors = {}
-  if (!values.name) {
-    errors.name = "Name is Required"
-  } else if (values.name.length > 25) {
-    errors.name = "Must be 25 characters or less"
-  }
-  return errors
+	const errors = {}
+	if (!values.name) {
+		errors.name = 'Name is Required'
+	} else if (values.name.length > 25) {
+		errors.name = 'Must be 25 characters or less'
+	}
+	return errors
 }
 
 /*Formik component accepts a function as child component that returns form and props to set defaults.
@@ -29,144 +33,132 @@ initial values, onChange, onBlur etc; based on the name of each Field.
 */
 
 const CreateGameForm = (props) => {
-  return (
-    <Formik
-      initialValues={props.initialValues}
-      validate={validate}
-      onSubmit={(values, { setSubmitting }) =>
-        props.handleSubmit(values, setSubmitting)
-      }
-    >
-      {(formik) => (
-        <Form id="createGameForm">
-          <FormSection>
-            <TextLabel htmlFor="name">
-              Enter Your Name
-            </TextLabel>
-            <Field id="name" maxLength={20} name="name" type="text" as={TextInput} placeholder=""  tabIndex="1"/>
-            <ErrorMessage name="name" component={ErrorText} />
-          </FormSection>
+	return (
+		<Formik
+			initialValues={props.initialValues}
+			validate={validate}
+			onSubmit={(values, { setSubmitting }) => props.handleSubmit(values, setSubmitting)}
+		>
+			{(formik) => (
+				<Form id="createGameForm">
+					<FormSection>
+						<TextLabel htmlFor="name">Enter Your Name</TextLabel>
+						<Field id="name" name="name" type="text" as={TextInput} placeholder="" tabIndex="1" />
+						<ErrorMessage name="name" component={ErrorText} />
+					</FormSection>
 
-          {/* Leaving for future:
-            
-            <FormSection padding="1rem">
-            <FormSectionTitle>Game Mode </FormSectionTitle>
-            <InputGroup>
-              <Field
-                type="radio"
-                as={RadioButton}
-                id="remote"
-                name="gameMode"
-                value="remote"
-                tabIndex="2"
-              />
-              <Label htmlFor="remote">Remote</Label>
-            </InputGroup>
-            <InputGroup>
-              <Field
-                type="radio"
-                as={RadioButton}
-                id="inPerson"
-                name="gameMode"
-                value="inPerson"
-         
-              />
-              <Label htmlFor="inPerson">In Person</Label>
-            </InputGroup>
-      </FormSection> */}
-          {/* Radio button and drop down combination. Drop down for # of turns/amount of time is disabled if 
+					{/* LEAVING FOR FUTURE USE: */}
+
+					<HideContainer>
+						<FormSection padding="1rem">
+							<FormSectionTitle>Game Mode </FormSectionTitle>
+							<InputGroup>
+								<Field
+									type="radio"
+									as={RadioButton}
+									id="remote"
+									name="gameMode"
+									value="remote"
+									tabIndex="2"
+								/>
+								<Label htmlFor="remote">Remote</Label>
+							</InputGroup>
+							<InputGroup>
+								<Field type="radio" as={RadioButton} id="inPerson" name="gameMode" value="inPerson" />
+								<Label htmlFor="inPerson">In Person</Label>
+							</InputGroup>
+						</FormSection>
+          </HideContainer>
+          
+
+					{/* Radio button and drop down combination. Drop down for # of turns/amount of time is disabled if 
                 corresponding radio button for that option is not selected */}
 
-          <FormSection padding="1rem">
-            <FormSectionTitle>End Game Method</FormSectionTitle>
-            <InputGroup>
-              <Field
-                type="radio"
-                as={RadioButton}
-                id="turns"
-                name="endGameMethod"
-                value="turns"
-                tabIndex="3"
-              />
-              <Label htmlFor="turns">Turns per Person</Label>
-            </InputGroup>
-            <Field
-              name="turnsValue"
-              as={DropDown}
-              disabled={formik.values.endGameMethod === "time"}
-              tabIndex="4"
-            >
-              <option value={1}>1 Turn</option>
-              <option value={2}>2 Turns</option>
-              <option value={3}>3 Turns</option>
-              <option value={4}>4 Turns</option>
-              <option value={5}>5 Turns</option>
+					<FormSection padding="1rem">
+						<FormSectionTitle>End Game Method</FormSectionTitle>
+						<InputGroup>
+							<Field
+								type="radio"
+								as={RadioButton}
+								id="turns"
+								name="endGameMethod"
+								value="turns"
+								tabIndex="3"
+							/>
+							<Label htmlFor="turns">Turns per Person</Label>
+						</InputGroup>
+						<Field
+							name="turnsValue"
+							as={DropDown}
+							disabled={formik.values.endGameMethod === 'time'}
+							tabIndex="4"
+						>
+							<option value={1}>1 Turn</option>
+							<option value={2}>2 Turns</option>
+							<option value={3}>3 Turns</option>
+							<option value={4}>4 Turns</option>
+							<option value={5}>5 Turns</option>
             </Field>
-            <InputGroup>
-              <Field
-                as={RadioButton}
-                type="radio"
-                id="time"
-                name="endGameMethod"
-                value="time"
-                tabIndex="5"
-              />
-              <Label htmlFor="time">Timer</Label>
-            </InputGroup>
-            <Field
-              name="timeValue"
-              as={DropDown}
-              disabled={formik.values.endGameMethod === "turns"}
-              tabIndex="6"
-            >
-              <option value={30}>30 minutes</option>
-              <option value={60}>60 minutes</option>
-              <option value={90}>90 minutes</option>
-            </Field>
-          </FormSection>
-          <FormSection padding="1rem">
-            <FormSectionTitle>Skipping Penalty</FormSectionTitle>
-            <InputGroup>
-              <Field
-                as={RadioButton}
-                type="radio"
-                id="none"
-                name="skipPenalty"
-                value="none"
-                tabIndex="7"
-              />
-              <Label htmlFor="none">None</Label>
-            </InputGroup>
-            <InputGroup>
-              <Field
-                as={RadioButton}
-                type="radio"
-                id="half"
-                name="skipPenalty"
-                value="half"         
-              />
-              <Label htmlFor="half">1/2 a Point</Label>
-            </InputGroup>
-            <InputGroup>
-              <Field
-                as={RadioButton}
-                type="radio"
-                id="full"
-                name="skipPenalty"
-                value="full"             
-              />
-              <Label htmlFor="full">1 Point</Label>
-            </InputGroup>
-          </FormSection>
-          {/* Submit Button is passed down to Taboo Card for UI consistency reasons*/}
-        </Form>
-        )
-      }
-    </Formik>
-  )
+            {/* LEAVING FOR FUTURE USE: */}
+						<HideContainer>
+							<InputGroup>
+								<Field
+									as={RadioButton}
+									type="radio"
+									id="time"
+									name="endGameMethod"
+									value="time"
+									tabIndex="5"
+									disabled={true}
+								/>
+								<Label htmlFor="time">Timer (Coming soon!)</Label>
+							</InputGroup>
+							<Field
+								name="timeValue"
+								as={DropDown}
+								// disabled={formik.values.endGameMethod === "turns"}
+								disabled={true}
+								tabIndex="6"
+							>
+								<option value={30}>30 minutes</option>
+								<option value={60}>60 minutes</option>
+								<option value={90}>90 minutes</option>
+							</Field>
+						</HideContainer>
+					</FormSection>
+
+					<FormSection padding="1rem">
+						<FormSectionTitle>Skipping Penalty</FormSectionTitle>
+						<InputGroup>
+							<Field
+								as={RadioButton}
+								type="radio"
+								id="none"
+								name="skipPenalty"
+								value="none"
+								tabIndex="7"
+							/>
+							<Label htmlFor="none">None</Label>
+						</InputGroup>
+						<InputGroup>
+							<Field as={RadioButton} type="radio" id="half" name="skipPenalty" value="half" />
+							<Label htmlFor="half">1/2 a Point</Label>
+						</InputGroup>
+						<InputGroup>
+							<Field as={RadioButton} type="radio" id="full" name="skipPenalty" value="full" />
+							<Label htmlFor="full">1 Point</Label>
+						</InputGroup>
+					</FormSection>
+					{/* Submit Button is passed down to Taboo Card for UI consistency reasons*/}
+				</Form>
+			)}
+		</Formik>
+	)
 }
 
 CreateGameForm.propTypes = {
-  initialValues: PropTypes.object.isRequired
+  initialValues: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
+
 export default CreateGameForm

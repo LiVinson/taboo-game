@@ -6,7 +6,7 @@ import randomize from 'randomatic'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
 import CreateGameForm from 'components/CreateGameForm'
 import Pending from 'components/shared/Pending'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 import { createNewGame } from 'store/actions/gameActions'
 import { clearErrors } from 'store/actions/errorActions'
 
@@ -30,7 +30,7 @@ export class CreateGame extends React.Component {
     On success, adds user to the game as as a player  
   */
 	handleSubmit = (values, setSubmitting) => {
-		console.log('submit')
+		// console.log('submit')
 		this.setState(
 			{
 				name: values.name.toUpperCase(),
@@ -65,8 +65,7 @@ export class CreateGame extends React.Component {
 						}
 					}
 				}
-				console.log("setstate done")
-
+				
 				this.props.createNewGame(gamecode, gameData, name).then(() => {
 					//finishes formik submission process
 					setSubmitting(false)
@@ -83,9 +82,11 @@ export class CreateGame extends React.Component {
 		this.props.history.push('/home')
 	}
 
+	//Needed in case user gets game error and opens component that references same error property without clearing
 	componentWillUnmount() {
 		this.props.clearGameErrors()
 	}
+
 	render() {
 		const buttonInfo = [
 			{ text: 'Back', onClick: this.handleBackClick },
@@ -110,7 +111,7 @@ export class CreateGame extends React.Component {
 
 CreateGame.propTypes = {
 	history: PropTypes.object.isRequired,
-	error: PropTypes.object,
+	error: PropTypes.string,	
 	isPending: PropTypes.bool.isRequired,
 	gamecode: PropTypes.string,
 	createNewGame: PropTypes.func.isRequired,

@@ -12,7 +12,7 @@ import {
 import List from 'components/shared/List'
 import ButtonContainer from 'components/ButtonContainer'
 import Star from 'components/shared/Star'
-import ErrorMessage from 'components/shared/ErrorMessage'
+import {ErrorMessage} from 'components/shared/FeedbackMessage'
 
 //Primary TabooCard component used for main menu and game
 export const TabooCard = ({ tabooWord, list, children }) => {
@@ -78,8 +78,8 @@ const TabooList = ({ list, property, specialValue, specialKey, secondary }) => {
 				let includeStar = false
 				if (typeof listItem === 'object' && listItem !== null && listItem[property]) {
 					displayText = listItem[property]
-					console.log(listItem[specialKey])
-					console.log(specialValue)
+					// console.log(listItem[specialKey])
+					// console.log(specialValue)
 					if (listItem[specialKey] && listItem[specialKey] === specialValue) {
 						console.log(true)
 						includeStar = true
