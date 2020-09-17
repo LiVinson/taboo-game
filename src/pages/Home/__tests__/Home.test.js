@@ -9,7 +9,7 @@ import theme from '../../../global-design/theme'
 describe('Home component renders correctly on each subroute', () => {
 	const defaultProps = {
 		match: {
-			path: '/hpme',
+			path: '/home',
 		},
 	}
 
