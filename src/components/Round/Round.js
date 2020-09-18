@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types"
 import { connect } from 'react-redux'
 import GameInfo from 'components/GameInfo'
 import PreRound from 'components/PreRound'
@@ -8,6 +9,9 @@ import RoundInfo from 'components/RoundInfo'
 import { updateRoundStatus } from 'store/actions/roundActions'
 
 class Round extends React.Component {
+
+	//Receives either 'giver' or 'watcher. Based on half (top = team 1, bottom = team 2) and the teamTurn index, returns 
+	//player object for the giver and watcher.
 	determineActivePlayer = (role) => {
 		let activePlayer
 		const { half, team1Turn, team2Turn } = this.props.gameplay
@@ -18,17 +22,16 @@ class Round extends React.Component {
 		} else {
 			activePlayer = half === 'top' ? team2[team2Turn] : team1[team1Turn]
 		}
-
 		return activePlayer
 	}
 
+	//Can only be called by giver. Changes round status so all screens update.
 	startRound = () => {
-		console.log('Start round')
 		this.props.updateRoundStatus(this.props.gamecode, 'in progress')
 	}
 
+	//Called automatically when time ends during the round
 	endRound = () => {
-		console.log('ending round')
 		this.props.updateRoundStatus(this.props.gamecode, 'postround')
 	}
 
@@ -51,7 +54,7 @@ class Round extends React.Component {
 		return (
 			<React.Fragment>
 				<GameInfo players={this.props.players} currentPlayer={currentPlayer} />
-				<RoundInfo round={round} watcher={watcher} giver={giver} />
+				<RoundInfo round={round} watcher={watcher} giver={giver} currentPlayerId={currentPlayer.playerId} />
 				{status === 'preround' && (
 					<PreRound
 						teamScores={score}						
@@ -93,9 +96,17 @@ class Round extends React.Component {
 	}
 }
 
+Round.propTypes = {
+	gamecode: PropTypes.string.isRequired,
+	players: PropTypes.array.isRequired,
+	gameplay: PropTypes.object.isRequired,
+	playerId: PropTypes.string.isRequired,
+	error: PropTypes.string,
+	isPending: PropTypes.bool.isRequired,
+	updateRoundStatus: PropTypes.func.isRequired
+}
+
 const mapStateToProps = (state) => {
-	console.log(state.cards)
-	console.log(state.round)
 	return {
 		//errors caused by changing rounds
 		error: state.round.error ? state.round.error.errorMessage : state.round.error,
@@ -105,8 +116,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, prevProps) => {
 	const { gameplay } = prevProps
-	// console.log("Index to be updated:") 
-	// console.log(gameplay.cardIndex)
 	return {
 		updateRoundStatus: (gamecode, newStatus) => {
 			dispatch(updateRoundStatus(gamecode, newStatus, gameplay.cardIndex))
