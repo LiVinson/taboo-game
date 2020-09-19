@@ -79,6 +79,7 @@ describe('Waiting component functions and renders correctly', () => {
 			</ThemeProvider>
 		)
 
+		//Set timeout is used to allow initial functions to finish running and setState to update
 		setTimeout(() => {
 			expect(component.dive().find(InstructionsCard).length).toBe(1)
 			expect(component.dive().find(TabooCardTop).length).toBe(1)
