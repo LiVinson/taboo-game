@@ -3,13 +3,13 @@ import PropType from 'prop-types'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 import { InstructionsText, KeyWord } from './style'
 
-export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
+
+const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
 	const buttonInfo = [
 		{
 			text: 'Skip!',
 			disabled: isPending,
 			onClick: () => {
-				console.log('skip card')
 				changeCardStatus('skipped')
 			},
 		},
@@ -17,7 +17,6 @@ export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error 
 			text: 'Next!',
 			disabled: isPending,
 			onClick: () => {
-				console.log("next")
 				changeCardStatus('correct')
 			},
 		},
@@ -33,13 +32,12 @@ GiverGameCard.propType = {
 	isPending: PropType.bool.isRequired
 }
 
-export const WatcherGameCard = ({currentCard, changeCardStatus, isPending, error}) => {
+const WatcherGameCard = ({currentCard, changeCardStatus, isPending, error}) => {
 	const buttonInfo = [
 		{
 			text: 'Buzzer!',
 			disabled: isPending,
 			onClick: () => {
-				console.log("discard")
 				changeCardStatus('discard')
 			}
 		},
@@ -54,7 +52,7 @@ WatcherGameCard.propType = {
 	isPending: PropType.bool.isRequired
 }
 
-export const TeamGameCard = ({ role, giver, watcher }) => {
+const TeamGameCard = ({ role, giver, watcher }) => {
 	return (
 		<React.Fragment>
 			{role === 'giverTeam' ? (
@@ -67,7 +65,7 @@ export const TeamGameCard = ({ role, giver, watcher }) => {
 			) : (
 				<TabooCard tabooWord="Relax!">
 					<InstructionsText>
-						It’s the other team’s turn to give clues and guess! <KeyWord>{watcher.name}</KeyWord> will be
+						It’s the other team’s turn to give clues and guess, so don't say anything! <KeyWord>{watcher.name}</KeyWord> will be
 						watching to make sure <KeyWord>{giver.name}</KeyWord> doesn’t say any Taboo words.
 					</InstructionsText>
 				</TabooCard>
@@ -80,4 +78,34 @@ TeamGameCard.propType = {
 	role: PropType.string.isRequired,
 	giver: PropType.string.isRequired,
 	watcher: PropType.string.isRequired,
+}
+
+export const GameCard = (props) => {
+	console.log(props)
+	const currentCard = props.deck[props.cardIndex]
+	switch (props.role) {
+		case 'giver':
+			return <GiverGameCard {...props} currentCard={currentCard} />
+		case 'watcher':
+			return <WatcherGameCard {...props} currentCard={currentCard} />
+		case 'giverTeam':
+		case 'watcherTeam':
+			//consider checking if card is changing for animation purposes
+			return <TeamGameCard {...props} />
+		default:
+			return null
+	}
+}
+
+GameCard.propType = {
+	gamecode: PropType.string.isRequired,
+	deck: PropType.object.isRequired,
+	role: PropType.string.isRequired,
+	error: PropType.string,
+	cardIndex: PropType.number.isRequired,
+	changeCardStatus: PropType.func.isRequired,
+	giver: PropType.object.isRequired,
+	isPending: PropType.bool.isRequired,
+	round: PropType.number.isRequired,
+	watcher: PropType.object.isRequired,
 }

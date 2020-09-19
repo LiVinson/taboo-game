@@ -5,26 +5,9 @@ import moment from 'moment'
 import TimeCard from 'components/TimeCard'
 import LoadingCard from 'components/shared/LoadingCard'
 import { ErrorCard } from 'components/shared/ErrorCard'
-
-import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
+import { GameCard } from 'components/GameCard'
 import { changeCardStatus } from 'store/actions/cardActions'
 
-export const GameCard = (props) => {
-	// console.log(props)
-	const currentCard = props.deck[props.cardIndex]
-	switch (props.role) {
-		case 'giver':
-			return <GiverGameCard {...props} currentCard={currentCard} />
-		case 'watcher':
-			return <WatcherGameCard {...props} currentCard={currentCard} />
-		case 'giverTeam':
-		case 'watcherTeam':
-			//consider checking if card is changing for animation purposes
-			return <TeamGameCard {...props} />
-		default:
-			return null
-	}
-}
 
 export const InRound = ({ roundEndTime, endRound, role, error, ...props }) => {
 	// export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, cardsPending, changeCardStatus, endRound }) => {

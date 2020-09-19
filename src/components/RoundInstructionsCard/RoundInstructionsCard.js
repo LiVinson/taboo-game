@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { TabooCard, ButtonTabooCard } from 'components/shared/TabooCard'
 import { InstructionsText, KeyWord } from './style'
 
+//Depending on role of current users, returns a TabooCard with different set of instructions and button
+//to start the round
 const RoundInstructionsCard = ({ role, giver, watcher, startRound, error }) => {
 	let instructions
 	//Determine the instructions based on current player's team and role

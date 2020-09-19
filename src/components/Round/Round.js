@@ -44,7 +44,7 @@ class Round extends React.Component {
 		const giver = this.determineActivePlayer('giver')
 		const watcher = this.determineActivePlayer('watcher')
 		const currentPlayer = this.props.players.find((player) => player.playerId === this.props.playerId)
-		// console.log(currentPlayer)
+	
 		let role
 		if (activeTeam === currentPlayer.team) {
 			role = currentPlayer.playerId === giver.playerId ? 'giver' : 'giverTeam'

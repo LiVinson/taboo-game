@@ -4,7 +4,6 @@ import RoundInstructionsCard from 'components/RoundInstructionsCard'
 import ScoreCard from 'components/ScoreCard'
 
 const PreRound = ({ teamScores, ...rest }) => {
-	console.log(teamScores)
 	const scoresArr = [teamScores.team1, teamScores.team2]
 	return (
 		<React.Fragment>
@@ -21,6 +20,7 @@ PreRound.propTypes = {
 	giver: PropTypes.object.isRequired,
 	watcher: PropTypes.object.isRequired,
 	startRound: PropTypes.func.isRequired,
+	error: PropTypes.string
 }
 
 export default PreRound

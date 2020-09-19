@@ -1,3 +1,3 @@
-import { GiverGameCard, WatcherGameCard, TeamGameCard } from "./GameCard"
+import { GameCard } from "./GameCard"
 
-export { GiverGameCard, WatcherGameCard, TeamGameCard }
+export { GameCard }
