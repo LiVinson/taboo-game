@@ -38,14 +38,12 @@ export class PostRound extends React.Component {
 	updateSelectedCard = (previousStatus, newStatus) => {
 		const property = previousStatus + 'Selection'
 		const indexToChange = this.state[property]
-		console.log(`card changing: ${this.state[property]} to ${newStatus}`)
 		//called prop method to trigger dispatch. Changes card status in firestore
 		this.props.changeCardStatus(newStatus, indexToChange)
 	}
 
 	//Called when Watcher selects 'Confirm' button
 	confirmRoundEnd = () => {
-		console.log('ending the round')
 		//Updates score in firestore based on status of cards and game rules. Once done, updates round half and updates turn as needed.
 		this.props.completeRound()
 	}
@@ -56,7 +54,7 @@ export class PostRound extends React.Component {
 		const cardStatuses = ['correct', 'skipped', 'discard']
 
 		return (
-			//update - only watcher gets the buttonTabooCard buttons
+			//Watcher card includes buttons to updates card statuses and trigger next round
 			<StyledPostRound>
 				{this.props.role === 'watcher' ? (
 					<PostRoundWatcher
@@ -92,15 +90,16 @@ export class PostRound extends React.Component {
 PostRound.propTypes = {
 	cardsPlayed: PropTypes.array.isRequired,
 	role: PropTypes.string.isRequired,
+	isPending: PropTypes.bool.isRequired,
+	error: PropTypes.object.isRequired,
 	changeCardStatus: PropTypes.func.isRequired,
-	completeRound: PropTypes.func.isRequired,
-	isPending: PropTypes.bool,
+	completeRound: PropTypes.func.isRequired
+
 }
 
 const mapStateToProps = (state) => {
 	// console.log(state.round)
 	return {
-		// isPending: state.round.pending,
 		isPending: {
 			round: state.round.pending,
 			cards: state.cards.pending,

@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { InstructionsCard } from 'components/InstructionsCard'
 import CardsPlayed from 'components/CardsPlayed'
 import { LargeButton } from 'components/shared/Button'
 import Pending from 'components/shared/Pending'
-import {ErrorMessage} from 'components/shared/FeedbackMessage'
+import { ErrorMessage } from 'components/shared/FeedbackMessage'
 
+//Used for each of 3 status types to create buttons to change card status to the other 2 statuses
 const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb, isPending) => {
-	// console.log(status)
-	// console.log(statusSelected)
-	// console.log(statusSelected.length)
 	const buttonInfo = statusArray
 		.filter((cardType) => cardType !== status)
 		.map((cardType) => {
@@ -16,7 +15,6 @@ const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb, 
 			button.text = cardType
 			button.disabled = statusSelected.length < 1 || isPending ? true : false
 			button.onClick = () => cb(status, cardType)
-						
 			return button
 		})
 
@@ -37,12 +35,13 @@ const PostRoundWatcher = ({
 	//Filters cards played based on the status. Information needed to generate buttons,
 	//select a card in the list, and change button status passed in
 	// Then separates cards played in round based on current card status
-
+	const instructions = "Review the taboo words from this round. If any card is not listed in the right category, select the word and click the button for the  "
 	return (
 		<React.Fragment>
+			<InstructionsCard></InstructionsCard>
 			{cardStatuses.map((status, index) => (
 				<CardsPlayed
-					// Only pass down error message if it is for this Card status
+					// Only pass down error message if it is for this Card status. Indicated by error message include status type
 					error={
 						error.cards &&
 						cardsPlayed.some(
@@ -77,6 +76,9 @@ PostRoundWatcher.propTypes = {
 	handleCardSelection: PropTypes.func.isRequired,
 	selectedCards: PropTypes.array.isRequired,
 	updateSelectedCard: PropTypes.func.isRequired,
+	confirmRoundEnd: PropTypes.func.isRequired,
+	isPending: PropTypes.bool.isRequired,
+	error: PropTypes.object.isRequired,
 }
 
 export default PostRoundWatcher

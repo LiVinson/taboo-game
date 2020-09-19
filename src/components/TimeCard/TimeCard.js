@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import { ProgressBar, Bar, TimeText } from './style'
 
@@ -10,18 +11,19 @@ class TimeCard extends React.Component {
 		}
 	}
 
+	//Calculates the difference between current time and time round ends in seconds
+	//Updates state with the amount of time remaining every second until 0, then giver
+	//calld method to endRound and change to PostRound.
 	componentDidMount() {
 		const { roundEndTime } = this.props
 		let timeRemaining = moment(roundEndTime).diff(moment(), 'second')
 		this.intervalId = setInterval(() => {
-			// console.log('time left', timeRemaining)
 			if (timeRemaining >= 0) {
 				timeRemaining--
 				this.setState({
 					timeRemaining,
 				})
 			} else {
-				console.log('time up')
 				clearInterval(this.intervalId)
 				//Only one player needs to update the round for everyone
 				if (this.props.role === 'giver') {
@@ -30,9 +32,9 @@ class TimeCard extends React.Component {
 			}
 		}, 1000)
 	}
+
 	render() {
 		const width = Math.round((this.state.timeRemaining / 60) * 100)
-		// console.log(width)
 		return (
 			<ProgressBar>
 				<Bar width={width}></Bar>
@@ -42,5 +44,11 @@ class TimeCard extends React.Component {
 			</ProgressBar>
 		)
 	}
+}
+
+TimeCard.propTypes = {
+	roundEndTime: PropTypes.instanceOf(Date).isRequired,
+	role: PropTypes.string.isRequired,
+	endRonud: PropTypes.func.isRequired,
 }
 export default TimeCard

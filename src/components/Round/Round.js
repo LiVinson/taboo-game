@@ -77,7 +77,7 @@ class Round extends React.Component {
 						deck={deck}
 						cardIndex={cardIndex}
 						endRound={this.endRound}
-						isPending={isPending}
+				
 					/>
 				)}
 				{status === 'postround' && (

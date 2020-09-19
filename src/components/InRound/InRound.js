@@ -10,12 +10,10 @@ import { changeCardStatus } from 'store/actions/cardActions'
 
 
 export const InRound = ({ roundEndTime, endRound, role, error, ...props }) => {
-	// export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, cardsPending, changeCardStatus, endRound }) => {
-
 	return (
 		<React.Fragment>
 			<TimeCard roundEndTime={roundEndTime} endRound={endRound} role={role} />
-
+			{/*Render GameCard as long as current time is before round ends other wise check for error and render otherwise display Loading until round status changes*/}
 			{moment().isBefore(roundEndTime, 'second') ? (
 				<GameCard role={role} error={error.cardError} {...props} />
 			) : error.roundError ? (
@@ -33,10 +31,11 @@ InRound.propTypes = {
 	watcher: PropTypes.object.isRequired,
 	role: PropTypes.string.isRequired,
 	round: PropTypes.number.isRequired,
-	// roundEndTime: PropTypes.
+	roundEndTime: PropTypes.instanceOf(Date),
 	deck: PropTypes.object.isRequired,
 	cardIndex: PropTypes.number.isRequired,
 	isPending: PropTypes.bool.isRequired,
+	error: PropTypes.object.isRequired,
 	changeCardStatus: PropTypes.func.isRequired,
 }
 

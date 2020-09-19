@@ -4,14 +4,14 @@ import { shallow } from 'enzyme'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
 import { InRound } from '../InRound'
-import { GameCard } from '../InRound'
+import { GameCard } from 'components/GameCard'
 import TimeCard from 'components/TimeCard'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
 
 jest.mock('moment', () => {
 	return () => jest.requireActual('moment')('2020-09-01T00:00:00.000Z')
 })
-//Note: moment().isBefore() is mocked in __mocks__
+
 describe('Inround rendering and functionality', () => {
 	const date = new Date()
 	const endTime = date.setSeconds(date.getSeconds() + 30)
