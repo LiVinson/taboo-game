@@ -13,6 +13,7 @@ const RadioListItem = ({ word, index, status, onChange }) => {
 				value={index}
 				id={word}
 				onChange={(e) => {
+					console.log("clicked!")
 					onChange(e.target.value, status)
 				}}
 			/>

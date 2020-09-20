@@ -50,7 +50,6 @@ describe('CardsPlayed', () => {
 			...defaultProps,
 		}
 
-        console.log(props)
         const wrapper = shallow(<CardsPlayed {...props} />)
         expect(wrapper.find(ButtonTabooCard).dive().find(List).dive().find(RadioListItem)).toHaveLength(2)
 	})
