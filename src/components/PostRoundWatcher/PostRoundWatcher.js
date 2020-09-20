@@ -7,7 +7,7 @@ import Pending from 'components/shared/Pending'
 import { ErrorMessage } from 'components/shared/FeedbackMessage'
 
 //Used for each of 3 status types to create buttons to change card status to the other 2 statuses
-const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb, isPending) => {
+export const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb, isPending) => {
 	const buttonInfo = statusArray
 		.filter((cardType) => cardType !== status)
 		.map((cardType) => {
@@ -77,7 +77,7 @@ PostRoundWatcher.propTypes = {
 	selectedCards: PropTypes.array.isRequired,
 	updateSelectedCard: PropTypes.func.isRequired,
 	confirmRoundEnd: PropTypes.func.isRequired,
-	isPending: PropTypes.bool.isRequired,
+	isPending: PropTypes.object.isRequired,
 	error: PropTypes.object.isRequired,
 }
 
