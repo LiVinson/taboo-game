@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardsPlayed Snapshot 1`] = `
+<div
+  className="sc-AxjAm hDlFTS"
+>
+  <div
+    className="sc-AxiKw dGnLMo"
+  >
+    correct
+  </div>
+  <div
+    className="sc-AxhCb JZaCe"
+  >
+    <ul
+      className="sc-Axmtr dHjpTi"
+    >
+      <li
+        className="sc-fzokOt gWWQxI"
+      >
+        <input
+          className="sc-fzqBZW dVYnNZ"
+          id="Kendrick Lamar"
+          name="Kendrick Lamar"
+          onChange={[Function]}
+          type="radio"
+          value={0}
+        />
+        <label
+          className="sc-fzqNJr VlIuW"
+          htmlFor="Kendrick Lamar"
+        >
+          Kendrick Lamar
+        </label>
+      </li>
+      <li
+        className="sc-fzokOt gWWQxI"
+      >
+        <input
+          className="sc-fzqBZW dVYnNZ"
+          id="apple"
+          name="apple"
+          onChange={[Function]}
+          type="radio"
+          value={2}
+        />
+        <label
+          className="sc-fzqNJr VlIuW"
+          htmlFor="apple"
+        >
+          apple
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="sc-fzplWN buDbqD"
+  >
+    <button
+      className="sc-AxmLO gmmVt button"
+      disabled={true}
+      onClick={[Function]}
+    >
+      skipped
+    </button>
+    <button
+      className="sc-AxmLO sc-fzozJi jlLOkV button"
+      disabled={true}
+      onClick={[Function]}
+    >
+      discard
+    </button>
+  </div>
+</div>
+`;
