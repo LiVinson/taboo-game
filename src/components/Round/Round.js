@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from "prop-types"
 import { connect } from 'react-redux'
 import GameInfo from 'components/GameInfo'
+import RoundInfo from 'components/RoundInfo'
 import PreRound from 'components/PreRound'
 import InRound from 'components/InRound'
 import PostRound from 'components/PostRound'
-import RoundInfo from 'components/RoundInfo'
 import { updateRoundStatus } from 'store/actions/roundActions'
 
-class Round extends React.Component {
+export class Round extends React.Component {
 
 	//Receives either 'giver' or 'watcher. Based on half (top = team 1, bottom = team 2) and the teamTurn index, returns 
 	//player object for the giver and watcher.
@@ -37,7 +37,7 @@ class Round extends React.Component {
 
 
 	render() {
-		const { gamecode, isPending } = this.props
+		const { gamecode } = this.props
 		const { round, half, status, cardIndex, deck, roundEndTime, score } = this.props.gameplay
 		console.log(score)
 		const activeTeam = half === 'top' ? 'team 1' : 'team 2'
@@ -84,7 +84,6 @@ class Round extends React.Component {
 					<PostRound
 						gamecode={gamecode}
 						role={role}
-						isPending={isPending}
 						//Convert deck object into array of objects. Add index to each card to track it's firestore deck.propertyName. Filters only for cards played this round
 						cardsPlayed={Object.values(deck)
 							.map((card, index) => ({ ...card, index }))
@@ -102,7 +101,6 @@ Round.propTypes = {
 	gameplay: PropTypes.object.isRequired,
 	playerId: PropTypes.string.isRequired,
 	error: PropTypes.string,
-	isPending: PropTypes.bool.isRequired,
 	updateRoundStatus: PropTypes.func.isRequired
 }
 
@@ -110,7 +108,6 @@ const mapStateToProps = (state) => {
 	return {
 		//errors caused by changing rounds
 		error: state.round.error ? state.round.error.errorMessage : state.round.error,
-		isPending: state.cards.pending,
 	}
 }
 

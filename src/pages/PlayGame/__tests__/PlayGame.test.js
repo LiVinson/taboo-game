@@ -7,7 +7,6 @@ import Round from 'components/Round'
 import LoadingCard from 'components/shared/LoadingCard'
 import { ButtonErrorCard } from 'components/shared/ErrorCard'
 
-console.log(game)
 describe('PlayGame renders and functions correctly ', () => {
 	const defaultProps = {
 		match: {
