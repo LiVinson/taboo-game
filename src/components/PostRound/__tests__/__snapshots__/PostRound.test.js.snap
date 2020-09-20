@@ -2,7 +2,7 @@
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is not watcher 1`] = `
 <div
-  className="sc-fzpjYC eQOcJW"
+  className="sc-fznxsB bFuePx"
 >
   <div
     className="sc-AxjAm hDlFTS"
@@ -64,8 +64,13 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is watcher 1`] = `
 <div
-  className="sc-fzpjYC eQOcJW"
+  className="sc-fznxsB bFuePx"
 >
+  <p
+    className="sc-fzokOt bIqlHw"
+  >
+    Review the taboo words from this round. If any card is not listed in the right category, select the word and click the button to change it's status. Select Confirm! when done to save the scores.
+  </p>
   <div
     className="sc-AxjAm hDlFTS"
   >
@@ -81,10 +86,10 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
         className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fzokOt gWWQxI"
+          className="sc-fzqBZW iVohld"
         >
           <input
-            className="sc-fzqBZW dVYnNZ"
+            className="sc-fzqNJr hpIjIE"
             id="Kendrick Lamar"
             name="Kendrick Lamar"
             onChange={[Function]}
@@ -92,7 +97,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
             value={0}
           />
           <label
-            className="sc-fzqNJr VlIuW"
+            className="sc-fzoyAV iZMDEE"
             htmlFor="Kendrick Lamar"
           >
             Kendrick Lamar
@@ -134,10 +139,10 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
         className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fzokOt gWWQxI"
+          className="sc-fzqBZW iVohld"
         >
           <input
-            className="sc-fzqBZW dVYnNZ"
+            className="sc-fzqNJr hpIjIE"
             id="Simba"
             name="Simba"
             onChange={[Function]}
@@ -145,7 +150,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
             value={1}
           />
           <label
-            className="sc-fzqNJr VlIuW"
+            className="sc-fzoyAV iZMDEE"
             htmlFor="Simba"
           >
             Simba
@@ -187,10 +192,10 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
         className="sc-Axmtr dHjpTi"
       >
         <li
-          className="sc-fzokOt gWWQxI"
+          className="sc-fzqBZW iVohld"
         >
           <input
-            className="sc-fzqBZW dVYnNZ"
+            className="sc-fzqNJr hpIjIE"
             id="Will Smith"
             name="Will Smith"
             onChange={[Function]}
@@ -198,7 +203,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
             value={2}
           />
           <label
-            className="sc-fzqNJr VlIuW"
+            className="sc-fzoyAV iZMDEE"
             htmlFor="Will Smith"
           >
             Will Smith

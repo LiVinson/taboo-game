@@ -39,7 +39,6 @@ export class Round extends React.Component {
 	render() {
 		const { gamecode } = this.props
 		const { round, half, status, cardIndex, deck, roundEndTime, score } = this.props.gameplay
-		console.log(score)
 		const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 		const giver = this.determineActivePlayer('giver')
 		const watcher = this.determineActivePlayer('watcher')

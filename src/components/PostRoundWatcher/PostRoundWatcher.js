@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { InstructionsCard } from 'components/InstructionsCard'
+import InstructionsCard from 'components/InstructionsCard'
 import CardsPlayed from 'components/CardsPlayed'
 import { LargeButton } from 'components/shared/Button'
 import Pending from 'components/shared/Pending'
@@ -35,10 +35,10 @@ const PostRoundWatcher = ({
 	//Filters cards played based on the status. Information needed to generate buttons,
 	//select a card in the list, and change button status passed in
 	// Then separates cards played in round based on current card status
-	const instructions = "Review the taboo words from this round. If any card is not listed in the right category, select the word and click the button for the  "
+	const instructions = "Review the taboo words from this round. If any card is not listed in the right category, select the word and click the button to change it's status. Select Confirm! when done to save the scores."
 	return (
 		<React.Fragment>
-			<InstructionsCard></InstructionsCard>
+			<InstructionsCard>{instructions}</InstructionsCard>
 			{cardStatuses.map((status, index) => (
 				<CardsPlayed
 					// Only pass down error message if it is for this Card status. Indicated by error message include status type

@@ -88,9 +88,10 @@ export class PostRound extends React.Component {
 }
 
 PostRound.propTypes = {
+	gamecode: PropTypes.string.isRequired,
 	cardsPlayed: PropTypes.array.isRequired,
 	role: PropTypes.string.isRequired,
-	isPending: PropTypes.bool.isRequired,
+	isPending: PropTypes.object.isRequired,
 	error: PropTypes.object.isRequired,
 	changeCardStatus: PropTypes.func.isRequired,
 	completeRound: PropTypes.func.isRequired

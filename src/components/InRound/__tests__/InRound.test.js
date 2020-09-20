@@ -7,7 +7,7 @@ import { InRound } from '../InRound'
 import { GameCard } from 'components/GameCard'
 import TimeCard from 'components/TimeCard'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
-
+import { deck } from "__fixtures__/deck"
 jest.mock('moment', () => {
 	return () => jest.requireActual('moment')('2020-09-01T00:00:00.000Z')
 })
@@ -22,20 +22,7 @@ describe('Inround rendering and functionality', () => {
 		round: 1,
 		role: 'giver',
 		roundEndTime: endTime,
-		deck: {
-			0: {
-				word: 'apple',
-				tabooList: ['fruit', 'red', 'shiny', 'round', 'Eve'],
-			},
-			1: {
-				word: 'banana',
-				tabooList: ['yellow', 'fruit', 'monkey', 'peel', 'slip'],
-			},
-			2: {
-				word: 'strawberry',
-				tabooList: ['red', 'green', 'fruit', 'shortcake', 'cheesecake'],
-			},
-		},
+		deck,
 		cardIndex: 0,
 		isPending: false,
 		changeCardStatus: jest.fn(),

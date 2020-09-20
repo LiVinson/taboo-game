@@ -21,6 +21,7 @@ describe('PreRound renders and functions correctly', () => {
 		giver: { name: 'Danielle', playerId: '12345', team: 'team 1' },
 		watcher: { name: 'Stephen', playerId: '34567', team: 'team 1' },
 		startRound: jest.fn(),
+		error: null
 	}
 
 	test('PreRound renders correctly', () => {
