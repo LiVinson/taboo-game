@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types"
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
@@ -7,10 +8,9 @@ import PlayerListCard from 'components/PlayerListCard'
 import { FilteredTabooList } from 'components/shared/TabooCard'
 import ScoreCard from 'components/ScoreCard'
 import LoadingCard from 'components/shared/LoadingCard'
-import {ButtonErrorCard } from 'components/shared/ErrorCard'
+import { ButtonErrorCard } from 'components/shared/ErrorCard'
 
-// const EndGame = ({ players, currentPlayer, team1Score, team2Score }) => {
-class EndGame extends React.Component {
+export class EndGame extends React.Component {
 	constructor(props) {
 		super(props)
 
@@ -34,11 +34,9 @@ class EndGame extends React.Component {
 	//verify that current user is a player in game
 	//toggle loading/verified so UI can render
 	verifyGameInfo = () => {
-		console.log('verifying game and player info')
 		const game = this.props.game
 		//Checks if falsy. Add additional edge cases in case empty object is returned
 		if (!game || game.status !== 'completed') {
-			console.log(game)
 			this.setState({
 				loading: false, //gameVerified false by default
 			})
@@ -46,7 +44,6 @@ class EndGame extends React.Component {
 			//game exists and is in correct status. Need to verify current user is a player in the game
 			const playerId = this.props.auth.uid
 			const players = game.players
-			console.log(playerId)
 			//Verify current user has valid uid and is in players array in firestore
 			let playerVerified
 			const includedUserArr = players.filter((player) => player.playerId === playerId)
@@ -63,31 +60,34 @@ class EndGame extends React.Component {
 		const { gamecode } = this.props.match.params
 		const { game } = this.props
 
-    const buttonInfo = [{
-      text: "Home",
-      type: "button",
-      onClick: ()=> {this.props.history.push("/home")}
-    }]
-		if (game.status === 'in progress') {
+		const buttonInfo = [
+			{
+				text: 'Home',
+				type: 'button',
+				onClick: () => {
+					this.props.history.push('/home')
+				},
+			},
+		]
+
+		//any other incorrect status will result in an error message
+		if (game.status === 'in progress') { 
 			return <Redirect to={`/play/${gamecode}`} />
 		} else if (this.state.loading) {
-			//Update with actual loading component
 			return <LoadingCard message="Calculating final scores" />
 		} else if (!this.state.gameVerified) {
-			const error = "That game doesn't exist, is still in progress, or the result can't be viewed."
+			const error = "That game doesn't exist, is still in progress, or you don't have access to view the results."
 			return <ButtonErrorCard error={error} />
 		} else if (!this.state.playerVerified) {
 			const error = 'Something went wrong when viewing the result.'
 			return <ButtonErrorCard error={error} />
 		} else {
-			console.log(game)
 			const teams = ['team 1', 'team 2']
 			const { players } = game
-			// console.log(players)
+
+			//Using alias for easier readability
 			const { team1: team1Score, team2: team2Score } = game.gameplay.score
-			console.log(team1Score, team2Score)
-			const currentPlayer = players.filter((player) => player.playerId === this.props.auth.uid)[0]
-			console.log(currentPlayer)
+			const currentPlayer = players.find((player) => player.playerId === this.props.auth.uid)
 			let winMessage = ''
 			if (team1Score > team2Score) {
 				winMessage = 'Team 1 Wins!'
@@ -120,13 +120,18 @@ class EndGame extends React.Component {
 	}
 }
 
+EndGame.propTypes = {
+	game: PropTypes.object.isRequired,
+	gameDataReceived: PropTypes.bool,
+	auth: PropTypes.object,
+	error: PropTypes.string
+
+}
 const mapStateToProps = (state, ownProps) => {
-	console.log(state)
+	// console.log(state)
 	//game object from firestore
 	const game = state.firestore.data?.games?.[ownProps.match.params.gamecode]
-	console.log(game)
 	return {
-		//determine if gamePending property needed...
 		game: game ? game : {}, //from firestore
 		gameDataReceived: state.firestore.status.requested[`games/${ownProps.match.params.gamecode}`],
 		auth: state.firebase.auth,
