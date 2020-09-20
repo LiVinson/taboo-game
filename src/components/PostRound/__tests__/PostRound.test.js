@@ -36,11 +36,11 @@ describe('PostRound renders and functions correctly', () => {
 		],
 		isPending: {
 			round: false,
-			cards: false
+			cards: false,
 		},
 		error: {
 			round: null,
-			cards: null
+			cards: null,
 		},
 		changeCardStatus: jest.fn(),
 		completeRound: jest.fn(),
@@ -67,6 +67,7 @@ describe('PostRound renders and functions correctly', () => {
 			role: 'giver',
 		}
 
+
 		const wrapper = renderer
 			.create(
 				<ThemeProvider theme={theme}>
@@ -88,9 +89,9 @@ describe('PostRound renders and functions correctly', () => {
 				<PostRound {...props} />
 			</ThemeProvider>
 		)
-
-		expect(wrapper.dive().find(PostRound).dive().find(PostRoundWatcher)).toHaveLength(1)
-		expect(wrapper.dive().find(PostRound).dive().find(PostRoundNonWatcher)).toHaveLength(0)
+		const component = wrapper.dive().find(PostRound)
+		expect(component.dive().find(PostRoundWatcher)).toHaveLength(1)
+		expect(component.dive().find(PostRoundNonWatcher)).toHaveLength(0)
 	})
 
 	test('renders PostRoundNonWatcher when role is not watcher', () => {
@@ -104,26 +105,18 @@ describe('PostRound renders and functions correctly', () => {
 				<PostRound {...props} />
 			</ThemeProvider>
 		)
-		expect(wrapper.dive().find(PostRound).dive().find(PostRoundWatcher)).toHaveLength(0)
-		expect(wrapper.dive().find(PostRound).dive().find(PostRoundNonWatcher)).toHaveLength(1)
+		const component = wrapper.dive().find(PostRound)
+		expect(component.dive().find(PostRoundWatcher)).toHaveLength(0)
+		expect(component.dive().find(PostRoundNonWatcher)).toHaveLength(1)
 	})
 
 	//---------Method tests --------//
-	// test('handleCardSelection updates state when called based on status', () => {
-	// 	const props = {
-	// 		...defaultProps,
-	// 	}
-	// 	const wrapper = shallow(<PostRound {...props} />)
-
-	// 	wrapper.instance().handleCardSelection()
-	// })
 
 	test('updateSelectedCard calls props.changeCardStatus with new status and card index', () => {
 		const props = {
 			...defaultProps,
 		}
 		const wrapper = shallow(<PostRound {...props} />)
-
 		wrapper.instance().updateSelectedCard()
 		expect(props.changeCardStatus).toHaveBeenCalled()
 	})

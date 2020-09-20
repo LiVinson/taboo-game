@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RoundInfo renders correctly 1`] = `
+exports[`RoundInfo renders correctly for active player 1`] = `
 <div
   className="sc-AxjAm jJJSIE"
 >
@@ -16,6 +16,40 @@ exports[`RoundInfo renders correctly 1`] = `
     >
       Giver: 
       Sam
+      <svg
+        className="sc-AxhCb fwzZEW"
+      >
+        star-full.svg
+      </svg>
+       
+    </p>
+    <p
+      className="sc-AxiKw kEKSvH"
+    >
+      Watcher: 
+      Jo
+    </p>
+  </div>
+</div>
+`;
+
+exports[`RoundInfo renders correctly for non-active player 1`] = `
+<div
+  className="sc-AxjAm jJJSIE"
+>
+  <p
+    className="sc-AxirZ ibSLEF"
+  >
+    Round: 
+    1
+  </p>
+  <div>
+    <p
+      className="sc-AxiKw kEKSvH"
+    >
+      Giver: 
+      Sam
+       
     </p>
     <p
       className="sc-AxiKw kEKSvH"

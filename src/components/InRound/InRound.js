@@ -5,34 +5,15 @@ import moment from 'moment'
 import TimeCard from 'components/TimeCard'
 import LoadingCard from 'components/shared/LoadingCard'
 import { ErrorCard } from 'components/shared/ErrorCard'
-
-import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
+import { GameCard } from 'components/GameCard'
 import { changeCardStatus } from 'store/actions/cardActions'
 
-export const GameCard = (props) => {
-	// console.log(props)
-	const currentCard = props.deck[props.cardIndex]
-	switch (props.role) {
-		case 'giver':
-			return <GiverGameCard {...props} currentCard={currentCard} />
-		case 'watcher':
-			return <WatcherGameCard {...props} currentCard={currentCard} />
-		case 'giverTeam':
-		case 'watcherTeam':
-			//consider checking if card is changing for animation purposes
-			return <TeamGameCard {...props} />
-		default:
-			return null
-	}
-}
 
 export const InRound = ({ roundEndTime, endRound, role, error, ...props }) => {
-	// export const InRound = ({ roundEndTime, deck, cardIndex, role, giver, watcher, cardsPending, changeCardStatus, endRound }) => {
-
 	return (
 		<React.Fragment>
 			<TimeCard roundEndTime={roundEndTime} endRound={endRound} role={role} />
-
+			{/*Render GameCard as long as current time is before round ends other wise check for error and render otherwise display Loading until round status changes*/}
 			{moment().isBefore(roundEndTime, 'second') ? (
 				<GameCard role={role} error={error.cardError} {...props} />
 			) : error.roundError ? (
@@ -50,10 +31,11 @@ InRound.propTypes = {
 	watcher: PropTypes.object.isRequired,
 	role: PropTypes.string.isRequired,
 	round: PropTypes.number.isRequired,
-	// roundEndTime: PropTypes.
+	roundEndTime: PropTypes.instanceOf(Date),
 	deck: PropTypes.object.isRequired,
 	cardIndex: PropTypes.number.isRequired,
 	isPending: PropTypes.bool.isRequired,
+	error: PropTypes.object.isRequired,
 	changeCardStatus: PropTypes.func.isRequired,
 }
 

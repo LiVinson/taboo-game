@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+//Container for the progress bar. Will be the background as the width of the inner bar decreases
 export const ProgressBar = styled.div`
 	width: 100%;
 	position: relative;
@@ -20,6 +21,7 @@ export const Bar = styled.div`
 	top: 0;
 	left: 0;
 	width: ${(props) => props.width + '%'};
+	/* If width is less than 16 (10 seconds or less remaining): change color */
 	background-color: ${(props) =>
 		parseInt(props.width) > 16 ? props.theme.color.accent3 : props.theme.color.accent2};
 	height: 100%;
@@ -28,8 +30,8 @@ export const Bar = styled.div`
 export const TimeText = styled.div`
 	/* positions numbers to the far right */
 	position: absolute;
+	/* when time = 0, centers time up message */
     right: ${(props) => (parseInt(props.width) > 0 ? 0 : '50%')};
-    /* when time = 0, centers time up message */
 	transform: ${(props) => {
 		if (parseInt(props.width) > 0) {
 			return 'translateX(0)'

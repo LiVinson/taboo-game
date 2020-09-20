@@ -112,7 +112,7 @@ exports[`GameCard functionality and rendering TeamGameCard renders correctly for
     <p
       className="sc-fzokOt bZVoaN"
     >
-      It’s the other team’s turn to give clues and guess! 
+      It’s the other team’s turn to give clues and guess, so don't say anything! 
       <span
         className="sc-fzqBZW hgCjBU"
       >
