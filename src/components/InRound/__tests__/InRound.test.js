@@ -6,7 +6,7 @@ import theme from '../../../global-design/theme'
 import { InRound } from '../InRound'
 import { GameCard } from 'components/GameCard'
 import TimeCard from 'components/TimeCard'
-import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard'
+import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard/GameCard'
 import { deck } from "__fixtures__/deck"
 jest.mock('moment', () => {
 	return () => jest.requireActual('moment')('2020-09-01T00:00:00.000Z')
@@ -57,9 +57,9 @@ describe('Inround rendering and functionality', () => {
 
 		expect(wrapper.find(TimeCard)).toHaveLength(1)
 		expect(wrapper.find(GameCard)).toHaveLength(1)
-		expect(wrapper.find(GameCard).shallow().find(GiverGameCard)).toHaveLength(1)
-		expect(wrapper.find(GameCard).shallow().find(WatcherGameCard)).toHaveLength(0)
-		expect(wrapper.find(GameCard).shallow().find(TeamGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).dive().find(GiverGameCard)).toHaveLength(1)
+		expect(wrapper.find(GameCard).dive().find(WatcherGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).dive().find(TeamGameCard)).toHaveLength(0)
 	})
 
 	test('renders TimeCard and WatcherGameCard when role is watcher', () => {
@@ -72,9 +72,9 @@ describe('Inround rendering and functionality', () => {
 
 		expect(wrapper.find(TimeCard)).toHaveLength(1)
 		expect(wrapper.find(GameCard)).toHaveLength(1)
-		expect(wrapper.find(GameCard).shallow().find(GiverGameCard)).toHaveLength(0)
-		expect(wrapper.find(GameCard).shallow().find(WatcherGameCard)).toHaveLength(1)
-		expect(wrapper.find(GameCard).shallow().find(TeamGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).dive().find(GiverGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).dive().find(WatcherGameCard)).toHaveLength(1)
+		expect(wrapper.find(GameCard).dive().find(TeamGameCard)).toHaveLength(0)
 	})
 
 	test('renders TimeCard and TeamGameCard when role is giverTeam', () => {
@@ -102,8 +102,8 @@ describe('Inround rendering and functionality', () => {
 
 		expect(wrapper.find(TimeCard)).toHaveLength(1)
 		expect(wrapper.find(GameCard)).toHaveLength(1)
-		expect(wrapper.find(GameCard).shallow().find(GiverGameCard)).toHaveLength(0)
-		expect(wrapper.find(GameCard).shallow().find(WatcherGameCard)).toHaveLength(0)
-		expect(wrapper.find(GameCard).shallow().find(TeamGameCard)).toHaveLength(1)
+		expect(wrapper.find(GameCard).dive().find(GiverGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).dive().find(WatcherGameCard)).toHaveLength(0)
+		expect(wrapper.find(GameCard).dive().find(TeamGameCard)).toHaveLength(1)
 	})
 })

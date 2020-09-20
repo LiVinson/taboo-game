@@ -84,7 +84,6 @@ test('Navigates to /home once all rules clicked through', () => {
 			<Rules {...props} />
 		</ThemeProvider>
 	)
-	console.log(rulesText.length)
 
   //Click next for each rules in rules array
 	rulesText.forEach((rule) => {

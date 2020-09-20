@@ -4,7 +4,7 @@ import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 import { InstructionsText, KeyWord } from './style'
 
 
-const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
+export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
 	const buttonInfo = [
 		{
 			text: 'Skip!',
@@ -32,7 +32,7 @@ GiverGameCard.propType = {
 	isPending: PropType.bool.isRequired
 }
 
-const WatcherGameCard = ({currentCard, changeCardStatus, isPending, error}) => {
+export const WatcherGameCard = ({currentCard, changeCardStatus, isPending, error}) => {
 	const buttonInfo = [
 		{
 			text: 'Buzzer!',
@@ -52,7 +52,7 @@ WatcherGameCard.propType = {
 	isPending: PropType.bool.isRequired
 }
 
-const TeamGameCard = ({ role, giver, watcher }) => {
+export const TeamGameCard = ({ role, giver, watcher }) => {
 	return (
 		<React.Fragment>
 			{role === 'giverTeam' ? (
@@ -81,7 +81,6 @@ TeamGameCard.propType = {
 }
 
 export const GameCard = (props) => {
-	console.log(props)
 	const currentCard = props.deck[props.cardIndex]
 	switch (props.role) {
 		case 'giver':
