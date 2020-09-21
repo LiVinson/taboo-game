@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorMessage Renders correctly when large and light props  provided 1`] = `
+.c0 {
+  font-size: 2.2rem;
+  font-style: inherit;
+  color: #757575;
+  background-color: #f7f9f9;
+}
+
+<p
+  className="c0"
+>
+  Something has gome wrong.
+</p>
+`;
+
+exports[`ErrorMessage Renders correctly when large and light props not provided 1`] = `
+.c0 {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: red;
+}
+
+<p
+  className="c0"
+>
+  Something has gome wrong.
+</p>
+`;
+
+exports[`SuccessMessage Renders correctly 1`] = `
+.c0 {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: red;
+  color: green;
+}
+
+<p
+  className="sc-AxjAm c0"
+>
+  Scores updated!
+</p>
+`;
