@@ -35,7 +35,8 @@ const PostRoundWatcher = ({
 	//Filters cards played based on the status. Information needed to generate buttons,
 	//select a card in the list, and change button status passed in
 	// Then separates cards played in round based on current card status
-	const instructions = "Review the taboo words from this round. If any card is not listed in the right category, select the word and click the button to change it's status. Select Confirm! when done to save the scores."
+	const instructions =
+		"Review the cards from this round below. Select the word and click the button to change it's status. Select Confirm! when done to calculate scores."
 	return (
 		<React.Fragment>
 			<InstructionsCard>{instructions}</InstructionsCard>

@@ -1,15 +1,5 @@
-import {
-	dbUpdateRoundStatus,
-	dbUpdateCardStatus,
-	dbUpdateGameScore,
-	dbUpdateRoundHalf,
-	dbUpdateRoundNumber,
-	dbVerifyEndGame,
-	dbUpdateGameStatus,
-	dbCompleteRound,
-} from 'utils/API'
+import { dbUpdateRoundStatus, dbUpdateCardStatus, dbCompleteRound } from 'utils/API'
 import { errorActionCreator } from './errorActions'
-// import { getFirestore } from 'redux-firestore'
 
 const requestRoundStatus = () => {
 	return {
@@ -80,8 +70,7 @@ export const completeRound = (gamecode) => {
 				dispatch(completeRoundSuccess())
 			})
 			.catch((error) => {
-					dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', error))
+				dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', error))
 			})
 	}
 }
-

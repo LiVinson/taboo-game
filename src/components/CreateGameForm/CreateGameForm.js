@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik, Field, ErrorMessage } from 'formik'
-import { ErrorMessage as CustomErrorText } from 'components/shared/FeedbackMessage'
+// import { ErrorMessage as CustomErrorText } from 'components/shared/FeedbackMessage'
 import HideContainer from 'components/shared/HideContainer'
 import {
 	Form,

@@ -27,10 +27,10 @@ export const RadioInput = styled.input`
 		font-weight: 500;
 		/* star that displays when the radio button corresponding to this label is checked */
 		&:before {
-			content: '*';
+			content: '>';
 			width: 1rem;
 			display: inline-block;
-			padding-right: 1rem;
+			padding-right: 2rem;
 			color: ${(props) => props.theme.color.accent2};
 		}
 	}

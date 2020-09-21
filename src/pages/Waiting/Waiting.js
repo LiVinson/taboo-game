@@ -155,7 +155,7 @@ export class Waiting extends React.Component {
 				<React.Fragment>
 					<InstructionsCard>
 						Share the game code below with friends! Once at least four players have joined and picked a
-						team, select PLAY to start!
+						team, the host can select PLAY to start!
 					</InstructionsCard>
 					<TabooCardTop margin={true}>{gamecode}</TabooCardTop>
 					<PlayerListCard buttonInfo={buttonInfo}>

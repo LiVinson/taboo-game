@@ -377,7 +377,7 @@ export const dbUpdateRoundHalf = (gamecode) => {
 				}
 
 				const data = game.data()
-				const { round, half, team1Turn, team2Turn, team1Rotations, team2Rotations } = data.gameplay
+				const { half, team1Turn, team2Turn, team1Rotations, team2Rotations } = data.gameplay
 				const { players } = data
 				const team1Count = players.filter((player) => player.team === 'team 1').length
 				const team2Count = players.filter((player) => player.team === 'team 2').length
