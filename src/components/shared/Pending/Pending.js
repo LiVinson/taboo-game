@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyledPending, StyledLargePending } from './style'
 
 export class Pending extends React.Component {
@@ -30,11 +31,17 @@ export class Pending extends React.Component {
 		) : (
 			<StyledPending>{this.state.message}</StyledPending>
 		)
-		return pending 
+		return pending
 	}
 }
 
 Pending.defaultProps = {
 	speed: 300,
 	large: false,
+}
+
+Pending.propTypes = {
+	message: PropTypes.string.isRequired,
+	speed: PropTypes.number.isRequired,
+	large: PropTypes.bool.isRequired,
 }

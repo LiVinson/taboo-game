@@ -33,7 +33,6 @@ describe('Inround rendering and functionality', () => {
 	}
 
 	test('renders correctly', () => {
-		console.log(defaultProps.roundEndTime)
 		const props = {
 			...defaultProps,
 		}

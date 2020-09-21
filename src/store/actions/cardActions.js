@@ -35,7 +35,7 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 				dispatch(updateCardStatusSuccess())
 			})
 			.catch((error) => {
-				console.log(error.message)
+		
 				const errorMessage = `There was a problem updating card ${currentIndex}. Please try again.`
 				dispatch(errorActionCreator('UPDATE_CARD_STATUS_FAILURE', errorMessage))
 			})
@@ -47,10 +47,9 @@ export const submitCardIdea = (cardIdea) => {
 
 		return new Promise((resolve, reject ) => {
 			dispatch(requestSubmitCardIdea())
-			// console.log(cardIdea)
+
 
 			return dbSubmitCardIdea(cardIdea).then(() => {
-					console.log("success")
 					dispatch(submitCardIdeaSuccess())
 					resolve(true)
 				})

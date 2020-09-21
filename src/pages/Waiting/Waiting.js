@@ -105,7 +105,7 @@ export class Waiting extends React.Component {
 		if (this.state.loading) {
 			return <LoadingCard message="Joining waiting room" />
 			//Game is already in progress or complete. Can't join Waiting Room
-		} else if (this.props.game[gamecode].status !== 'new') {
+		} else if (this.props.game[gamecode]?.status === 'in progress') {
 			return <Redirect to={`/play/${gamecode}`} />
 			//If url contains gamecode that is not valid
 		} else if (!this.state.gameVerified) {
@@ -155,7 +155,7 @@ export class Waiting extends React.Component {
 				<React.Fragment>
 					<InstructionsCard>
 						Share the game code below with friends! Once at least four players have joined and picked a
-						team, select PLAY to start!
+						team, the host can select PLAY to start!
 					</InstructionsCard>
 					<TabooCardTop margin={true}>{gamecode}</TabooCardTop>
 					<PlayerListCard buttonInfo={buttonInfo}>

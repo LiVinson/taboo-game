@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioListItem Renders correctly 1`] = `
+<li
+  className="sc-AxjAm kecFbU"
+>
+  <input
+    className="sc-AxirZ hHkOEQ"
+    id="apple"
+    name="apple"
+    onChange={[Function]}
+    type="radio"
+    value={0}
+  />
+  <label
+    className="sc-AxiKw kMXxWh"
+    htmlFor="apple"
+  >
+    apple
+  </label>
+</li>
+`;

@@ -7,8 +7,6 @@ const initState = {
 }
 
 export const gameReducer = (state = initState, action) => {
-	// console.log(state)
-	console.log(action.type)
 	switch (action.type) {
 		case 'REQUEST_CREATE_GAME':
 			return {

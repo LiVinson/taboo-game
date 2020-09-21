@@ -30,7 +30,6 @@ export class Submit extends React.Component {
 
 	//actions passed from Formik
 	handleSubmit = (values, actions) => {
-		// console.log(values)
 		this.setState(
 			{
 				tabooWord: values.tabooWord,

@@ -1,4 +1,4 @@
-const deck = {
+export const deck = {
     0: {
         word: 'apple',
         tabooList: ['fruit', 'red', 'shiny', 'round', 'Eve'],
@@ -13,4 +13,33 @@ const deck = {
     },
 }
 
-export {deck}
+export const cardsPlayed = [
+    {
+        index: 0,
+        status: 'correct',
+        tabooList: ['rapper', 'West Coast', 'Compton', 'Humble', 'Good Kid'],
+        word: 'Kendrick Lamar',
+        roundPlayed: '1-top',
+    },
+    {
+        index: 1,
+        status: 'skipped',
+        tabooList: ['Lion King', 'Disney', 'Mufasa', 'Pride Rock', 'Nala'],
+        word: 'Simba',
+        roundPlayed: '1-top',
+    },
+    {
+        index: 2,
+        status: 'correct',
+        tabooList: ['red', 'fruit', 'shiny', 'teacher', 'Eve'],
+        word: 'apple',
+        roundPlayed: '1-top',
+    },
+    {
+        index: 3,
+        status: 'discard',
+        tabooList: ['Fresh Prince', 'Philadelphia', 'Jazzy Jeff', 'Independence Day', 'Jada Pinkett'],
+        word: 'Will Smith',
+        roundPlayed: '1-top',
+    },
+]

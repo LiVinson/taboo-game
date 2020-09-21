@@ -1,15 +1,12 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
-import RadioListItem from "components/RadioListItem"
-import List from "components/shared/List"
-import { NoCardMessage } from "./style"
-
+import RadioListItem from 'components/RadioListItem'
+import List from 'components/shared/List'
+import { NoCardMessage } from './style'
 
 //Returns a Taboo card with buttons to change card status to other two options or a card stating there are no cards in this status
 const CardsPlayed = ({ status, cardList, handleChange, buttonInfo, error }) => {
-	// console.log(error)
-	// console.log(buttonInfo)
 	return (
 		<ButtonTabooCard tabooWord={status} buttons={buttonInfo} error={error}>
 			<List>
@@ -29,6 +26,14 @@ const CardsPlayed = ({ status, cardList, handleChange, buttonInfo, error }) => {
 			</List>
 		</ButtonTabooCard>
 	)
+}
+
+CardsPlayed.propTypes = {
+	status: PropTypes.string.isRequired,
+	cardList: PropTypes.array.isRequired,
+	handleChange: PropTypes.func.isRequired,
+	buttonInfo: PropTypes.array.isRequired,
+	error: PropTypes.string,
 }
 
 export default CardsPlayed

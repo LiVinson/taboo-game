@@ -6,10 +6,8 @@ const initState = {
 }
 
 export const cardsReducer = (state = initState, action) => {
-	console.log(action.type)
 	switch (action.type) {
 		case 'REQUEST_UPDATE_CARD_STATUS':
-			console.log('REQUEST_UPDATE_CARD_STATUS')
 			return {
 				...errorReducer(state, action),
 				pending: true,

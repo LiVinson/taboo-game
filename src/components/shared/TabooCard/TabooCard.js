@@ -78,11 +78,9 @@ const TabooList = ({ list, property, specialValue, specialKey, secondary }) => {
 				let includeStar = false
 				if (typeof listItem === 'object' && listItem !== null && listItem[property]) {
 					displayText = listItem[property]
-					// console.log(listItem[specialKey])
-					// console.log(specialValue)
+
 					if (listItem[specialKey] && listItem[specialKey] === specialValue) {
-						console.log(true)
-						includeStar = true
+								includeStar = true
 					}
 				} else {
 					displayText = listItem
@@ -146,12 +144,6 @@ export const FilteredTabooList = ({
 	specialValue,
 	noneMessage,
 }) => {
-	// console.log(unfilteredList)
-	// console.log(filterKey)
-	// console.log(filterValue)
-	// console.log(displayProperty)
-	// console.log(specialKey)
-	// console.log(specialValue)
 
 	//filters array based on match of item or item[filterKey] equal to filterValue
 	const filteredList = unfilteredList.filter((item) => {

@@ -83,7 +83,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 					})
 				})
 				.catch((error) => {
-					console.log(error.message)
+	
 					dispatch(errorActionCreator('CREATE_GAME_FAILURE', error))
 				})
 		})
@@ -101,15 +101,12 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 					return dbCreatePlayer(playerName).then((playerData) => {
 						const player = { ...playerData, host: false, team: 'unassigned' }
 						return addPlayer(player, gamecode).then(() => {
-							console.log('succesfully created game and added player')
 							dispatch(joinGameSuccess(gamecode))
 							resolve()
 						})
 					})
 				})
 				.catch((error) => {
-					console.log('there was an error joining the game')
-					console.log(error)
 					dispatch(errorActionCreator('JOIN_GAME_FAILURE', error.message))
 				})
 		})
@@ -125,7 +122,6 @@ export const updateGameStatus = (gamecode, status) => {
 				dispatch(updateGameStatusSuccess(status))
 			})
 			.catch((error) => {
-				console.log(error)
 				const errorMsg =
 					'There was an error updating the game status. Try again, and refresh the page if it persists.'
 				dispatch(errorActionCreator('UPDATE_GAME_STATUS_FAILURE', errorMsg))
@@ -139,19 +135,15 @@ export const fetchGameDeck = (gamecode) => {
 		dispatch(requestFetchGameDeck())
 
 		dbRequestGameDeck()
-			.then((response) => {
-				console.log(response)
+			.then((response) => {	
 				const shuffledDeck = shuffleArray(response)
 				//convert from array of objects to object with keys = objects.
 				const deckObject = convertArrayToObject(shuffledDeck)
 				return dbSaveGameDeck(gamecode, deckObject).then((res) => {
-					console.log('back from saving shuffled array')
 					dispatch(fetchGameDeckSuccess())
 				})
 			})
 			.catch((error) => {
-				console.log('there was an error retreiving the deck')
-				console.log(error.message)
 				dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', "There was a problem fetching the deck. Please refresh the page to try again."))
 			})
 	}

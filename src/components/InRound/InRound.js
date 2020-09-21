@@ -40,7 +40,6 @@ InRound.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state)
 	return {
 		isPending: state.cards.pending,
 		error: {

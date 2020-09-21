@@ -50,7 +50,7 @@ const displayGiverInstructions = (watcher, startRound, error) => {
 			</InstructionsText>
 
 			<InstructionsText>
-				Select NEXT if your team guesses the word correctly or SKIP to go to the next card. Make sure to keep an
+				Select {<KeyWord>NEXT</KeyWord>} if your team guesses the word correctly or {<KeyWord>SKIP</KeyWord>} to go to the next card. Make sure to keep an
 				eye on your time!
 			</InstructionsText>
 		</ButtonTabooCard>
@@ -61,9 +61,9 @@ const displayWatcherInstructions = (giver) => {
 	return (
 		<TabooCard tabooWord="Get Ready!">
 			<InstructionsText>
-				It’s the other team’s turn to give clues! You are the watcher for this round! If{' '}
-				{<KeyWord>{giver.name}</KeyWord>} says any words from the taboo list or gives any illegal clues, hit the
-				buzzer!
+				It’s the other team’s turn to give clues! {<KeyWord>You</KeyWord>} are the watcher for this round! If{' '}
+				{<KeyWord>{giver.name}</KeyWord>} says any words from the taboo list or gives any illegal clues, hit the{' '}
+				{<KeyWord>buzzer!</KeyWord>}
 			</InstructionsText>
 		</TabooCard>
 	)
