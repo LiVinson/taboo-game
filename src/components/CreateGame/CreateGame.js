@@ -30,7 +30,6 @@ export class CreateGame extends React.Component {
     On success, adds user to the game as as a player  
   */
 	handleSubmit = (values, setSubmitting) => {
-		// console.log('submit')
 		this.setState(
 			{
 				name: values.name.toUpperCase(),

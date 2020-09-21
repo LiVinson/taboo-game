@@ -22,7 +22,6 @@ export class JoinGame extends React.Component {
 
 	//Update to creating player id, validating gamecode, redirecting to 'Waiting Room'
 	handleSubmit = (values, setSubmitting) => {
-		// console.log('submitted', values)
 		this.setState(
 			{
 				playerName: values.name.toUpperCase(),
@@ -31,7 +30,6 @@ export class JoinGame extends React.Component {
 			() => {
 				const { gamecode, playerName } = this.state
 				this.props.joinNewGame({ gamecode, playerName }).then(() => {
-					// console.log('promise done: player has joined game. Redirecting.')
 					//Finishes Formik submission process
 					setSubmitting(false)
 					//redirect to Waiting
@@ -53,7 +51,6 @@ export class JoinGame extends React.Component {
 	}
 
 	render() {
-		// console.log(this.props)
 		const { name, gamecode } = this.state
 		const buttonInfo = [
 			{ text: 'Back', onClick: this.handleBackClick },
