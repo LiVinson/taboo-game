@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List renders children correctly  1`] = `
+.c0 {
+  list-style-type: none;
+}
+
+<ul
+  className="c0"
+>
+  <li>
+    item1
+  </li>
+  <li>
+    item2
+  </li>
+  <li>
+    item3
+  </li>
+</ul>
+`;
