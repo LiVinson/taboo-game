@@ -5,7 +5,7 @@ exports[`RadioListItem Renders correctly 1`] = `
   className="sc-AxjAm kecFbU"
 >
   <input
-    className="sc-AxirZ loqAvr"
+    className="sc-AxirZ hHkOEQ"
     id="apple"
     name="apple"
     onChange={[Function]}

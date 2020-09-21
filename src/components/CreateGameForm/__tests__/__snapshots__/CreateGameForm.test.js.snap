@@ -3,22 +3,22 @@
 exports[`CreateGameForm renders correctly 1`] = `
 <form
   action="#"
-  className="sc-AxhCb dTtMqn"
+  className="sc-AxirZ jZLUev"
   id="createGameForm"
   onReset={[Function]}
   onSubmit={[Function]}
 >
   <div
-    className="sc-AxhUy bEZqON"
+    className="sc-AxiKw ebFOUE"
   >
     <label
-      className="sc-fzoLsD sc-fzpans giyGVI"
+      className="sc-AxmLO sc-fzozJi kZdFWe"
       htmlFor="name"
     >
       Enter Your Name
     </label>
     <input
-      className="sc-Axmtr hFjKvF"
+      className="sc-AxgMl egcgFI"
       id="name"
       name="name"
       onBlur={[Function]}
@@ -30,22 +30,22 @@ exports[`CreateGameForm renders correctly 1`] = `
     />
   </div>
   <span
-    className="sc-AxiKw dXUfwT"
+    className="sc-AxjAm htLRco"
   >
     <div
-      className="sc-AxhUy iugAjZ"
+      className="sc-AxiKw dsnoEE"
     >
       <p
-        className="sc-AxgMl cDErLg"
+        className="sc-AxhCb bDNQHH"
       >
         Game Mode 
       </p>
       <div
-        className="sc-AxheI kCUngE"
+        className="sc-AxhUy fehFXc"
       >
         <input
           checked={true}
-          className="sc-AxmLO gpdOlk"
+          className="sc-AxheI jnBKJW"
           id="remote"
           name="gameMode"
           onBlur={[Function]}
@@ -55,18 +55,18 @@ exports[`CreateGameForm renders correctly 1`] = `
           value="remote"
         />
         <label
-          className="sc-fzoLsD iXKDUT"
+          className="sc-AxmLO XqAik"
           htmlFor="remote"
         >
           Remote
         </label>
       </div>
       <div
-        className="sc-AxheI kCUngE"
+        className="sc-AxhUy fehFXc"
       >
         <input
           checked={false}
-          className="sc-AxmLO gpdOlk"
+          className="sc-AxheI jnBKJW"
           id="inPerson"
           name="gameMode"
           onBlur={[Function]}
@@ -75,7 +75,7 @@ exports[`CreateGameForm renders correctly 1`] = `
           value="inPerson"
         />
         <label
-          className="sc-fzoLsD iXKDUT"
+          className="sc-AxmLO XqAik"
           htmlFor="inPerson"
         >
           In Person
@@ -84,19 +84,19 @@ exports[`CreateGameForm renders correctly 1`] = `
     </div>
   </span>
   <div
-    className="sc-AxhUy iugAjZ"
+    className="sc-AxiKw dsnoEE"
   >
     <p
-      className="sc-AxgMl cDErLg"
+      className="sc-AxhCb bDNQHH"
     >
       End Game Method
     </p>
     <div
-      className="sc-AxheI kCUngE"
+      className="sc-AxhUy fehFXc"
     >
       <input
         checked={true}
-        className="sc-AxmLO gpdOlk"
+        className="sc-AxheI jnBKJW"
         id="turns"
         name="endGameMethod"
         onBlur={[Function]}
@@ -106,14 +106,14 @@ exports[`CreateGameForm renders correctly 1`] = `
         value="turns"
       />
       <label
-        className="sc-fzoLsD iXKDUT"
+        className="sc-AxmLO XqAik"
         htmlFor="turns"
       >
         Turns per Person
       </label>
     </div>
     <select
-      className="sc-fzozJi duWWmO"
+      className="sc-Axmtr hzlKJe"
       disabled={false}
       name="turnsValue"
       onBlur={[Function]}
@@ -148,14 +148,14 @@ exports[`CreateGameForm renders correctly 1`] = `
       </option>
     </select>
     <span
-      className="sc-AxiKw dXUfwT"
+      className="sc-AxjAm htLRco"
     >
       <div
-        className="sc-AxheI kCUngE"
+        className="sc-AxhUy fehFXc"
       >
         <input
           checked={false}
-          className="sc-AxmLO gpdOlk"
+          className="sc-AxheI jnBKJW"
           disabled={true}
           id="time"
           name="endGameMethod"
@@ -166,14 +166,14 @@ exports[`CreateGameForm renders correctly 1`] = `
           value="time"
         />
         <label
-          className="sc-fzoLsD iXKDUT"
+          className="sc-AxmLO XqAik"
           htmlFor="time"
         >
           Timer (Coming soon!)
         </label>
       </div>
       <select
-        className="sc-fzozJi duWWmO"
+        className="sc-Axmtr hzlKJe"
         disabled={true}
         name="timeValue"
         onBlur={[Function]}
@@ -200,19 +200,19 @@ exports[`CreateGameForm renders correctly 1`] = `
     </span>
   </div>
   <div
-    className="sc-AxhUy iugAjZ"
+    className="sc-AxiKw dsnoEE"
   >
     <p
-      className="sc-AxgMl cDErLg"
+      className="sc-AxhCb bDNQHH"
     >
       Skipping Penalty
     </p>
     <div
-      className="sc-AxheI kCUngE"
+      className="sc-AxhUy fehFXc"
     >
       <input
         checked={true}
-        className="sc-AxmLO gpdOlk"
+        className="sc-AxheI jnBKJW"
         id="none"
         name="skipPenalty"
         onBlur={[Function]}
@@ -222,18 +222,18 @@ exports[`CreateGameForm renders correctly 1`] = `
         value="none"
       />
       <label
-        className="sc-fzoLsD iXKDUT"
+        className="sc-AxmLO XqAik"
         htmlFor="none"
       >
         None
       </label>
     </div>
     <div
-      className="sc-AxheI kCUngE"
+      className="sc-AxhUy fehFXc"
     >
       <input
         checked={false}
-        className="sc-AxmLO gpdOlk"
+        className="sc-AxheI jnBKJW"
         id="half"
         name="skipPenalty"
         onBlur={[Function]}
@@ -242,18 +242,18 @@ exports[`CreateGameForm renders correctly 1`] = `
         value="half"
       />
       <label
-        className="sc-fzoLsD iXKDUT"
+        className="sc-AxmLO XqAik"
         htmlFor="half"
       >
         1/2 a Point
       </label>
     </div>
     <div
-      className="sc-AxheI kCUngE"
+      className="sc-AxhUy fehFXc"
     >
       <input
         checked={false}
-        className="sc-AxmLO gpdOlk"
+        className="sc-AxheI jnBKJW"
         id="full"
         name="skipPenalty"
         onBlur={[Function]}
@@ -262,7 +262,7 @@ exports[`CreateGameForm renders correctly 1`] = `
         value="full"
       />
       <label
-        className="sc-fzoLsD iXKDUT"
+        className="sc-AxmLO XqAik"
         htmlFor="full"
       >
         1 Point

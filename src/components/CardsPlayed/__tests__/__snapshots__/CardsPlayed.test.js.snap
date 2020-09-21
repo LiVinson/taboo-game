@@ -19,7 +19,7 @@ exports[`CardsPlayed Snapshot 1`] = `
         className="sc-fzokOt gWWQxI"
       >
         <input
-          className="sc-fzqBZW dVYnNZ"
+          className="sc-fzqBZW cKxhfK"
           id="Kendrick Lamar"
           name="Kendrick Lamar"
           onChange={[Function]}
@@ -37,7 +37,7 @@ exports[`CardsPlayed Snapshot 1`] = `
         className="sc-fzokOt gWWQxI"
       >
         <input
-          className="sc-fzqBZW dVYnNZ"
+          className="sc-fzqBZW cKxhfK"
           id="apple"
           name="apple"
           onChange={[Function]}

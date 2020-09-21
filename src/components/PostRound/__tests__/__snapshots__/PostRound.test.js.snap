@@ -69,7 +69,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
   <p
     className="sc-fzokOt bIqlHw"
   >
-    Review the taboo words from this round. If any card is not listed in the right category, select the word and click the button to change it's status. Select Confirm! when done to save the scores.
+    Review the cards from this round below. Select the word and click the button to change it's status. Select Confirm! when done to calculate scores.
   </p>
   <div
     className="sc-AxjAm hDlFTS"
@@ -89,7 +89,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
           className="sc-fzqBZW iVohld"
         >
           <input
-            className="sc-fzqNJr hpIjIE"
+            className="sc-fzqNJr iGpCVv"
             id="Kendrick Lamar"
             name="Kendrick Lamar"
             onChange={[Function]}
@@ -142,7 +142,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
           className="sc-fzqBZW iVohld"
         >
           <input
-            className="sc-fzqNJr hpIjIE"
+            className="sc-fzqNJr iGpCVv"
             id="Simba"
             name="Simba"
             onChange={[Function]}
@@ -195,7 +195,7 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
           className="sc-fzqBZW iVohld"
         >
           <input
-            className="sc-fzqNJr hpIjIE"
+            className="sc-fzqNJr iGpCVv"
             id="Will Smith"
             name="Will Smith"
             onChange={[Function]}
