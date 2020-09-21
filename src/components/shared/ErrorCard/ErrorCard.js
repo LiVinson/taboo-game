@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types"
 import { StyledErrorCard } from './style'
 import {ErrorMessage} from 'components/shared/FeedbackMessage'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
@@ -14,11 +15,14 @@ export const ErrorCard = ({error, title}) => {
 	)
 }
 ErrorCard.defaultProps = {
-	
 	title: 'Uh Oh!',
 }
 
-const ButtonErrorCard = ({ error, history, url, title }) => {
+ErrorCard.propTypes = {
+	title: PropTypes.string.isRequired,
+	error: PropTypes.string.isRequired
+}
+export const ButtonErrorCard = ({ error, history, url, title }) => {
 	const buttonInfo = [
 		{
 			text: 'Home',
