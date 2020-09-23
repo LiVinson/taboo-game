@@ -51,6 +51,7 @@ export class CreateGame extends React.Component {
 					skipPenalty,
 					players: [],
 					gameplay: {
+						// cardIndex: 0,
 						round: 1,
 						status: "preround",
 						half: "top",	
@@ -62,7 +63,8 @@ export class CreateGame extends React.Component {
 							team1: 0,
 							team2: 0
 						}
-					}
+					},
+					users: []
 				}
 				
 				this.props.createNewGame(gamecode, gameData, name).then(() => {

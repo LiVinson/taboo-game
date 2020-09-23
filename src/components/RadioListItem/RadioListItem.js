@@ -4,12 +4,13 @@ import { StyledRadioListItem, RadioInput, RadioLabel } from './style'
 
 //Takes in taboo word, it's index, status, and a cb function that is called when user selects a different word in the list
 //Returns a list item with a hidden radio button and label.
-const RadioListItem = ({ word, index, status, onChange }) => {
+const RadioListItem = ({ word, index, status, checked, onChange }) => {
 	return (
 		<StyledRadioListItem>
 			<RadioInput
+				checked={checked}
 				type="radio"
-				name={word}
+				name={status}
 				value={index}
 				id={word}
 				onChange={(e) => {

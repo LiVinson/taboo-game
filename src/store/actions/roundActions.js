@@ -26,14 +26,14 @@ const completeRoundSuccess = () => {
 	}
 }
 
-export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex) => {
+export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex, round, half) => {
 	return async (dispatch) => {
 		dispatch(requestRoundStatus())
 
 		//If round has ended, change the status of the last card displayed so it does not display next round
 		if (newRoundStatus === 'postround') {
 			try {
-				await dbUpdateCardStatus(gamecode, 'discard', parseInt(currentIndex))
+				await dbUpdateCardStatus(gamecode, 'discard', currentIndex, "in progress", round, half, )
 				//need to determine handling error here
 			} catch (err) {
 				const errorMessage =

@@ -139,11 +139,14 @@ export const fetchGameDeck = (gamecode) => {
 				const shuffledDeck = shuffleArray(response)
 				//convert from array of objects to object with keys = objects.
 				const deckObject = convertArrayToObject(shuffledDeck)
+		
+				//object with each property as a number containg an object
 				return dbSaveGameDeck(gamecode, deckObject).then((res) => {
 					dispatch(fetchGameDeckSuccess())
 				})
 			})
 			.catch((error) => {
+				console.log(error.message)
 				dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', "There was a problem fetching the deck. Please refresh the page to try again."))
 			})
 	}

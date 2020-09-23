@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import GameInfo from 'components/GameInfo'
 import RoundInfo from 'components/RoundInfo'
@@ -9,8 +9,7 @@ import PostRound from 'components/PostRound'
 import { updateRoundStatus } from 'store/actions/roundActions'
 
 export class Round extends React.Component {
-
-	//Receives either 'giver' or 'watcher. Based on half (top = team 1, bottom = team 2) and the teamTurn index, returns 
+	//Receives either 'giver' or 'watcher. Based on half (top = team 1, bottom = team 2) and the teamTurn index, returns
 	//player object for the giver and watcher.
 	determineActivePlayer = (role) => {
 		let activePlayer
@@ -35,15 +34,15 @@ export class Round extends React.Component {
 		this.props.updateRoundStatus(this.props.gamecode, 'postround')
 	}
 
-
 	render() {
 		const { gamecode } = this.props
-		const { round, half, status, cardIndex, deck, roundEndTime, score } = this.props.gameplay
+		const { round, half, status, roundEndTime, score } = this.props.gameplay
+		const { deck } = this.props
 		const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 		const giver = this.determineActivePlayer('giver')
 		const watcher = this.determineActivePlayer('watcher')
 		const currentPlayer = this.props.players.find((player) => player.playerId === this.props.playerId)
-	
+		// console.log(deck)
 		let role
 		if (activeTeam === currentPlayer.team) {
 			role = currentPlayer.playerId === giver.playerId ? 'giver' : 'giverTeam'
@@ -56,11 +55,11 @@ export class Round extends React.Component {
 				<RoundInfo round={round} watcher={watcher} giver={giver} currentPlayerId={currentPlayer.playerId} />
 				{status === 'preround' && (
 					<PreRound
-						teamScores={score}						
+						teamScores={score}
 						currentPlayer={currentPlayer}
 						role={role}
 						giver={giver}
-						watcher={watcher}						
+						watcher={watcher}
 						startRound={this.startRound}
 						error={this.props.error}
 					/>
@@ -74,9 +73,8 @@ export class Round extends React.Component {
 						round={round}
 						roundEndTime={roundEndTime}
 						deck={deck}
-						cardIndex={cardIndex}
+						cardIndex={deck[gamecode].cardIndex}
 						endRound={this.endRound}
-				
 					/>
 				)}
 				{status === 'postround' && (
@@ -95,12 +93,13 @@ export class Round extends React.Component {
 }
 
 Round.propTypes = {
+	deck: PropTypes.object.isRequired,
 	gamecode: PropTypes.string.isRequired,
 	players: PropTypes.array.isRequired,
 	gameplay: PropTypes.object.isRequired,
 	playerId: PropTypes.string.isRequired,
 	error: PropTypes.string,
-	updateRoundStatus: PropTypes.func.isRequired
+	updateRoundStatus: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
@@ -111,10 +110,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, prevProps) => {
-	const { gameplay } = prevProps
+	const { cardIndex } = prevProps.deck[prevProps.gamecode]
+	const { round, half } = prevProps.gameplay
 	return {
-		updateRoundStatus: (gamecode, newStatus) => {
-			dispatch(updateRoundStatus(gamecode, newStatus, gameplay.cardIndex))
+		updateRoundStatus: (gamecode, newRoundStatus) => {
+			dispatch(updateRoundStatus(gamecode, newRoundStatus, cardIndex, round, half))
 		},
 	}
 }

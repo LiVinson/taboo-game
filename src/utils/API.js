@@ -2,7 +2,6 @@ import firebase from './fbConfig'
 
 //--------------------- GAME UPDATES ---------------------------//
 export const dbCreateGame = (gamecode, gameDetails) => {
-
 	const newGame = {
 		gamecode,
 		...gameDetails,
@@ -55,7 +54,6 @@ export const dbUpdateGameStatus = (gamecode, status) => {
 		.catch((error) => {
 			throw error
 		})
-
 }
 
 export const dbVerifyEndGame = (gamecode) => {
@@ -80,7 +78,6 @@ export const dbVerifyEndGame = (gamecode) => {
 				//end based on amount of time elapsed. Fetaure to be added
 			}
 		})
-
 }
 
 //---------------------PLAYER & TEAM UPDATES --------------------------------
@@ -102,7 +99,7 @@ export const dbCreatePlayer = (playerName) => {
 					}
 					return player
 				})
-				.catch((error) => {	
+				.catch((error) => {
 					throw error
 				})
 		})
@@ -118,6 +115,8 @@ export const addPlayer = (player, gamecode) => {
 		.doc(gamecode)
 		.update({
 			players: firebase.firestore.FieldValue.arrayUnion(player),
+			//storing just the ids separately for purposes of security rules
+			users: firebase.firestore.FieldValue.arrayUnion(player.playerId),
 		})
 		.then(() => {
 			return player
@@ -125,7 +124,6 @@ export const addPlayer = (player, gamecode) => {
 }
 
 export const dbUpdateTeam = (gamecode, playerId, team) => {
-
 	const gamePath = firebase.firestore().collection('games').doc(gamecode)
 	return firebase
 		.firestore()
@@ -157,7 +155,6 @@ export const dbUpdateTeam = (gamecode, playerId, team) => {
 }
 
 export const dbUpdateRoundStatus = (gamecode, status) => {
-
 	let currentTime
 	let endTime = null
 
@@ -206,73 +203,85 @@ export const dbRequestGameDeck = () => {
 }
 
 export const dbSaveGameDeck = (gamecode, deck) => {
-	return firebase
-		.firestore()
-		.collection('games')
-		.doc(gamecode)
-		.update({
-			'gameplay.deck': deck,
-			'gameplay.cardIndex': 0,
-		})
+	const batch = firebase.firestore().batch()
+	// console.log(deck)
+
+	//for each item in deck, create a document with the index as the document Id.
+	for (let i = 0, keys = Object.keys(deck); i < keys.length; i++) {
+		const cardRef = firebase.firestore().collection('games').doc(gamecode).collection('deck').doc(String(i))
+		batch.set(cardRef, { tabooList: deck[i].tabooList, word: deck[i].word })
+	}
+
+	batch.set(firebase.firestore().collection('games').doc(gamecode).collection('deck').doc(gamecode), { cardIndex: 0 })
+
+	//need to figure out how to handle index...
+	return batch
+		.commit()
 		.then(() => {
+			console.log('batch complete')
 			return
 		})
 		.catch((error) => {
+			console.log('error on batch write')
+			console.log(error.message)
 			throw error
 		})
 }
 
-export const dbUpdateCardStatus = (gamecode, status, currentIndex) => {
-	const gamePath = firebase.firestore().collection('games').doc(gamecode)
+export const dbUpdateCardStatus = (gamecode, cardStatus, currentIndex, roundStatus, round, half ) => {
+	console.log("cardStatus", cardStatus)
+	console.log("currentIndex", currentIndex)
+	console.log("roundStatus", roundStatus)
+	console.log("round", round)
+	console.log("half", half)
+	const deckPath = firebase.firestore().collection('games').doc(gamecode).collection('deck')
+
 	return firebase
 		.firestore()
 		.runTransaction((transaction) => {
-			return transaction.get(gamePath).then((game) => {
-				if (!game.exists) {
-								throw new Error("game doesn't exist...")
+			return transaction.get(deckPath.doc(gamecode)).then((deck) => {
+				if (!deck.exists) {
+					throw new Error("deck doesn't exist...")
 				}
 
-				const { cardIndex, deck, round, half, status: roundStatus } = game.data().gameplay
-				const cardPath = `gameplay.deck.${currentIndex}`
-				const cardIndexPath = 'gameplay.cardIndex'
+				console.log(deck.data())
+				const { cardIndex } = deck.data()
 
-				let updatedCard
-
-				const updateValue = {}
 				//Card status changed based on giver/watcher updating within the round
 				if (roundStatus === 'in progress') {
+					console.log("in progress")
 					//If the index provided no longer matches, giver and watcher may have selected a button at nearly the same time. This allows only one update to occur and discard
 					if (cardIndex !== currentIndex) {
 						throw new Error("card index was already changed. Don't proceed")
 					}
-
-					updatedCard = {
-						...deck[currentIndex],
-						status: status,
-						//Will be used to filter cards that were played in the current round
+					transaction.update(deckPath.doc(String(currentIndex)), {
+						status: cardStatus,
 						roundPlayed: `${round}-${half}`,
-					}
+					})
+					console.log("transaction 1 done")
+					transaction.update(deckPath.doc(gamecode), {
+						cardIndex: firebase.firestore.FieldValue.increment(1),
+					})
+					console.log("transaction 2 done")
 
-					updateValue[cardPath] = updatedCard
-					updateValue[cardIndexPath] = currentIndex + 1
 				}
 				//Card status changed by watcher updating card statuses as needed
 				else if (roundStatus === 'postround') {
-					updatedCard = {
-						...deck[currentIndex],
-						status: status,
-					}
-					updateValue[cardPath] = updatedCard
-				}
+					transaction.update(deckPath.doc(currentIndex), { status: cardStatus })
+					console.log("transaction 1 done")
 
-						//Only change the cardIndex for in round card changes. Stays the same for postround status changes
-				return transaction.update(gamePath, updateValue)
+				} else {
+					throw new Error('Round must be in progress or postround to update card status')
+				}
+				return 
 			})
 		})
 		.then(() => {
+			console.log("all transactions complete")
 			return
 		})
 		.catch((error) => {
+			console.log(error.message)
 			throw error
 		})
 }
@@ -298,7 +307,6 @@ export const dbUpdateGameScore = (gamecode) => {
 				//giving score: number of cards player this round, this half, and with status of correct get 1 point
 				const roundScore = deckArr.reduce(
 					(score, card) => {
-
 						//calculate number of cards for current round/half that were not discarded
 						if (card.roundPlayed === `${round}-${half}` && card.status !== 'discard') {
 							//always worth 1 point for 'giving' team
@@ -329,16 +337,14 @@ export const dbUpdateGameScore = (gamecode) => {
 				})
 			})
 		})
-		.then(() => {
-
-		})
+		.then(() => {})
 		.catch((error) => {
 			throw error
 		})
 }
 
 export const dbSubmitCardIdea = (cardIdea) => {
-	const cardIdeaObj = {		
+	const cardIdeaObj = {
 		...cardIdea,
 		reviewed: false,
 		added: false,
@@ -356,7 +362,6 @@ export const dbSubmitCardIdea = (cardIdea) => {
 		.catch((error) => {
 			throw error
 		})
-
 }
 //---------------------------- ROUND UPDATES -------------------------------------//
 
@@ -440,73 +445,75 @@ export const dbUpdateRoundNumber = (gamecode) => {
 export const dbCompleteRound = (gamecode) => {
 	const gamePath = firebase.firestore().collection('games').doc(`${gamecode}`)
 
-	return firebase.firestore().runTransaction((transaction) => {
-		return transaction.get(gamePath).then((game) => {
-			if (!game.exists) {
-				throw new Error("game doesn't exist...")
-			}
+	return firebase
+		.firestore()
+		.runTransaction((transaction) => {
+			return transaction.get(gamePath).then((game) => {
+				if (!game.exists) {
+					throw new Error("game doesn't exist...")
+				}
 
-			const { endGameMethod, endValue, gameplay, players, skipPenalty } = game.data()
+				const { endGameMethod, endValue, gameplay, players, skipPenalty } = game.data()
 
-			const { deck, round, half, team1Turn, team2Turn, team1Rotations, team2Rotations, score } = gameplay
-			let endGame = false
+				const { deck, round, half, team1Turn, team2Turn, team1Rotations, team2Rotations, score } = gameplay
+				let endGame = false
 
-			//Calculate new score
-			//Update game/gameplay/score
-			const givingTeam = half === 'top' ? 'team1' : 'team2'
-			const watchingTeam = givingTeam === 'team1' ? 'team2' : 'team1'
-			const skipScore = skipPenalty === 'full' ? 1 : skipPenalty === 'half' ? 0.5 : 0
-			
-			
-		
-			const cardsPlayed= Object.values(deck).filter((card) => card.roundPlayed === `${round}-${half}`)
-			const scoreObject = calculateRoundScore(skipScore, cardsPlayed, givingTeam, watchingTeam)
+				//Calculate new score
+				//Update game/gameplay/score
+				const givingTeam = half === 'top' ? 'team1' : 'team2'
+				const watchingTeam = givingTeam === 'team1' ? 'team2' : 'team1'
+				const skipScore = skipPenalty === 'full' ? 1 : skipPenalty === 'half' ? 0.5 : 0
 
-			//Determine new half
-			//Determine team1 and team 2 turn values
-			// Determine rotation values
-			const team1Count = players.filter((player) => player.team === 'team 1').length
-			const team2Count = players.filter((player) => player.team === 'team 2').length
+				const cardsPlayed = Object.values(deck).filter((card) => card.roundPlayed === `${round}-${half}`)
+				const scoreObject = calculateRoundScore(skipScore, cardsPlayed, givingTeam, watchingTeam)
 
-			const roundTurnObject = calculateRoundTurns(
-				half,
-				round,
-				team1Turn,
-				team2Turn,
-				team1Count,
-				team2Count,
-				team1Rotations,
-				team2Rotations
-			)
+				//Determine new half
+				//Determine team1 and team 2 turn values
+				// Determine rotation values
+				const team1Count = players.filter((player) => player.team === 'team 1').length
+				const team2Count = players.filter((player) => player.team === 'team 2').length
 
-			//Determing if game should end
-			if (half === "bottom") {
-				endGame = verifyEndGame(
-					endGameMethod,
-					endValue,
-					roundTurnObject.team1Rotations,
-					roundTurnObject.team2Rotations
+				const roundTurnObject = calculateRoundTurns(
+					half,
+					round,
+					team1Turn,
+					team2Turn,
+					team1Count,
+					team2Count,
+					team1Rotations,
+					team2Rotations
 				)
-			}
 
-			const updatedGamePlay = Object.assign(gameplay,  roundTurnObject)
-			//current score + score just calculated for this round
-			updatedGamePlay.score = {
-				team1: score.team1 + scoreObject.team1,
-				team2: score.team2 + scoreObject.team2
-			}
-			const updatedGameObject = Object.assign(game.data(), {gameplay:updatedGamePlay})
-			if (endGame) {
-				updatedGameObject.status = "completed"
-			}
+				//Determing if game should end
+				if (half === 'bottom') {
+					endGame = verifyEndGame(
+						endGameMethod,
+						endValue,
+						roundTurnObject.team1Rotations,
+						roundTurnObject.team2Rotations
+					)
+				}
 
-			return transaction.update(gamePath, updatedGameObject)		
+				const updatedGamePlay = Object.assign(gameplay, roundTurnObject)
+				//current score + score just calculated for this round
+				updatedGamePlay.score = {
+					team1: score.team1 + scoreObject.team1,
+					team2: score.team2 + scoreObject.team2,
+				}
+				const updatedGameObject = Object.assign(game.data(), { gameplay: updatedGamePlay })
+				if (endGame) {
+					updatedGameObject.status = 'completed'
+				}
+
+				return transaction.update(gamePath, updatedGameObject)
+			})
 		})
-	}).then(() => {
-		return
-	}).catch(error => {
-		throw error
-	})
+		.then(() => {
+			return
+		})
+		.catch((error) => {
+			throw error
+		})
 }
 
 const calculateRoundScore = (skipScore, cardsPlayed, givingTeam, watchingTeam) => {
@@ -535,13 +542,13 @@ const calculateRoundTurns = (currentHalf, currentRound, t1Turn, t2Turn, t1Count,
 	const roundObject = {}
 
 	roundObject.half = currentHalf === 'top' ? 'bottom' : 'top'
-	roundObject.status = "preround"
+	roundObject.status = 'preround'
 	//Once both t1 and t2 has completed a round, increment the turnCount.
 	//If all players on team have completed a turn, restart at 0 and increment rotationCount
 	if (currentHalf === 'bottom') {
 		//Check if the active players are the last ones on the team, and start at 0 if so
-		roundObject.team1Turn = t1Turn >= (t1Count - 1) ? 0 : (t1Turn + 1)
-		roundObject.team2Turn = t2Turn >= (t2Count - 1) ? 0 : (t2Turn + 1)
+		roundObject.team1Turn = t1Turn >= t1Count - 1 ? 0 : t1Turn + 1
+		roundObject.team2Turn = t2Turn >= t2Count - 1 ? 0 : t2Turn + 1
 		//If starting turns over with first player on the team,  increment the rotation
 		roundObject.team1Rotations = roundObject.team1Turn === 0 ? t1Rotation + 1 : t1Rotation
 		roundObject.team2Rotations = roundObject.team2Turn === 0 ? t2Rotation + 1 : t2Rotation
@@ -565,5 +572,3 @@ const verifyEndGame = (endGameMethod, endGameValue, t1Rotations, t2Rotations) =>
 		return false
 	}
 }
-
-

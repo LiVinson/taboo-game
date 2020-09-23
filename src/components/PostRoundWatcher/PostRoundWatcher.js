@@ -24,6 +24,7 @@ export const generateCardsPlayedButtonInfo = (statusArray, status, statusSelecte
 const PostRoundWatcher = ({
 	cardStatuses,
 	cardsPlayed,
+	selection,
 	handleCardSelection,
 	selectedCards,
 	updateSelectedCard,
@@ -53,12 +54,13 @@ const PostRoundWatcher = ({
 					}
 					key={status}
 					status={cardStatuses[index]}
+					selected={selectedCards[index]}
 					cardList={cardsPlayed.filter((card) => card.status === status)}
 					handleChange={handleCardSelection}
 					buttonInfo={generateCardsPlayedButtonInfo(
 						cardStatuses,
 						status,
-						selectedCards[index],
+						selectedCards[index], //selectedCards array order is same as status array order, so indexes correspond
 						updateSelectedCard,
 						isPending.cards //true when in progress of updating status
 					)}

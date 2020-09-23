@@ -6,20 +6,27 @@ import List from 'components/shared/List'
 import { NoCardMessage } from './style'
 
 //Returns a Taboo card with buttons to change card status to other two options or a card stating there are no cards in this status
-const CardsPlayed = ({ status, cardList, handleChange, buttonInfo, error }) => {
+const CardsPlayed = ({ status, cardList, selected, handleChange, buttonInfo, error }) => {
 	return (
 		<ButtonTabooCard tabooWord={status} buttons={buttonInfo} error={error}>
 			<List>
 				{cardList.length > 0 ? (
-					cardList.map((card) => (
-						<RadioListItem
-							key={card.index} //index in deck in firestore which is unchanging
-							word={card.word}
-							index={card.index}
-							onChange={handleChange}
-							status={status}
-						/>
-					))
+					cardList.map((card) => {
+						console.log(status)
+						console.log(card.index)
+
+						console.log(selected)
+						return (
+							<RadioListItem
+								key={card.index} //index in deck in firestore which is unchanging
+								word={card.word}
+								index={card.index}
+								onChange={handleChange}
+								status={status}
+								checked={String(card.index) === selected}
+							/>
+						)
+					})
 				) : (
 					<NoCardMessage>No {status} cards this round</NoCardMessage>
 				)}

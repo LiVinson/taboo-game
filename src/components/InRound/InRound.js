@@ -51,11 +51,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, prevProps) => {
 	//The index of the currently displayed card, current round and gamecode
-	const { cardIndex, gamecode } = prevProps
+	const { cardIndex, gamecode, round, giver } = prevProps
+	const half = giver.team === "team 1" ? "top" : "bottom"
 	return {
-		changeCardStatus: (status) => {
-			dispatch(changeCardStatus(gamecode, status, cardIndex))
-		},
+		changeCardStatus: (cardStatus) => dispatch(changeCardStatus(gamecode, cardStatus, cardIndex, "in progress", round, half, ))
 	}
 }
 
