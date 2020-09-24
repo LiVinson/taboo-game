@@ -42,7 +42,6 @@ export class Round extends React.Component {
 		const giver = this.determineActivePlayer('giver')
 		const watcher = this.determineActivePlayer('watcher')
 		const currentPlayer = this.props.players.find((player) => player.playerId === this.props.playerId)
-		// console.log(deck)
 		let role
 		if (activeTeam === currentPlayer.team) {
 			role = currentPlayer.playerId === giver.playerId ? 'giver' : 'giverTeam'
@@ -85,6 +84,8 @@ export class Round extends React.Component {
 						cardsPlayed={Object.values(deck)
 							.map((card, index) => ({ ...card, index }))
 							.filter((card) => card.roundPlayed === `${round}-${half}`)}
+						round={round}
+						half={half}
 					/>
 				)}
 			</React.Fragment>

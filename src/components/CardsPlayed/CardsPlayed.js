@@ -12,10 +12,6 @@ const CardsPlayed = ({ status, cardList, selected, handleChange, buttonInfo, err
 			<List>
 				{cardList.length > 0 ? (
 					cardList.map((card) => {
-						console.log(status)
-						console.log(card.index)
-
-						console.log(selected)
 						return (
 							<RadioListItem
 								key={card.index} //index in deck in firestore which is unchanging

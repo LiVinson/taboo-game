@@ -20,10 +20,7 @@ export class PostRound extends React.Component {
 		}
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		console.log(prevState)
-		console.log('card was pending: ', prevProps.isPending.cards)
-		console.log('card is pending: ', this.props.isPending.cards)
+	componentDidUpdate(prevProps) {
 		//If isPending.cards was true due to updating card, and now update is complete,
 		//clear the selection state so buttons for that card will return to disabled
 		if (prevProps.isPending.cards && !this.props.isPending.cards) {
@@ -112,7 +109,6 @@ PostRound.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-	// console.log(state.round)
 	return {
 		isPending: {
 			round: state.round.pending,
@@ -125,11 +121,11 @@ const mapStateToProps = (state) => {
 	}
 }
 const mapDispatchToProps = (dispatch, prevProps) => {
-	const { gamecode } = prevProps
+	const { gamecode, round, half } = prevProps
 	return {
 		changeCardStatus: (cardStatus, cardIndex) =>
 			dispatch(changeCardStatus(gamecode, cardStatus, cardIndex, 'postround')),
-		completeRound: () => dispatch(completeRound(gamecode)),
+		completeRound: () => dispatch(completeRound(gamecode, round, half)),
 	}
 }
 

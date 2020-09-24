@@ -39,7 +39,6 @@ export class PlayGame extends React.Component {
 	//verify that current user is a player in game
 	//toggle loading/verified so UI can render
 	verifyGameInfo = () => {
-		console.log('verifying game')
 		const game = this.props.game
 		//Checks if falsy. Add additional edge cases in case empty object is returned
 		if (!game || isEmpty(game) || game.status !== 'in progress') {
@@ -47,7 +46,6 @@ export class PlayGame extends React.Component {
 				loading: false, //gameVerified false by default
 			})
 		} else {
-			console.log('game verified. verifying players')
 			//game exists and is in correct status. Need to verify current user is a player in the game
 			const playerId = this.props.auth.uid
 			const players = game.players
@@ -66,9 +64,6 @@ export class PlayGame extends React.Component {
 					// load the deck. Other players are in "pending" until deck is added
 					//Currently, host is set to game creator. Will update to account for player still being online.
 					const host = this.props.game.players.find((player) => player.host === true)
-					console.log('host?: ', host)
-					console.log('deck data received?', this.props.deckDataReceived)
-					console.log('deck empty object: ', isEmpty(this.props.deck))
 					if (
 						host.playerId === this.props.auth.uid &&
 						(isEmpty(this.props.deck) || this.props.deck == null)
@@ -81,7 +76,6 @@ export class PlayGame extends React.Component {
 	}
 
 	loadGameDeck = () => {
-		console.log('loading deck')
 		const { gamecode } = this.props.match.params
 		this.props.fetchDeck(gamecode)
 	}
