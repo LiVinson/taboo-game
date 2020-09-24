@@ -70,7 +70,6 @@ export const completeRound = (gamecode, currentRound, currentHalf) => {
 				dispatch(completeRoundSuccess())
 			})
 			.catch((error) => {
-				console.log(error.message)
 				dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', "There was a problem updating the round"))
 			})
 	}

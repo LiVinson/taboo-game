@@ -42,7 +42,7 @@ export const changeCardStatus = (gamecode, status, currentIndex, round, half, ro
 }
 
 export const submitCardIdea = (cardIdea) => {
-	console.log(cardIdea)
+
 	return (dispatch) => {
 		return new Promise((resolve, reject) => {
 			dispatch(requestSubmitCardIdea())

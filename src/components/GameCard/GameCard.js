@@ -81,10 +81,7 @@ TeamGameCard.propType = {
 }
 
 export const GameCard = (props) => {
-	console.log(props)
-	const currentCard = props.deck[props.cardIndex]
-	console.log(currentCard)
-	
+	const currentCard = props.deck[props.cardIndex]	
 	switch (props.role) {
 		case 'giver':
 			return <GiverGameCard {...props} currentCard={currentCard} />

@@ -147,8 +147,7 @@ export const fetchGameDeck = (gamecode) => {
 				})
 			})
 			.catch((error) => {
-				console.log(error.message)
-				dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', "There was a problem fetching the deck. Please refresh the page to try again."))
+						dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', "There was a problem fetching the deck. Please refresh the page to try again."))
 			})
 	}
 }
