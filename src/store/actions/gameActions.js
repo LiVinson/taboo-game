@@ -107,7 +107,8 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 					})
 				})
 				.catch((error) => {
-					dispatch(errorActionCreator('JOIN_GAME_FAILURE', error.message))
+					const message = error.message === "Missing or insufficient permissions." ? "You don't have permission to join this game" : error.message
+					dispatch(errorActionCreator('JOIN_GAME_FAILURE', message))
 				})
 		})
 	}
@@ -134,17 +135,19 @@ export const fetchGameDeck = (gamecode) => {
 	return (dispatch) => {
 		dispatch(requestFetchGameDeck())
 
-		dbRequestGameDeck()
+		return dbRequestGameDeck()
 			.then((response) => {	
 				const shuffledDeck = shuffleArray(response)
 				//convert from array of objects to object with keys = objects.
 				const deckObject = convertArrayToObject(shuffledDeck)
+		
+				//object with each property as a number containg an object
 				return dbSaveGameDeck(gamecode, deckObject).then((res) => {
 					dispatch(fetchGameDeckSuccess())
 				})
 			})
 			.catch((error) => {
-				dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', "There was a problem fetching the deck. Please refresh the page to try again."))
+						dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', "There was a problem fetching the deck. Please refresh the page to try again."))
 			})
 	}
 }

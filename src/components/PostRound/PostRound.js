@@ -20,6 +20,17 @@ export class PostRound extends React.Component {
 		}
 	}
 
+	componentDidUpdate(prevProps) {
+		//If isPending.cards was true due to updating card, and now update is complete,
+		//clear the selection state so buttons for that card will return to disabled
+		if (prevProps.isPending.cards && !this.props.isPending.cards) {
+			this.setState({
+				correctSelection: '',
+				skippedSelection: '',
+				discardSelection: '',
+			})
+		}
+	}
 	//Called onchange of radio button value to select  card. Set in state so that on click to change the status, can determine which word is selected
 	handleCardSelection = (cardIndex, status) => {
 		const statuses = ['correct', 'skipped', 'discard']
@@ -50,7 +61,7 @@ export class PostRound extends React.Component {
 
 	render() {
 		//Creates array of the selected cards string for each status.
-		const selections = Object.values(this.state)
+		const selections = [this.state.correctSelection, this.state.skippedSelection, this.state.discardSelection]
 		const cardStatuses = ['correct', 'skipped', 'discard']
 
 		return (
@@ -62,7 +73,7 @@ export class PostRound extends React.Component {
 						cardsPlayed={this.props.cardsPlayed}
 						handleCardSelection={this.handleCardSelection}
 						updateSelectedCard={this.updateSelectedCard}
-						selectedCards={selections}
+						selectedCards={selections} // array of selected values
 						confirmRoundEnd={this.confirmRoundEnd}
 						isPending={this.props.isPending}
 						error={this.props.error}
@@ -94,12 +105,10 @@ PostRound.propTypes = {
 	isPending: PropTypes.object.isRequired,
 	error: PropTypes.object.isRequired,
 	changeCardStatus: PropTypes.func.isRequired,
-	completeRound: PropTypes.func.isRequired
-
+	completeRound: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
-	// console.log(state.round)
 	return {
 		isPending: {
 			round: state.round.pending,
@@ -112,10 +121,11 @@ const mapStateToProps = (state) => {
 	}
 }
 const mapDispatchToProps = (dispatch, prevProps) => {
-	const { gamecode } = prevProps
+	const { gamecode, round, half } = prevProps
 	return {
-		changeCardStatus: (status, cardIndex) => dispatch(changeCardStatus(gamecode, status, cardIndex)),
-		completeRound: () => dispatch(completeRound(gamecode)),
+		changeCardStatus: (cardStatus, cardIndex) =>
+			dispatch(changeCardStatus(gamecode, cardStatus, cardIndex, 'postround')),
+		completeRound: () => dispatch(completeRound(gamecode, round, half)),
 	}
 }
 

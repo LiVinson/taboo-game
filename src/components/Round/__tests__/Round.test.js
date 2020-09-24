@@ -12,9 +12,15 @@ import PostRound from 'components/PostRound'
 
 describe('Round renders and functions correctly ', () => {
 	const { gameplay } = game
-	gameplay.deck = deck
+const updatedDeck = {
+	...deck,
+	[gamecode]: {
+		cardIndex: 0
+	}
+}
 
 	const defaultProps = {
+		deck: updatedDeck,
 		gamecode,
 		players: assignedPlayers,
 		gameplay,

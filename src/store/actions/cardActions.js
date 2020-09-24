@@ -24,18 +24,17 @@ const submitCardIdeaSuccess = () => {
 		type: 'SUBMIT_CARD_IDEA_SUCCESS',
 	}
 }
-export const changeCardStatus = (gamecode, status, currentIndex) => {
+export const changeCardStatus = (gamecode, status, currentIndex, round, half, roundStatus) => {
 	return (dispatch) => {
 		//dispatch changing card in progress
 		//set the status of the current card in firebase, and update the index
 		//dispatch changing card complete
 		dispatch(requestUpdateCardStatus())
-		dbUpdateCardStatus(gamecode, status, currentIndex)
+		dbUpdateCardStatus(gamecode, status, currentIndex, round, half, roundStatus)
 			.then(() => {
 				dispatch(updateCardStatusSuccess())
 			})
 			.catch((error) => {
-		
 				const errorMessage = `There was a problem updating card ${currentIndex}. Please try again.`
 				dispatch(errorActionCreator('UPDATE_CARD_STATUS_FAILURE', errorMessage))
 			})
@@ -43,13 +42,13 @@ export const changeCardStatus = (gamecode, status, currentIndex) => {
 }
 
 export const submitCardIdea = (cardIdea) => {
-	return (dispatch) => {
 
-		return new Promise((resolve, reject ) => {
+	return (dispatch) => {
+		return new Promise((resolve, reject) => {
 			dispatch(requestSubmitCardIdea())
 
-
-			return dbSubmitCardIdea(cardIdea).then(() => {
+			return dbSubmitCardIdea(cardIdea)
+				.then(() => {
 					dispatch(submitCardIdeaSuccess())
 					resolve(true)
 				})

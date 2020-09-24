@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import { shallow, mount } from 'enzyme'
+import {  mount } from 'enzyme'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
 import RadioListItem from '../RadioListItem'
@@ -10,6 +10,7 @@ describe('RadioListItem', () => {
 		word: 'apple',
 		index: 0,
 		status: 'correct',
+		checked: false, 
 		onChange: jest.fn(),
 	}
 

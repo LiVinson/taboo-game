@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import { shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../global-design/theme'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from '../GameCard'
@@ -13,6 +13,7 @@ describe('GameCard functionality and rendering', () => {
 		},
 		changeCardStatus: jest.fn(),
 		isPending: false,
+		error: null
 	}
 
 	test('GiverGameCard renders correctly', () => {

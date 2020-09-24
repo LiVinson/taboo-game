@@ -89,9 +89,10 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
           className="sc-fzqBZW iVohld"
         >
           <input
+            checked={false}
             className="sc-fzqNJr iGpCVv"
             id="Kendrick Lamar"
-            name="Kendrick Lamar"
+            name="correct"
             onChange={[Function]}
             type="radio"
             value={0}
@@ -142,9 +143,10 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
           className="sc-fzqBZW iVohld"
         >
           <input
+            checked={false}
             className="sc-fzqNJr iGpCVv"
             id="Simba"
-            name="Simba"
+            name="skipped"
             onChange={[Function]}
             type="radio"
             value={1}
@@ -195,9 +197,10 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
           className="sc-fzqBZW iVohld"
         >
           <input
+            checked={false}
             className="sc-fzqNJr iGpCVv"
             id="Will Smith"
-            name="Will Smith"
+            name="discard"
             onChange={[Function]}
             type="radio"
             value={2}

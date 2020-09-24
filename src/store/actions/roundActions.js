@@ -26,14 +26,14 @@ const completeRoundSuccess = () => {
 	}
 }
 
-export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex) => {
+export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex, round, half) => {
 	return async (dispatch) => {
 		dispatch(requestRoundStatus())
 
 		//If round has ended, change the status of the last card displayed so it does not display next round
 		if (newRoundStatus === 'postround') {
 			try {
-				await dbUpdateCardStatus(gamecode, 'discard', parseInt(currentIndex))
+				await dbUpdateCardStatus(gamecode, 'discard', currentIndex, "in progress", round, half, )
 				//need to determine handling error here
 			} catch (err) {
 				const errorMessage =
@@ -62,15 +62,15 @@ export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex) => {
  * If ending, updates game status which triggers redirect
  * If not ending, updates the round number (if required) and round status.
  */
-export const completeRound = (gamecode) => {
+export const completeRound = (gamecode, currentRound, currentHalf) => {
 	return (dispatch) => {
 		dispatch(requestCompleteRound())
-		dbCompleteRound(gamecode)
+		dbCompleteRound(gamecode, currentRound, currentHalf)
 			.then((response) => {
 				dispatch(completeRoundSuccess())
 			})
 			.catch((error) => {
-				dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', error))
+				dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', "There was a problem updating the round"))
 			})
 	}
 }

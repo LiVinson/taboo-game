@@ -47,7 +47,7 @@ class TimeCard extends React.Component {
 }
 
 TimeCard.propTypes = {
-	roundEndTime: PropTypes.instanceOf(Date).isRequired,
+	roundEndTime: PropTypes.number,
 	role: PropTypes.string.isRequired,
 	endRound: PropTypes.func.isRequired,
 }

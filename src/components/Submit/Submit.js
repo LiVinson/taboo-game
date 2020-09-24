@@ -41,7 +41,11 @@ export class Submit extends React.Component {
 			},
 			() => {
 				//Saves card idea in firestore
-				this.props.submitCardIdea(this.state).then(() => {
+				const cardIdea = {
+					tabooWord: this.state.tabooWord,
+					tabooList: [this.state.word1, this.state.word2, this.state.word3, this.state.word4, this.state.word5, ]
+				}
+				this.props.submitCardIdea(cardIdea).then(() => {
 					actions.setSubmitting(false)
 					this.displaySuccess()
 				})
