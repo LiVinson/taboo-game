@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         box-sizing:border-box;
-        font-family: var(--font-family--text);
+        font-family: Roboto, Arial;
         line-height:1.4; 
         min-height: 100vh;
         max-width: 100vw;             
