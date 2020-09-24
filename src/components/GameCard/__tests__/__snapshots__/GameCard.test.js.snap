@@ -112,7 +112,8 @@ exports[`GameCard functionality and rendering TeamGameCard renders correctly for
     <p
       className="sc-fzokOt bZVoaN"
     >
-      It’s the other team’s turn to give clues and guess, so don't say anything! 
+      It’s the other team’s turn to give clues and guess, so don't say anything!
+       
       <span
         className="sc-fzqBZW hgCjBU"
       >
@@ -124,7 +125,8 @@ exports[`GameCard functionality and rendering TeamGameCard renders correctly for
       >
         Joe
       </span>
-       doesn’t say any Taboo words.
+       
+      doesn’t say any Taboo words.
     </p>
   </div>
 </div>
