@@ -3,7 +3,6 @@ import PropType from 'prop-types'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 import { InstructionsText, KeyWord } from './style'
 
-
 export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
 	const buttonInfo = [
 		{
@@ -22,34 +21,38 @@ export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error 
 		},
 	]
 
-
-	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
+	return (
+		<ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
+	)
 }
 
 GiverGameCard.propType = {
 	currentCard: PropType.object.isRequired,
 	changeCardStatus: PropType.func.isRequired,
-	isPending: PropType.bool.isRequired
+	isPending: PropType.bool.isRequired,
+	error: PropType.string,
 }
 
-export const WatcherGameCard = ({currentCard, changeCardStatus, isPending, error}) => {
+export const WatcherGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
 	const buttonInfo = [
 		{
 			text: 'Buzzer!',
 			disabled: isPending,
 			onClick: () => {
 				changeCardStatus('discard')
-			}
+			},
 		},
 	]
 
-	return <ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
+	return (
+		<ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
+	)
 }
 
 WatcherGameCard.propType = {
 	currentCard: PropType.object.isRequired,
 	changeCardStatus: PropType.func.isRequired,
-	isPending: PropType.bool.isRequired
+	isPending: PropType.bool.isRequired,
 }
 
 export const TeamGameCard = ({ role, giver, watcher }) => {
@@ -65,8 +68,9 @@ export const TeamGameCard = ({ role, giver, watcher }) => {
 			) : (
 				<TabooCard tabooWord="Relax!">
 					<InstructionsText>
-						It’s the other team’s turn to give clues and guess, so don't say anything! <KeyWord>{watcher.name}</KeyWord> will be
-						watching to make sure <KeyWord>{giver.name}</KeyWord> doesn’t say any Taboo words.
+						It’s the other team’s turn to give clues and guess, so don't say anything!{' '}
+						<KeyWord>{watcher.name}</KeyWord> will be watching to make sure <KeyWord>{giver.name}</KeyWord>{' '}
+						doesn’t say any Taboo words.
 					</InstructionsText>
 				</TabooCard>
 			)}
@@ -81,7 +85,7 @@ TeamGameCard.propType = {
 }
 
 export const GameCard = (props) => {
-	const currentCard = props.deck[props.cardIndex]	
+	const currentCard = props.deck[props.cardIndex]
 	switch (props.role) {
 		case 'giver':
 			return <GiverGameCard {...props} currentCard={currentCard} />
