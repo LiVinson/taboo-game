@@ -19,6 +19,7 @@ describe('CardsPlayed', () => {
 		handleChange: jest.fn(),
 		buttonInfo,
 		error: null,
+		selected: ""
 	}
 
 	test('Snapshot', () => {

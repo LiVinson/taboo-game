@@ -5,9 +5,10 @@ exports[`RadioListItem Renders correctly 1`] = `
   className="sc-AxjAm kecFbU"
 >
   <input
+    checked={false}
     className="sc-AxirZ hHkOEQ"
     id="apple"
-    name="apple"
+    name="correct"
     onChange={[Function]}
     type="radio"
     value={0}
