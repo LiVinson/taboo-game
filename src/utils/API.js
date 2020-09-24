@@ -495,8 +495,11 @@ export const dbCompleteRound = (gamecode, currentRound, currentHalf) => {
 						team1: score.team1 + scoreObject.team1,
 						team2: score.team2 + scoreObject.team2,
 					}
+					//merge the retrieved data and update the gameplay property with the new properties calculations
 					const updatedGameObject = Object.assign(game.data(), { gameplay: updatedGamePlay })
+					//If determiend game should end, also update the game status, and keep round number the same
 					if (endGame) {
+						updatedGameObject.round = currentRound 
 						updatedGameObject.status = 'completed'
 					}
 

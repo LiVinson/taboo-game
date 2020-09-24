@@ -107,7 +107,8 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 					})
 				})
 				.catch((error) => {
-					dispatch(errorActionCreator('JOIN_GAME_FAILURE', error.message))
+					const message = error.message === "Missing or insufficient permissions." ? "You don't have permission to join this game" : error.message
+					dispatch(errorActionCreator('JOIN_GAME_FAILURE', message))
 				})
 		})
 	}
@@ -134,7 +135,7 @@ export const fetchGameDeck = (gamecode) => {
 	return (dispatch) => {
 		dispatch(requestFetchGameDeck())
 
-		dbRequestGameDeck()
+		return dbRequestGameDeck()
 			.then((response) => {	
 				const shuffledDeck = shuffleArray(response)
 				//convert from array of objects to object with keys = objects.

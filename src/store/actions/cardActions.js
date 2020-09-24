@@ -35,7 +35,6 @@ export const changeCardStatus = (gamecode, status, currentIndex, round, half, ro
 				dispatch(updateCardStatusSuccess())
 			})
 			.catch((error) => {
-				console.log(error.message)
 				const errorMessage = `There was a problem updating card ${currentIndex}. Please try again.`
 				dispatch(errorActionCreator('UPDATE_CARD_STATUS_FAILURE', errorMessage))
 			})
@@ -43,6 +42,7 @@ export const changeCardStatus = (gamecode, status, currentIndex, round, half, ro
 }
 
 export const submitCardIdea = (cardIdea) => {
+	console.log(cardIdea)
 	return (dispatch) => {
 		return new Promise((resolve, reject) => {
 			dispatch(requestSubmitCardIdea())
