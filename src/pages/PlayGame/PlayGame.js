@@ -86,8 +86,8 @@ export class PlayGame extends React.Component {
 		if (game.status === 'completed') {
 			return <Redirect to={`/end/${gamecode}`} />
 		} else if (this.state.loading) {
-			//loading is default state until game and player verified
 			return <LoadingCard message="Setting up game" />
+			//loading is default state until game and player verified
 		} else if (!this.state.gameVerified) {
 			const error = "That game doesn't exist or hasn't started yet. Make sure you joined the game properly."
 			return <ButtonErrorCard error={error} />
@@ -99,8 +99,6 @@ export class PlayGame extends React.Component {
 		} else if (this.props.isPending || isEmpty(this.props.deck)) {
 			return this.props.error ? <ErrorCard error={this.props.error} /> : <LoadingCard message="Fetching deck" />
 		} else {
-			//Game and players are valid, deck is fetched, and ready to play
-
 			return (
 				<Round
 					deck={this.props.deck}
@@ -110,6 +108,7 @@ export class PlayGame extends React.Component {
 					playerId={this.props.auth.uid}
 				/>
 			)
+			//Game and players are valid, deck is fetched, and ready to play
 		}
 	}
 }
