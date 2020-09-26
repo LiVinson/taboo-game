@@ -47,9 +47,9 @@ class GameInfo extends React.Component {
 		]
 
 		const { showRules, showTeams } = this.state
-
+		
+		//Displays 2 buttons and 2 Taboo cards containing Rules and list team list when showing or nothing when hidden
 		return (
-			//Displays 2 buttons and 2 Taboo cards containing Rules and list team list when showing or nothing when hidden
 			<StyledGameInfo open={showRules || showTeams}>
 				{<Button {...buttonInfo[0]} />}
 				{<Button {...buttonInfo[1]} />}

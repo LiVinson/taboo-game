@@ -32,12 +32,12 @@ const PostRoundWatcher = ({
 	isPending,
 	error,
 }) => {
+	const instructions =
+		"Review the cards from this round below. Select the word and click the button to change it's status. Select Confirm! when done to calculate scores."
 	//Loops over each card status, and returns a Taboo card with 2 buttons.
 	//Filters cards played based on the status. Information needed to generate buttons,
 	//select a card in the list, and change button status passed in
 	// Then separates cards played in round based on current card status
-	const instructions =
-		"Review the cards from this round below. Select the word and click the button to change it's status. Select Confirm! when done to calculate scores."
 	return (
 		<React.Fragment>
 			<InstructionsCard>{instructions}</InstructionsCard>

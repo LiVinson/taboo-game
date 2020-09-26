@@ -60,12 +60,13 @@ export class PostRound extends React.Component {
 	}
 
 	render() {
-		//Creates array of the selected cards string for each status.
 		const selections = [this.state.correctSelection, this.state.skippedSelection, this.state.discardSelection]
 		const cardStatuses = ['correct', 'skipped', 'discard']
+		//Creates array of the selected cards string for each status.
+
+		//Watcher card includes buttons to updates card statuses and trigger next round
 
 		return (
-			//Watcher card includes buttons to updates card statuses and trigger next round
 			<StyledPostRound>
 				{this.props.role === 'watcher' ? (
 					<PostRoundWatcher
