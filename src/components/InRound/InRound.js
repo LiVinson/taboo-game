@@ -31,7 +31,7 @@ InRound.propTypes = {
 	watcher: PropTypes.object.isRequired,
 	role: PropTypes.string.isRequired,
 	round: PropTypes.number.isRequired,
-	roundEndTime: PropTypes.instanceOf(Date),
+	roundEndTime: PropTypes.number.isRequired,
 	deck: PropTypes.object.isRequired,
 	cardIndex: PropTypes.number.isRequired,
 	isPending: PropTypes.bool.isRequired,

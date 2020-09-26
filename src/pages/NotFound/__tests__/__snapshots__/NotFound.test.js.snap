@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound component NotFound renders correctly 1`] = `
+.c0 {
+  padding: 1rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  z-index: 1000;
+}
+
+.c4 {
+  font-size: 2.2rem;
+  font-style: inherit;
+  color: #757575;
+}
+
+.c1 {
+  width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: currentColor;
+  color: #1982C4;
+}
+
+.c1:before {
+  z-index: -1;
+  position: absolute;
+  content: '';
+  bottom: 1.2rem;
+  left: 0.5rem;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 1.5rem 1rem rgba(0,0,0,0.4);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.c2 {
+  background-color: #f7f9f9;
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 2px;
+  font-family: 'Oswald',sans-serif;
+  font-size: 4rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.c3 {
+  background-color: #f7f9f9;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 4rem;
+  margin-top: 1.5rem;
+}
+
+.c6 {
+  width: 47%;
+  padding: 0.6rem 0rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #f7f9f9;
+  font-size: 2.3rem;
+  font-family: 'Oswald',sans-serif;
+  text-transform: uppercase;
+  color: #1982C4;
+  width: 100%;
+  padding: 1rem 0;
+  border: solid 3px #8AC926;
+  background-color: #ebebeb;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #1982C4;
+}
+
+.c6:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.c6:active {
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c6:focus {
+  border: none;
+  outline: solid 2px #8AC926;
+}
+
+.c6:disabled {
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}
+
+.c6:focus {
+  outline: none;
+  border: solid 3px #757575;
+}
+
+.c5 {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      Lost?
+    </div>
+    <div
+      className="c3"
+    >
+      <p
+        className="c4"
+      >
+        Uh-oh, I don't think this is where you should be. Try going home and starting again. 
+      </p>
+    </div>
+    <div
+      className="c5"
+    >
+      <button
+        className="sc-fzpans c6"
+        onClick={[Function]}
+      >
+        Home
+      </button>
+    </div>
+  </div>
+</div>
+`;

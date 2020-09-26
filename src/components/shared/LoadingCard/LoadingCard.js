@@ -1,25 +1,25 @@
 import React from 'react'
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 import { TabooCardTop } from 'components/shared/TabooCard'
 import Pending from 'components/shared/Pending'
-import { StyledLoadingCard } from "./style"
+import { StyledLoadingCard } from './style'
 
 const LoadingCard = ({ message }) => {
 	return (
-        <StyledLoadingCard>
-            <TabooCardTop>
-                <Pending message={message} large={true} />
-            </TabooCardTop>
-        </StyledLoadingCard>
+		<StyledLoadingCard>
+			<TabooCardTop>
+				<Pending message={message} large={true} />
+			</TabooCardTop>
+		</StyledLoadingCard>
 	)
 }
 
 LoadingCard.defaultProps = {
-	title: 'Loading',
+	message: 'Loading',
 }
 
-LoadingCard.propTypes = {
-    title: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired
+LoadingCard.propTypes = {	
+	message: PropTypes.string.isRequired,
 }
+
 export default LoadingCard
