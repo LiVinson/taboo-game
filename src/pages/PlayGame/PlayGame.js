@@ -106,6 +106,8 @@ export class PlayGame extends React.Component {
 					players={game.players}
 					gameplay={game.gameplay}
 					playerId={this.props.auth.uid}
+					skipPenalty={game.skipPenalty}
+					endValue={game.endValue}
 				/>
 			)
 			//Game and players are valid, deck is fetched, and ready to play

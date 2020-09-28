@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SubmitCardForm from 'components/SubmitCardForm'
 import { ButtonTabooCard } from 'components/shared/TabooCard'
-import InstructionsCard from 'components/InstructionsCard'
+import InstructionsText from 'components/InstructionsText'
 import Pending from 'components/shared/Pending'
 import { ErrorMessage, SuccessMessage } from 'components/shared/FeedbackMessage'
 import { submitCardIdea } from 'store/actions/cardActions'
@@ -98,9 +98,9 @@ export class Submit extends React.Component {
 		]
 		return (
 			<React.Fragment>
-				<InstructionsCard>
+				<InstructionsText>
 					Submit your taboo card idea and maybe you will see it the next time you play!
-				</InstructionsCard>
+				</InstructionsText>
 				<ButtonTabooCard tabooWord="Have an Idea?" buttons={buttonInfo}>
 					<SubmitCardForm initialValues={this.state} handleSubmit={this.handleSubmit} />
 					{this.props.isPending ? <Pending speed={300} message="Submitting card idea." /> : null}

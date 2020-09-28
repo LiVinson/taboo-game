@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import InstructionsCard from 'components/InstructionsCard'
+import InstructionsText from 'components/InstructionsText'
 import CardsPlayed from 'components/CardsPlayed'
 import { LargeButton } from 'components/shared/Button'
 import Pending from 'components/shared/Pending'
 import { ErrorMessage } from 'components/shared/FeedbackMessage'
+import KeyWord from 'components/shared/KeyWord'
 
 //Used for each of 3 status types to create buttons to change card status to the other 2 statuses
 export const generateCardsPlayedButtonInfo = (statusArray, status, statusSelected, cb, isPending) => {
@@ -40,7 +41,10 @@ const PostRoundWatcher = ({
 	// Then separates cards played in round based on current card status
 	return (
 		<React.Fragment>
-			<InstructionsCard>{instructions}</InstructionsCard>
+			<InstructionsText align="center">
+				Review the cards from this round below. Select the word and click the button to change it's status.
+				Select <KeyWord>Confirm!</KeyWord> when done to calculate scores.
+			</InstructionsText>
 			{cardStatuses.map((status, index) => (
 				<CardsPlayed
 					// Only pass down error message if it is for this Card status. Indicated by error message include status type
