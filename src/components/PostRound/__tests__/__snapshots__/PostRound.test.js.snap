@@ -2,7 +2,7 @@
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is not watcher 1`] = `
 <div
-  className="sc-fznxsB bFuePx"
+  className="sc-fznJRM jfTSqx"
 >
   <div
     className="sc-AxjAm hDlFTS"
@@ -64,12 +64,18 @@ exports[`PostRound renders and functions correctly PostRound renders correctly w
 
 exports[`PostRound renders and functions correctly PostRound renders correctly when role is watcher 1`] = `
 <div
-  className="sc-fznxsB bFuePx"
+  className="sc-fznJRM jfTSqx"
 >
   <p
-    className="sc-fzokOt bIqlHw"
+    className="sc-fzokOt itUVmo"
   >
-    Review the cards from this round below. Select the word and click the button to change it's status. Select Confirm! when done to calculate scores.
+    Review the cards from this round below. Select the word and click the button to change it's status. Select 
+    <span
+      className="sc-fznxsB gTdnEB"
+    >
+      Confirm!
+    </span>
+     when done to calculate scores.
   </p>
   <div
     className="sc-AxjAm hDlFTS"

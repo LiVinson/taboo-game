@@ -57,7 +57,6 @@ class PreRound extends React.Component {
 		const { timeRemaining } = this.state
 		const gameRulesText = timeRemaining > 7 ? generateSkipText(skipPenalty) : generateEndGameText('turns', endValue)
 		const pendingMsg = timeRemaining > 7 ? 'shuffling cards' : 'preparing the timer'
-		console.log(pendingMsg)
 		return this.state.displayGameRules ? (
 			<TabooCard tabooWord="Game Rules">
 				<InstructionsText>{gameRulesText}</InstructionsText>
