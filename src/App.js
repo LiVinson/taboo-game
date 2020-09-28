@@ -35,6 +35,7 @@ class App extends React.Component {
 						</Switch>
 					</Suspense>
 					<LayeredCards />
+					
 				</Container>
 			</Router>
 		)
