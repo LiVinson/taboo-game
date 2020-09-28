@@ -162,7 +162,7 @@ exports[`Rules render correctly 1`] = `
 
 .c4 {
   font-size: 1.6rem;
-  text-align: justify;
+  text-align: left;
   padding: 0 0.5rem;
   margin-bottom: 1rem;
   color: #333333;
@@ -187,12 +187,12 @@ exports[`Rules render correctly 1`] = `
     <p
       className="c4"
     >
-      Taboo is a verbal team game that can be played via any platforms that allows the players to hear each other, like Google Meets, Zoom, Skype, or even a group phone call.
+      Taboo is a 4 -10 player team game that you can play when you are together with friends or virtually using platforms like Google Meets, Zoom, Skype, or even a group phone call.
     </p>
     <p
       className="c4"
     >
-      Once a new game is created, a game code is generated. Anyone who enters the game code will be added to the waiting room while all players join. Once everyone has joined and selected a team, the game can begin.
+      Once a new game is created, join using the gamecode, select a team, and start the fun.
     </p>
   </div>
   <div
