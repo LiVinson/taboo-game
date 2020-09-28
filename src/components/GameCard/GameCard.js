@@ -1,7 +1,7 @@
 import React from 'react'
 import PropType from 'prop-types'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
-import  InstructionsText  from 'components/InstructionsText'
+import  InstructionsText  from 'components/shared/InstructionsText'
 import  KeyWord  from 'components/shared/KeyWord'
 
 export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {

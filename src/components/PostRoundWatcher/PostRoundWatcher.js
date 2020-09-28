@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import InstructionsText from 'components/InstructionsText'
+import InstructionsText from 'components/shared/InstructionsText'
 import CardsPlayed from 'components/CardsPlayed'
 import { LargeButton } from 'components/shared/Button'
 import Pending from 'components/shared/Pending'

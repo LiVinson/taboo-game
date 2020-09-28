@@ -9,7 +9,7 @@ import { Waiting } from '../Waiting'
 import { ButtonErrorCard } from 'components/shared/ErrorCard'
 import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
-import InstructionsText from 'components/InstructionsText'
+import InstructionsText from 'components/shared/InstructionsText'
 import { LargeButton } from 'components/shared/Button'
 
 describe('Waiting component functions and renders correctly', () => {

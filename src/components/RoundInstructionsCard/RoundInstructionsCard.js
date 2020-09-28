@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TabooCard, ButtonTabooCard } from 'components/shared/TabooCard'
-import  InstructionsText  from 'components/InstructionsText'
+import  InstructionsText  from 'components/shared/InstructionsText'
 import  KeyWord  from 'components/shared/KeyWord'
 
 //Depending on role of current users, returns a TabooCard with different set of instructions and button
