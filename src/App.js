@@ -4,6 +4,7 @@ import Container from 'components/Container'
 import Header from 'components/Header'
 import LayeredCards from 'components/LayeredCards'
 import LoadingSpinner from 'components/shared/LoadingSpinner'
+import { createGreetingMsg } from 'utils/helpers'
 //Code splitting routes
 const Home = lazy(() => import('pages/Home'))
 const Waiting = lazy(() => import('pages/Waiting'))
@@ -13,8 +14,7 @@ const NotFound = lazy(() => import('pages/NotFound'))
 
 class App extends React.Component {
 	componentDidMount() {
-		const consoleMsg = `Hey There! Thanks for checking out my project! I'm looking for my next software developer position, so if you really like and you're hiring, you can find my contact information and resume HERE!`
-		console.log(consoleMsg)
+		createGreetingMsg()
 	}
 
 	render() {

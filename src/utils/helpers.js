@@ -34,7 +34,7 @@ export const generateSkipText = (skipPenalty) => {
 			break
 	}
 
-  return `Each correct card is worth one point, skipped cards are worth ${skipText} for the other team, and discarded cards are worth no points.\n`
+	return `Each correct card is worth one point, skipped cards are worth ${skipText} for the other team, and discarded cards are worth no points.\n`
 }
 
 export const generateEndGameText = (endGameMethod, endGameValue) => {
@@ -44,6 +44,17 @@ export const generateEndGameText = (endGameMethod, endGameValue) => {
 	} else {
 		endGameText = `${endGameValue} minutes`
 	}
-
 	return `The game ends after ${endGameText} or all cards have been played. Good luck!`
+}
+
+export const createGreetingMsg = () => {
+	const line1 = '%cHi There!'
+	const style1 = `font-size: 2.6rem; color: #1982C4; font-style:Palatino; letter-spacing: 2px`
+	const line2 =
+		"%cThanks for checking out my game. My name is Lisa  and I'm  looking for my next software developer position.\n\nIf you're hiring or know someone who is, you can find my contact info at "
+	const style2 = `font-size: 1rem; color:#333333; font-style:Palatino`
+	const line3 = `%chttps://www.lisavinson.com`
+	const style3 = `font-size: 1rem; font-weight:bold; color:red; font-style:Palatino`
+
+	console.log(line1 + line2 + line3, style1, style2, style3)
 }
