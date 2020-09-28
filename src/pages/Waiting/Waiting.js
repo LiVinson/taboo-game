@@ -10,7 +10,9 @@ import { FilteredTabooList } from 'components/shared/TabooCard'
 import LoadingCard from 'components/shared/LoadingCard'
 import { ButtonErrorCard } from 'components/shared/ErrorCard'
 import {ErrorMessage} from 'components/shared/FeedbackMessage'
-import InstructionsCard from 'components/InstructionsCard'
+import InstructionsText from 'components/shared/InstructionsText'
+import KeyWord from 'components/shared/KeyWord'
+
 import { updateTeam } from 'store/actions/playerActions'
 import { updateGameStatus } from 'store/actions/gameActions'
 
@@ -153,10 +155,10 @@ export class Waiting extends React.Component {
 			]
 			return (
 				<React.Fragment>
-					<InstructionsCard>
+					<InstructionsText align={"center"}>
 						Share the game code below with friends! Once at least four players have joined and picked a
-						team, the host can select PLAY to start!
-					</InstructionsCard>
+						team, the host can select <KeyWord>PLAY</KeyWord> to start!
+					</InstructionsText>
 					<TabooCardTop margin={true}>{gamecode}</TabooCardTop>
 					<PlayerListCard buttonInfo={buttonInfo}>
 						{teams.map((team) => (

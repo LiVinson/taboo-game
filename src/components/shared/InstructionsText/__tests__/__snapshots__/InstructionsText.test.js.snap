@@ -1,11 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InstructionsCard renders correctly 1`] = `
+exports[`InstructionsText renders correctly 1`] = `
 .c0 {
   font-size: 2rem;
   margin-bottom: 2rem;
   padding: 0 1rem;
-  text-align: center;
+  text-align: left;
+  color: #333333;
+}
+
+.c0:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
 <p

@@ -3,17 +3,17 @@ import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
 import 'jest-styled-components'
 import { ThemeProvider } from 'styled-components'
-import theme from '../../../global-design/theme'
-import {InstructionsCard} from "../InstructionsCard"
+import theme from '../../../../global-design/theme'
+import {InstructionsText} from "../InstructionsText"
 
-test("InstructionsCard renders correctly", () => {
+test("InstructionsText renders correctly", () => {
     const text = "Here are some instructions to display."
     const wrapper = renderer
     .create(
         <ThemeProvider theme={theme}>
-            <InstructionsCard theme={theme}>
+            <InstructionsText theme={theme}>
                 {text}
-            </InstructionsCard>
+            </InstructionsText>
         </ThemeProvider>
     )
     .toJSON()
@@ -21,12 +21,12 @@ test("InstructionsCard renders correctly", () => {
 expect(wrapper).toMatchSnapshot()
 })
 
-test("InstructionsCard renders text passed as children", () => {
+test("InstructionsText renders text passed as children", () => {
     const text = "Here are some instructions to display."
     const wrapper = shallow(
-            <InstructionsCard theme={theme}>
+            <InstructionsText theme={theme}>
                 {text}
-            </InstructionsCard>
+            </InstructionsText>
     )
  
     expect(wrapper.text()).toEqual(text)      

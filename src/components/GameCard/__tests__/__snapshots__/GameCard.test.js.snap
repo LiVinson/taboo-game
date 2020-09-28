@@ -76,7 +76,7 @@ exports[`GameCard functionality and rendering TeamGameCard renders correctly for
     className="sc-AxhCb JZaCe"
   >
     <p
-      className="sc-fzokOt bZVoaN"
+      className="sc-fzokOt kxxFRs"
     >
       It's your teams turn to guess the word! 
       <span
@@ -110,7 +110,7 @@ exports[`GameCard functionality and rendering TeamGameCard renders correctly for
     className="sc-AxhCb JZaCe"
   >
     <p
-      className="sc-fzokOt bZVoaN"
+      className="sc-fzokOt kxxFRs"
     >
       It’s the other team’s turn to give clues and guess, so don't say anything!
        

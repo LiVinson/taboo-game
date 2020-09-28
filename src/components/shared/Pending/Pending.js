@@ -13,13 +13,27 @@ export class Pending extends React.Component {
 	componentDidMount() {
 		const { speed, message } = this.props
 
+		this.setPendingMessage(message, speed)
+	}
+
+	setPendingMessage = (message, speed) => {
 		this.interval = window.setInterval(() => {
 			this.state.message === message + '...'
 				? this.setState({ message: message })
 				: this.setState(({ message }) => ({ message: message + '.' }))
 		}, speed)
 	}
-
+	componentDidUpdate(prevProps) {
+		if (prevProps.message !== this.props.message) {
+			window.clearInterval(this.interval)
+			this.setState(
+				{
+					message: this.props.message,
+				},
+				this.setPendingMessage(this.props.message, this.props.speed)
+			)
+		}
+	}
 	componentWillUnmount() {
 		window.clearInterval(this.interval)
 	}

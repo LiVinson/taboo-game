@@ -9,7 +9,7 @@ import { Waiting } from '../Waiting'
 import { ButtonErrorCard } from 'components/shared/ErrorCard'
 import { TabooCardTop } from 'components/shared/TabooCard'
 import PlayerListCard from 'components/PlayerListCard'
-import InstructionsCard from 'components/InstructionsCard'
+import InstructionsText from 'components/shared/InstructionsText'
 import { LargeButton } from 'components/shared/Button'
 
 describe('Waiting component functions and renders correctly', () => {
@@ -81,7 +81,7 @@ describe('Waiting component functions and renders correctly', () => {
 
 		//Set timeout is used to allow initial functions to finish running and setState to update
 		setTimeout(() => {
-			expect(component.dive().find(InstructionsCard).length).toBe(1)
+			expect(component.dive().find(InstructionsText).length).toBe(1)
 			expect(component.dive().find(TabooCardTop).length).toBe(1)
 			expect(component.dive().find(PlayerListCard).length).toBe(1)
 		}, 100)

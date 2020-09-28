@@ -6,7 +6,12 @@ Array [
   font-size: 2rem;
   margin-bottom: 2rem;
   padding: 0 1rem;
-  text-align: center;
+  text-align: left;
+  color: #333333;
+}
+
+.c0:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
 <p
@@ -406,7 +411,12 @@ Array [
   font-size: 2rem;
   margin-bottom: 2rem;
   padding: 0 1rem;
-  text-align: center;
+  text-align: left;
+  color: #333333;
+}
+
+.c0:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
 <p

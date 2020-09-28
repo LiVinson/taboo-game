@@ -42,8 +42,8 @@ export class CreateGame extends React.Component {
 			() => {
 				const { endGameMethod, turnsValue, timeValue, skipPenalty, name } = this.state
 				const endValue = endGameMethod === 'turns' ? turnsValue : timeValue
-				//6 characters of capital letters and numbers
-				const gamecode = randomize('A0', 6)
+				//6 characters of capital letters and numbers excluding zero and O
+				const gamecode = randomize('A0', 6, {exclude: "0oO"})
 				const gameData = {
 					status: 'new',
 					endGameMethod,

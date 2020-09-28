@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import PostRoundWatcher from 'components/PostRoundWatcher'
 import { generateCardsPlayedButtonInfo } from '../PostRoundWatcher'
-import InstructionsCard from 'components/InstructionsCard'
+import InstructionsText from 'components/shared/InstructionsText'
 import CardsPlayed from 'components/CardsPlayed'
 import { LargeButton } from 'components/shared/Button'
 import { ErrorMessage } from 'components/shared/FeedbackMessage'
@@ -29,12 +29,12 @@ describe('PostRoundWatcher', () => {
 		}
 	}
 
-	test('renders InstructionsCard, 3 CardsPlayed, and LargeButton component', () => {
+	test('renders InstructionsText, 3 CardsPlayed, and LargeButton component', () => {
 		const props = {
 			...defaultProps,
 		}
 		const wrapper = shallow(<PostRoundWatcher {...props} />)
-		expect(wrapper.find(InstructionsCard)).toHaveLength(1)
+		expect(wrapper.find(InstructionsText)).toHaveLength(1)
 		expect(wrapper.find(CardsPlayed)).toHaveLength(3)
 		expect(wrapper.find(LargeButton)).toHaveLength(1)
 	})

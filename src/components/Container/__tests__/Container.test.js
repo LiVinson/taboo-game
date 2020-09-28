@@ -11,8 +11,8 @@ test('Container renders without crashing', () => {
 
 test("Contains the Wrapper component", () => {
     const data = <h1>Hello</h1>
-    const wrapper = mount(<Container>{data}</Container>)
-    expect(wrapper.contains(Wrapper)).toEqual(true)
+    const wrapper = shallow(<Container>{data}</Container>)
+    expect(wrapper.find(Wrapper)).toHaveLength(1)
 })
 
 test("Contains children", () => {

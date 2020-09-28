@@ -4,6 +4,7 @@ import Container from 'components/Container'
 import Header from 'components/Header'
 import LayeredCards from 'components/LayeredCards'
 import LoadingSpinner from 'components/shared/LoadingSpinner'
+import { createGreetingMsg } from 'utils/helpers'
 //Code splitting routes
 const Home = lazy(() => import('pages/Home'))
 const Waiting = lazy(() => import('pages/Waiting'))
@@ -12,6 +13,10 @@ const EndGame = lazy(() => import('pages/EndGame'))
 const NotFound = lazy(() => import('pages/NotFound'))
 
 class App extends React.Component {
+	componentDidMount() {
+		createGreetingMsg()
+	}
+
 	render() {
 		return (
 			<Router>
@@ -30,6 +35,7 @@ class App extends React.Component {
 						</Switch>
 					</Suspense>
 					<LayeredCards />
+					
 				</Container>
 			</Router>
 		)
