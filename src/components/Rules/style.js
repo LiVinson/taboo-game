@@ -20,7 +20,7 @@ export const RulesTitle = styled.h5`
 
 export const RulesText = styled.p`
 	font-size: 1.6rem;
-	text-align: justify;
+	text-align: left;
 	padding: 0 0.5rem;
 	margin-bottom: 1rem;
 	color: ${(props) => props.theme.color.grayDark2};
