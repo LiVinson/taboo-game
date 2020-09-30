@@ -2,6 +2,8 @@
 
 The online multiplayer team game that's all about what you say, and what you don't! [Play Now!](https://playtaboo.app)
 
+![GitHub license](https://img.shields.io/github/license/liVinson/taboo-game)
+![Last Commit](https://img.shields.io/github/last-commit/livinson/taboo-game)
 ## Table of Contents
 
 1. [About](#about)
@@ -138,7 +140,7 @@ I am not open to contributions to the code at this time, but I am always happy t
 
 ## License <a id="license">🔓</a>
 
-Here is some license information
+This project is licensed with [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/#). Review the included [LICENSE.md](https://github.com/LiVinson/taboo-game/blob/master/LICENSE) file for more information.
 
 ## Questions <a id="questions">❓</a> 
 
