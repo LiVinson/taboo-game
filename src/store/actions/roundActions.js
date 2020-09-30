@@ -48,8 +48,7 @@ export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex, round,
 				return
 			})
 			.catch((error) => {
-				const errorMsg = 'There was a problem starting the round. Please refresh the page to try again.'
-				dispatch(errorActionCreator('ROUND_STATUS_UPDATE_FAILURE', errorMsg))
+				dispatch(errorActionCreator('ROUND_STATUS_UPDATE_FAILURE', error.message))
 				return
 			})
 	}

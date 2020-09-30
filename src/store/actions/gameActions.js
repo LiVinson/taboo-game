@@ -73,7 +73,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 			dispatch(requestCreateGame())
 			return dbCreateGame(gamecode, gameData)
 				.then(() => {
-					return dbCreatePlayer(hostPlayerName).then((player) => {
+					return dbCreatePlayer(hostPlayerName, gamecode).then((player) => {
 						const host = { ...player, team: 'unassigned', online: true, host: true }
 						//associates anonymous user with game instance in firestore
 						return addPlayer(host, gamecode).then((player) => {
