@@ -35,8 +35,7 @@ export const changeCardStatus = (gamecode, status, currentIndex, round, half, ro
 				dispatch(updateCardStatusSuccess())
 			})
 			.catch((error) => {
-				const errorMessage = `There was a problem updating card ${currentIndex}. Please try again.`
-				dispatch(errorActionCreator('UPDATE_CARD_STATUS_FAILURE', errorMessage))
+				dispatch(errorActionCreator('UPDATE_CARD_STATUS_FAILURE', error.message))
 			})
 	}
 }
@@ -53,8 +52,7 @@ export const submitCardIdea = (cardIdea) => {
 					resolve(true)
 				})
 				.catch((error) => {
-					const errorMessage = 'There was a problem submitting your idea. Please try again.'
-					dispatch(errorActionCreator('SUBMIT_CARD_IDEA_FAILURE', errorMessage))
+					dispatch(errorActionCreator('SUBMIT_CARD_IDEA_FAILURE', error.message))
 				})
 		})
 	}

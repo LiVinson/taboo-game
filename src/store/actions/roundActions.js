@@ -65,11 +65,11 @@ export const completeRound = (gamecode, currentRound, currentHalf) => {
 	return (dispatch) => {
 		dispatch(requestCompleteRound())
 		dbCompleteRound(gamecode, currentRound, currentHalf)
-			.then((response) => {
+			.then(() => {
 				dispatch(completeRoundSuccess())
 			})
 			.catch((error) => {
-				dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', "There was a problem updating the round"))
+				dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', error.message))
 			})
 	}
 }
