@@ -48,8 +48,7 @@ export const updateRoundStatus = (gamecode, newRoundStatus, currentIndex, round,
 				return
 			})
 			.catch((error) => {
-				const errorMsg = 'There was a problem starting the round. Please refresh the page to try again.'
-				dispatch(errorActionCreator('ROUND_STATUS_UPDATE_FAILURE', errorMsg))
+				dispatch(errorActionCreator('ROUND_STATUS_UPDATE_FAILURE', error.message))
 				return
 			})
 	}
@@ -66,11 +65,11 @@ export const completeRound = (gamecode, currentRound, currentHalf) => {
 	return (dispatch) => {
 		dispatch(requestCompleteRound())
 		dbCompleteRound(gamecode, currentRound, currentHalf)
-			.then((response) => {
+			.then(() => {
 				dispatch(completeRoundSuccess())
 			})
 			.catch((error) => {
-				dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', "There was a problem updating the round"))
+				dispatch(errorActionCreator('COMPLETE_ROUND_FAILURE', error.message))
 			})
 	}
 }

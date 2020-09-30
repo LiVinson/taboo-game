@@ -14,7 +14,9 @@ const NotFound = lazy(() => import('pages/NotFound'))
 
 class App extends React.Component {
 	componentDidMount() {
-		createGreetingMsg()
+		if (process.env.NODE_ENV === 'production') {
+			createGreetingMsg()
+		}
 	}
 
 	render() {
@@ -35,7 +37,6 @@ class App extends React.Component {
 						</Switch>
 					</Suspense>
 					<LayeredCards />
-					
 				</Container>
 			</Router>
 		)
