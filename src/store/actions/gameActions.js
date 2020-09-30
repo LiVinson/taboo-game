@@ -2,7 +2,7 @@ import {
 	dbCreateGame,
 	dbCreatePlayer,
 	addPlayer,
-	verifyGameExists,
+	dbVerifyGameExists,
 	dbUpdateGameStatus,
 	dbRequestGameDeck,
 	dbSaveGameDeck,
@@ -82,8 +82,7 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 						})
 					})
 				})
-				.catch((error) => {
-					console.log(error.message)
+				.catch((error) => {			
 					dispatch(errorActionCreator('CREATE_GAME_FAILURE', error.message))
 				})
 		})
@@ -93,10 +92,9 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 export const joinNewGame = ({ gamecode, playerName }) => {
 	return (dispatch) => {
 		//reject not needed. Any error updated in store. Promise needed to allow for calling Formik function on completion of creation
-
 		return new Promise((resolve) => {
 			dispatch(requestJoinGame())
-			return verifyGameExists(gamecode)
+			return dbVerifyGameExists(gamecode)
 				.then(() => {
 					return dbCreatePlayer(playerName).then((playerData) => {
 						const player = { ...playerData, host: false, team: 'unassigned' }
@@ -107,8 +105,7 @@ export const joinNewGame = ({ gamecode, playerName }) => {
 					})
 				})
 				.catch((error) => {
-					const message = error.message === "Missing or insufficient permissions." ? "You don't have permission to join this game" : error.message
-					dispatch(errorActionCreator('JOIN_GAME_FAILURE', message))
+					dispatch(errorActionCreator('JOIN_GAME_FAILURE', error.message))
 				})
 		})
 	}
@@ -123,18 +120,14 @@ export const updateGameStatus = (gamecode, status) => {
 				dispatch(updateGameStatusSuccess(status))
 			})
 			.catch((error) => {
-				const errorMsg =
-					'There was an error updating the game status. Try again, and refresh the page if it persists.'
-				dispatch(errorActionCreator('UPDATE_GAME_STATUS_FAILURE', errorMsg))
+				dispatch(errorActionCreator('UPDATE_GAME_STATUS_FAILURE', error.message))
 			})
-		// })
 	}
 }
 
 export const fetchGameDeck = (gamecode) => {
 	return (dispatch) => {
 		dispatch(requestFetchGameDeck())
-
 		return dbRequestGameDeck()
 			.then((response) => {	
 				const shuffledDeck = shuffleArray(response)
@@ -147,11 +140,8 @@ export const fetchGameDeck = (gamecode) => {
 				})
 			})
 			.catch((error) => {
-						dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', "There was a problem fetching the deck. Please refresh the page to try again."))
+						dispatch(errorActionCreator('FETCH_GAME_DECK_FAILURE', error.message))
 			})
 	}
 }
 
-export const endGame = () => {
-	return (dispatch) => {}
-}

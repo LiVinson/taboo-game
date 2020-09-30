@@ -4,8 +4,8 @@ import CustomError from '../lib/CustomError'
 
 const db = firebase.firestore()
 
-const dbLogError = (error, gamecode, sourceFunc, customErrMsg = 'There was an error. Please try again.') => {
-	const errorObj = new FireStoreErrorInfo(error, sourceFunc)
+const dbLogError = (error, gamecode, sourceFunc, customErrMsg = 'There was an error. Please try again.', additionalInfo="none") => {
+	const errorObj = new FireStoreErrorInfo(error, sourceFunc, additionalInfo)
 	console.log(errorObj)
 	return db
 		.collection('errors')
@@ -45,7 +45,7 @@ export const dbCreateGame = (gamecode, gameDetails) => {
 }
 
 //Called when a player attempts to join an existing game. Verifies game exists and is in a valid status for a player to join
-export const verifyGameExists = (gamecode) => {
+export const dbVerifyGameExists = (gamecode) => {
 	return db
 		.collection('games')
 		.doc(gamecode)
@@ -64,43 +64,43 @@ export const verifyGameExists = (gamecode) => {
 }
 
 export const dbUpdateGameStatus = (gamecode, status) => {
-	// return new Promise((resolve, reject) => {
 	return db
 		.collection('games')
 		.doc(gamecode)
 		.update({
 			status: status,
 		})
-		.then(() => {
-			return
-		})
 		.catch((error) => {
-			throw error
+			const generalErrorMsg = 'There was an error updating the game status. Refresh the page and try again.'
+			return dbLogError(error, gamecode, 'dbUpdateGameStatus', generalErrorMsg, status)
 		})
 }
 
-export const dbVerifyEndGame = (gamecode) => {
-	return db
-		.collection('games')
-		.doc(gamecode)
-		.get()
-		.then((game) => {
-			if (!game.exists) throw new Error(`${gamecode} does not exist`)
-			const gameInfo = game.data()
-			const { endGameMethod } = gameInfo
+// export const dbVerifyEndGame = (gamecode) => {
+// 	return db
+// 		.collection('games')
+// 		.doc(gamecode)
+// 		.get()
+// 		.then((game) => {
+// 			if (!game.exists) throw new Error(`${gamecode} does not exist!`)
+// 			const gameInfo = game.data()
+// 			const { endGameMethod } = gameInfo
 
-			if (endGameMethod === 'turns') {
-				const { endValue } = gameInfo
-				const { team1Rotations, team2Rotations } = gameInfo.gameplay
-				//true if both teams have rotated endValue # of turns
-				const endGame = team1Rotations >= endValue && team2Rotations >= endValue
-				return endGame
-			} else {
-				return false
-				//end based on amount of time elapsed. Fetaure to be added
-			}
-		})
-}
+// 			if (endGameMethod === 'turns') {
+// 				const { endValue } = gameInfo
+// 				const { team1Rotations, team2Rotations } = gameInfo.gameplay
+// 				//true if both teams have rotated endValue # of turns
+// 				const endGame = team1Rotations >= endValue && team2Rotations >= endValue
+// 				return endGame
+// 			} else {
+// 				return false
+// 				//end based on amount of time elapsed. Feature to be added
+// 			}
+// 		}).catch((error) => {
+// 			const generalErrorMsg = 'There was a problem ending the game. Please try again.'
+// 			return dbLogError(error, gamecode, 'dbCreateGame', generalErrorMsg)
+// 		})
+// }
 
 //---------------------PLAYER & TEAM UPDATES --------------------------------
 //Creates an anonymous user in firebase with a uid generated.
