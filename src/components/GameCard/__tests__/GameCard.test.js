@@ -7,13 +7,17 @@ import { GiverGameCard, WatcherGameCard, TeamGameCard } from '../GameCard'
 
 describe('GameCard functionality and rendering', () => {
 	const defaultProps = {
+		giver: {},
+		watcher: {},
+		role: '',
 		currentCard: {
 			word: 'Will Smith',
 			tabooList: ['Fresh Prince', 'Philadelphia', 'Jazzy Jeff', 'Independence Day', 'Jada Pinkett'],
 		},
-		changeCardStatus: jest.fn(),
 		isPending: false,
-		error: null
+		changeCardStatus: jest.fn(),
+		cardsRemainingMsg: '',
+		error: null,
 	}
 
 	test('GiverGameCard renders correctly', () => {
@@ -40,11 +44,10 @@ describe('GameCard functionality and rendering', () => {
 			<ThemeProvider theme={theme}>
 				<GiverGameCard {...props} />
 			</ThemeProvider>
-		)	
+		)
 
-		 wrapper.find("button").at(0).simulate("click")
-		 expect(props.changeCardStatus).toHaveBeenCalledWith("skipped")    
-		
+		wrapper.find('button').at(0).simulate('click')
+		expect(props.changeCardStatus).toHaveBeenCalledWith('skipped')
 	})
 
 	test("Selecting 'Next' calls props.changeCardStatus with correct status", () => {
@@ -58,9 +61,8 @@ describe('GameCard functionality and rendering', () => {
 			</ThemeProvider>
 		)
 
-		 wrapper.find("button").at(1).simulate("click")
-		 expect(props.changeCardStatus).toHaveBeenCalledWith("correct")    
-		
+		wrapper.find('button').at(1).simulate('click')
+		expect(props.changeCardStatus).toHaveBeenCalledWith('correct')
 	})
 
 	test('WatcherGameCard renders correctly', () => {
@@ -89,12 +91,9 @@ describe('GameCard functionality and rendering', () => {
 			</ThemeProvider>
 		)
 
-		 wrapper.find("button").at(0).simulate("click")
-		 expect(props.changeCardStatus).toHaveBeenCalledWith("discard")    
-		
+		wrapper.find('button').at(0).simulate('click')
+		expect(props.changeCardStatus).toHaveBeenCalledWith('discard')
 	})
-
-
 
 	test('TeamGameCard renders correctly for watcherTeam', () => {
 		const props = {
@@ -117,7 +116,6 @@ describe('GameCard functionality and rendering', () => {
 		expect(wrapper).toMatchSnapshot()
 	})
 
-	
 	test('TeamGameCard renders correctly for giverTeam', () => {
 		const props = {
 			role: 'giverTeam',

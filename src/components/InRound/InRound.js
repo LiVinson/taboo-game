@@ -9,7 +9,7 @@ import { GameCard } from 'components/GameCard'
 import { changeCardStatus } from 'store/actions/cardActions'
 
 // export const InRound = ({ roundEndTime, endRound, role, error, ...props }) => {
-class InRound extends React.Component {
+export class InRound extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {

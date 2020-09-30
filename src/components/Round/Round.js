@@ -106,6 +106,8 @@ Round.propTypes = {
 	players: PropTypes.array.isRequired,
 	gameplay: PropTypes.object.isRequired,
 	playerId: PropTypes.string.isRequired,
+	skipPenalty: PropTypes.string.isRequired,
+	endValue: PropTypes.number.isRequired,
 	error: PropTypes.string,
 	updateRoundStatus: PropTypes.func.isRequired,
 }

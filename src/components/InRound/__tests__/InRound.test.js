@@ -7,7 +7,8 @@ import { InRound } from '../InRound'
 import { GameCard } from 'components/GameCard'
 import TimeCard from 'components/TimeCard'
 import { GiverGameCard, WatcherGameCard, TeamGameCard } from 'components/GameCard/GameCard'
-import { deck } from "__fixtures__/deck"
+import { deck } from '__fixtures__/deck'
+
 jest.mock('moment', () => {
 	return () => jest.requireActual('moment')('2020-09-01T00:00:00.000Z')
 })
@@ -19,17 +20,20 @@ describe('Inround rendering and functionality', () => {
 		gamecode: '90210',
 		giver: { name: 'Sam', playerId: '12345', team: 'team 1' },
 		watcher: { name: 'Jo', playerId: '23456', team: 'team 2' },
-		round: 1,
 		role: 'giver',
+		round: 1,
 		roundEndTime: endTime,
-		deck,
+		currentCard: deck[0],
 		cardIndex: 0,
+		lastCardIndex: 10,
+		allCardsPlayed: false,
+		endRound: jest.fn(),
 		isPending: false,
-		changeCardStatus: jest.fn(),
 		error: {
 			cardError: null,
-			roundError: null
-		}
+			roundError: null,
+		},
+		changeCardStatus: jest.fn(),
 	}
 
 	test('renders correctly', () => {
