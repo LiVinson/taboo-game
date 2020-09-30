@@ -1,10 +1,11 @@
 import React from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
-import  InstructionsText  from 'components/shared/InstructionsText'
-import  KeyWord  from 'components/shared/KeyWord'
+import InstructionsText from 'components/shared/InstructionsText'
+import KeyWord from 'components/shared/KeyWord'
+import { ErrorMessage } from 'components/shared/FeedbackMessage'
 
-export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
+export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error, cardsRemainingMsg }) => {
 	const buttonInfo = [
 		{
 			text: 'Skip!',
@@ -21,20 +22,27 @@ export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error 
 			},
 		},
 	]
-
+	//If there is an error, display it. Otherwise if there is a cardsRemainingMsg, display it. Otherwise display nothing
+	const errorMsg = error ? error : cardsRemainingMsg ? cardsRemainingMsg : null
 	return (
-		<ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
+		<ButtonTabooCard
+			buttons={buttonInfo}
+			tabooWord={currentCard.word}
+			list={currentCard.tabooList}
+			error={errorMsg}
+		/>
 	)
 }
 
 GiverGameCard.propType = {
-	currentCard: PropType.object.isRequired,
-	changeCardStatus: PropType.func.isRequired,
-	isPending: PropType.bool.isRequired,
-	error: PropType.string,
+	currentCard: PropTypes.object.isRequired,
+	changeCardStatus: PropTypes.func.isRequired,
+	isPending: PropTypes.bool.isRequired,
+	error: PropTypes.string,
+	cardsRemainingMsg: PropTypes.string,
 }
 
-export const WatcherGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
+export const WatcherGameCard = ({ currentCard, changeCardStatus, isPending, error, cardsRemainingMsg }) => {
 	const buttonInfo = [
 		{
 			text: 'Buzzer!',
@@ -44,19 +52,27 @@ export const WatcherGameCard = ({ currentCard, changeCardStatus, isPending, erro
 			},
 		},
 	]
-
+	//If there is an error, display it. Otherwise if there is a cardsRemainingMsg, display it. Otherwise display nothing
+	const errorMsg = error ? error : cardsRemainingMsg ? cardsRemainingMsg : null
 	return (
-		<ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
+		<ButtonTabooCard
+			buttons={buttonInfo}
+			tabooWord={currentCard.word}
+			list={currentCard.tabooList}
+			error={errorMsg}
+		/>
 	)
 }
 
 WatcherGameCard.propType = {
-	currentCard: PropType.object.isRequired,
-	changeCardStatus: PropType.func.isRequired,
-	isPending: PropType.bool.isRequired,
+	currentCard: PropTypes.object.isRequired,
+	changeCardStatus: PropTypes.func.isRequired,
+	isPending: PropTypes.bool.isRequired,
+	error: PropTypes.string,
+	cardsRemainingMsg: PropTypes.string,
 }
 
-export const TeamGameCard = ({ role, giver, watcher }) => {
+export const TeamGameCard = ({ role, giver, watcher, cardsRemainingMsg }) => {
 	return (
 		<React.Fragment>
 			{role === 'giverTeam' ? (
@@ -65,6 +81,7 @@ export const TeamGameCard = ({ role, giver, watcher }) => {
 						It's your teams turn to guess the word! <KeyWord>{giver.name}</KeyWord> is giving the clues and{' '}
 						<KeyWord>{watcher.name}</KeyWord> will be making sure they don't say anything Taboo!
 					</InstructionsText>
+					{cardsRemainingMsg && <ErrorMessage error={cardsRemainingMsg} />}
 				</TabooCard>
 			) : (
 				<TabooCard tabooWord="Relax!">
@@ -73,6 +90,7 @@ export const TeamGameCard = ({ role, giver, watcher }) => {
 						<KeyWord>{watcher.name}</KeyWord> will be watching to make sure <KeyWord>{giver.name}</KeyWord>{' '}
 						doesn’t say any Taboo words.
 					</InstructionsText>
+					{cardsRemainingMsg && <ErrorMessage error={cardsRemainingMsg} />}
 				</TabooCard>
 			)}
 		</React.Fragment>
@@ -80,36 +98,51 @@ export const TeamGameCard = ({ role, giver, watcher }) => {
 }
 
 TeamGameCard.propType = {
-	role: PropType.string.isRequired,
-	giver: PropType.string.isRequired,
-	watcher: PropType.string.isRequired,
+	role: PropTypes.string.isRequired,
+	giver: PropTypes.string.isRequired,
+	watcher: PropTypes.string.isRequired,
+	cardsRemainingMsg: PropTypes.string,
 }
 
 export const GameCard = (props) => {
-	const currentCard = props.deck[props.cardIndex]
-	switch (props.role) {
+	const { giver, watcher, role, currentCard, isPending, changeCardStatus, cardsRemainingMsg, error } = props
+	switch (role) {
 		case 'giver':
-			return <GiverGameCard {...props} currentCard={currentCard} />
+			return (
+				<GiverGameCard
+					currentCard={currentCard}
+					changeCardStatus={changeCardStatus}
+					isPending={isPending}
+					error={error}
+					cardsRemainingMsg={cardsRemainingMsg}
+				/>
+			)
 		case 'watcher':
-			return <WatcherGameCard {...props} currentCard={currentCard} />
+			return (
+				<WatcherGameCard
+					currentCard={currentCard}
+					changeCardStatus={changeCardStatus}
+					isPending={isPending}
+					error={error}
+					cardsRemainingMsg={cardsRemainingMsg}
+				/>
+			)
 		case 'giverTeam':
 		case 'watcherTeam':
 			//consider checking if card is changing for animation purposes
-			return <TeamGameCard {...props} />
+			return <TeamGameCard role={role} giver={giver} watcher={watcher} cardsRemainingMsg={cardsRemainingMsg} />
 		default:
 			return null
 	}
 }
 
 GameCard.propType = {
-	gamecode: PropType.string.isRequired,
-	deck: PropType.object.isRequired,
-	role: PropType.string.isRequired,
-	error: PropType.string,
-	cardIndex: PropType.number.isRequired,
-	changeCardStatus: PropType.func.isRequired,
-	giver: PropType.object.isRequired,
-	isPending: PropType.bool.isRequired,
-	round: PropType.number.isRequired,
-	watcher: PropType.object.isRequired,
+	giver: PropTypes.object.isRequired,
+	watcher: PropTypes.object.isRequired,
+	role: PropTypes.string.isRequired,
+	currentCard: PropTypes.object.isRequired,
+	isPending: PropTypes.bool.isRequired,
+	changeCardStatus: PropTypes.func.isRequired,
+	cardsRemainingMsg: PropTypes.string,
+	error: PropTypes.string,
 }

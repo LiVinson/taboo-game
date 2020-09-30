@@ -33,6 +33,12 @@ class TimeCard extends React.Component {
 		}, 1000)
 	}
 
+	componentWillUnmount() {
+		if (this.intervalId) {
+			clearInterval(this.intervalId)
+		}
+	}
+	
 	render() {
 		const width = Math.round((this.state.timeRemaining / 60) * 100)
 		return (

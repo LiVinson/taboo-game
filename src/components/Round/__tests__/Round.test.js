@@ -12,12 +12,12 @@ import PostRound from 'components/PostRound'
 
 describe('Round renders and functions correctly ', () => {
 	const { gameplay } = game
-const updatedDeck = {
-	...deck,
-	[gamecode]: {
-		cardIndex: 0
+	const updatedDeck = {
+		...deck,
+		[gamecode]: {
+			cardIndex: 0,
+		},
 	}
-}
 
 	const defaultProps = {
 		deck: updatedDeck,
@@ -25,6 +25,8 @@ const updatedDeck = {
 		players: assignedPlayers,
 		gameplay,
 		playerId: '12345',
+		skipPenalty: 'none',
+		endValue: 2,
 		error: null,
 		updateRoundStatus: jest.fn(),
 	}

@@ -38,6 +38,7 @@ export class Round extends React.Component {
 		const { gamecode } = this.props
 		const { round, half, status, roundEndTime, score } = this.props.gameplay
 		const { deck, skipPenalty, endValue } = this.props
+		const { cardIndex, totalCards, allCardsPlayed } = deck[gamecode]
 		const activeTeam = half === 'top' ? 'team 1' : 'team 2'
 		const giver = this.determineActivePlayer('giver')
 		const watcher = this.determineActivePlayer('watcher')
@@ -75,8 +76,10 @@ export class Round extends React.Component {
 						role={role}
 						round={round}
 						roundEndTime={roundEndTime}
-						deck={deck}
-						cardIndex={deck[gamecode].cardIndex}
+						currentCard={deck[cardIndex]}
+						cardIndex={cardIndex}
+						lastCardIndex={totalCards - 1}
+						allCardsPlayed={allCardsPlayed}
 						endRound={this.endRound}
 					/>
 				)}
@@ -103,6 +106,8 @@ Round.propTypes = {
 	players: PropTypes.array.isRequired,
 	gameplay: PropTypes.object.isRequired,
 	playerId: PropTypes.string.isRequired,
+	skipPenalty: PropTypes.string.isRequired,
+	endValue: PropTypes.number.isRequired,
 	error: PropTypes.string,
 	updateRoundStatus: PropTypes.func.isRequired,
 }
@@ -114,9 +119,9 @@ const mapStateToProps = (state) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch, prevProps) => {
-	const { cardIndex } = prevProps.deck[prevProps.gamecode]
-	const { round, half } = prevProps.gameplay
+const mapDispatchToProps = (dispatch, props) => {
+	const { cardIndex } = props.deck[props.gamecode]
+	const { round, half } = props.gameplay
 	return {
 		updateRoundStatus: (gamecode, newRoundStatus) => {
 			dispatch(updateRoundStatus(gamecode, newRoundStatus, cardIndex, round, half))
