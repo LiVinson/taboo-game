@@ -96,7 +96,7 @@ export class PlayGame extends React.Component {
 			return <ButtonErrorCard error={error} />
 			//If in the process of fetching deck or deck propety doesn't exist yet or exists but has no cards yet, show loading message or error
 			// } else if (this.props.isPending || !game.gameplay?.deck || Object.keys(game.gameplay?.deck).length === 0) {
-		} else if (this.props.isPending || isEmpty(this.props.deck)) {
+		} else if (this.props.isPending || this.props.error || isEmpty(this.props.deck)) {
 			return this.props.error ? <ErrorCard error={this.props.error} /> : <LoadingCard message="Fetching deck" />
 		} else {
 			return (

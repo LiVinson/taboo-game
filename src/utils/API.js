@@ -14,7 +14,6 @@ const dbLogError = (
 	additionalInfo = 'none'
 ) => {
 	const errorObj = new FireStoreErrorInfo(error, sourceFunc, additionalInfo)
-	console.log(errorObj)
 	return db
 		.collection('errors')
 		.doc(gamecode)
@@ -43,12 +42,12 @@ export const dbCreateGame = (gamecode, gameDetails) => {
 		createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 	}
 	return db
-		.collection('gam')
+		.collection('games')
 		.doc(gamecode)
 		.set(newGame)
 		.catch((error) => {
 			const generalErrorMsg = 'There was a problem creating the game. Please try again.'
-			return dbLogError(error, gamecode, 'dbCreateGame', generalErrorMsg)
+			dbLogError(error, gamecode, 'dbCreateGame', generalErrorMsg)
 		})
 }
 
@@ -160,7 +159,7 @@ export const dbUpdateTeam = (gamecode, playerId, team) => {
 }
 
 //------------------------------------ CARD / DECK UPDATES -------------------------------------
-export const dbRequestGameDeck = () => {
+export const dbRequestGameDeck = (gamecode) => {
 	const gamedeck = []
 	return db
 		.collection('cards')
@@ -176,7 +175,7 @@ export const dbRequestGameDeck = () => {
 		})
 		.catch((error) => {
 			const generalErrorMsg = 'There was a problem retrieving the deck. Please refresh and try again.'
-			return dbLogError(error, null, 'dbRequestGameDeck', generalErrorMsg)
+			return dbLogError(error, 'deckRequest', 'dbRequestGameDeck', generalErrorMsg)
 		})
 }
 
@@ -192,14 +191,18 @@ export const dbSaveGameDeck = (gamecode, deck) => {
 	}
 	//Store the starting index for accessing cards, and the total number of cards in deck used to determine when cards run out.
 	// batch.set(db.collection('games').doc(gamecode).collection('deck').doc(gamecode), { cardIndex: 0 })
-	batch.update(db.collection('games').doc(gamecode).collection('deck').doc(gamecode), {
-		cardIndex: 0,
-		totalCards: cardCount,
-		allCardsPlayed: false,
-	})
+	batch.set(
+		db.collection('games').doc(gamecode).collection('deck').doc(gamecode),
+		{
+			cardIndex: 0,
+			totalCards: cardCount,
+			allCardsPlayed: false,
+		},
+		{ merge: true }
+	)
 	return batch.commit().catch((error) => {
 		const generalErrorMsg = 'There was a problem retrieving the deck. Please refresh and try again.'
-		return dbLogError(error, null, 'dbSaveGameDeck', generalErrorMsg)
+		return dbLogError(error, gamecode, 'dbSaveGameDeck', generalErrorMsg)
 	})
 }
 
@@ -276,7 +279,7 @@ export const dbSubmitCardIdea = (cardIdea) => {
 		.set(cardIdeaObj)
 		.catch((error) => {
 			const generalErrorMsg = 'There was a problem submitting your idea. Please try again.'
-			return dbLogError(error, null, 'dbSubmitCardIdea', generalErrorMsg, JSON.stringify(cardIdeaObj))
+			return dbLogError(error, 'cardSubmit', 'dbSubmitCardIdea', generalErrorMsg, JSON.stringify(cardIdeaObj))
 		})
 }
 //---------------------------- ROUND UPDATES -------------------------------------//
@@ -401,7 +404,7 @@ export const dbCompleteRound = (gamecode, currentRound, currentHalf) => {
 								team1: score.team1 + scoreObject.team1,
 								team2: score.team2 + scoreObject.team2,
 							}
-							//object used to update games/{gamecode} including merging gameplay field with updatedGamePlay object. Merged with existing 
+							//object used to update games/{gamecode} including merging gameplay field with updatedGamePlay object. Merged with existing
 							const updatedGameObject = Object.assign(game.data(), { gameplay: updatedGamePlay })
 							//If determined game should end, also update the game status, and keep round number the same isntead of incrementing
 							if (endGame) {
@@ -416,7 +419,13 @@ export const dbCompleteRound = (gamecode, currentRound, currentHalf) => {
 		})
 		.catch((error) => {
 			const generalErrorMsg = 'There was an error completing this round. Please try again.'
-			return dbLogError(error, gamecode, 'dbCompleteRound', generalErrorMsg, `round: ${currentRound}-${currentHalf}`)
+			return dbLogError(
+				error,
+				gamecode,
+				'dbCompleteRound',
+				generalErrorMsg,
+				`round: ${currentRound}-${currentHalf}`
+			)
 		})
 }
 

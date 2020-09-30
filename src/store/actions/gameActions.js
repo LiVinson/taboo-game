@@ -128,7 +128,7 @@ export const updateGameStatus = (gamecode, status) => {
 export const fetchGameDeck = (gamecode) => {
 	return (dispatch) => {
 		dispatch(requestFetchGameDeck())
-		return dbRequestGameDeck()
+		return dbRequestGameDeck(gamecode)
 			.then((response) => {	
 				const shuffledDeck = shuffleArray(response)
 				//convert from array of objects to object with keys = objects.
