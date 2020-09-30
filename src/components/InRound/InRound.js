@@ -22,10 +22,10 @@ class InRound extends React.Component {
 	}
 
 	componentDidUpdate(prevProps) {
-			//If game is set to end and not previously called, call endRound
+		//If game is set to end and not previously called, call endRound
 		if (prevProps.allCardsPlayed !== this.props.allCardsPlayed && this.props.allCardsPlayed) {
 			this.props.endRound()
-		//If the card index has changed, check if getting down to last cards
+			//If the card index has changed, check if getting down to last cards
 		} else if (prevProps.cardIndex !== this.props.cardIndex) {
 			this.checkCardsRemaining()
 		}
@@ -68,16 +68,37 @@ class InRound extends React.Component {
 		}
 	}
 	render() {
-		const { roundEndTime, endRound, role, error, cardIndex, lastCardIndex, ...rest } = this.props
+		const {
+			giver,
+			watcher,
+			role,
+			roundEndTime,
+			currentCard,
+			cardIndex,
+			lastCardIndex,
+			endRound,
+			isPending,
+			error,
+			changeCardStatus,
+		} = this.props
 		const cardsRemainingMsg = this.state.displayCardsRemaining
 			? `Only ${lastCardIndex - cardIndex} cards remaining!`
 			: ''
 		return (
 			<React.Fragment>
 				<TimeCard roundEndTime={roundEndTime} endRound={endRound} role={role} />
-				{/*Render GameCard as long as current time is before round ends other wise check for error and render otherwise display Loading until round status changes*/}
+				{/*Render GameCard as long as current time is before round ends other wise check for error and render. If no error, display Loading until round status changes*/}
 				{moment().isBefore(roundEndTime, 'second') ? (
-					<GameCard role={role} error={error.cardError} cardsRemainingMsg={cardsRemainingMsg} {...rest} />
+					<GameCard
+						giver={giver}
+						watcher={watcher}
+						role={role}
+						currentCard={currentCard}
+						isPending={isPending}
+						changeCardStatus={changeCardStatus}
+						cardsRemainingMsg={cardsRemainingMsg}
+						error={error.cardError}
+					/>
 				) : error.roundError ? (
 					<ErrorCard error={error.roundError} />
 				) : (
@@ -95,8 +116,11 @@ InRound.propTypes = {
 	role: PropTypes.string.isRequired,
 	round: PropTypes.number.isRequired,
 	roundEndTime: PropTypes.number.isRequired,
-	deck: PropTypes.object.isRequired,
+	currentCard: PropTypes.object.isRequired,
 	cardIndex: PropTypes.number.isRequired,
+	lastCardIndex: PropTypes.number.isRequired,
+	allCardsPlayed: PropTypes.bool.isRequired,
+	endRound: PropTypes.func.isRequired,
 	isPending: PropTypes.bool.isRequired,
 	error: PropTypes.object.isRequired,
 	changeCardStatus: PropTypes.func.isRequired,

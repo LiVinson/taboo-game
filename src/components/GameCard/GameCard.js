@@ -1,5 +1,5 @@
 import React from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
 import InstructionsText from 'components/shared/InstructionsText'
 import KeyWord from 'components/shared/KeyWord'
@@ -35,10 +35,11 @@ export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error,
 }
 
 GiverGameCard.propType = {
-	currentCard: PropType.object.isRequired,
-	changeCardStatus: PropType.func.isRequired,
-	isPending: PropType.bool.isRequired,
-	error: PropType.string,
+	currentCard: PropTypes.object.isRequired,
+	changeCardStatus: PropTypes.func.isRequired,
+	isPending: PropTypes.bool.isRequired,
+	error: PropTypes.string,
+	cardsRemainingMsg: PropTypes.string,
 }
 
 export const WatcherGameCard = ({ currentCard, changeCardStatus, isPending, error, cardsRemainingMsg }) => {
@@ -64,9 +65,11 @@ export const WatcherGameCard = ({ currentCard, changeCardStatus, isPending, erro
 }
 
 WatcherGameCard.propType = {
-	currentCard: PropType.object.isRequired,
-	changeCardStatus: PropType.func.isRequired,
-	isPending: PropType.bool.isRequired,
+	currentCard: PropTypes.object.isRequired,
+	changeCardStatus: PropTypes.func.isRequired,
+	isPending: PropTypes.bool.isRequired,
+	error: PropTypes.string,
+	cardsRemainingMsg: PropTypes.string,
 }
 
 export const TeamGameCard = ({ role, giver, watcher, cardsRemainingMsg }) => {
@@ -95,35 +98,51 @@ export const TeamGameCard = ({ role, giver, watcher, cardsRemainingMsg }) => {
 }
 
 TeamGameCard.propType = {
-	role: PropType.string.isRequired,
-	giver: PropType.string.isRequired,
-	watcher: PropType.string.isRequired,
+	role: PropTypes.string.isRequired,
+	giver: PropTypes.string.isRequired,
+	watcher: PropTypes.string.isRequired,
+	cardsRemainingMsg: PropTypes.string,
 }
 
 export const GameCard = (props) => {
-	switch (props.role) {
+	const { giver, watcher, role, currentCard, isPending, changeCardStatus, cardsRemainingMsg, error } = props
+	switch (role) {
 		case 'giver':
-			return <GiverGameCard {...props} currentCard={props.currentCard} />
+			return (
+				<GiverGameCard
+					currentCard={currentCard}
+					changeCardStatus={changeCardStatus}
+					isPending={isPending}
+					error={error}
+					cardsRemainingMsg={cardsRemainingMsg}
+				/>
+			)
 		case 'watcher':
-			return <WatcherGameCard {...props} currentCard={props.currentCard} />
+			return (
+				<WatcherGameCard
+					currentCard={currentCard}
+					changeCardStatus={changeCardStatus}
+					isPending={isPending}
+					error={error}
+					cardsRemainingMsg={cardsRemainingMsg}
+				/>
+			)
 		case 'giverTeam':
 		case 'watcherTeam':
 			//consider checking if card is changing for animation purposes
-			return <TeamGameCard {...props} />
+			return <TeamGameCard role={role} giver={giver} watcher={watcher} cardsRemainingMsg={cardsRemainingMsg} />
 		default:
 			return null
 	}
 }
 
 GameCard.propType = {
-	gamecode: PropType.string.isRequired,
-	deck: PropType.object.isRequired,
-	role: PropType.string.isRequired,
-	error: PropType.string,
-	cardIndex: PropType.number.isRequired,
-	changeCardStatus: PropType.func.isRequired,
-	giver: PropType.object.isRequired,
-	isPending: PropType.bool.isRequired,
-	round: PropType.number.isRequired,
-	watcher: PropType.object.isRequired,
+	giver: PropTypes.object.isRequired,
+	watcher: PropTypes.object.isRequired,
+	role: PropTypes.string.isRequired,
+	currentCard: PropTypes.object.isRequired,
+	isPending: PropTypes.bool.isRequired,
+	changeCardStatus: PropTypes.func.isRequired,
+	cardsRemainingMsg: PropTypes.string,
+	error: PropTypes.string,
 }
