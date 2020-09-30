@@ -60,7 +60,7 @@ class PreRound extends React.Component {
 		return this.state.displayGameRules ? (
 			<TabooCard tabooWord="Game Rules">
 				<InstructionsText>{gameRulesText}</InstructionsText>
-				<Pending message={pendingMsg} />
+				<Pending message={pendingMsg} speed={400}/>
 			</TabooCard>
 		) : (
 			<React.Fragment>

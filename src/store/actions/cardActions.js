@@ -27,7 +27,7 @@ const submitCardIdeaSuccess = () => {
 export const changeCardStatus = (gamecode, status, currentIndex, round, half, roundStatus) => {
 	return (dispatch) => {
 		//dispatch changing card in progress
-		//set the status of the current card in firebase, and update the index
+		//set the status of the current card in firebase, and update the index or update field to indicate all cards played
 		//dispatch changing card complete
 		dispatch(requestUpdateCardStatus())
 		dbUpdateCardStatus(gamecode, status, currentIndex, round, half, roundStatus)

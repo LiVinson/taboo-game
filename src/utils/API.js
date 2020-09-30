@@ -205,13 +205,21 @@ export const dbRequestGameDeck = () => {
 export const dbSaveGameDeck = (gamecode, deck) => {
 	const batch = firebase.firestore().batch()
 
+	let cardCount = 0
 	//for each item in deck, create a document with the index as the document Id.
 	for (let i = 0, keys = Object.keys(deck); i < keys.length; i++) {
 		const cardRef = firebase.firestore().collection('games').doc(gamecode).collection('deck').doc(String(i))
 		batch.set(cardRef, { tabooList: deck[i].tabooList, word: deck[i].word })
+		cardCount++
 	}
 
+	//Store the starting index for accessing cards, and the total number of cards in deck.
 	batch.set(firebase.firestore().collection('games').doc(gamecode).collection('deck').doc(gamecode), { cardIndex: 0 })
+	batch.update(firebase.firestore().collection('games').doc(gamecode).collection('deck').doc(gamecode), {
+		cardIndex: 0,
+		totalCards: cardCount,
+		allCardsPlayed: false,
+	})
 
 	//need to figure out how to handle index...
 	return batch
@@ -235,7 +243,7 @@ export const dbUpdateCardStatus = (gamecode, cardStatus, currentIndex, roundStat
 					throw new Error("deck doesn't exist...")
 				}
 
-				const { cardIndex } = deck.data()
+				const { cardIndex, totalCards } = deck.data()
 
 				//Card status changed based on giver/watcher updating within the round
 				if (roundStatus === 'in progress') {
@@ -247,9 +255,16 @@ export const dbUpdateCardStatus = (gamecode, cardStatus, currentIndex, roundStat
 						status: cardStatus,
 						roundPlayed: `${round}-${half}`,
 					})
-					transaction.update(deckPath.doc(gamecode), {
-						cardIndex: firebase.firestore.FieldValue.increment(1),
-					})
+					//Check if the card that was just updated is the last card. If so update field that will cause round/game to end. Otherwise, increment cardIndex so next card displays on screen
+					if (cardIndex + 1 === totalCards) {
+						transaction.update(deckPath.doc(gamecode), {
+							allCardsPlayed: true,
+						})
+					} else {
+						transaction.update(deckPath.doc(gamecode), {
+							cardIndex: firebase.firestore.FieldValue.increment(1),
+						})
+					}
 				}
 				//Card status changed by watcher updating card statuses as needed
 				else if (roundStatus === 'postround') {
@@ -435,77 +450,101 @@ export const dbCompleteRound = (gamecode, currentRound, currentHalf) => {
 
 	return gamePath
 		.collection('deck')
-		.where('roundPlayed', '==', `${currentRound}-${currentHalf}`)
+		.doc(gamecode)
 		.get()
-		.then((deckSnapshot) => {
-			const cardsPlayed = []
-			deckSnapshot.forEach((doc) => {
-				cardsPlayed.push(doc.data())
-			})
+		.then((deckInfo) => {
+			if (!deckInfo.exists) {
+				throw new Error("Deck doesn't exist...")
+			}
+			const deckComplete = deckInfo.data().allCardsPlayed
+			return deckComplete
+		})
+		.then((deckComplete) => {
+			return gamePath
+				.collection('deck')
+				.where('roundPlayed', '==', `${currentRound}-${currentHalf}`)
+				.get()
+				.then((deckSnapshot) => {
+					const cardsPlayed = []
+					deckSnapshot.forEach((doc) => {
+						cardsPlayed.push(doc.data())
+					})
 
-			return firebase.firestore().runTransaction((transaction) => {
-				return transaction.get(gamePath).then((game) => {
-					if (!game.exists) {
-						throw new Error("game doesn't exist...")
-					}
+					return firebase.firestore().runTransaction((transaction) => {
+						return transaction.get(gamePath).then((game) => {
+							if (!game.exists) {
+								throw new Error("game doesn't exist...")
+							}
 
-					const { endGameMethod, endValue, gameplay, players, skipPenalty } = game.data()
+							const { endGameMethod, endValue, gameplay, players, skipPenalty } = game.data()
 
-					const { round, half, team1Turn, team2Turn, team1Rotations, team2Rotations, score } = gameplay
-					let endGame = false
+							const {
+								round,
+								half,
+								team1Turn,
+								team2Turn,
+								team1Rotations,
+								team2Rotations,
+								score,
+							} = gameplay
+							let endGame = false
 
-					//Calculate new score
-					//Update game/gameplay/score
-					const givingTeam = half === 'top' ? 'team1' : 'team2'
-					const watchingTeam = givingTeam === 'team1' ? 'team2' : 'team1'
-					const skipScore = skipPenalty === 'full' ? 1 : skipPenalty === 'half' ? 0.5 : 0
+							//Calculate new score
+							//Update game/gameplay/score
+							const givingTeam = half === 'top' ? 'team1' : 'team2'
+							const watchingTeam = givingTeam === 'team1' ? 'team2' : 'team1'
+							const skipScore = skipPenalty === 'full' ? 1 : skipPenalty === 'half' ? 0.5 : 0
 
-					const scoreObject = calculateRoundScore(skipScore, cardsPlayed, givingTeam, watchingTeam)
+							const scoreObject = calculateRoundScore(skipScore, cardsPlayed, givingTeam, watchingTeam)
 
-					//Determine new half
-					//Determine team1 and team 2 turn values
-					// Determine rotation values
-					const team1Count = players.filter((player) => player.team === 'team 1').length
-					const team2Count = players.filter((player) => player.team === 'team 2').length
+							//Determine new half
+							//Determine team1 and team 2 turn values
+							// Determine rotation values
+							const team1Count = players.filter((player) => player.team === 'team 1').length
+							const team2Count = players.filter((player) => player.team === 'team 2').length
 
-					const roundTurnObject = calculateRoundTurns(
-						half,
-						round,
-						team1Turn,
-						team2Turn,
-						team1Count,
-						team2Count,
-						team1Rotations,
-						team2Rotations
-					)
+							const roundTurnObject = calculateRoundTurns(
+								half,
+								round,
+								team1Turn,
+								team2Turn,
+								team1Count,
+								team2Count,
+								team1Rotations,
+								team2Rotations
+							)
 
-					//Determing if game should end
-					if (half === 'bottom') {
-						endGame = verifyEndGame(
-							endGameMethod,
-							endValue,
-							roundTurnObject.team1Rotations,
-							roundTurnObject.team2Rotations
-						)
-					}
+							//Determing if game should end
 
-					const updatedGamePlay = Object.assign(gameplay, roundTurnObject)
-					//current score + score just calculated for this round
-					updatedGamePlay.score = {
-						team1: score.team1 + scoreObject.team1,
-						team2: score.team2 + scoreObject.team2,
-					}
-					//merge the retrieved data and update the gameplay property with the new properties calculations
-					const updatedGameObject = Object.assign(game.data(), { gameplay: updatedGamePlay })
-					//If determiend game should end, also update the game status, and keep round number the same
-					if (endGame) {
-						updatedGameObject.round = currentRound 
-						updatedGameObject.status = 'completed'
-					}
+							if (deckComplete) {
+								endGame = true
+							} else if (half === 'bottom') {
+								endGame = verifyEndGame(
+									endGameMethod,
+									endValue,
+									roundTurnObject.team1Rotations,
+									roundTurnObject.team2Rotations
+								)
+							}
 
-					return transaction.update(gamePath, updatedGameObject)
+							const updatedGamePlay = Object.assign(gameplay, roundTurnObject)
+							//current score + score just calculated for this round
+							updatedGamePlay.score = {
+								team1: score.team1 + scoreObject.team1,
+								team2: score.team2 + scoreObject.team2,
+							}
+							//merge the retrieved data and update the gameplay property with the new properties calculations
+							const updatedGameObject = Object.assign(game.data(), { gameplay: updatedGamePlay })
+							//If determiend game should end, also update the game status, and keep round number the same
+							if (endGame) {
+								updatedGameObject.round = currentRound
+								updatedGameObject.status = 'completed'
+							}
+
+							return transaction.update(gamePath, updatedGameObject)
+						})
+					})
 				})
-			})
 		})
 		.then(() => {
 			return

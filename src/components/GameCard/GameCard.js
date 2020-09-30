@@ -1,10 +1,11 @@
 import React from 'react'
 import PropType from 'prop-types'
 import { ButtonTabooCard, TabooCard } from 'components/shared/TabooCard'
-import  InstructionsText  from 'components/shared/InstructionsText'
-import  KeyWord  from 'components/shared/KeyWord'
+import InstructionsText from 'components/shared/InstructionsText'
+import KeyWord from 'components/shared/KeyWord'
+import { ErrorMessage } from 'components/shared/FeedbackMessage'
 
-export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
+export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error, cardsRemainingMsg }) => {
 	const buttonInfo = [
 		{
 			text: 'Skip!',
@@ -21,9 +22,15 @@ export const GiverGameCard = ({ currentCard, changeCardStatus, isPending, error 
 			},
 		},
 	]
-
+	//If there is an error, display it. Otherwise if there is a cardsRemainingMsg, display it. Otherwise display nothing
+	const errorMsg = error ? error : cardsRemainingMsg ? cardsRemainingMsg : null
 	return (
-		<ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
+		<ButtonTabooCard
+			buttons={buttonInfo}
+			tabooWord={currentCard.word}
+			list={currentCard.tabooList}
+			error={errorMsg}
+		/>
 	)
 }
 
@@ -34,7 +41,7 @@ GiverGameCard.propType = {
 	error: PropType.string,
 }
 
-export const WatcherGameCard = ({ currentCard, changeCardStatus, isPending, error }) => {
+export const WatcherGameCard = ({ currentCard, changeCardStatus, isPending, error, cardsRemainingMsg }) => {
 	const buttonInfo = [
 		{
 			text: 'Buzzer!',
@@ -44,9 +51,15 @@ export const WatcherGameCard = ({ currentCard, changeCardStatus, isPending, erro
 			},
 		},
 	]
-
+	//If there is an error, display it. Otherwise if there is a cardsRemainingMsg, display it. Otherwise display nothing
+	const errorMsg = error ? error : cardsRemainingMsg ? cardsRemainingMsg : null
 	return (
-		<ButtonTabooCard buttons={buttonInfo} tabooWord={currentCard.word} list={currentCard.tabooList} error={error} />
+		<ButtonTabooCard
+			buttons={buttonInfo}
+			tabooWord={currentCard.word}
+			list={currentCard.tabooList}
+			error={errorMsg}
+		/>
 	)
 }
 
@@ -56,7 +69,7 @@ WatcherGameCard.propType = {
 	isPending: PropType.bool.isRequired,
 }
 
-export const TeamGameCard = ({ role, giver, watcher }) => {
+export const TeamGameCard = ({ role, giver, watcher, cardsRemainingMsg }) => {
 	return (
 		<React.Fragment>
 			{role === 'giverTeam' ? (
@@ -65,6 +78,7 @@ export const TeamGameCard = ({ role, giver, watcher }) => {
 						It's your teams turn to guess the word! <KeyWord>{giver.name}</KeyWord> is giving the clues and{' '}
 						<KeyWord>{watcher.name}</KeyWord> will be making sure they don't say anything Taboo!
 					</InstructionsText>
+					{cardsRemainingMsg && <ErrorMessage error={cardsRemainingMsg} />}
 				</TabooCard>
 			) : (
 				<TabooCard tabooWord="Relax!">
@@ -73,6 +87,7 @@ export const TeamGameCard = ({ role, giver, watcher }) => {
 						<KeyWord>{watcher.name}</KeyWord> will be watching to make sure <KeyWord>{giver.name}</KeyWord>{' '}
 						doesn’t say any Taboo words.
 					</InstructionsText>
+					{cardsRemainingMsg && <ErrorMessage error={cardsRemainingMsg} />}
 				</TabooCard>
 			)}
 		</React.Fragment>
@@ -86,12 +101,11 @@ TeamGameCard.propType = {
 }
 
 export const GameCard = (props) => {
-	const currentCard = props.deck[props.cardIndex]
 	switch (props.role) {
 		case 'giver':
-			return <GiverGameCard {...props} currentCard={currentCard} />
+			return <GiverGameCard {...props} currentCard={props.currentCard} />
 		case 'watcher':
-			return <WatcherGameCard {...props} currentCard={currentCard} />
+			return <WatcherGameCard {...props} currentCard={props.currentCard} />
 		case 'giverTeam':
 		case 'watcherTeam':
 			//consider checking if card is changing for animation purposes

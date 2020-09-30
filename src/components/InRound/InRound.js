@@ -8,21 +8,84 @@ import { ErrorCard } from 'components/shared/ErrorCard'
 import { GameCard } from 'components/GameCard'
 import { changeCardStatus } from 'store/actions/cardActions'
 
+// export const InRound = ({ roundEndTime, endRound, role, error, ...props }) => {
+class InRound extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			displayCardsRemaining: false,
+		}
+	}
 
-export const InRound = ({ roundEndTime, endRound, role, error, ...props }) => {
-	return (
-		<React.Fragment>
-			<TimeCard roundEndTime={roundEndTime} endRound={endRound} role={role} />
-			{/*Render GameCard as long as current time is before round ends other wise check for error and render otherwise display Loading until round status changes*/}
-			{moment().isBefore(roundEndTime, 'second') ? (
-				<GameCard role={role} error={error.cardError} {...props} />
-			) : error.roundError ? (
-				<ErrorCard error={error.roundError} />
-			) : (
-				<LoadingCard message="Checking cards played" />
-			)}
-		</React.Fragment>
-	)
+	componentDidMount() {
+		this.checkCardsRemaining()
+	}
+
+	componentDidUpdate(prevProps) {
+			//If game is set to end and not previously called, call endRound
+		if (prevProps.allCardsPlayed !== this.props.allCardsPlayed && this.props.allCardsPlayed) {
+			this.props.endRound()
+		//If the card index has changed, check if getting down to last cards
+		} else if (prevProps.cardIndex !== this.props.cardIndex) {
+			this.checkCardsRemaining()
+		}
+	}
+
+	checkCardsRemaining = () => {
+		const cardsRemaining = this.props.lastCardIndex - this.props.cardIndex
+		if ((cardsRemaining === 20 || cardsRemaining === 5) && !this.state.displayCardsRemaining) {
+			this.toggleCardsRemaining()
+		} else if (cardsRemaining <= -1) {
+			this.props.endGame()
+		}
+	}
+	//change display status. If changing to true, call function to change back after a few seconds
+	toggleCardsRemaining = () => {
+		this.setState(
+			{
+				displayCardsRemaining: !this.state.displayCardsRemaining,
+			},
+			() => {
+				if (this.state.displayCardsRemaining) {
+					this.removeCardsRemaining()
+				}
+			}
+		)
+	}
+
+	//Sets display cards false after a few seconds
+	removeCardsRemaining = () => {
+		this.timeOutId = setTimeout(() => {
+			if (this.state.displayCardsRemaining) {
+				this.toggleCardsRemaining()
+			}
+		}, 6000)
+	}
+
+	componentWillUnmount() {
+		if (this.timeOutId) {
+			clearTimeout(this.timeOutId)
+		}
+	}
+	render() {
+		const { roundEndTime, endRound, role, error, cardIndex, lastCardIndex, ...rest } = this.props
+		const cardsRemainingMsg = this.state.displayCardsRemaining
+			? `Only ${lastCardIndex - cardIndex} cards remaining!`
+			: ''
+		return (
+			<React.Fragment>
+				<TimeCard roundEndTime={roundEndTime} endRound={endRound} role={role} />
+				{/*Render GameCard as long as current time is before round ends other wise check for error and render otherwise display Loading until round status changes*/}
+				{moment().isBefore(roundEndTime, 'second') ? (
+					<GameCard role={role} error={error.cardError} cardsRemainingMsg={cardsRemainingMsg} {...rest} />
+				) : error.roundError ? (
+					<ErrorCard error={error.roundError} />
+				) : (
+					<LoadingCard message="Checking cards played" />
+				)}
+			</React.Fragment>
+		)
+	}
 }
 
 InRound.propTypes = {
@@ -44,7 +107,7 @@ const mapStateToProps = (state) => {
 		isPending: state.cards.pending,
 		error: {
 			cardError: state.cards.error && state.cards.error.errorMessage,
-			roundError: state.round.error && state.round.error.errorMessage
+			roundError: state.round.error && state.round.error.errorMessage,
 		},
 	}
 }
@@ -52,9 +115,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, prevProps) => {
 	//The index of the currently displayed card, current round and gamecode
 	const { cardIndex, gamecode, round, giver } = prevProps
-	const half = giver.team === "team 1" ? "top" : "bottom"
+	const half = giver.team === 'team 1' ? 'top' : 'bottom'
 	return {
-		changeCardStatus: (cardStatus) => dispatch(changeCardStatus(gamecode, cardStatus, cardIndex, "in progress", round, half, ))
+		changeCardStatus: (cardStatus) =>
+			dispatch(changeCardStatus(gamecode, cardStatus, cardIndex, 'in progress', round, half)),
 	}
 }
 
