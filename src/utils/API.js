@@ -1,5 +1,32 @@
 import firebase from './fbConfig'
 
+class CustomError {
+	constructor(error, source) {
+		this.message = error.message
+		this.name = error.name || 'No name provided'
+		this.source = source || 'Function name not available'
+		this.date = Date.now()
+	}
+}
+const dbLogError = (gamecode, error, sourceFunc) => {
+	const errorObj = new CustomError(error, sourceFunc)
+	console.log(errorObj)
+	return firebase
+		.firestore()
+		.collection('errors')
+		.doc(gamecode)
+		.set(
+			{
+				//JSON parse/stringify hack needed as FS does not allow saving class instances
+				errorList: firebase.firestore.FieldValue.arrayUnion(JSON.parse(JSON.stringify(errorObj))),
+			},
+			{ merge: true }
+		)
+		.catch((err) => {
+			//when logging. Will determine how to handle.
+			return
+		})
+}
 //--------------------- GAME UPDATES ---------------------------//
 export const dbCreateGame = (gamecode, gameDetails) => {
 	const newGame = {
@@ -13,11 +40,11 @@ export const dbCreateGame = (gamecode, gameDetails) => {
 		.collection('games')
 		.doc(gamecode)
 		.set(newGame)
-		.then(() => {
-			return
-		})
 		.catch((error) => {
-			throw new Error(error)
+			console.log('first catch:', error.message)
+			return dbLogError(gamecode, error, 'dbCreateGame').then(() => {
+				throw new Error('There was a problem creating the game. Please try again')
+			})
 		})
 }
 
@@ -34,9 +61,9 @@ export const verifyGameExists = (gamecode) => {
 			if (gameInfo.status !== 'new') throw new Error(`${gamecode} is ${gameInfo.status} and can't be joined!`)
 			return
 		})
-		.catch((error) => {
-			throw error
-		})
+	// .catch((error) => {
+	// 	throw error
+	// })
 }
 
 export const dbUpdateGameStatus = (gamecode, status) => {

@@ -83,8 +83,8 @@ export const createNewGame = (gamecode, gameData, hostPlayerName) => {
 					})
 				})
 				.catch((error) => {
-	
-					dispatch(errorActionCreator('CREATE_GAME_FAILURE', error))
+					console.log(error.message)
+					dispatch(errorActionCreator('CREATE_GAME_FAILURE', error.message))
 				})
 		})
 	}
