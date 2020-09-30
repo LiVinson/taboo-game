@@ -1,18 +1,13 @@
 import firebase from './fbConfig'
+import FireStoreErrorInfo from '../lib/FireStoreErrorInfo'
+import CustomError from '../lib/CustomError'
 
-class CustomError {
-	constructor(error, source) {
-		this.message = error.message
-		this.name = error.name || 'No name provided'
-		this.source = source || 'Function name not available'
-		this.date = Date.now()
-	}
-}
-const dbLogError = (gamecode, error, sourceFunc) => {
-	const errorObj = new CustomError(error, sourceFunc)
+const db = firebase.firestore()
+
+const dbLogError = (error, gamecode, sourceFunc, customErrMsg = 'There was an error. Please try again.') => {
+	const errorObj = new FireStoreErrorInfo(error, sourceFunc)
 	console.log(errorObj)
-	return firebase
-		.firestore()
+	return db
 		.collection('errors')
 		.doc(gamecode)
 		.set(
@@ -20,56 +15,57 @@ const dbLogError = (gamecode, error, sourceFunc) => {
 				//JSON parse/stringify hack needed as FS does not allow saving class instances
 				errorList: firebase.firestore.FieldValue.arrayUnion(JSON.parse(JSON.stringify(errorObj))),
 			},
+			//update array if exists. Otherwise create array
 			{ merge: true }
 		)
-		.catch((err) => {
-			//when logging. Will determine how to handle.
-			return
+		.then(() => {
+			if (error instanceof CustomError) {
+				throw error
+			} else {
+				throw new Error(customErrMsg)
+			}
 		})
 }
-//--------------------- GAME UPDATES ---------------------------//
+
+//---------------------------- GAME UPDATES ----------------------------------//
 export const dbCreateGame = (gamecode, gameDetails) => {
 	const newGame = {
 		gamecode,
 		...gameDetails,
 		createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 	}
-
-	return firebase
-		.firestore()
-		.collection('games')
+	return db
+		.collection('gam')
 		.doc(gamecode)
 		.set(newGame)
 		.catch((error) => {
-			console.log('first catch:', error.message)
-			return dbLogError(gamecode, error, 'dbCreateGame').then(() => {
-				throw new Error('There was a problem creating the game. Please try again')
-			})
+			const generalErrorMsg = 'There was a problem creating the game. Please try again.'
+			return dbLogError(error, gamecode, 'dbCreateGame', generalErrorMsg)
 		})
 }
 
 //Called when a player attempts to join an existing game. Verifies game exists and is in a valid status for a player to join
 export const verifyGameExists = (gamecode) => {
-	return firebase
-		.firestore()
+	return db
 		.collection('games')
 		.doc(gamecode)
 		.get()
 		.then((game) => {
-			if (!game.exists) throw new Error(`${gamecode} does not exist`)
+			if (!game.exists) throw new CustomError(`Game code ${gamecode} does not exist!`)
 			const gameInfo = game.data() //how data is accessed via firestore
-			if (gameInfo.status !== 'new') throw new Error(`${gamecode} is ${gameInfo.status} and can't be joined!`)
+			if (gameInfo.status !== 'new')
+				throw new CustomError(`${gamecode} is ${gameInfo.status} and can't be joined!`)
 			return
 		})
-	// .catch((error) => {
-	// 	throw error
-	// })
+		.catch((error) => {
+			const generalErrorMsg = 'There was a problem verifying this game. Please try again.'
+			return dbLogError(error, gamecode, 'dbCreateGame', generalErrorMsg)
+		})
 }
 
 export const dbUpdateGameStatus = (gamecode, status) => {
 	// return new Promise((resolve, reject) => {
-	return firebase
-		.firestore()
+	return db
 		.collection('games')
 		.doc(gamecode)
 		.update({
@@ -84,8 +80,7 @@ export const dbUpdateGameStatus = (gamecode, status) => {
 }
 
 export const dbVerifyEndGame = (gamecode) => {
-	return firebase
-		.firestore()
+	return db
 		.collection('games')
 		.doc(gamecode)
 		.get()
@@ -136,8 +131,7 @@ export const dbCreatePlayer = (playerName) => {
 }
 
 export const addPlayer = (player, gamecode) => {
-	return firebase
-		.firestore()
+	return db
 		.collection('games')
 		.doc(gamecode)
 		.update({
@@ -152,8 +146,7 @@ export const addPlayer = (player, gamecode) => {
 
 export const dbUpdateTeam = (gamecode, playerId, team) => {
 	const gamePath = firebase.firestore().collection('games').doc(gamecode)
-	return firebase
-		.firestore()
+	return db
 		.runTransaction((transaction) => {
 			//get the game document corresponding to gamecode
 			return transaction.get(gamePath).then((game) => {
@@ -191,8 +184,7 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 		endTime = currentTime.setTime(currentTime.getTime() + 60500)
 	}
 
-	return firebase
-		.firestore()
+	return db
 		.collection('games')
 		.doc(gamecode)
 		.update({
@@ -211,8 +203,7 @@ export const dbUpdateRoundStatus = (gamecode, status) => {
 //----------------------------- CARD / DECK UPDATES ---------------------------
 export const dbRequestGameDeck = () => {
 	const gamedeck = []
-	return firebase
-		.firestore()
+	return db
 		.collection('cards')
 		.get()
 		.then((response) => {
@@ -262,8 +253,7 @@ export const dbSaveGameDeck = (gamecode, deck) => {
 export const dbUpdateCardStatus = (gamecode, cardStatus, currentIndex, roundStatus, round, half) => {
 	const deckPath = firebase.firestore().collection('games').doc(gamecode).collection('deck')
 
-	return firebase
-		.firestore()
+	return db
 		.runTransaction((transaction) => {
 			return transaction.get(deckPath.doc(gamecode)).then((deck) => {
 				if (!deck.exists) {
@@ -312,8 +302,7 @@ export const dbUpdateCardStatus = (gamecode, cardStatus, currentIndex, roundStat
 
 export const dbUpdateGameScore = (gamecode) => {
 	const gamePath = firebase.firestore().collection('games').doc(`${gamecode}`)
-	return firebase
-		.firestore()
+	return db
 		.runTransaction((transaction) => {
 			return transaction.get(gamePath).then((game) => {
 				if (!game.exists) {
@@ -375,8 +364,7 @@ export const dbSubmitCardIdea = (cardIdea) => {
 		createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 	}
 
-	return firebase
-		.firestore()
+	return db
 		.collection('suggestions')
 		.doc()
 		.set(cardIdeaObj)
@@ -397,8 +385,7 @@ export const dbUpdateRoundHalf = (gamecode) => {
 	//transaction: read current round, half. write: team rotations/turn
 	const gamePath = firebase.firestore().collection('games').doc(`${gamecode}`)
 	let newHalf
-	return firebase
-		.firestore()
+	return db
 		.runTransaction((transaction) => {
 			return transaction.get(gamePath).then((game) => {
 				if (!game.exists) {
