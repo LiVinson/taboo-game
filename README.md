@@ -55,7 +55,7 @@ THe motivation for this game came during quarantine while missing game nights wi
 
 1. The 'watcher' can also see the giver's card and should select 'Buzzer' if the giver says any of the words on the taboo card.
 
-![Watcher's view](https://github.com/LiVinson/taboo-game/blob/master/public/img/watcher.gif)
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/watcher.gif" alt="Watcher's view" width="279" height="604">
 
 ### Post Round
 1. Once time is up, the watcher reviews all the cards played in the round and moves them if they are not in the correct category (i.e. if the giver accidentally skipped a card, it can be moved to discarded)
