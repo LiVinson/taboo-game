@@ -41,22 +41,33 @@ THe motivation for this game came during quarantine while missing game nights wi
 3. Family and friends can join using the generated gamecode
 4. Once all players are in the Waiting room and have selected Team 1 or Team 2, the host selects Play to start the game.
 
+![Creating a Game](https://github.com/LiVinson/taboo-game/blob/master/public/img/create_game.gif)
+![Waiting Room](https://github.com/LiVinson/taboo-game/blob/master/public/img/waiting.gif)
 ### During Play
 
 1. Each round a 'giver' and 'watcher are chosen from opposing teams.
 2. The 60 second round begins when the giver selects 'Play'.
-3. The giver is showin a 'Taboo' card, with the word to guess at the top and five words they cannot say listed below.
+3. The giver is shown a 'Taboo' card, with the word to guess at the top and five words they cannot say listed below.
 4. The giver must use any verbal explanation to get their teammates to guess the word at the top.
 5. Select 'Next' if they guess correctly, or 'Skip' if your team is stuck on the word.
+
+![Giver view](https://github.com/LiVinson/taboo-game/blob/master/public/img/giver.gif)
+
 6. The 'watcher' can also see the giver's card and should select 'Buzzer' if the giver says any of the words on the taboo card.
+
+![Watcher's view](https://github.com/LiVinson/taboo-game/blob/master/public/img/watcher.gif)
 
 ### Post Round
 1. Once time is up, the watcher reviews all the cards played in the round and moves them if they are not in the correct category (i.e. if the giver accidentally skipped a card, it can be moved to discarded)
 2. The watcher selects 'Confirm' once all statuses are correct, and the giver/watcher roles swap.
 
+![Watcher's view](https://github.com/LiVinson/taboo-game/blob/master/public/img/watcher_postround.gif)
+
 ### Game Over
 1. The game ends once all players have gone the set number of times, or all cards in the deck have been played.
 2. The team with the most points wins!
+
+![End of Game](https://github.com/LiVinson/taboo-game/blob/master/public/img/end_game.gif)
 
 ## Tools and Technology <a id="tools-and-technology">💻</a>
 
@@ -124,7 +135,7 @@ To run unit tests:
 
 **Jest Styled Components**: Used to help testing styled components. Allows snapshots to be rendered with the exact style information in snapshot instead of ambiguous class names. Allows for better testing React components that make use of the theme prop.
 
-## Future Developments <a id="future">🤝🔮</a> 
+## Future Developments <a id="future">🔮</a> 
 
 This project is being continuously updated, and all feedback and suggestions are greatly appreciated. Some future development ideas include:
 
@@ -144,4 +155,4 @@ This project is licensed with [GNU General Public License v3.0](https://chooseal
 
 ## Questions <a id="questions">❓</a> 
 
- Please reach out with questions about this project at any time at **contact@lisavinson.com**.
+ Please reach out with feedback, suggestions, or questions about this project at any time at **contact@lisavinson.com**.
