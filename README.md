@@ -24,7 +24,7 @@ The online multiplayer team game that's all about what you say, and what you don
 
 ## About <a id="about">📝</a>
 
-Taboo! is based on the popular Hasbro board game of the same name (no affiliation). The game allows family and friends to play the verbal guessing game while physically together or virtually using meeting platforms like Zoom or Google Meets.
+Taboo! is based on the popular board game of the same name (no affiliation). The game allows family and friends to play the verbal guessing game while physically together or virtually using meeting platforms like Zoom or Google Meets.
 
 The motivation for this game came during quarantine while missing game nights with family and friends.
 
@@ -72,37 +72,36 @@ The motivation for this game came during quarantine while missing game nights wi
 
 The core of the application is built using React.js with Firebase as the SAAS. The following are the core libraries, frameworks, and npm packages used to create and run the application:
 
-- [React.js](https://reactjs.org/) - All of the UI is made up of custom React components. React was chosen because of how well it integrates with Firebase and Firestore through higher order components, and the need for multiple reusable components and partial DOM updates.
+- [React.js](https://reactjs.org/) - All of the UI is made up of custom React components. React was chosen because of how well it integrates with Firebase and Firestore through higher order components and fit my need for multiple reusable components and partial DOM updates.
 - [Firebase Authentication](https://firebase.google.com/products/auth) - Anonymous users created in firebase used as players in each game to prevent unauthorized access to games. Firebase was chosen because of it's seemless integration with Firestore, and the ability to create persistent accounts without the user needing to provide any information.
 - [Firestore](https://firebase.google.com/products/firestore) - Document based database used to store data for the game and all players. Firestore was chosen because of the ability to set up rules to protect who could participate in games, the ease of setup, and the variety of data structures permitted.
-- [Styled Components](https://styled-components.com/) - CSS in JavaScript library used for styling all components. I was implementing a CSS in JS library for the first time, and Styled Components is really well documented, was easier to set up and use theming than than sass with minimal boilerplate for theming.
+- [Styled Components](https://styled-components.com/) - CSS in JavaScript library used for styling all components. I was implementing a CSS in JS library for the first time, and Styled Components is really well documented, was easier to set up and use theming than than SASS (but reminded me of SASS in a lot of ways) with minimal boilerplate for theming.
 - [React Router](https://reactrouter.com/) - Handles routing between pages.
-- [Redux.js](https://redux.js.org/) - Manages shared state between components. Although I probably could have used other data stores or even relied on the Context API in some cases, Redux, Firebase, and Firestore integrating together so seemlessly that this felt like the best choice to get the app running quickly.
+- [Redux.js](https://redux.js.org/) - Manages shared state between components. Although I probably could have used other data stores or even relied on the Context API in some cases, Redux, Firebase, and Firestore integrate together so seemlessly that this felt like the best choice to get the app running quickly.
 - [React Redux](https://react-redux.js.org/) - Used to connect React components to Redux store
 - [React Redux Firebase](http://react-redux-firebase.com/) - Provides reducers for redux store to have access to firebase. Also provides HOCs to connect components to firebase.
 - [Redux Thunk](https://www.npmjs.com/package/redux-thunk) - Allows for asynchronous interactions with redux store (e.g. querying/updating firestore).
 - [Redux Firestore](https://www.npmjs.com/package/redux-firestore) - Provides reducers for redux store to have access to firestore.
 - [Formik](https://formik.org/) - Provides components for forms. I chose to use formik for how easy it made validation and error messages and because I could easily use my own custom components within formik.
-
-* [Randomatic](https://www.npmjs.com/package/randomatic) - Generates gamecodes. It was really easy to implement, and even let me choose combinations not to use (e.g. o and O) to prevent confusion for users.
+- [Randomatic](https://www.npmjs.com/package/randomatic) - Generates gamecodes. It was really easy to implement, and even let me choose combinations not to use (e.g. o and O) to prevent confusion for users.
 
 ## Design Process <a id="design-process">🎨</a>
 
-From the very beginning, I was not sure of the overall design but I had some set ideas on what I wanted the design to fulfill:
+From the very beginning, I was not sure of the overall design but I had some set ideas of the role I wanted the design to fulfill:
 
 * Be extremely mobile friendly since that is how most people would play.
-* Look fun and game-like, but without looking like was targeted to children.
-* Heavily incorporate actual game card components that stayed true to the look and feel in the actual game.
+* Look fun and game-like, but without looking like it is targeted to children.
+* Heavily incorporate actual game card components that stayed true to the look and feel of those used in the physical game.
 
-With this is mind, I used Figma to go through several iterations of the design before settling on the final concept and building out the prototype of all screens in the entire application.
+With this is mind, I used Figma to go through several iterations of the design before settling on the final concept:
 
-<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version1.png" alt="Taboo Design Version 1" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version2.png" alt="Taboo Design Version 2" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version3.png" alt="Taboo Design Version 3" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version4.png" alt="Taboo Design Version 4" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version5.png" alt="Taboo Design Version 5" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version6.png" alt="Taboo Design Version 6" width="180"/>
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version1.png" alt="Taboo Design Version 1" width="180"/>&nbsp;&nbsp;<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version2.png" alt="Taboo Design Version 2" width="180"/>&nbsp;&nbsp;<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version3.png" alt="Taboo Design Version 3" width="180"/>&nbsp;&nbsp;<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version4.png" alt="Taboo Design Version 4" width="180"/>&nbsp;&nbsp;<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version5.png" alt="Taboo Design Version 5" width="180"/>&nbsp;&nbsp;<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version6.png" alt="Taboo Design Version 6" width="180"/>
 
-Although there were aspects of all of these designs I liked, the early illustration  showed my own preference for dark themes/designs but was far too dark to really feel "game-y" and. The next few illustrations had better color choices, but the multi-color solid and  gradient backgrounds were too overwhelming. Removing the background color or reducing the gradient to just the white and blue felt closer, but did still felt too "heavy" for a game.
+Although there were aspects of all of these designs I liked, the early illustration  showed my own preference for dark themes/color palettes but did not feel "game-y". The next few iterations had better color choices, but the multi-color solid and  gradient backgrounds were too overwhelming. Removing the background color or reducing the gradient to just the white and blue felt closer, but still felt too "heavy" for this type of game. Still I liked the overall structure of the content, but needed to tweak the background further:
 
 <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version_final.png" alt="Taboo Design Final Version" width="180"/>
 
-The version I chose used a background image that I designed using a series of exclamation point icons in the same colors used for the layer of cards. This allowed me to infuse the color and fun feel, carry through the theme into the background with the use of the exclamation points, and avoid the heaviness of the earlier designs. Also, it has the versatility of being usable for a dark theme design that I plan to roll out soon with minimal changes.
+The version I chose used a background image that I designed using a series of exclamation point icons in the same colors used for the layer of cards. This allowed me to infuse the color and fun feel, carry through the theme into the background with the use of the exclamation points, but avoid the heaviness of the earlier designs. Also, it has the versatility of being usable for a dark theme design with minimal changes.
 
 Overall, I really enjoyed designing this application because it pushed me outside of my comfort zone in it's use of colors and creating a "fun" look that it is not typical of most of my projects.
 
@@ -166,11 +165,11 @@ This project is being continuously updated, and all feedback and suggestions are
 * Allow users to add custom 'private' cards to their game deck that only they can access
 * Many more!
   
-In addition to adding more features, I acknowledge there are countless ways to improve the code itself to better align with the latest coding standards and conventions. A few of these include:
+In addition to adding more features, I acknowledge there are countless ways to improve the code itself to better align with the latest coding standards and conventions and these updates will gradually be implemented. A few of these include:
 
 - Converting React class components to hooks
 - Using Firebase hooks instead of higher order components to connect React components to Firebase and Firestore
-- Adding TypeScript
+- Converting to TypeScript
 - Increasing code coverage
 
 ## Contributions <a id="contributions">🤝🏾</a>
