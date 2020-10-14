@@ -96,17 +96,7 @@ From the very beginning, I was not sure of the overall design but I had some set
 
 With this is mind, I used Figma to go through several iterations of the design before settling on the final concept and building out the prototype of all screens in the entire application.
 
-<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version1.png" alt="Taboo Design Version 1" width="180"/>
-
-<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version2.png" alt="Taboo Design Version 2" width="180"/>
-
-<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version3.png" alt="Taboo Design Version 3" width="180"/>
-
-<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version4.png" alt="Taboo Design Version 4" width="180"/>
-
-<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version5.png" alt="Taboo Design Version 5" width="180"/>
-
-<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version6.png" alt="Taboo Design Version 6" width="180"/>
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version1.png" alt="Taboo Design Version 1" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version2.png" alt="Taboo Design Version 2" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version3.png" alt="Taboo Design Version 3" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version4.png" alt="Taboo Design Version 4" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version5.png" alt="Taboo Design Version 5" width="180"/> <img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version6.png" alt="Taboo Design Version 6" width="180"/>
 
 Although there were aspects of all of these designs I liked, the early illustration  showed my own preference for dark themes/designs but was far too dark to really feel "game-y" and. The next few illustrations had better color choices, but the multi-color solid and  gradient backgrounds were too overwhelming. Removing the background color or reducing the gradient to just the white and blue felt closer, but did still felt too "heavy" for a game.
 
