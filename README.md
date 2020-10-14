@@ -4,25 +4,23 @@ The online multiplayer team game that's all about what you say, and what you don
 
 ![GitHub license](https://img.shields.io/github/license/liVinson/taboo-game)
 ![Last Commit](https://img.shields.io/github/last-commit/livinson/taboo-game)
+
 ## Table of Contents
 
-- [Taboo!](#taboo)
-  - [Table of Contents](#table-of-contents)
-  - [About <a id="about">📝</a>](#about-)
-  - [How to Play <a id="how-to-play">📋</a>](#how-to-play-)
-    - [Setup](#setup)
-    - [During Play](#during-play)
-    - [Post Round](#post-round)
-    - [Game Over](#game-over)
-  - [Tools and Technology <a id="tools-and-technology">💻</a>](#tools-and-technology-)
-  - [Design Process <a id="design-process">🎨</a>](#design-process-)
-  - [Run Locally <a id="run-locally">🏃🏿‍♀️</a>](#run-locally-️)
-  - [Testing <a id="testing">🧪</a>](#testing-)
-    - [Testing tools](#testing-tools)
-  - [Future Developments <a id="future">🔮</a>](#future-developments-)
-  - [Contributions <a id="contributions">🤝🏾</a>](#contributions-)
-  - [License <a id="license">🔓</a>](#license-)
-  - [Questions <a id="questions">❓</a>](#questions-)
+1. [About <a id="about">📝</a>](#about-)
+2. [How to Play <a id="how-to-play">📋</a>](#how-to-play-)
+    * [Setup](#setup)
+    * [During Play](#during-play)
+    * [Post Round](#post-round)
+    * [Game Over](#game-over)
+3. [Tools and Technology <a id="tools-and-technology">💻</a>](#tools-and-technology-)
+4. [Design Process <a id="design-process">🎨</a>](#design-process-)
+5. [Run Locally <a id="run-locally">🏃🏿‍♀️</a>](#run-locally-️)
+6. [Testing <a id="testing">🧪</a>](#testing-)
+7. [Future Developments <a id="future">🔮</a>](#future-developments-)
+8. [Contributions <a id="contributions">🤝🏾</a>](#contributions-)
+9. [License <a id="license">🔓</a>](#license-)
+10. [Questions <a id="questions">❓</a>](#questions-)
 
 ## About <a id="about">📝</a>
 
@@ -98,21 +96,21 @@ From the very beginning, I was not sure of the overall design but I had some set
 
 With this is mind, I used Figma to go through several iterations of the design before settling on the final concept and building out the prototype of all screens in the entire application.
 
-![Taboo Design Version 1](https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version1.png)
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version1.png" alt="Taboo Design Version 1" width="180"/>
 
-![Taboo Design Version 2](https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version2.png)
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version2.png" alt="Taboo Design Version 2" width="180"/>
 
-![Taboo Design Version 3](https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version3.png)
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version3.png" alt="Taboo Design Version 3" width="180"/>
 
-![Taboo Design Version 4](https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version4.png)
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version4.png" alt="Taboo Design Version 4" width="180"/>
 
-![Taboo Design Version 5](https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version5.png)
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version5.png" alt="Taboo Design Version 5" width="180"/>
 
-![Taboo Design Version 6](https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version6.png)
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version6.png" alt="Taboo Design Version 6" width="180"/>
 
 Although there were aspects of all of these designs I liked, the early illustration  showed my own preference for dark themes/designs but was far too dark to really feel "game-y" and. The next few illustrations had better color choices, but the multi-color solid and  gradient backgrounds were too overwhelming. Removing the background color or reducing the gradient to just the white and blue felt closer, but did still felt too "heavy" for a game.
 
-![Taboo Design Final Version](https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version_final.png)
+<img src="https://github.com/LiVinson/taboo-game/blob/master/public/img/taboo_version_final.png" alt="Taboo Design Final Version" width="180"/>
 
 The version I chose used a background image that I designed using a series of exclamation point icons in the same colors used for the layer of cards. This allowed me to infuse the color and fun feel, carry through the theme into the background with the use of the exclamation points, and avoid the heaviness of the earlier designs. Also, it has the versatility of being usable for a dark theme design that I plan to roll out soon with minimal changes.
 
