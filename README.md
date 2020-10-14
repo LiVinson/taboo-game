@@ -7,23 +7,20 @@ The online multiplayer team game that's all about what you say, and what you don
 
 ## Table of Contents
 
-- [Taboo!](#taboo)
-  - [Table of Contents](#table-of-contents)
-  - [About <a id="about">📝</a>](#about-)
-  - [How to Play <a id="how-to-play">📋</a>](#how-to-play-)
-    - [Setup](#setup)
-    - [During Play](#during-play)
-    - [Post Round](#post-round)
-    - [Game Over](#game-over)
-  - [Tools and Technology <a id="tools-and-technology">💻</a>](#tools-and-technology-)
-  - [Design Process <a id="design-process">🎨</a>](#design-process-)
-  - [Run Locally <a id="run-locally">🏃🏿‍♀️</a>](#run-locally-️)
-  - [Testing <a id="testing">🧪</a>](#testing-)
-    - [Testing tools](#testing-tools)
-  - [Future Developments <a id="future">🔮</a>](#future-developments-)
-  - [Contributions <a id="contributions">🤝🏾</a>](#contributions-)
-  - [License <a id="license">🔓</a>](#license-)
-  - [Questions <a id="questions">❓</a>](#questions-)
+1. [About <a id="about">📝</a>](#about-)
+2. [How to Play <a id="how-to-play">📋</a>](#how-to-play-)
+    * [Setup](#setup)
+    * [During Play](#during-play)
+    * [Post Round](#post-round)
+    * [Game Over](#game-over)
+3. [Tools and Technology <a id="tools-and-technology">💻</a>](#tools-and-technology-)
+4. [Design Process <a id="design-process">🎨</a>](#design-process-)
+5. [Run Locally <a id="run-locally">🏃🏿‍♀️</a>](#run-locally-️)
+6. [Testing <a id="testing">🧪</a>](#testing-)
+7. [Future Developments <a id="future">🔮</a>](#future-developments-)
+8. [Contributions <a id="contributions">🤝🏾</a>](#contributions-)
+9. [License <a id="license">🔓</a>](#license-)
+10. [Questions <a id="questions">❓</a>](#questions-)
 
 ## About <a id="about">📝</a>
 
